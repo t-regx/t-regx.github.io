@@ -1,0 +1,48 @@
+{
+  "docs": {
+    "Kick Start": [
+      "installation",
+      "introduction",
+      "whats-the-point"
+    ],
+    "Matching": [
+      "matches",
+      "match-all",
+      "match-first",
+      "match-details",
+      "match-iterate",
+      "match-map",
+      "match-for-first"
+    ],
+    "Replacing": [
+      "replace-with",
+      "replace-callback"
+    ],
+    "Groups": [
+      "match-group",
+      "match-groups",
+      "groups-inline"
+    ],
+    "Offsets": [],
+    "Misc": [
+      "split",
+      "count",
+      "filter",
+      "valid",
+      "delimiters",
+      "composite-pattern"
+    ],
+    "Advanced Replacement": []
+  },
+  "api": {
+    "Pattern": [
+      "api"
+    ],
+    "CompositePattern": [
+      "composite-matching"
+    ],
+    "SafeRegex vs CleanRegex": [
+      "safe-regex"
+    ]
+  }
+}
