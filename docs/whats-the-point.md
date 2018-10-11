@@ -8,13 +8,13 @@ sidebar_label: Why would I use T-Regx?
 
 That's a fact. How much PHP sucks, you can see for yourself in genius 
 "[A fractal of bad design](https://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/)", where it's illustrated just 
-how inconsistent and jarring the language is. Regular Expressions API in PHP is no different. 
+how inconsistent and jarring the language is. Regular Expressions in PHP are no different. 
 
 ## PHP suckage reasons:
 
 ### Implicit
 
-You are a PHP developer, probably. I want to get `'Robert likes apples'`. Can you tell me which is the correct signature 
+You are a PHP developer, probably. I would like to get `'Robert likes apples'`. Can you tell me which is the correct signature 
 for this task?
 ```php
 preg_replace('/Bob/', 'Robert', 'Bob likes apples');
@@ -52,7 +52,8 @@ Someone who doesn't know PHP regular expressions, can probably ask himself:
 #### What's more 
  - Parameters:
    - Methods with 4 or 5 parameters (3 of which are optional).
-   - That means, whoever looks at the code has to **remember** (or to lookup) what those optional values are.
+   
+     That means, whoever looks at the code has to **remember** (or to lookup) what those optional values are and in what order.
  - Return types:
    - Array of arrays, which contain either a `string`, `null`, or an array of `null`s, `strings` and `int`s.
 
@@ -103,9 +104,11 @@ whether or any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` we
   ```
   there's no way of knowing whether your pattern is incorrect, or whether it's correct but your subject didn't match your 
   pattern. You need to **remember** to add an explicit `false` check each time you use it.
-- All `preg_*` methods only return `false`/`null` on error. You have to remember to call `preg_last_error()` to get some insight. 
-  Of course it only returns `int`! So you have to look up that `4` is "invalid utf8 sequence" and `2` is "backtrack 
-  limit exceeded".
+- All `preg_*` methods only return `false`/`null`/`[]` on error. You have to remember to call `preg_last_error()` to get 
+  some insight in the nature of your error. Of course it only returns `int`! So you have to look up that `4` is 
+  "invalid utf8 sequence" and `2` is "backtrack limit exceeded".
+- `preg_filter()` for arrays, returns `[]` if an error occurred; even though `[]` is perfectly valid result for this method.
+  For example it could haved filtered out all values or it's input was an empty array right from the beginning.
 
 ## T-Regx to the rescue
 
