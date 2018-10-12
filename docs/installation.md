@@ -3,7 +3,7 @@ id: installation
 title: Installation
 ---
 
-T-Regx recommended way of installation is using Composer.
+T-Regx recommended way of installation is using [Composer](https://getcomposer.org/).
 
 ## PHP 7.1 and later
 

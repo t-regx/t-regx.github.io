@@ -4,5 +4,5 @@ title: Quote PCRE characters
 ---
 
 ```php
-patter('[A-Z][a-z]+')->quote();
+pattern('[A-Z][a-z]+')->quote();
 ```

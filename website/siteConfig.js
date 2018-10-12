@@ -8,39 +8,36 @@ const siteConfig = {
     //   url: 'https://facebook.github.io',
     //   baseUrl: '/test-site/',
 
+    organizationName: 'Danon',
     projectName: 'T-Regx',
-    organizationName: 'T-Regx',
+    repoUrl: 'https://github.com/Danon/T-Regx',
 
     headerLinks: [
+        {search: true},
         {doc: 'installation', label: 'Docs'},
         {doc: 'api', label: 'API'},
         {page: 'help', label: 'Help'},
         {blog: true, label: 'Blog'},
         {href: 'https://github.com/Danon/T-Regx', label: 'GitHub'},
+        {languages: true}
     ],
+    blogSidebarCount: 'ALL',
+    enableUpdateTime: true,
+    scrollToTop: true,
+    scrollToTopOptions: {
+        showWhenScrollTopIs: 190,
+        scrollDuration: 400,
+        backgroundColor: '#26768c'
+    },
 
-    headerIcon: 'img/t.regx.png',
+    headerIcon: 'img/t.regx.borderless.png',
     footerIcon: 'img/t.regx.png',
-    favicon: 'img/favicon.png',
+    favicon: 'img/favicon.ico',
 
     colors: {
         primaryColor: '#26768c',
-        secondaryColor: '#205C3B',
+        secondaryColor: '#2495B0',
     },
-
-    /* Custom fonts for website */
-    /*
-    fonts: {
-      myFont: [
-        "Times New Roman",
-        "Serif"
-      ],
-      myOtherFont: [
-        "-apple-system",
-        "system-ui"
-      ]
-    },
-    */
 
     copyright: `Copyright © ${new Date().getFullYear()} Daniel Wilkowski`,
 
@@ -49,7 +46,6 @@ const siteConfig = {
         defaultLang: 'php'
     },
 
-    // Add custom scripts here that would be placed in <script> tags.
     scripts: ['https://buttons.github.io/buttons.js'],
 
     // On page navigation for the current documentation page.
@@ -59,10 +55,6 @@ const siteConfig = {
     // Open Graph and Twitter card images.
     ogImage: 'img/docusaurus.png',
     twitterImage: 'img/docusaurus.png',
-
-    // You may provide arbitrary config keys to be used as needed by your
-    // template. For example, if you need your repo's URL...
-    //   repoUrl: 'https://github.com/facebook/test-site',
 };
 
 module.exports = siteConfig;

@@ -5,6 +5,10 @@ const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 
+function gifUrl(img) {
+    return `${siteConfig.baseUrl}gif/${img}`;
+}
+
 function imgUrl(img) {
     return `${siteConfig.baseUrl}img/${img}`;
 }
@@ -71,9 +75,9 @@ class HomeSplash extends React.Component {
                 <div className="inner">
                     <ProjectTitle/>
                     <PromoSection>
-                        <Button href="#try">Try It Out</Button>
-                        <Button href={docUrl('doc-whats-the-point.html', language)}>Matching</Button>
-                        <Button href={docUrl('replace-with.html', language)}>Replacing</Button>
+                        <Button href={docUrl('installation', language)}>Try It Out</Button>
+                        <Button href={docUrl('matches', language)}>Matching</Button>
+                        <Button href={docUrl('replace-with', language)}>Replacing</Button>
                     </PromoSection>
                 </div>
             </SplashContainer>
@@ -96,13 +100,13 @@ const Features = () => (
             {
                 title: 'Automatic delimiters',
                 content: 'This is the content of my feature',
-                image: imgUrl('t.regx.png'),
+                image: gifUrl('first.gif'),
                 imageAlign: 'top',
             },
             {
                 title: 'Converting warnings to exceptions',
                 content: 'The content of my second feature',
-                image: imgUrl('t.regx.png'),
+                image: gifUrl('second.gif'),
                 imageAlign: 'top',
             },
         ]}
@@ -115,43 +119,46 @@ const FeatureCallout = () => (
         style={{textAlign: 'center'}}>
         <h2>Feature Callout</h2>
         <MarkdownBlock>These are features of this project</MarkdownBlock>
+        <MarkdownBlock>These are features of this project</MarkdownBlock>
+        <MarkdownBlock>These are features of this project</MarkdownBlock>
     </div>
 );
 
-const LearnHow = () => (
+const AutomaticDelimiters = () => (
     <Block background="light">
         {[
             {
-                content: 'Talk about learning how to use this',
-                image: imgUrl('t.regx.png'),
+                title: 'Automatic delimiters',
+                content: "You no longer need to delimiter your patterns. [T-Regx' smart delimiterer](docs/delimiters) will add one of many"
+                    + " delimiters for you, if they're not already present.",
+                image: gifUrl('first.gif'),
                 imageAlign: 'right',
-                title: 'Learn How',
             },
         ]}
     </Block>
 );
 
-const TryOut = () => (
-    <Block id="try">
+const WarningsToExceptions = () => (
+    <Block id="try" background="dark">
         {[
             {
-                content: 'Talk about trying this out',
-                image: imgUrl('t.regx.png'),
+                title: 'SafeRegex | Converts warnings to exceptions',
+                content: "SafeRegex watches for warnings, analyzes `preg_*()` methods' return values and looks up last preg errors to validate a call. If it fails, an exception is thrown.",
+                image: gifUrl('second.gif'),
                 imageAlign: 'left',
-                title: 'Try it Out',
             },
         ]}
     </Block>
 );
 
-const Description = () => (
-    <Block background="dark">
+const MatchDetails = () => (
+    <Block background="light">
         {[
             {
-                content: 'This is another description of how this project is useful',
-                image: imgUrl('t.regx.png'),
+                title: 'Match details',
+                content: "With `pattern()->match()` and `pattern()->replace()`, it's trivial to retrieve, iterate, map and filter matches with callback and a detailed `Match` object.",
+                image: gifUrl('match-details.gif'),
                 imageAlign: 'right',
-                title: 'Description',
             },
         ]}
     </Block>
@@ -165,11 +172,11 @@ class Index extends React.Component {
             <div>
                 <HomeSplash language={language}/>
                 <div className="mainContainer">
+                    <MatchDetails/>
                     <Features/>
+                    <AutomaticDelimiters/>
                     <FeatureCallout/>
-                    <LearnHow/>
-                    <TryOut/>
-                    <Description/>
+                    <WarningsToExceptions/>
                 </div>
             </div>
         );

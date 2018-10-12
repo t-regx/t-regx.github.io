@@ -28,13 +28,13 @@ class Footer extends React.Component {
                     <div>
                         <h5>Docs</h5>
                         <a href={this.docUrl('installation.html', this.props.language)}>
-                            Getting Started (or other categories)
+                            Getting Started
                         </a>
                         <a href={this.docUrl('match-for-first.html', this.props.language)}>
-                            Documentation (or other categories)
+                            Documentation
                         </a>
                         <a href={this.docUrl('api.html', this.props.language)}>
-                            API Reference (or other categories)
+                            API Reference
                         </a>
                     </div>
                     <div>
@@ -56,16 +56,16 @@ class Footer extends React.Component {
                     <div>
                         <h5>More</h5>
                         <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
-                        <a href="https://github.com/Danon/T-Regx">GitHub</a>
+                        <a href="https://github.com/Danon/T-Regx" target="_blank">GitHub</a>
                         <a
                             className="github-button"
                             href={this.props.config.repoUrl}
                             data-icon="octicon-star"
-                            data-count-href="/facebook/docusaurus/stargazers"
                             data-show-count="true"
+                            data-count-href="/Danon/T-Regx/stargazers"
                             data-count-aria-label="# stargazers on GitHub"
                             aria-label="Star this project on GitHub">
-                            Star
+                            T-Regx
                         </a>
                     </div>
                 </section>

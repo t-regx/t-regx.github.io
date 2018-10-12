@@ -7,21 +7,13 @@ T-Regx (*a combination of T-Rex and RegExp*) is a lightweight Regular Expression
  - Descriptive interface *(and we mean it)*
  - Working **with** and **for** a developer
  - Being explicit *(and we mean it too)*
+ - Cleaning the [mess after PHP regular expressions API](whats-the-point.md)
 
 ## Why is descriptive interface so important?
 
 T-Regx' aim is to relieve programmers from **brain strain** while reading and writing code. Our mission is
 to make developers write/read a line and **immediately** go on, without thinking about what it does or what side 
 effects it may cause.
-
-### What's good
-
-```php
-$result = pattern($p)->match($subject)->first();
-```
-`$result` **must** contain the first occurrence; and **never** `null`, `false` or an empty array.
-
-And even if `first()` does return `''`, it's only because it's supposed to; that is "when a pattern matched a string of length 0".
 
 ### What's bad
 
@@ -39,3 +31,18 @@ preg_match($p, $subject, $matches);
  - Will this return *my value*? Or *my value* nested in arrays?
 
 What should be obvious, is now complicated and causes many questions and assumptions.
+
+### What's good
+
+While using T-Regx, some things are **certain**. For example:
+
+```php
+$result = pattern($p)->match($subject)->first();
+```
+Here, `$result` **must** contain the first occurrence. It must contain *your value*.
+
+It will **never** contain `null`, `false` or an empty array - `SubjectNotMatchedException` would be thrown in 
+that case. And even if  `first()` does return `''`, it's only because it's supposed to; that is "when a pattern matched 
+a string of length 0".
+
+Also, it will never trigger a warning, but throw `SafeRegexException` with a descriptive message.

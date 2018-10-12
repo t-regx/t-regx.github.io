@@ -3,21 +3,19 @@
     "Kick Start": [
       "installation",
       "overview",
-      "introduction",
-      "whats-the-point"
+      "whats-the-point",
+      "introduction"
     ],
     "Matching": [
       "matches",
       "match-all",
       "match-first",
-      "match-details",
       "match-iterate",
       "match-map",
       "match-for-first"
     ],
     "Replacing": [
-      "replace-with",
-      "replace-callback"
+      "replace-with"
     ],
     "Groups": [
       "match-group",
@@ -38,6 +36,9 @@
   "api": {
     "Pattern": [
       "api"
+    ],
+    "Details": [
+      "match-details"
     ],
     "CompositePattern": [
       "composite-matching"

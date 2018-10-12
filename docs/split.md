@@ -4,5 +4,5 @@ title: Split a string
 ---
 
 ```php
-patter('[A-Z][a-z]+')->split($subject)->ex();
+pattern('[A-Z][a-z]+')->split($subject)->ex();
 ```

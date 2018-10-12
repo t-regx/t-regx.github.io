@@ -4,5 +4,12 @@ title: Replace with string
 ---
 
 ```php
-patter('[A-Z][a-z]+')->replace($subject)->first()->with('Jhon');
+pattern('[A-Z][a-z]+')->replace($subject)->first()->with('Jhon');
+```
+
+
+```php
+pattern('[A-Z][a-z]+')->replace($subject)->first()->callback(function (Match $m) {
+    return strtoupper($m->text());
+});
 ```
