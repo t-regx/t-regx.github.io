@@ -62,7 +62,7 @@ $s = pattern('[0-9]+')->match("I'm a dog")
         return 'Match is found!';
     })
     ->orElse(function (NotMatched $notMatched) { 
-        return "I couldn't match subject ' . $notMatched->subject();
+        return "I couldn't match subject " . $notMatched->subject();
     });
     
 $s // "I couldn't match subject I'm a dog"
@@ -87,11 +87,11 @@ catch (MyException $e) {
 }
 ```
 
-Your custom exception must meet certain requirements.
+Of course, your custom exception must meet certain requirements:
 
 #### It has to be a class 
 
-Trying to instantiate interfaces would lead to implicit instances, which breaks our "Explicity rule".
+Trying to instantiate interfaces breaks our "Explicity rule". The class must be concrete and explicit.
 
 #### It has to implement `\Throwable`
 
@@ -105,9 +105,9 @@ The class must be instantiable with one of the following signatures and paramete
  - `__construct($message)`, where `$message` can be a string
  - `__construct($message, subject)`, where `$message` and `$subject` can be strings
 
-### I don't like functional
+## I don't like functional
 
-If you don't like functional programming style, you are free to use `first()` which throws an exception and 
+If you don't like functional programming style, you are free to use `first()` (which throws an exception) and 
 just catch it.
 
 ```php
