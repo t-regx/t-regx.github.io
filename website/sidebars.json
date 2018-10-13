@@ -7,8 +7,7 @@
       "introduction"
     ],
     "Matching": [
-      "matches",
-      "match-all",
+      "match",
       "match-first",
       "match-for-first",
       "match-for-each",
