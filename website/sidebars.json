@@ -10,7 +10,7 @@
       "matches",
       "match-all",
       "match-first",
-      "match-iterate",
+      "match-for-each",
       "match-map",
       "match-for-first"
     ],
