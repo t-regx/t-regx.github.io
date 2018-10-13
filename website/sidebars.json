@@ -10,9 +10,9 @@
       "matches",
       "match-all",
       "match-first",
+      "match-for-first",
       "match-for-each",
-      "match-map",
-      "match-for-first"
+      "match-map"
     ],
     "Replacing": [
       "replace-with"
