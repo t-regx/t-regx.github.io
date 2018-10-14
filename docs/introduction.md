@@ -4,7 +4,7 @@ title: Introduction
 ---
 
 There are two ways of instantiating a pattern for T-Regx. Each of them accepts an [undelimitered](delimiters.md) pattern
-as first argument and optional flags as a second argument. 
+as the first argument and optional flags as the second argument. 
 
 ## Entry points
 
@@ -28,11 +28,11 @@ You can add flags to your regular expression by passing a second argument.
 pattern('[A-Z]+', 'im')->matches($subject);
 ```
 
-To see more about automatic delimiters, go to [Automatic Delimiters](delimiters.md).
+To learn more, go to [Automatic Delimiters](delimiters.md).
 
 ### Old-school patterns
 
-Of course you can still used delimitered patterns with flags. Both versions are equal with each other.
+Of course, you can still use delimitered patterns with flags. Both versions are equal with each other.
 ```php
 pattern('/[A-Z]+/im')->matches($subject);
 ```

@@ -82,7 +82,7 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
   $count    = preg_match($p, $s, $matched);
   ```
 
-- If you use `PREG_CAPTURE_OFFSET` and your subject isn't matched, these are the results:
+- If you use `PREG_CAPTURE_OFFSET` and your subject isn't matched with the pattern; these are the results:
   
   Success | `preg_match()`   | `preg_match_all()`
   ------- | -------------- | ---------------
@@ -93,20 +93,20 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
 
 - `preg_match` and `preg_match_all` return either:
   - `(int) x` - a number of matches, if a match is found
-  - `(int) 0` - if no matches is found
+  - `(int) 0` - if no matches are found
   - `(bool) false` - if an error occurred
 
-  So if you do just this
+  So if you do just this:
   ```php
   if (preg_match('//', '')) {
   ```
-  there's no way of knowing whether your pattern is incorrect, or whether it's correct but your subject didn't match your 
+  there's no way of knowing whether your pattern is incorrect or whether it's correct but your subject wasn't matched with your 
   pattern. You need to **remember** to add an explicit `false` check each time you use it.
 - All `preg_*` methods only return `false`/`null`/`[]` on error. You have to remember to call `preg_last_error()` to get 
   some insight in the nature of your error. Of course it only returns `int`! So you have to look up that `4` is 
   "invalid utf8 sequence" and `2` is "backtrack limit exceeded".
-- `preg_filter()` for arrays, returns `[]` if an error occurred; even though `[]` is perfectly valid result for this method.
-  For example it could haved filtered out all values or it's input was an empty array right from the beginning.
+- `preg_filter()` for arrays returns `[]` if an error occurred; even though `[]` is the perfectly valid result for this method.
+  For example, it could have filtered out all values or its input was an empty array right from the beginning.
 
 ## T-Regx to the rescue
 
@@ -132,12 +132,12 @@ If you try to use an invalid regular expression in Java or JavaScript, you would
 and you'd be forced to handle it. Such things don't happen in PHP regular expressions. If any `preg_` method fails, 
 it returns `false` (or sometimes `null`). You can always use `if`, if you remember about it, but...
 
-...unfortunately these methods return values - some of which are `0` - which makes this code is completely unreliable!
+...unfortunately these methods return values - some of which are `0` - which makes this code completely unreliable!
 ```php
 if (preg_match('//', $subject)) {
 ```
 
-Doesn't matter whether it found nothing (`0`) or failed (`false`) - you would have no idea. You need to add an explicit check:
+It doesn't matter whether it found nothing (`0`) or failed (`false`) - you would have no idea. You need to add an explicit check:
 ```php
 if (($count = preg_match('//', $subject)) !== false) {
     if ($count > 1) {
@@ -151,7 +151,7 @@ else {
 
 ### It's explicit
 
-PHP `preg_*` methods' poor design does not make them really descriptive. Someone who's not familiar with it, will probably
+Poor design of PHP `preg_*` methods does not make them really descriptive. Someone who's not familiar with it will probably
 ask himself:
 
  - `preg_replace('//', $r, $s)` - will this replace all or just one occurrence?
@@ -160,7 +160,7 @@ ask himself:
 However,
 
 looking at T-Regx code, everyone can immediately see author's intentions and will be able to recognize what
-the code does **exactly**, right away.
+the code **exactly** does, right away.
 
 ```php
 pattern('[A-Z]+')->match($subject)->all();
