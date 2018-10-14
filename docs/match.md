@@ -7,6 +7,7 @@ Using `pattern()->match()` you can:
  - Test a subject against a pattern: `matches()`/`fails()` 
  - Retrieve matches from subject: `first()`/`all()`/`only()`
  - Get capturing groups from matches: `group()`/`Match.group()`/`groups()`
+ - Invoke callbacks for matches: `first()`/`forFirst()`/`forEach()`/`map()`
 
 ## Test a subject
 

@@ -1,6 +1,6 @@
 ---
 id: match-details
-title: Details
+title: Advanced details
 ---
 
 ```php

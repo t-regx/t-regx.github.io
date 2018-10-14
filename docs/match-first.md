@@ -5,37 +5,57 @@ title: First occurrence
 
 Matching a first occurrence in a string is the most common usecase.
 
+## Return from `first()`
+
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")->first();
 ```
 
 If a match is not found in a subject, `SubjectNotMatchedException` is thrown. This is done to relieve you of 
-[**brain strain**](overview.md#brain-strain). It's much easier to develop an application and *just assume* that this method **has** to return
-a value and go on. No more bothering  with empty arrays or possible `null`/`false` hiding somewhere.
+[**brain strain**](overview.md#brain-strain). It's much easier to develop an application and *just assume* that this 
+method **has** to return a value and go on. No more bothering  with empty arrays or possible `null`/`false` hiding somewhere.
 
 If you would like to control what should be done if the subject isn't matched by your pattern though, 
 you can do it **explicitly** with [`forFirst()`](#forfirst).
 
-## Match details
+## Use `first()` with callback
 
-With `Match` details, you can gain access to useful information about the matched occurrence.
+You can call an anonymous function for the first matched occurrence. In this example we'll print the matched text to the 
+standard output.
 
-### Matched text
+```php
+pattern('\w+')->match("Apples are cool")->first(function (string $match) {
+    echo $match;
+});
+```
 
-In this example we'll print the matched text to the standard output.
+### Match details
+
+With `Match` details, you can gain access to useful information about the matched occurrence. 
 
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
     echo $match->text();
+    echo (string) $match;
 });
 ```
 
-You can also cast `Match` to string with the same effect.
+> Casting `Match` to string is the same as calling `text()` method.
+
+### Groups in match
+
+Retrieving capturing groups from a match is really simple.
 
 ```php
-pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
-    echo (string) $match;
+pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(Match $match) {
+    $capital = $match->group('capital')->text();
+    $capital = (string) $match->group('capital');
+    
+    return $capital;
 });
+```
+```bash
+'G'
 ```
 
 ### Return value
@@ -66,7 +86,7 @@ return pattern('\w+')->match("Apples are cool")->first('strtoupper');
 APPLES
 ```
 
-Of course `strtoupper` (or any other callback) is only invoked **if** your subject matches the pattern.
+Of course, `strtoupper` (or any other callback) is only invoked **if** your subject matches the pattern.
 
 ### Arbitrary return types
 
@@ -78,8 +98,6 @@ return pattern('\w+')->match("Apples are cool")->first('str_split');
 ```bash
 ['A', 'p', 'p', 'l', 'e', 's']
 ```
-
-### Groups in match
 
 ## Inline groups
 

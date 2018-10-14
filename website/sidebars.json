@@ -16,7 +16,8 @@
     "Replacing": [
       "replace-with"
     ],
-    "Groups": [
+    "Match Details": [
+      "match-details",
       "match-group",
       "match-groups",
       "groups-inline"
@@ -37,7 +38,6 @@
       "api"
     ],
     "Details": [
-      "match-details"
     ],
     "CompositePattern": [
       "composite-matching"
