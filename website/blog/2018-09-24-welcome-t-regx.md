@@ -5,11 +5,11 @@ authorURL: http://twitter.com/ericnakagawa
 authorFBID: 100001025937739
 ---
 
-The library changes it's name! Now it's called [T-Regx](https://github.com/Danon/T-Regx)! It's a combination of 
+The library changes its name! Now it's called [T-Regx](https://github.com/Danon/T-Regx)! It's a combination of 
 words *"T-Rex"* - the dinosaur - and *"RegExp"*.
 
 Also, I've invested much more time into the development of ~~CleanRegex~~ T-Regx. Here are the results:
- - Library changed it's name :D
+ - Library changed its name. :D
  - Throwing different exceptions for:
    - Invalid pattern - *should never happen in prod*
    - Unmatched subject - should be handled by the developer
@@ -26,4 +26,4 @@ Also, I've invested much more time into the development of ~~CleanRegex~~ T-Regx
    - Check if any pattern matches a subject
    - Invoke many replacements, and pass result of one `preg_replace()` as a subject to the other.
 
-But it's still a long way until `T-Regx 1.0` is released :)
+But it's still a long way until `T-Regx 1.0` is released. :)
