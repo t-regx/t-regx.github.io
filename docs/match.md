@@ -1,6 +1,6 @@
 ---
 id: match
-title: Matching
+title: Match a subject
 ---
 
 Using `pattern()->match()` you can:
