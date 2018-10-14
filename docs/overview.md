@@ -43,7 +43,7 @@ $result = pattern($p)->match($subject)->first();
 Here, `$result` **must** contain the first occurrence. It must contain *your value*.
 
 It will **never** contain `null`, `false` or an empty array. `SubjectNotMatchedException` would be thrown in 
-that case. And even if  `first()` does return `''`, it's only because it's supposed to; that is "when a pattern matched 
+that case. Even if  `first()` does return `''`, it's only because it supposed to do that; that is "when a pattern matched 
 a string of length 0".
 
 Also, it will never trigger a warning, but throw `SafeRegexException` with a descriptive message.
