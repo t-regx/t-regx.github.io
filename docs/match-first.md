@@ -3,7 +3,7 @@ id: match-first
 title: First occurrence
 ---
 
-Matching a first occurrence in a string is the most common usecase.
+Matching a first occurrence in a string is the most common use-case.
 
 ## Return from `first()`
 
@@ -11,16 +11,16 @@ Matching a first occurrence in a string is the most common usecase.
 pattern('[0-9]+')->match("I'm 19 years old")->first();
 ```
 
-If a match is not found in a subject, `SubjectNotMatchedException` is thrown. This is done to relieve you of 
+If a match is not found in a subject, `SubjectNotMatchedException` is thrown. This is done to relieve you from the 
 [**brain strain**](overview.md#brain-strain). It's much easier to develop an application and *just assume* that this 
-method **has** to return a value and go on. No more bothering  with empty arrays or possible `null`/`false` hiding somewhere.
+method **has** to return a value and go on. No more bothers  about empty arrays or a possible `null`/`false` hiding somewhere.
 
-If you would like to control what should be done if the subject isn't matched by your pattern though, 
+If you would like to control what should be done if the subject isn't matched with your pattern though; 
 you can do it **explicitly** with [`forFirst()`](#forfirst).
 
 ## Use `first()` with callback
 
-You can call an anonymous function for the first matched occurrence. In this example we'll print the matched text to the 
+You can call an anonymous function for the first matched occurrence. In this example, we'll print the matched text to the 
 standard output.
 
 ```php
@@ -40,7 +40,7 @@ pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
 });
 ```
 
-> Casting `Match` to string is the same as calling `text()` method.
+> Casting `Match` to a string is the same as calling a `text()` method.
 
 ### Groups in match
 
@@ -86,7 +86,7 @@ return pattern('\w+')->match("Apples are cool")->first('strtoupper');
 APPLES
 ```
 
-Of course, `strtoupper` (or any other callback) is only invoked **if** your subject matches the pattern.
+Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
 
 ### Arbitrary return types
 
