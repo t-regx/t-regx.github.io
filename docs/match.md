@@ -5,7 +5,7 @@ title: Match a subject
 
 Using `pattern()->match()` you can:
  - Test a subject against a pattern: `matches()`/`fails()` 
- - Retrieve matches from subject: `first()`/`all()`/`only()`
+ - Retrieve matches from the subject: `first()`/`all()`/`only()`
  - Get capturing groups from matches: `group()`/`Match.group()`/`groups()`
  - Invoke callbacks for matches: `first()`/`forFirst()`/`forEach()`/`map()`
 
@@ -17,7 +17,7 @@ If you only need to check whether a pattern matches the subject, use
 pattern('[0-9]+')->matches("I'm 19 years old");
 ```
 
-...or whether it doesn't
+...or whether it doesn't.
 
 ```php
 pattern('[0-9]{3}')->fails("I'm 19 years old");
@@ -60,13 +60,13 @@ pattern('\d+')->match("I'm 19 years old. I was born in 1999")->first();
 '19'
 ```
 
-Read on to the [next page](match-first.md) to learn more about `first()`.
+Read on the [next page](match-first.md) to learn more about `first()`.
 
 ## Unmatched subject
 
 ### `all()`/`only()`
 
-If you call `all()` or `only()` on a subject that isn't matched by your pattern, you'll receive an empty array.
+If you call `all()` or `only()` on a subject that isn't matched with your pattern, you'll receive an empty array.
 ```php
 pattern('\d+')->match('Word')->all();
 ```
