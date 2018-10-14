@@ -6,15 +6,15 @@ sidebar_label: Why would I use T-Regx?
 
 ## PHP sucks
 
-That's a fact. How much PHP sucks, you can see for yourself in genius 
-"[A fractal of bad design](https://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/)", where it's illustrated just 
+That's a fact. How much PHP sucks, you can see by yourself in the genius article
+*[A fractal of bad design](https://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/)*, that illustrates  
 how inconsistent and jarring the language is. Regular Expressions in PHP are no different. 
 
 ## PHP suckage reasons:
 
 ### Implicit
 
-You are a PHP developer, probably. I would like to get `'Robert likes apples'`. Can you tell me which is the correct signature 
+You are probably a PHP developer. I would like to get `'Robert likes apples'`. Can you tell me which is the correct signature 
 for this task?
 ```php
 preg_replace('/Bob/', 'Robert', 'Bob likes apples');
@@ -38,9 +38,7 @@ preg_replace(?, ?, ?, $count, $limit);
 ### Unintuitive
 
 Programming languages are **tools** created to solve problems. An experienced programmer **should** be able to look
-at the code and tell what it does. With PHP `preg_*` method it's just.
-not.
-possible.
+at the code and tell what it does. With PHP `preg_*` method it's &nbsp;&nbsp; j u s t  &nbsp;&nbsp;  n o t  &nbsp;&nbsp;  p o s s i b l e.
 
 Someone who doesn't know PHP regular expressions, can probably ask himself:
 
@@ -53,7 +51,7 @@ Someone who doesn't know PHP regular expressions, can probably ask himself:
  - Parameters:
    - Methods with 4 or 5 parameters (3 of which are optional).
    
-     That means, whoever looks at the code has to **remember** (or to lookup) what those optional values are and in what order.
+     It means that, whoever looks at the code has to **remember** (or to look up) what those optional values are and in which order.
  - Return types:
    - Array of arrays, which contain either a `string`, `null`, or an array of `null`s, `strings` and `int`s.
 
@@ -67,8 +65,8 @@ The worst part? You find yourself looking at this code
 ```php
 return $match[1][0];
 ```
-not having any idea what. it. does. You have to see whether you're using `preg_match()` or `preg_match_all()` and
-whether or any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were used.
+having no idea &nbsp; w h a t &nbsp;&nbsp; i t &nbsp;&nbsp; d o e s. You have to see whether you're using `preg_match()` or `preg_match_all()` and
+whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were used.
 
 ### Inconsistent
 
@@ -84,7 +82,7 @@ whether or any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` we
   $count    = preg_match($p, $s, $matched);
   ```
 
-- If you use `PREG_CAPTURE_OFFSET`, and your subject isn't matched, these are the results:
+- If you use `PREG_CAPTURE_OFFSET` and your subject isn't matched, these are the results:
   
   Success | `preg_match()`   | `preg_match_all()`
   ------- | -------------- | ---------------
