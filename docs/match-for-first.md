@@ -1,16 +1,20 @@
 ---
 id: match-for-first
-title: Optional Matches
+title: Optional matches
 ---
 
-```php
-pattern('[0-9]+')->match("I'm 19 years old")
-   ->forFirst(function (Match $m) {
-       return strlen($m->text());
-   })
-   ->orThrow(InvalidArgumentException::class);
-```
+If you call `first()` on a subject that isn't matched by a pattern - `SubjectNotMatchedException` is thrown. We discussed
+that in the previous chapter. 
 
+But what if you **expected** the subject not to be matched? And how do you to react to it? 
+
+## Optional matches with `forFirst()`
+
+Method `forFirst()` can be called with a callback (that accepts `Match` details) just like `first()`. The difference is:
+`forFirst()` never throws `SubjectNotMatchedException`, and allows to control unmatched pattern by appropriate control methods:
+`orThrow()`, `orReturn()` and `orElse()`.
+
+For example:
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")
    ->forFirst(function (Match $m) {
@@ -24,7 +28,7 @@ handling of an unmatched subject relies in the chained method.
 
 ### `orReturn()`
 
-If match is not found, it returns a default value.
+If a match is not found, it returns a default value.
 
 ```php
 $s = pattern('[0-9]+')->match("I'm a dog")
@@ -38,7 +42,7 @@ $s // 'Match is not found'
 
 ### `orElse()`
 
-You can also call another function and use *it*, to evaluate a return value.
+If a match is not found, it calls `orElse()` callback and uses *it* to evaluate a return value.
 
 ```php
 $s = pattern('[0-9]+')->match("I'm a dog")
@@ -54,7 +58,7 @@ $s // "I couldn't match subject I'm a dog"
 
 ### `orThrow()`
 
-Or you can also provide your exception class to be thrown, when subject isn't matched.
+If a match is not found, it throws an exception using the provided exception class.
 
 ```php
 class MyException extends \Exception {}
@@ -73,21 +77,22 @@ catch (MyException $e) {
 
 Of course, your custom exception must meet certain requirements:
 
-#### It has to be a class 
+- **It has to be a class**
+  
+  Trying to instantiate interfaces would break our "Explicity rule". The class must be concrete and explicit. Besides,
+  in PHP you only can throw `Error` or `Exception` (classes).
 
-Trying to instantiate interfaces breaks our "Explicity rule". The class must be concrete and explicit.
+- **It has to implement `\Throwable`**
+  
+  Obviously.
 
-#### It has to implement `\Throwable`
+- **It must have a suitable constructor**
 
-Obviously.
+  The class must be instantiable with one of the following signatures and parameter types.
 
-#### It must have a suitable constructor
-
-The class must be instantiable with one of the following signatures and parameter types.
-
- - `__construct()`
- - `__construct($message)`, where `$message` can be a string
- - `__construct($message, subject)`, where `$message` and `$subject` can be strings
+   - `__construct()`
+   - `__construct($message)`, where `$message` can be a string
+   - `__construct($message, subject)`, where `$message` and `$subject` can be strings
 
 ## I don't like functional
 
