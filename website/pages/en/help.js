@@ -4,6 +4,10 @@ const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 
+function pageUrl(page, language) {
+    return siteConfig.baseUrl + (language ? `${language}/` : '') + page;
+}
+
 function docUrl(doc, language) {
     return `${siteConfig.baseUrl}docs/${language ? `${language}/` : ''}${doc}`;
 }
@@ -13,10 +17,7 @@ class Help extends React.Component {
         const language = this.props.language || '';
         const supportLinks = [
             {
-                content: `Learn more using the [documentation on this site.](${docUrl(
-                    'installation',
-                    language
-                )})`,
+                content: `Learn more using the [documentation on this site](${docUrl('introduction', language)}).`,
                 title: 'Browse Docs',
             },
             {
@@ -24,7 +25,7 @@ class Help extends React.Component {
                 title: 'Join the community',
             },
             {
-                content: "Find out what's new with this project",
+                content: `Find out what's new with this project on [Blog](${pageUrl('blog', language)})`,
                 title: 'Stay up to date',
             },
         ];
