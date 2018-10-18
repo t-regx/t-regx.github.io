@@ -11,6 +11,7 @@
       "match-first",
       "match-for-first",
       "match-for-each",
+      "match-offsets",
       "match-map",
       "match-flat-map"
     ],
