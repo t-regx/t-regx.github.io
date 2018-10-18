@@ -19,9 +19,8 @@
     ],
     "Match Details": [
       "match-details",
-      "match-group",
       "match-groups",
-      "groups-inline"
+      "match-group"
     ],
     "Offsets": [],
     "Misc": [
