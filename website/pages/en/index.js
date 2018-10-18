@@ -96,19 +96,6 @@ const Block = props => (
     </Container>
 );
 
-const MatchDetails = () => (
-    <Block background="light">
-        {[
-            {
-                title: 'Match details',
-                content: "With `pattern()->match()` and `pattern()->replace()`, it's trivial to retrieve, iterate, map and filter matches with callbacks and a detailed `Match` object.",
-                image: gifUrl('match-details.gif'),
-                imageAlign: 'right',
-            },
-        ]}
-    </Block>
-);
-
 const FunctionalProgramming = () => (
     <Block>
         {[
@@ -117,6 +104,19 @@ const FunctionalProgramming = () => (
                 content: "T-Regx utilizes chainable, functional programming with methods like `filter()`, `map()`, `flatMap()`, `first()`/`forFirst()` etc.",
                 image: gifUrl('functional.gif'),
                 imageAlign: 'left',
+            },
+        ]}
+    </Block>
+);
+
+const MatchDetails = () => (
+    <Block background="light">
+        {[
+            {
+                title: 'Match details',
+                content: "With `pattern()->match()` and `pattern()->replace()`, it's trivial to retrieve, iterate, map and filter matches with callbacks and a detailed `Match` object.",
+                image: gifUrl('match-details.gif'),
+                imageAlign: 'right',
             },
         ]}
     </Block>
@@ -139,15 +139,17 @@ const Features = () => (
     </Block>
 );
 
-const WorkingWithDeveloper = () => (
-    <div
-        className="productShowcaseSection paddingBottom"
-        style={{textAlign: 'center'}}>
-        <h2>Working <b>with</b> the developer</h2>
-        <MarkdownBlock>UTF-8 support out of the box</MarkdownBlock>
-        <MarkdownBlock>No implicit/default values - T-Regx is explicit as heck</MarkdownBlock>
-        <MarkdownBlock>Not even **touching** your error handlers</MarkdownBlock>
-    </div>
+const Installation = () => (
+    <Block layout="fourColumn" align="left">
+        {[
+            {},
+            {
+                title: 'Installation',
+                content: 'Just add composer dependency:\n\n    $ composer require rawr/t-regx',
+            },
+            {},
+        ]}
+    </Block>
 );
 
 const AutomaticDelimiters = () => (
@@ -177,24 +179,6 @@ const WarningsToExceptions = () => (
     </Block>
 );
 
-class Installation extends React.Component {
-    render() {
-        const language = this.props.language || '';
-        return (
-            <div className="paddingBottom" style={{textAlign: 'center'}}>
-                <h2>Installation</h2>
-                <MarkdownBlock>
-                    ```
-                    $ composer require rawr/t-regx
-                    ```
-                </MarkdownBlock>
-                You can also read about <a href={docUrl('installation', language)}>Installation</a> in our
-                documentation.
-            </div>
-        );
-    }
-}
-
 class Index extends React.Component {
     render() {
         const language = this.props.language || '';
@@ -206,9 +190,8 @@ class Index extends React.Component {
                     <FunctionalProgramming/>
                     <MatchDetails/>
                     <Features/>
-                    <WorkingWithDeveloper/>
-                    <WarningsToExceptions/>
                     <Installation/>
+                    <WarningsToExceptions/>
                 </div>
             </div>
         );
