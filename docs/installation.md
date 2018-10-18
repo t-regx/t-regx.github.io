@@ -34,7 +34,3 @@ $ composer require rawr/t-regx:dev-master-php5.3
 > Remember that those versions can still be run and tested on PHP 7.1+ environments. They will just lack the 
   new PHP features like scalar params, nullable types, return type hints, `PREG_EMPTY_AS_NULL`, 
   `error_clear_last()`, `preg_replace_callback_array`, etc.
-
-## Why can't you just develop it in 5.3?
-
-Well, because fuck you, that's why.

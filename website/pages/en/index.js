@@ -74,12 +74,12 @@ class HomeSplash extends React.Component {
                 <div className="inner">
                     <ProjectTitle/>
                     <PromoSection>
-                        <Button href={docUrl('installation', language)}>Try It Out</Button>
+                        <Button href={docUrl('installation', language)}>Installation</Button>
                         <Button href={docUrl('match', language)}>Matching</Button>
                         <Button href={docUrl('replace-with', language)}>Replacing</Button>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                         <Button href={docUrl('overview', language)}>What's T-Regx</Button>
-                        <Button href={docUrl('whats-the-point', language)}>Why PHP sucks</Button>
+                        <Button href={docUrl('whats-the-point', language)}>Why use T-Regx?</Button>
                     </PromoSection>
                 </div>
             </SplashContainer>

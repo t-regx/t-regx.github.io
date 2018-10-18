@@ -4,13 +4,11 @@ title: What's the point?
 sidebar_label: Why would I use T-Regx?
 ---
 
-## PHP sucks
+Here is a few reasons why one might consider using T-Regx.
 
-That's a fact. How much PHP sucks, you can see by yourself in the genius article
-*[A fractal of bad design](https://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/)*, that illustrates  
-how inconsistent and jarring the language is. Regular Expressions in PHP are no different. 
+## About PHP regular expressions
 
-## PHP suckage reasons:
+PHP regular expressions API is far from perfect. Here's only a handful of what's wrong with it:
 
 ### Implicit
 
