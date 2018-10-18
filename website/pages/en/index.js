@@ -52,8 +52,7 @@ const Logo = props => (
 );
 
 const ProjectTitle = () => (
-    <h2 className="projectTitle">
-        {siteConfig.title}
+    <h2 className="projectTitle">{siteConfig.title}
         <small>{siteConfig.tagline}</small>
     </h2>
 );
@@ -78,6 +77,9 @@ class HomeSplash extends React.Component {
                         <Button href={docUrl('installation', language)}>Try It Out</Button>
                         <Button href={docUrl('match', language)}>Matching</Button>
                         <Button href={docUrl('replace-with', language)}>Replacing</Button>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <Button href={docUrl('overview', language)}>What's T-Regx</Button>
+                        <Button href={docUrl('whats-the-point', language)}>Why PHP sucks</Button>
                     </PromoSection>
                 </div>
             </SplashContainer>
@@ -94,19 +96,29 @@ const Block = props => (
     </Container>
 );
 
+const MatchDetails = () => (
+    <Block background="light">
+        {[
+            {
+                title: 'Match details',
+                content: "With `pattern()->match()` and `pattern()->replace()`, it's trivial to retrieve, iterate, map and filter matches with callbacks and a detailed `Match` object.",
+                image: gifUrl('match-details.gif'),
+                imageAlign: 'left',
+            },
+        ]}
+    </Block>
+);
 const Features = () => (
     <Block layout="fourColumn">
         {[
             {
-                title: 'Automatic delimiters',
-                content: 'This is the content of my feature',
+                title: 'Written with clean design in mind',
+                content: '`No varargs`, `No boolean arguments`, `No flags`, `No Reflection used`',
                 image: gifUrl('first.gif'),
-                imageAlign: 'top',
             },
             {
-                title: 'Converting warnings to exceptions',
-                content: 'The content of my second feature',
-                image: gifUrl('second.gif'),
+                title: 'Always and exception!',
+                content: 'If any error occurs while using regexp (invalid pattern, malformed UTF8, backtrack limit, nonexistent group, anything!) T-Regx throws an exception.',
                 imageAlign: 'top',
             },
         ]}
@@ -117,10 +129,10 @@ const FeatureCallout = () => (
     <div
         className="productShowcaseSection paddingBottom"
         style={{textAlign: 'center'}}>
-        <h2>Feature Callout</h2>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
+        <h2>Working <b>with</b> the developer</h2>
+        <MarkdownBlock>UTF-8 support out of the box</MarkdownBlock>
+        <MarkdownBlock>No implicit/default values - T-Regx is explicit as heck</MarkdownBlock>
+        <MarkdownBlock>Not even **touching** your error handlers</MarkdownBlock>
     </div>
 );
 
@@ -143,7 +155,7 @@ const WarningsToExceptions = () => (
         {[
             {
                 title: 'SafeRegex | Converts warnings to exceptions',
-                content: "SafeRegex watches for warnings, analyzes `preg_*()` methods' return values and looks up last preg errors to validate a call. If it fails, an exception is thrown.",
+                content: "SafeRegex watches for warnings, analyzes `preg_()` methods' return values and looks up `last_preg_error()` to validate a call. If it fails, an exception is thrown.",
                 image: gifUrl('second.gif'),
                 imageAlign: 'left',
             },
@@ -151,32 +163,37 @@ const WarningsToExceptions = () => (
     </Block>
 );
 
-const MatchDetails = () => (
-    <Block background="light">
-        {[
-            {
-                title: 'Match details',
-                content: "With `pattern()->match()` and `pattern()->replace()`, it's trivial to retrieve, iterate, map and filter matches with callback and a detailed `Match` object.",
-                image: gifUrl('match-details.gif'),
-                imageAlign: 'right',
-            },
-        ]}
-    </Block>
-);
+class Installation extends React.Component {
+    render() {
+        const language = this.props.language || '';
+        return (
+            <div className="paddingBottom" style={{textAlign: 'center'}}>
+                <h2>Installation</h2>
+                <MarkdownBlock>
+                    ```
+                    $ composer require rawr/t-regx
+                    ```
+                </MarkdownBlock>
+                You can also read about <a href={docUrl('installation', language)}>Installation</a> in our
+                documentation.
+            </div>
+        );
+    }
+}
 
 class Index extends React.Component {
     render() {
         const language = this.props.language || '';
-
         return (
             <div>
                 <HomeSplash language={language}/>
                 <div className="mainContainer">
-                    <MatchDetails/>
-                    <Features/>
                     <AutomaticDelimiters/>
+                    <Features/>
+                    <MatchDetails/>
                     <FeatureCallout/>
                     <WarningsToExceptions/>
+                    <Installation/>
                 </div>
             </div>
         );
