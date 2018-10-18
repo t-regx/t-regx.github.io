@@ -51,7 +51,7 @@ pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, on May 12")->onl
 
 ### One
 
-To get the first occurrence of a matched pattern, call `first()`.
+To get the first occurrence of a matched pattern, call [`first()`](match-first.md).
 
 ```php
 pattern('\d+')->match("I'm 19 years old. I was born in 1999")->first();
@@ -60,7 +60,7 @@ pattern('\d+')->match("I'm 19 years old. I was born in 1999")->first();
 '19'
 ```
 
-Read on the [next page](match-first.md) to learn more about `first()`.
+Read on the [next page](match-first.md) to learn more about [`first()`](match-first.md).
 
 ## Unmatched subject
 

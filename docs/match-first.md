@@ -25,9 +25,11 @@ standard output.
 
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (string $match) {
-    echo $match;
+    echo 'I matched ' . $match;
 });
 ```
+
+> Casting `Match` to a string is the same as calling a `text()` method.
 
 ### Match details
 
@@ -35,12 +37,24 @@ With `Match` details, you can gain access to useful information about the matche
 
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
-    echo $match->text();
-    echo (string) $match;
+    $subject = $match->subject();
+    echo "$match was matched inside '$subject'";
 });
 ```
+```bash
+Apples was matches inside 'Apples are cool'
+```
 
-> Casting `Match` to a string is the same as calling a `text()` method.
+You can learn more about `Match`, on [Advanced details](match-details.md) page. One of such details is retrieving other matches:
+```php
+pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
+    $all = $match->all();
+    echo "$match was matched first. All matches are " . json_encode($all);
+});
+```
+```bash
+Apples was matched first. All matches are ["Apples","are","cool"]
+```
 
 ### Groups in match
 
@@ -49,7 +63,6 @@ Retrieving capturing groups from a match is really simple.
 ```php
 pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(Match $match) {
     $capital = $match->group('capital')->text();
-    $capital = (string) $match->group('capital');
     
     return $capital;
 });
@@ -57,6 +70,9 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(
 ```bash
 'G'
 ```
+
+You can learn more about groups on [Capturing Group](match-group.md) page. You can even use familiar `all()`, `first()`,
+ `offsets()` methods on groups. 
 
 ### Return value
 
@@ -98,8 +114,6 @@ return pattern('\w+')->match("Apples are cool")->first('str_split');
 ```bash
 ['A', 'p', 'p', 'l', 'e', 's']
 ```
-
-## Inline groups
 
 ## `forFirst()`
 

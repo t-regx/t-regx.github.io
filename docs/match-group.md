@@ -1,6 +1,6 @@
 ---
 id: match-group
-title: Group
+title: Capturing Group
 ---
 
 ```php
