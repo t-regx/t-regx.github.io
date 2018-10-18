@@ -11,18 +11,20 @@ But what if you **expected** the subject not to be matched? And how do you to re
 ## Optional matches with `forFirst()`
 
 Method `forFirst()` can be called with a callback (that accepts `Match` details) just like `first()`. The difference is:
-`forFirst()` never throws `SubjectNotMatchedException`, and allows to control unmatched pattern by appropriate control methods:
-`orThrow()`, `orReturn()` and `orElse()`.
+`forFirst()` never throws `SubjectNotMatchedException`, and allows you to control an unmatched subject by appropriate 
+control methods: `orThrow()`, `orReturn()` and `orElse()`.
 
 For example:
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")
-   ->forFirst(function (Match $m) {
-       return strlen($m->text());
+   ->forFirst(function (Match $match) {
+       return "I was born $match years ago";
    })
    ->orReturn('Unmatched :/');
 ```
-
+```bash
+I was born 19 years ago
+```
 If a match is found, then the result of `forFirst()` callback is returned. If a match is not found, however, then the 
 handling of an unmatched subject relies in the chained method.
 
