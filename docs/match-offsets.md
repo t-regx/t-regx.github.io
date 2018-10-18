@@ -32,10 +32,10 @@ pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, on May 12")->off
 You can also limit your matches.
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, on May 12")->only(2);
+pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, on May 12")->offsets()->only(2);
 ```
 ```bash
-['19', '1999']
+[4, 32]
 ```
 
 ### One

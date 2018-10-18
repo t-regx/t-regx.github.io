@@ -36,7 +36,7 @@ preg_replace(?, ?, ?, $count, $limit);
 ### Unintuitive
 
 Programming languages are **tools** created to solve problems. An experienced programmer **should** be able to look
-at the code and tell what it does. With PHP `preg_*` method it's &nbsp;&nbsp; j u s t  &nbsp;&nbsp;  n o t  &nbsp;&nbsp;  p o s s i b l e.
+at the code and tell what it does. With PHP `preg_*` method it's just. not. possible.
 
 Someone who doesn't know PHP regular expressions, can probably ask himself:
 
@@ -63,7 +63,7 @@ The worst part? You find yourself looking at this code
 ```php
 return $match[1][0];
 ```
-having no idea &nbsp; w h a t &nbsp;&nbsp; i t &nbsp;&nbsp; d o e s. You have to see whether you're using `preg_match()` or `preg_match_all()` and
+having no idea what. it. does. You have to see whether you're using `preg_match()` or `preg_match_all()` and
 whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were used.
 
 ### Inconsistent
