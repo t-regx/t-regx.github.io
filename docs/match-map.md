@@ -56,3 +56,18 @@ pattern('[0-9]+')->match("I'm 19 years old")->map('str_split');
   ['O', 'L', 'D']
 ]
 ```
+
+## `flatMap()`
+
+You can just as easily create a flattened map.
+
+```php
+pattern('[0-9]+')->match("I'm 19 years old")->flatMap('str_split');
+```
+```
+[
+  'I', '\'', 'M', '1', '9', 'Y', 'E', 'A', 'R', 'S', 'O', 'L', 'D'
+]
+```
+
+Read more about [`flatMap()`](match-flat-map.md) on the next page.

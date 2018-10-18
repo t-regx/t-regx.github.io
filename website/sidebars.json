@@ -11,7 +11,8 @@
       "match-first",
       "match-for-first",
       "match-for-each",
-      "match-map"
+      "match-map",
+      "match-flat-map"
     ],
     "Replacing": [
       "replace-with"
