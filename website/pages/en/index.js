@@ -103,18 +103,32 @@ const MatchDetails = () => (
                 title: 'Match details',
                 content: "With `pattern()->match()` and `pattern()->replace()`, it's trivial to retrieve, iterate, map and filter matches with callbacks and a detailed `Match` object.",
                 image: gifUrl('match-details.gif'),
+                imageAlign: 'right',
+            },
+        ]}
+    </Block>
+);
+
+const FunctionalProgramming = () => (
+    <Block>
+        {[
+            {
+                title: 'Functional programming',
+                content: "T-Regx utilizes chainable, functional programming with methods like `filter()`, `map()`, `flatMap()`, `first()`/`forFirst()` etc.",
+                image: gifUrl('functional.gif'),
                 imageAlign: 'left',
             },
         ]}
     </Block>
 );
+
 const Features = () => (
     <Block layout="fourColumn">
         {[
             {
                 title: 'Written with clean design in mind',
                 content: '`No varargs`, `No boolean arguments`, `No flags`, `No Reflection used`',
-                image: gifUrl('first.gif'),
+                image: gifUrl('delimiters.gif'),
             },
             {
                 title: 'Always and exception!',
@@ -125,7 +139,7 @@ const Features = () => (
     </Block>
 );
 
-const FeatureCallout = () => (
+const WorkingWithDeveloper = () => (
     <div
         className="productShowcaseSection paddingBottom"
         style={{textAlign: 'center'}}>
@@ -143,7 +157,7 @@ const AutomaticDelimiters = () => (
                 title: 'Automatic delimiters',
                 content: "You no longer need to delimiter your patterns. [T-Regx' smart delimiterer](docs/delimiters) will add one of many"
                     + " delimiters for you, if they're not already present.",
-                image: gifUrl('first.gif'),
+                image: gifUrl('delimiters.gif'),
                 imageAlign: 'right',
             },
         ]}
@@ -156,7 +170,7 @@ const WarningsToExceptions = () => (
             {
                 title: 'SafeRegex | Converts warnings to exceptions',
                 content: "SafeRegex watches for warnings, analyzes `preg_()` methods' return values and looks up `last_preg_error()` to validate a call. If it fails, an exception is thrown.",
-                image: gifUrl('second.gif'),
+                image: gifUrl('safe.regex.gif'),
                 imageAlign: 'left',
             },
         ]}
@@ -189,9 +203,10 @@ class Index extends React.Component {
                 <HomeSplash language={language}/>
                 <div className="mainContainer">
                     <AutomaticDelimiters/>
-                    <Features/>
+                    <FunctionalProgramming/>
                     <MatchDetails/>
-                    <FeatureCallout/>
+                    <Features/>
+                    <WorkingWithDeveloper/>
                     <WarningsToExceptions/>
                     <Installation/>
                 </div>
