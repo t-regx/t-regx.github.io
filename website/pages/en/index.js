@@ -140,14 +140,17 @@ const Features = () => (
 );
 
 const Installation = () => (
-    <Block layout="fourColumn" align="left">
+    <Block layout="threeColumn" align="left">
         {[
-            {},
+            {
+                title: '',
+                content: '![](img/t.regx.installation.png)',
+            },
             {
                 title: 'Installation',
-                content: 'Just add composer dependency:\n\n    $ composer require rawr/t-regx',
+                content: '\n\n    $ composer require rawr/t-regx',
             },
-            {},
+            {}
         ]}
     </Block>
 );
