@@ -147,6 +147,16 @@ else {
 }
 ```
 
+T-Regx always throws an exception and never issues any warnings, errors or notices.
+```php
+try {
+    return pattern('Foo')->match('Bar')->all();
+}
+catch (CleanRegexException $exception) {
+    // handle the error
+}
+```
+
 ### It's explicit
 
 Poor design of PHP `preg_*` methods does not make them really descriptive. Someone who's not familiar with it will probably
