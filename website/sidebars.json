@@ -1,9 +1,11 @@
 {
   "docs": {
-    "Kick Start": [
+    "About": [
       "installation",
       "overview",
-      "whats-the-point",
+      "whats-the-point"
+    ],
+    "Kick Start": [
       "introduction"
     ],
     "Matching": [
