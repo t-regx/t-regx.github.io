@@ -132,8 +132,7 @@ const Features = () => (
             },
             {
                 title: 'Always and exception!',
-                content: 'If any error occurs while using regexp (invalid pattern, malformed UTF8, backtrack limit, nonexistent group, anything!) T-Regx throws an exception.',
-                imageAlign: 'top',
+                content: 'If any error occurs while using regexp (invalid pattern, malformed UTF8, backtrack limit, nonexistent group, anything!) T-Regx throws an exception.'
             },
         ]}
     </Block>
@@ -150,7 +149,9 @@ const Installation = () => (
                 title: 'Installation',
                 content: '\n\n    $ composer require rawr/t-regx',
             },
-            {}
+            {
+                title: ''
+            }
         ]}
     </Block>
 );
