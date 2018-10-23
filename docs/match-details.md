@@ -14,7 +14,8 @@ pattern($p) ->match($s) ->iterate(function (Match $match) {
 
     (string) $match->group('value');    // '168'
     (string) $match->group(2);          // 'cm'
-    $match->offset();                   //  10       UTF-8 safe offset
+    $match->offset();                   //  10       UTF-8 safe     (offset in characters)
+    $match->byteOffset();               //  10       UTF-8 not-safe (offset in raw bytes)
 
     $match->group('unit')->text()       // '168'
     $match->group('unit')->offset()     // 13
