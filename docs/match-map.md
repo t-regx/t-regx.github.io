@@ -13,7 +13,7 @@ So instead of returning all elements:
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->all();
 ```
-```
+```php
 ["I'm", "19", "years", "old"]
 ```
 
@@ -24,7 +24,7 @@ pattern("[\w']+")->match("I'm 19 years old")->map(function (Match $m) {
     return strlen($m->text());
 });
 ```
-```
+```php
 [3, 2, 5, 3]
 ```
 
@@ -36,7 +36,7 @@ like [`first()`](match-first.md).
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map('strtoupper');
 ```
-```
+```php
 ["I'M", "19", "YEARS", "OLD"]
 ```
 
@@ -48,7 +48,7 @@ booleans and `null`.
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map('str_split');
 ```
-```
+```php
 [
   ['I', '\'', 'm'], 
   ['1', '9'], 
@@ -64,7 +64,7 @@ You can just as easily create a flattened map.
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
-```
+```php
 [
   'I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd'
 ]

@@ -14,8 +14,8 @@ pattern('\w+')->match("I have 19 trains")->flatMap(function (Match $match) {
     ];
 });
 ```
-```
-[ "I", 1, "have", 2, "19", 2, "trains", 6 ]
+```php
+['I', 1, 'have', 2, '19', 2, 'trains', 6]
 ```
 
 ## Return types
@@ -43,7 +43,7 @@ like [`first()`](match-first.md) and [`map()`](match-map.md).
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
-```
+```php
 [
   'I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd'
 ]
@@ -56,11 +56,11 @@ pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
     return [$match->text() => $match->offset()];
 });
 ```
-```bash
+```php
 [
-    Apples  => 0,
-    are     => 7,
-    cool    => 11
+    'Apples' => 0,
+    'are'    => 7,
+    'cool'   => 11
 ]
 ```
 
@@ -79,11 +79,11 @@ pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
     ];
 });
 ```
-```bash
+```php
 [
-    Apples  => 0,
-    subject => "I'm 19 years only",
-    are     => 7,
-    cool    => 11
+    'Apples'  => 0,
+    'subject' => "I'm 19 years only",
+    'are'     => 7,
+    'cool'    => 11
 ]
 ```

@@ -6,7 +6,7 @@ title: Count occurrences
 ```php
 pattern('[aeiouy]')->count('Computer');
 ```
-```
+```php
 3
 ```
 

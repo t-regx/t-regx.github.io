@@ -60,9 +60,11 @@ Someone who doesn't know PHP regular expressions, can probably ask himself:
    depending on the flag.
 
 The worst part? You find yourself looking at this code
+
 ```php
 return $match[1][0];
 ```
+
 having no idea what. it. does. You have to see whether you're using `preg_match()` or `preg_match_all()` and
 whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were used.
 

@@ -12,6 +12,6 @@ pattern('[A-Z][a-z]+$')->filter([
      'Stan123'
 ])
 ```
-```
+```php
 ['Mark', 'Robert', 'Jane']
 ```

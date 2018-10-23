@@ -25,7 +25,7 @@ If you only want to get offsets of your matches, use `offsets()->all()`.
 ```php
 pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, on May 12")->offsets()->all();
 ```
-```bash
+```php
 [4, 32, 45]
 ```
 
@@ -34,7 +34,7 @@ You can also limit your matches.
 ```php
 pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, on May 12")->offsets()->only(2);
 ```
-```bash
+```php
 [4, 32]
 ```
 
@@ -45,7 +45,7 @@ To only get offset of the first occurrence of a matched pattern, call `offsets()
 ```php
 pattern('\d+')->match("I was born in 1999")->offsets()->first();
 ```
-```bash
+```php
 14
 ```
 
@@ -72,6 +72,6 @@ $offset = pattern('(?<capital>[A-Z])[a-z]+')
 ```php
 pattern('(?<capital>[A-Z])[a-z]+')->match('my name is Jhon Cena')->group('capital')->offsets()->first();
 ```
-```bash
+```php
 11
 ```

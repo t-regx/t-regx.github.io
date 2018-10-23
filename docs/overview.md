@@ -40,6 +40,7 @@ While using T-Regx, some things are **certain**. For example:
 ```php
 $result = pattern($p)->match($subject)->first();
 ```
+
 Here, `$result` **must** contain the first occurrence. It must contain *your value*.
 
 It will **never** contain `null`, `false` or an empty array. `SubjectNotMatchedException` would be thrown in 

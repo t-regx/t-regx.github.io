@@ -6,16 +6,15 @@ title: Validate a pattern
 Validate a pattern
 
 ```php
-pattern('Am (I a valid pattern')->is()->valid()
+pattern('Am (I a valid pattern')->is()->valid();
 ```
-```bash
-(boolean) false
+```php
+false
 ```
-
 
 ```php
-pattern('I a valid pattern')->is()->valid()
+pattern('I a valid pattern')->is()->valid();
 ```
-```bash
-(boolean) true
+```php
+true
 ```

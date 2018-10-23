@@ -15,6 +15,7 @@ Method `forFirst()` can be called with a callback (that accepts `Match` details)
 control methods: `orThrow()`, `orReturn()` and `orElse()`.
 
 For example:
+
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")
    ->forFirst(function (Match $match) {
@@ -22,9 +23,10 @@ pattern('[0-9]+')->match("I'm 19 years old")
    })
    ->orReturn('Unmatched :/');
 ```
-```bash
-I was born 19 years ago
+```php
+'I was born 19 years ago'
 ```
+
 If a match is found, then the result of `forFirst()` callback is returned. If a match is not found, however, then the 
 handling of an unmatched subject relies in the chained method.
 

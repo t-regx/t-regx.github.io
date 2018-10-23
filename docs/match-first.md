@@ -7,13 +7,19 @@ Matching a first occurrence in a string is the most common use-case.
 
 ## Return from `first()`
 
+You can get the first occurrence of a pattern in a subject by calling `first()`.
+
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")->first();
+```
+```php
+'19'
 ```
 
 If a match is not found in a subject, `SubjectNotMatchedException` is thrown. This is done to relieve you from the 
 [**brain strain**](overview.md#brain-strain). It's much easier to develop an application and *just assume* that this 
-method **has** to return a value and go on. No more bothers  about empty arrays or a possible `null`/`false` hiding somewhere.
+method **has** to return a value and go on. No more bothers about empty arrays and strings, or a possible
+`null`/`false` hiding somewhere.
 
 If you would like to control what should be done if the subject isn't matched with your pattern though; 
 you can do it **explicitly** with [`forFirst()`](#forfirst).
@@ -28,6 +34,9 @@ pattern('\w+')->match("Apples are cool")->first(function (string $match) {
     echo 'I matched ' . $match;
 });
 ```
+```text
+I matched Apples
+```
 
 > Casting `Match` to a string is the same as calling a `text()` method.
 
@@ -38,23 +47,14 @@ With `Match` details, you can gain access to useful information about the matche
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
     $subject = $match->subject();
-    echo "$match was matched inside '$subject'";
+    echo "Match '$match' was matched inside '$subject'.";
 });
 ```
-```bash
-Apples was matches inside 'Apples are cool'
+```text
+Match 'Apples' was matched inside 'Apples are cool'.
 ```
 
-You can learn more about `Match`, on [Advanced details](match-details.md) page. One of such details is retrieving other matches:
-```php
-pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
-    $all = $match->all();
-    echo "$match was matched first. All matches are " . json_encode($all);
-});
-```
-```bash
-Apples was matched first. All matches are ["Apples","are","cool"]
-```
+You can learn more about `Match` on [Advanced details](match-details.md) page.
 
 ### Groups in match
 
@@ -67,12 +67,12 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(
     return $capital;
 });
 ```
-```bash
+```php
 'G'
 ```
 
-You can learn more about groups on [Capturing Group](match-group.md) page. You can even use familiar `all()`, `first()`,
- `offsets()` methods on groups. 
+You can learn more about groups on [Capturing Group](match-group.md) page. You can even use familiar `all()`,
+`first()` and `offsets()` methods on groups. 
 
 ### Return value
 
@@ -80,15 +80,16 @@ It's also possible to return your custom value from within `first()` callback. T
 from `first()` function.
 
 ```php
-$value = pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
+pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
     return [
         $match->text(), 
-        $match->text(),
-        $match->text()
+        strtoupper($match->text()),
+        lcfirst($match->text())
     ];
 });
-
-$value // ['Apples', 'Apples', 'Apples']
+```
+```php
+['Apples', 'APPLES', 'apples']
 ```
 
 ### Variable callbacks
@@ -98,11 +99,13 @@ You can call `first()` for any valid PHP `callable` which accepts one string par
 ```php
 return pattern('\w+')->match("Apples are cool")->first('strtoupper');
 ```
-```bash
-APPLES
+```php
+'APPLES'
 ```
 
-Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
+In this example `Match` will be cast to string, which is the same as calling `Match.text()` method.
+
+> Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
 
 ### Arbitrary return types
 
@@ -111,7 +114,7 @@ From within `first()` callback, you can return any value, including: objects, ar
 ```php
 return pattern('\w+')->match("Apples are cool")->first('str_split');
 ```
-```bash
+```php
 ['A', 'p', 'p', 'l', 'e', 's']
 ```
 
@@ -121,14 +124,16 @@ This method allows you to explicitly specify how to handle an unmatched subject.
 one of the following `orReturn()`, `orElse` or `orThrow()`.
 
 ```php
-$func = function () {
-    return 'Yay';
+$func = function (Match $match) {
+    return "Yay $match";
 };
 
 echo pattern('\w+')->match('Dog')->forFirst($func)->orReturn('Aw, man :/');
 ```
-```bash
-Yay
+```text
+Yay Dog
 ```
 
-Read on to learn more about [`forFirst()`](match-for-first.md)
+---
+
+Read on to learn more about [`forFirst()`](match-for-first.md).
