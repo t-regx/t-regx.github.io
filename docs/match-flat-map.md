@@ -8,14 +8,14 @@ There are cases when you would like to create a single list of all your matches.
 ## Making a flat map
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->flatMap(function (Match $match) {
+pattern('\w+')->match("I have 19 trains")->flatMap(function (Match $match) {
     return [
         $match->text(), strlen($match)
     ];
 });
 ```
 ```
-[ "I'm", 3, "19", 2, "years", 5, "old", 3 ]
+[ "I", 1, "have", 2, "19", 2, "trains", 6 ]
 ```
 
 ## Return types
@@ -24,13 +24,13 @@ pattern('[0-9]+')->match("I'm 19 years old")->flatMap(function (Match $match) {
 one-element array under the hood would break our "Explicity rule".
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->flatMap(function (Match $match) {
+pattern("\w+")->match("I like trains")->flatMap(function (Match $match) {
     return $match;  // <- throws InvalidReturnValueException
 });
 ```
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->flatMap(function (Match $match) {
+pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
     return [$match];  // ok
 });
 ```
@@ -41,11 +41,11 @@ You can invoke `flatMap()` with any valid PHP `callable` which accepts one strin
 like [`first()`](match-first.md) and [`map()`](match-map.md).
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->flatMap('str_split');
+pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
 ```
 [
-  'I', '\'', 'M', '1', '9', 'Y', 'E', 'A', 'R', 'S', 'O', 'L', 'D'
+  'I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd'
 ]
 ```
 
@@ -64,10 +64,9 @@ pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
 ]
 ```
 
-> Keep in mind that `flatMap()` uses `array_merge()` to flatten the results! So If you use `int` keys, or even
-`string` keys with numeric values (like `'19'`) they will be **reindexed** by `array_merge()`.
- 
- 
+> Keep in mind that `flatMap()` uses `array_merge()` to flatten the results! So If you use `int` as a key, or even
+a `string` with numeric values (like `'19'`) they will be **reindexed** by `array_merge()`.
+
 ## Duplicate keys
 
 Duplicate keys are not allowed in PHP arrays, so they'll only appear once in the results.

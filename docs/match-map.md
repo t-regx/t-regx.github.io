@@ -3,15 +3,15 @@ id: match-map
 title: Map
 ---
 
-Mapping matches works a bit like a combination of `all()` and `forEach()`. It returns all matched elements, after they've
-been iterated using `map()` callback (which accepts `Match` details).
+Mapping matches works a bit like a combination of `all()` and `forEach()`. It returns all matched elements, after they 
+have been iterated using `map()` callback (which accepts `Match` details).
 
 ## Map matched occurrences
 
 So instead of returning all elements:
 
 ```php
-pattern("[0-9A-Za-z']+")->match("I'm 19 years old")->all();
+pattern("[\w']+")->match("I'm 19 years old")->all();
 ```
 ```
 ["I'm", "19", "years", "old"]
@@ -20,7 +20,7 @@ pattern("[0-9A-Za-z']+")->match("I'm 19 years old")->all();
 ...you can map them - to any other value:
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->map(function (Match $m) {
+pattern("[\w']+")->match("I'm 19 years old")->map(function (Match $m) {
     return strlen($m->text());
 });
 ```
@@ -34,7 +34,7 @@ You can invoke `map()` with any valid PHP `callable` which accepts one string pa
 like [`first()`](match-first.md).
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->map('strtoupper');
+pattern("[\w']+")->match("I'm 19 years old")->map('strtoupper');
 ```
 ```
 ["I'M", "19", "YEARS", "OLD"]
@@ -42,18 +42,18 @@ pattern('[0-9]+')->match("I'm 19 years old")->map('strtoupper');
 
 ## Arbitrary return types
 
-Again, just like [`first()`](match-first.md), this method allows for any return type, including: objects, arrays, 
+Again, just like [`first()`](match-first.md), this method can return values of any type, including: objects, arrays, 
 booleans and `null`.
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->map('str_split');
+pattern("[\w']+")->match("I'm 19 years old")->map('str_split');
 ```
 ```
 [
-  ['I', '\'', 'M'], 
+  ['I', '\'', 'm'], 
   ['1', '9'], 
-  ['Y', 'E', 'A', 'R', 'S'], 
-  ['O', 'L', 'D']
+  ['y', 'e', 'a', 'r', 's'], 
+  ['o', 'l', 'd']
 ]
 ```
 
@@ -62,11 +62,11 @@ pattern('[0-9]+')->match("I'm 19 years old")->map('str_split');
 You can just as easily create a flattened map.
 
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->flatMap('str_split');
+pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
 ```
 [
-  'I', '\'', 'M', '1', '9', 'Y', 'E', 'A', 'R', 'S', 'O', 'L', 'D'
+  'I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd'
 ]
 ```
 
