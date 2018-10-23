@@ -76,7 +76,7 @@ class HomeSplash extends React.Component {
                     <PromoSection>
                         <Button href={docUrl('installation', language)}>Installation</Button>
                         <Button href={docUrl('match', language)}>Matching</Button>
-                        <Button href={docUrl('replace/replace-with', language)}>Replacing</Button>
+                        <Button href={docUrl('replace-with', language)}>Replacing</Button>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                         <Button href={docUrl('overview', language)}>What's T-Regx</Button>
                         <Button href={docUrl('whats-the-point', language)}>Why use T-Regx?</Button>

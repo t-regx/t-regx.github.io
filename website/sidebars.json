@@ -1,11 +1,11 @@
 {
   "docs": {
     "About": [
-      "installation",
       "overview",
       "whats-the-point"
     ],
     "Kick Start": [
+      "installation",
       "introduction"
     ],
     "Matching": [
@@ -18,7 +18,10 @@
       "match-flat-map"
     ],
     "Replacing": [
-      "replace/replace-with"
+      "replace",
+      "replace-with",
+      "replace-callback",
+      "replace-match-details"
     ],
     "Match Details": [
       "match-details",

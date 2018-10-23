@@ -13,6 +13,8 @@ The installation of T-Regx for `PHP 7.1` is really simple. Just add a composer d
 $ composer require rawr/t-regx
 ```
 
+If you're using PHP 7.1 or newer, feel free to skip to [Introduction](introduction.md).
+
 ## Older PHP versions
 
 Support for PHP <7.1 is achieved by maintaining two additional branches (`master-php-5.6` and `master-php5.3`).

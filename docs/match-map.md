@@ -1,10 +1,10 @@
 ---
 id: match-map
-title: Map
+title: Map occurrences
 ---
 
-Mapping matches works a bit like a combination of `all()` and `forEach()`. It returns all matched elements, after they 
-have been iterated using `map()` callback (which accepts `Match` details).
+Mapping works a bit like a combination of `all()` and `forEach()`. It returns all matched elements, after they 
+have been iterated (and potentially altered) using `map()` callback (which accepts `Match` details).
 
 ## Map matched occurrences
 
