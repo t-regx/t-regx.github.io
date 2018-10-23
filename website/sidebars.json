@@ -18,7 +18,7 @@
       "match-flat-map"
     ],
     "Replacing": [
-      "replace-with"
+      "replace/replace-with"
     ],
     "Match Details": [
       "match-details",
@@ -38,7 +38,7 @@
   },
   "api": {
     "Pattern": [
-      "api"
+      "api/api"
     ],
     "Details": [
     ],

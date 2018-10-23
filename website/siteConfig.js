@@ -15,7 +15,7 @@ const siteConfig = {
     headerLinks: [
         {search: true},
         {doc: 'installation', label: 'Docs'},
-        {doc: 'api', label: 'API'},
+        {doc: 'api/api', label: 'API'},
         {page: 'help', label: 'Help'},
         {blog: true, label: 'Blog'},
         {href: 'https://github.com/Danon/T-Regx', label: 'GitHub'},
