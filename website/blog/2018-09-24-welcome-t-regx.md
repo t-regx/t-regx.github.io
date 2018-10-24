@@ -5,7 +5,7 @@ authorURL: http://twitter.com/ericnakagawa
 authorFBID: 100001025937739
 ---
 
-The library changes its name! Now it's called [T-Regx](https://github.com/Danon/T-Regx)! It's a combination of 
+The library changes its name! Now it's called [T-Regx](https://github.com/T-Regx/T-Regx)! It's a combination of 
 words *"T-Rex"* - the dinosaur - and *"RegExp"*.
 
 Also, I've invested much more time into the development of ~~CleanRegex~~ T-Regx. Here are the results:

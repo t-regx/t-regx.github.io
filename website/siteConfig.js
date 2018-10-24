@@ -2,15 +2,12 @@ const siteConfig = {
     title: 'T-Regx',
     tagline: 'Powerful Regular Expressions library',
 
-    url: 'https://your-docusaurus-test-site.com', // Your website URL
+    url: 'https://t-regx.github.io',
     baseUrl: '/',
-    // For github.io type URLs, you would set the url and baseUrl like:
-    //   url: 'https://facebook.github.io',
-    //   baseUrl: '/test-site/',
 
-    organizationName: 'Danon',
-    projectName: 'T-Regx',
-    repoUrl: 'https://github.com/Danon/T-Regx',
+    organizationName: 'T-Regx',
+    projectName: 't-regx.github.io',
+    repoUrl: 'https://github.com/T-Regx/t-regx.github.io',
 
     headerLinks: [
         {search: true},
@@ -18,7 +15,7 @@ const siteConfig = {
         {doc: 'api/api', label: 'API'},
         {page: 'help', label: 'Help'},
         {blog: true, label: 'Blog'},
-        {href: 'https://github.com/Danon/T-Regx', label: 'GitHub'},
+        {href: 'https://github.com/T-Regx/T-Regx', label: 'GitHub'},
         {languages: true}
     ],
     blogSidebarCount: 'ALL',
