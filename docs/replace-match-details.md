@@ -139,3 +139,5 @@ ____, ____ and my ____ really like Sweden
                                    modifiedOffset()  // 35
                                    offset()          // 35
 ```
+
+But be sure, each of those examples only uses one call to `preg_replace_callback` :)
