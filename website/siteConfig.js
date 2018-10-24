@@ -12,7 +12,7 @@ const siteConfig = {
     headerLinks: [
         {search: true},
         {doc: 'installation', label: 'Docs'},
-        {doc: 'api/api', label: 'API'},
+        // {doc: 'api/api', label: 'API'},
         {page: 'help', label: 'Help'},
         {blog: true, label: 'Blog'},
         {href: 'https://github.com/T-Regx/T-Regx', label: 'GitHub'},
