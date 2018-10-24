@@ -52,6 +52,12 @@ const siteConfig = {
     // Open Graph and Twitter card images.
     ogImage: 'img/docusaurus.png',
     twitterImage: 'img/docusaurus.png',
+
+    algolia: {
+        apiKey: '6d3eef6432e87213c7f031ee898b73a1',
+        indexName: 't-regx',
+        algoliaOptions: {}
+    },
 };
 
 module.exports = siteConfig;
