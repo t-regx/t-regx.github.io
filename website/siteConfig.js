@@ -8,6 +8,7 @@ const siteConfig = {
     organizationName: 'T-Regx',
     projectName: 't-regx.github.io',
     repoUrl: 'https://github.com/T-Regx/t-regx.github.io',
+    mainRepoUrl: 'https://github.com/T-Regx/T-Regx',
 
     headerLinks: [
         {search: true},

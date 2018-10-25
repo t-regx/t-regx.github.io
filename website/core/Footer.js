@@ -1,4 +1,5 @@
 const React = require('react');
+const GithubButton = require('./GithubButton.js');
 
 class Footer extends React.Component {
     docUrl(doc, language) {
@@ -56,17 +57,8 @@ class Footer extends React.Component {
                     <div>
                         <h5>More</h5>
                         <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
-                        <a href="https://github.com/T-Regx/T-Regx" target="_blank">GitHub</a>
-                        <a
-                            className="github-button"
-                            href={this.props.config.repoUrl}
-                            data-icon="octicon-star"
-                            data-show-count="true"
-                            data-count-href="/T-Regx/T-Regx/stargazers"
-                            data-count-aria-label="# stargazers on GitHub"
-                            aria-label="Star this project on GitHub">
-                            T-Regx
-                        </a>
+                        <a href={this.props.config.mainRepoUrl} target="_blank">GitHub</a>
+                        <GithubButton href={this.props.config.mainRepoUrl}/>
                     </div>
                 </section>
 
