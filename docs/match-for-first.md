@@ -3,7 +3,7 @@ id: match-for-first
 title: Optional matches
 ---
 
-If you call `first()` on a subject that isn't matched by a pattern - `SubjectNotMatchedException` is thrown. We discussed
+If you call [`first()`](match-first.md) on a subject that isn't matched by a pattern - `SubjectNotMatchedException` is thrown. We discussed
 that in the previous chapter. 
 
 But what if you **expected** the subject not to be matched? And how do you to react to it? 

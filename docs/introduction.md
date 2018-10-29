@@ -22,7 +22,7 @@ pattern('[A-Z][a-z]+')->matches($subject);
 
 ## Automatic delimiters
 
-Notice, that these patterns **don't have to** be delimitered. Smart T-Regx will add them implicitly.
+Notice, that these patterns **don't have to** be delimitered. Smart T-Regx will conveniently add them for you.
 You can add flags to your regular expression by passing a second argument.
 ```php
 pattern('[A-Z]+', 'im')->matches($subject);

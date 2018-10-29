@@ -59,7 +59,7 @@ Results of `Match.index()` are always **continuous integer**  numbers, going fro
 
 ## Subject
 
-To use a subject in your callback, use `Match.subject()`:
+To get the subject in your callback, use `Match.subject()`:
 
 ```php
 pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
@@ -121,13 +121,19 @@ Use:
 Even if you use `first()` or `only(int)` methods, `Match.all()` always returns unlimited occurrences.
 
 ```php
-pattern('\w+')->match('Apples are cool')->first(function (Match $match) {
-    $text = $match->text();   // 'Apples'
-    return $match->all();     // ['Apples', 'are', 'cool']
+pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
+    return [
+        'match' => $match->text(),
+        'all'   => $match->all()
+    ];
 });
 ```
 ```php
-['Apples', 'are', 'cool']
+[
+  ['match' => 'Apples', 'all' => ['Apples', 'are', 'cool']],
+  ['match' => 'are',    'all' => ['Apples', 'are', 'cool']],
+  ['match' => 'cool',   'all' => ['Apples', 'are', 'cool']]
+]
 ```
 
 Basically, mapping each occurrence's text is the same as `Match.all()`.

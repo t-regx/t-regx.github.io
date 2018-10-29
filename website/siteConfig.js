@@ -16,7 +16,7 @@ const siteConfig = {
         // {doc: 'api/api', label: 'API'},
         {page: 'help', label: 'Help'},
         {blog: true, label: 'Blog'},
-        {href: 'https://github.com/T-Regx/T-Regx', label: 'GitHub'},
+        {href: 'https://github.com/T-Regx/T-Regx', label: 'GitHub', external: true},
         {languages: true}
     ],
     blogSidebarCount: 'ALL',
