@@ -1,40 +1,26 @@
 const React = require('react');
 const GithubButton = require('./GithubButton.js');
+const FooterIcon = require('./FooterIcon.js');
 
 class Footer extends React.Component {
-    docUrl(doc, language) {
-        const baseUrl = this.props.config.baseUrl;
-        return `${baseUrl}docs/${language ? `${language}/` : ''}${doc}`;
-    }
-
-    pageUrl(doc, language) {
-        const baseUrl = this.props.config.baseUrl;
-        return baseUrl + (language ? `${language}/` : '') + doc;
+    docUrl(doc) {
+        return `${this.props.config.baseUrl}docs/${doc}`;
     }
 
     render() {
         return (
             <footer className="nav-footer" id="footer">
                 <section className="sitemap">
-                    <a href={this.props.config.baseUrl} className="nav-home">
-                        {this.props.config.footerIcon && (
-                            <img
-                                src={this.props.config.baseUrl + this.props.config.footerIcon}
-                                alt={this.props.config.title}
-                                width="64"
-                                height="52"
-                            />
-                        )}
-                    </a>
+                    <FooterIcon baseUrl={this.props.config.baseUrl}/>
                     <div>
                         <h5>Docs</h5>
-                        <a href={this.docUrl('installation', this.props.language)}>
+                        <a href={this.docUrl('installation')}>
                             Getting Started
                         </a>
-                        <a href={this.docUrl('match-for-first', this.props.language)}>
+                        <a href={this.docUrl('match-for-first')}>
                             Documentation
                         </a>
-                        <a href={this.docUrl('api/api', this.props.language)}>
+                        <a href={this.docUrl('api/api')}>
                             API Reference
                         </a>
                     </div>

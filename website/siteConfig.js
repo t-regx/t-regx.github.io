@@ -29,7 +29,6 @@ const siteConfig = {
     },
 
     headerIcon: 'img/t.regx.borderless.png',
-    footerIcon: 'img/t.regx.png',
     favicon: 'img/favicon.ico',
 
     colors: {
