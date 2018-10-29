@@ -1,0 +1,20 @@
+.container {
+  &.mainContainer.docMainContainer .post {
+    *:not(h1) > a:not(.hash-link) {
+      color: #0b495a;
+      background-color: #ddf2f7;
+      text-decoration: underline;
+      padding: 0 4px 0 3px;
+
+      &:hover {
+        color: #0b495a;
+        background-color: #c2e4ec;
+      }
+
+      code {
+        padding: 0;
+        background-color: initial;
+      }
+    }
+  }
+}
