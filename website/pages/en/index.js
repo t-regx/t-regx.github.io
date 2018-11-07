@@ -3,6 +3,7 @@ const CompLibrary = require('../../core/CompLibrary.js');
 const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 const siteConfig = require(`${process.cwd()}/siteConfig.js`);
+const HeaderButton = require(`${process.cwd()}/core/HeaderButton`);
 
 function gifUrl(img) {
     return `${siteConfig.baseUrl}gif/${img}`;
@@ -15,22 +16,6 @@ function imgUrl(img) {
 function docUrl(doc, language) {
     return `${siteConfig.baseUrl}docs/${language ? `${language}/` : ''}${doc}`;
 }
-
-class Button extends React.Component {
-    render() {
-        return (
-            <div className="pluginWrapper buttonWrapper">
-                <a className="button" href={this.props.href} target={this.props.target}>
-                    {this.props.children}
-                </a>
-            </div>
-        );
-    }
-}
-
-Button.defaultProps = {
-    target: '_self',
-};
 
 const SplashContainer = props => (
     <div className="homeContainer">
@@ -70,12 +55,12 @@ class HomeSplash extends React.Component {
                 <div className="inner">
                     <ProjectTitle/>
                     <PromoSection>
-                        <Button href={docUrl('installation', language)}>Installation</Button>
-                        <Button href={docUrl('match', language)}>Matching</Button>
-                        <Button href={docUrl('replace-with', language)}>Replacing</Button>
+                        <HeaderButton href={docUrl('installation', language)}>Installation</HeaderButton>
+                        <HeaderButton href={docUrl('match', language)}>Matching</HeaderButton>
+                        <HeaderButton href={docUrl('replace-with', language)}>Replacing</HeaderButton>
                         <div className="separator"/>
-                        <Button href={docUrl('overview', language)}>What's T-Regx</Button>
-                        <Button href={docUrl('whats-the-point', language)}>Why use T-Regx?</Button>
+                        <HeaderButton href={docUrl('overview', language)}>What's T-Regx</HeaderButton>
+                        <HeaderButton href={docUrl('whats-the-point', language)}>Why use T-Regx?</HeaderButton>
                     </PromoSection>
                 </div>
             </SplashContainer>
@@ -171,7 +156,7 @@ const WarningsToExceptions = () => (
         {[
             {
                 title: 'SafeRegex | Converts warnings to exceptions',
-                content: "SafeRegex watches for warnings, analyzes `preg_()` methods' return values and looks up `last_preg_error()` to validate a call. If it fails, an exception is thrown.",
+                content: "SafeRegex watches for warnings, analyzes `preg_()` return values and looks up `last_preg_error()` to validate a call. If it fails, an exception is thrown.",
                 image: gifUrl('safe.regex.gif'),
                 imageAlign: 'left',
             },
