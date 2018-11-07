@@ -16,13 +16,13 @@ pattern('[0-9]+')->match("I'm 19 years old")->first();
 '19'
 ```
 
-If a match is not found in a subject, `SubjectNotMatchedException` is thrown. This is done to relieve you from the 
+If a match is **not found** in a subject, `SubjectNotMatchedException` is thrown. This is done to relieve you from the 
 [**brain strain**](overview.md#brain-strain). It's much easier to develop an application and *just assume* that this 
-method **has** to return a value and go on. No more bothers about empty arrays and strings, or a possible
+method **has** to return a value and go on. No more bothers about empty arrays and empty strings, or a possible
 `null`/`false` hiding somewhere.
 
-If you would like to control what should be done if the subject isn't matched with your pattern though; 
-you can do it **explicitly** with [`forFirst()`](#forfirst).
+> If you would like to control the subject that **isn't matched** with your pattern though; 
+> you can do it **explicitly** with [`forFirst()`](#forfirst) (and `orReturn()`, `orElse()`, `orThrow()`).
 
 ## Use `first()` with callback
 
@@ -71,8 +71,12 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(
 'G'
 ```
 
-You can learn more about groups on [Capturing Group](match-group.md) page. You can even use familiar `all()`,
-`first()` and `offsets()` methods on groups. 
+Of course, `first()` callback will only be invoked if your pattern matches the subject.
+
+> You can learn more about groups on [Capturing Group](match-groups.md) page. 
+
+> Even more, you can visit [Inline groups](match-group.md) and use familiar `all()`, `first()`, `only()` and `offsets()` 
+> methods on groups. 
 
 ### Return value
 
@@ -121,7 +125,7 @@ return pattern('\w+')->match("Apples are cool")->first('str_split');
 ## `forFirst()`
 
 This method allows you to explicitly specify how to handle an unmatched subject. Just chain `forFirst()` with
-one of the following `orReturn()`, `orElse` or `orThrow()`.
+one of the following `orReturn()`, `orElse()` or `orThrow()`.
 
 ```php
 $func = function (Match $match) {

@@ -110,7 +110,11 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
 
 ## T-Regx to the rescue
 
-That's why T-Regx happened. It addresses all of PHP regular expressions flaws. 
+That's why T-Regx happened. It addresses all of PHP regular expressions flaws:
+
+ - [It's descriptive](whats-the-point.md#it-s-descriptive)
+ - [It's for developers](whats-the-point.md#it-s-for-developers)
+ - [It's explicit](whats-the-point.md#it-s-explicit)
 
 ### It's descriptive
 

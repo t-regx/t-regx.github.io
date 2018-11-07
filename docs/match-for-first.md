@@ -54,15 +54,33 @@ $s = pattern('[0-9]+')->match("I'm a dog")
         return 'Match is found!';
     })
     ->orElse(function (NotMatched $notMatched) { 
-        return "I couldn't match subject " . $notMatched->subject();
+        return "I couldn't match subject: " . $notMatched->subject();
     });
     
-$s // "I couldn't match subject I'm a dog"
+$s // "I couldn't match subject: I'm a dog"
 ```
 
 ### `orThrow()`
 
-If a match is not found, it throws an exception using the provided exception class.
+If a match is not found, it throws `SubjectNotMatchedException` by default.
+
+```php
+try 
+{
+    pattern('[0-9]+')->match("I'm a dog")
+        ->forFirst(function (Match $match) {
+            return 'Match is found!';
+        })
+        ->orThrow();
+}
+catch (SubjectNotMatchedException $e) {
+    // React to an unmatched subject
+}
+```
+
+### Custom exceptions for `orThrow()`
+
+You can also supply your own exception class name.
 
 ```php
 class MyException extends \Exception {}
@@ -83,8 +101,8 @@ Of course, your custom exception must meet certain requirements:
 
 - **It has to be a class**
   
-  Trying to instantiate interfaces would break our "Explicity rule". The class must be concrete and explicit. Besides,
-  in PHP you only can throw `Error` or `Exception` (classes).
+  Trying to instantiate interfaces or abstract classes would break our ["Explicity rule"](whats-the-point#t-regx-to-the-rescue). 
+  The class must be concrete and explicit.
 
 - **It has to implement `\Throwable`**
   
@@ -100,8 +118,8 @@ Of course, your custom exception must meet certain requirements:
 
 ## I don't like functional
 
-If you don't like functional programming style, you are free to use `first()` (which throws an exception) and 
-just catch it.
+If you don't like functional programming style, you are free to use [`first()`](match-first.md) (which throws an exception) 
+and just catch it.
 
 ```php
 try {
