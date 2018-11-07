@@ -1,3 +1,7 @@
 .promoRow .pluginRowBlock .buttonWrapper {
   margin-bottom: 5px;
 }
+
+.blockContent div span pre code:before {
+  content: '$ ';
+}

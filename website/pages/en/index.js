@@ -128,7 +128,7 @@ const Installation = () => (
             },
             {
                 title: 'Installation',
-                content: '\n\n    $ composer require rawr/t-regx',
+                content: '    composer require rawr/t-regx',
             },
             {
                 title: ''
