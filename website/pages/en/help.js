@@ -17,19 +17,19 @@ class Help extends React.Component {
         const language = this.props.language || '';
         const supportLinks = [
             {
-                content: `Learn more using the [documentation on this site](${docUrl('introduction', language)}).`,
                 title: 'Browse Docs',
+                content: `Learn more using the [documentation on this site](${docUrl('introduction', language)}).`,
             },
             {
-                content: 'Ask questions about the documentation and project',
                 title: 'Join the community',
+                content: 'Ask questions about the documentation and project.',
             },
             {
-                content: `Find out what's new with this project on [Blog](${pageUrl('blog', language)})`,
                 title: 'Stay up to date',
+                content: `Find out what's new with this project on [Blog](${pageUrl('blog', language)}).`,
             },
         ];
-
+        const issueLink = 'https://github.com/T-Regx/T-Regx/issues/new/choose';
         return (
             <div className="docMainWrapper wrapper">
                 <Container className="mainContainer documentContainer postContainer">
@@ -37,7 +37,10 @@ class Help extends React.Component {
                         <header className="postHeader">
                             <h1>Need help?</h1>
                         </header>
-                        <p>This project is maintained by a dedicated group of people.</p>
+                        <p>
+                            This project is maintained by a dedicated group of people. If you have any questions or
+                            problems, you're welcome to submit an <a href={issueLink}>issue in T-Regx github!</a> :)
+                        </p>
                         <GridBlock contents={supportLinks} layout="threeColumn"/>
                     </div>
                 </Container>

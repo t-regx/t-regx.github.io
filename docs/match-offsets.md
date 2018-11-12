@@ -14,7 +14,7 @@ $offset = pattern('\d+')->match('I was born in 1996')->first(function (Match $ma
 });
 ```
 
-> Remember that `offset()` is UTF-8 safe and returns offsets in characters, not bytes. For that, consider using `byteOffset()` method.
+> Remember that `offset()` is UTF-8 safe and returns offsets in characters, not bytes. For bytes, consider using `byteOffset()` method.
 
 ## Use inline `offsets()` method
 
@@ -49,7 +49,7 @@ pattern('\d+')->match("I was born in 1999")->offsets()->first();
 14
 ```
 
-As any other `first()` method, it throws `SubjectNotMatchedException` if the subject wasn't matched by your pattern.
+As any other `first()` method, it throws `SubjectNotMatchedException` if the subject isn't matched by your pattern.
 
 ## Group offsets
 
@@ -75,3 +75,6 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('my name is Jhon Cena')->group('capita
 ```php
 11
 ```
+
+Both `offsets()->first()` and `group()->offsets()->first()` throw `SubjectNotMatchedException` if the subject isn't 
+matched by your pattern.

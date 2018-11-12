@@ -20,8 +20,8 @@ pattern('\w+')->match("I have 19 trains")->flatMap(function (Match $match) {
 
 ## Return types
 
-`flatMap()` only accepts an `array` as it's return type. Returning a single element and implicitly creating a 
-one-element array under the hood would break our "Explicity rule".
+`flatMap()` only accepts an `array` as it's return type. Returning a single element and implicitly creating a one-element 
+array under the hood would break our ["Explicity rule"](whats-the-point#t-regx-to-the-rescue). 
 
 ```php
 pattern("\w+")->match("I like trains")->flatMap(function (Match $match) {
@@ -38,7 +38,7 @@ pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
 ## Variable callbacks
 
 You can invoke `flatMap()` with any valid PHP `callable` which accepts one string parameter (or no parameters) - just 
-like [`first()`](match-first.md) and [`map()`](match-map.md).
+like [`first()`](match-first.md) and [`map()`](match-map.md) - and returns `array`.
 
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
@@ -48,6 +48,8 @@ pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
   'I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd'
 ]
 ```
+
+The `callable` passed to `flatMap()` must return an array. `InvalidReturnValueException` is thrown, otherwise.
 
 ## Mapping with keys
 

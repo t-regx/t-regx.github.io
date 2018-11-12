@@ -6,7 +6,7 @@ sidebar_label: Why would I use T-Regx?
 
 Here is a few reasons why one might consider using T-Regx.
 
-## About PHP regular expressions
+## What's wrong with PHP Regular Expressions:
 
 PHP regular expressions API is far from perfect. Here's only a handful of what's wrong with it:
 
@@ -100,13 +100,13 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
   ```php
   if (preg_match('//', '')) {
   ```
-  there's no way of knowing whether your pattern is incorrect or whether it's correct but your subject wasn't matched with your 
-  pattern. You need to **remember** to add an explicit `false` check each time you use it.
+  there's no way of knowing whether your pattern is incorrect or whether it's correct but your subject isn't matched by 
+  your pattern. You need to **remember** to add an explicit `false` check each time you use it.
 - All `preg_*` methods only return `false`/`null`/`[]` on error. You have to remember to call `preg_last_error()` to get 
   some insight in the nature of your error. Of course it only returns `int`! So you have to look up that `4` is 
   "invalid utf8 sequence" and `2` is "backtrack limit exceeded".
-- `preg_filter()` for arrays returns `[]` if an error occurred; even though `[]` is the perfectly valid result for this method.
-  For example, it could have filtered out all values or its input was an empty array right from the beginning.
+- `preg_filter()` for arrays returns `[]` if an error occurred; even though `[]` is the perfectly valid result for this 
+  method. For example, it could have filtered out all values or its input was an empty array right from the beginning.
 
 ## T-Regx to the rescue
 

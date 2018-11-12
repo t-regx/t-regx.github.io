@@ -12,9 +12,9 @@ T-Regx (*a combination of T-Rex and RegExp*) is a lightweight Regular Expression
 
 ## Why is descriptive interface so important?
 
-T-Regx' aim is to relieve programmers from [**brain strain**](overview.md#brain-strain) while reading and writing code. Our mission is
-to make developers write/read a line and **immediately** go on, without thinking about what it does or what side 
-effects it may cause.
+T-Regx' aim is to relieve programmers from [**brain strain**](overview.md#brain-strain) while reading and writing code. 
+Our mission is to make developers write/read a line and **immediately** go on, without thinking about what it does or 
+what side effects it may cause.
 
 ### What's bad
 
@@ -26,7 +26,7 @@ preg_match($p, $subject, $matches);
 
 ...developers must stop for a moment and think:
  - Will the `$subject` match the pattern `$p`?
- - Will this trigger a warning if I messed up my regexp?
+ - Will this trigger a warning if I mess up my regexp?
  - Will this return `null`/`''`, if the `$subject` doesn't match?
  - Is `$match` a `string[]` or a `string[][]`?
  - Will this return *my value*? Or *my value* nested in arrays?

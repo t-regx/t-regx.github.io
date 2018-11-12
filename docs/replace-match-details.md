@@ -38,12 +38,12 @@ Given a pattern that matches capitalized words:
 ```php
 $subject = 'Me, Rihanna and my Mom really like Sweden';
 
-$result = pattern("[A-Z][a-z]+")->replace($subject)->first()->callback(function () {
+$result = pattern("[A-Z][a-z]+")->replace($subject)->all()->callback(function () {
     return '____';
 });
 ```
 
-having iterated the subject looking for `[A-Z][a-z]+`, for each `Match` the result of `Match.subject()` method would 
+having iterated the subject looking for `[A-Z][a-z]+` - for each `Match` the result of `Match.subject()` method would 
 always be the same. There are 4 occurrences matched by the pattern, so callback is invoked 4 times.
 
 ```text
@@ -62,7 +62,7 @@ Results of `ReplaceMatch.subject()` would be identical.
 
 ---
 
-Results `ReplaceMatch.modifiedSubject()` would, however, contain results of previous replacements.
+However, results of `ReplaceMatch.modifiedSubject()` would also contain results of **previous replacements**.
 
 ```text
 Me, Rihanna and my Mom really like Sweden
@@ -140,4 +140,6 @@ ____, ____ and my ____ really like Sweden
                                    offset()          // 35
 ```
 
-But be sure, each of those examples only uses one call to `preg_replace_callback` :)
+## Performance
+
+But be sure, each of those examples only uses one call to `preg_replace_callback()`. :)

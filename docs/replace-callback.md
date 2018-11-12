@@ -33,7 +33,9 @@ pattern('[A-Z][a-z]+')->replace($subject)->first()->callback(function (Match $m)
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
 
-pattern('[A-Z][a-z]+')->replace($subject)->all()->callback('strtoupper');
+pattern('[A-Z][a-z]+')->replace($subject)->all()->callback(function (Match $m) {
+   return strtoupper($m->text());
+});
 ```
 ```php
 'I like scandinavia: SWEDEN, NORWAY and DENMARK'
@@ -52,10 +54,10 @@ pattern('[A-Z][a-z]+')->replace($subject)->only(2)->callback('strtoupper');
 
 ## Return types
 
-`replace()->callback()` only accepts `string` as it's return type. We believe that returning an object, an array, `null` or 
-even `integer` or `boolean` can be a sign of a bug.
+`replace()->callback()` only accepts `string` as it's return type. 
 
-Moreover, converting them silently would break our "Explicity rule".
+We believe that returning anything, that's not a string can **be a sign of a bug**! Moreover, converting them silently 
+would break our ["Explicity rule"](whats-the-point#t-regx-to-the-rescue).
 
 ```php
 pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
@@ -66,8 +68,10 @@ pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $m
 });
 ```
 
+### Explicit string
+
 If you'd like to replace an occurrence with a numeric value (for example `'12'`), an empty string or `'true'`/`'false'` 
-literals, just return them **explicitly**.
+literals - just return them **explicitly**.
 
 ```php
 pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
@@ -80,8 +84,8 @@ pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $m
 
 ## Variable callbacks
 
-You can call `replace()->first()` for any valid PHP `callable` which accepts one string parameter (or no parameters) and
-returns `string`.
+You can call `replace()->callback()` for any valid PHP `callable` which accepts one string parameter (or no parameters) 
+and returns `string`.
 
 ```php
 pattern('\w+')->replace('Apples are cool')->first()->callback('strtoupper');

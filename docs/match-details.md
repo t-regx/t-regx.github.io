@@ -6,12 +6,16 @@ title: Matched occurrence details
 When using `pattern()->match()`, some methods receive a callback that accepts `Match` details object. These methods 
 are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `map()`, `flatMap()`.
 
-Using `Match` details you can:
- - Get [value of a matched occurrence](#matched-text), as well as matched capturing groups - `text()`
- - Get the [ordinal value](#ordinal-value-index) of a matched occurrence - `index()`.
- - Get the [subject](#subject), against which the pattern was matched - `subject()`.
- - Get the [offsets of matched values](#offsets) inside the subject - character offsets (UTF-8 safe) and byte offsets.
- - Get [other matched occurrences](#other-occurrences) - `all()`
+Using `Match` details, you gain access to:
+
+ - [value of a matched occurrence](#matched-text) - `text()`
+ - [ordinal value](#ordinal-value-index) of a matched occurrence - `index()`.
+ - [subject](#subject) against which the pattern was matched - `subject()`.
+ - [offsets of matched values](#offsets) in the subject:
+   - character offsets (UTF-8 safe)
+   - byte offsets.
+ - [other matched occurrences](#other-occurrences) - `all()`
+ - details about capturing groups, in the next chapter: [Capturing groups](match-groups.md).
 
 ## Matched text
 
@@ -105,8 +109,8 @@ A  p   p   l   e   s      f   o   r      0  .  3  0  €           ,     h   e  
                                                                        byteOffset()
 ```
 
-In other words, `offset()` treats bytes `[226, 130, 172]` as one multi-byte character: `€` - and counts them as one, 
-whereas `byteOffset()` counts them as three.
+In other words, `offset()` treats bytes `[226, 130, 172]` as one multi-byte character (euro sign `€`) and counts them as 
+one; whereas `byteOffset()` counts them as three.
 
 Use:
  - `offset()` with methods: `mb_substr()`, `mb_strpos()`
@@ -136,7 +140,14 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
 ]
 ```
 
-Basically, mapping each occurrence's text is the same as `Match.all()`.
+### Identities
+
+A curious reader might notice that:
+ - calling `match()->all()`
+ - calling `Match.all()` for `first()`
+ - mapping `Match.text()`
+ 
+are identical calls:
 
 ```php
 $all      = pattern($p)->match($s)->all();
