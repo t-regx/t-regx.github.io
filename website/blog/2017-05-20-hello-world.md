@@ -1,7 +1,6 @@
 ---
 title: Hello, World!
 author: Daniel Wilkowski
-authorURL: http://twitter.com/
 authorFBID: 100001025937739
 ---
 

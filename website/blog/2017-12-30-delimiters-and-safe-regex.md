@@ -1,7 +1,6 @@
 ---
 title: What's new, new, new!
 author: Daniel Wilkowski
-authorURL: http://twitter.com/ericnakagawa
 authorFBID: 100001025937739
 ---
 

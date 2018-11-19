@@ -1,5 +1,5 @@
 .container {
-  &.mainContainer .post {
+  &.mainContainer:not(.blogContainer) .post {
     *:not(h1) > a:not(.hash-link) {
       color: #0b495a;
       background-color: #ddf2f7;
