@@ -3,6 +3,8 @@ id: match-offsets
 title: Match offsets
 ---
 
+There are several ways to read offsets of your matched occurrences and your capturing groups.
+
 ## Using `Match` details
 
 If you use `Match` details object (like the one passed to `first()`, `forEach()` or `map()` callback) you can just use
@@ -16,7 +18,7 @@ $offset = pattern('\d+')->match('I was born in 1996')->first(function (Match $ma
 
 > Remember that `offset()` is UTF-8 safe and returns offsets in characters, not bytes. For bytes, consider using `byteOffset()` method.
 
-## Use inline `offsets()` method
+## Using inline `offsets()` method
 
 ### Many
 
@@ -57,7 +59,7 @@ In a similar manner you can get offsets of your capturing groups, either using `
 
 These two snippets below are equal to each other.
 
-### `Match` details
+### Using `Match` details
 
 ```php
 $offset = pattern('(?<capital>[A-Z])[a-z]+')
@@ -66,8 +68,11 @@ $offset = pattern('(?<capital>[A-Z])[a-z]+')
         return $match->group('capital')->offset();
     });
 ```
+```php
+11
+```
 
-### Inline `offsets()` method
+### Using inline `offsets()` method
 
 ```php
 pattern('(?<capital>[A-Z])[a-z]+')->match('my name is Jhon Cena')->group('capital')->offsets()->first();

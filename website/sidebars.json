@@ -13,7 +13,6 @@
       "match-first",
       "match-for-first",
       "match-for-each",
-      "match-offsets",
       "match-map",
       "match-flat-map"
     ],
@@ -25,6 +24,7 @@
     ],
     "Match Details": [
       "match-details",
+      "match-offsets",
       "match-groups",
       "match-group"
     ],
