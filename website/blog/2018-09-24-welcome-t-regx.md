@@ -9,7 +9,7 @@ words *"T-Rex"* - the dinosaur - and *"RegExp"*.
 
 Also, I've invested much more time into the development of ~~CleanRegex~~ T-Regx. Here are the results:
  - Library changed its name. :D
- - Throwing different exceptions for:
+ - PHP silences almost all of buggy situations, so T-Regx is now throwing different exceptions for:
    - Invalid pattern - *should never happen in prod*
    - Unmatched subject - should be handled by the developer
    - Invalid group name (like `_*`) - *should never happen*
@@ -17,6 +17,7 @@ Also, I've invested much more time into the development of ~~CleanRegex~~ T-Regx
    - Group index exceeding number of groups - *should never happen*
    - Negative group index - *should never happen*
    - Group that wasn't matched by subject - should be handled by the developer
+   - Capture a split delimiter, that's not inside a capturing group - *should never happen*
  - `forFirst()` for matches, replacements and groups - useful in cases of "should be handled by the developer"
  - PCRE returns offsets as bytes, always. T-Regx now returns these offsets as characters, using `mb_string` extension.
    You can still get offsets in bytes using `->byteOffset()` method.
