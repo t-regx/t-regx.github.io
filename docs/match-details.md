@@ -86,7 +86,8 @@ pattern('[A-Z][a-z]+')->match($subject)->map(function (Match $match) use ($subje
 
 ## Offsets
 
-`Match.offset()` returns offsets in characters, whereas `Match.byteOffset()` returns it in bytes.
+`Match.offset()` is multi-byte character safe and returns offset in characters, whereas `Match.byteOffset()` returns 
+the offset in bytes.
 
 ```php
 pattern('here')->match('Apples for 0.30€, here')->first(function (Match $match) {
@@ -165,8 +166,8 @@ Arrays `$all`, `$allFirst` and  `$allMap` are equal.
 
 ## Groups
 
-Using `Match.group()` you can easily retrieve capturing groups. Same as with `Match`, to retrieve matched occurrence 
-value you can use `text()` method or cast it to `string`.
+With `Match.group()`, you can easily retrieve capturing groups. Just like with `Match`, retrieving matched occurrence 
+value is done with `text()` method or by casting it to `string`.
 
 ```php
 $p = '(?<value>\d+)(?<unit>cm|mm)';
