@@ -113,13 +113,24 @@ In this example `Match` will be cast to string, which is the same as calling `Ma
 
 ### Arbitrary return types
 
-From within `first()` callback, you can return any value, including: objects, arrays, booleans and `null`.
+From within `first()` callback, you can return any value:
 
 ```php
 return pattern('\w+')->match("Apples are cool")->first('str_split');
 ```
 ```php
 ['A', 'p', 'p', 'l', 'e', 's']
+```
+
+The `first()` callback accepts all return types, including: numbers, objects, arrays, booleans and `null`:
+
+```php
+$p = '(?<value>\d+)(?<unit>cm|mm)';
+$s = '192mm and 168cm or 18mm and 12cm';
+
+pattern($p)->match($s)->first();                 // '192mm'
+pattern($p)->match($s)->first('str_split');      // ['1', '9', '2', 'm', 'm']
+pattern($p)->match($s)->first('strlen')          // 5
 ```
 
 ## `forFirst()`
