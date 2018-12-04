@@ -8,8 +8,8 @@ Using `pattern()->replace()` you can:
    - `replace()->first()`
    - `replace()->all()`
    - `replace()->only(int)`
- - Replace occurrences with a constant value - `with()`
- - Replace occurrences with a value from callback - `callback()`
+ - Replace occurrences with a constant value - [`with()`](replace-with.md)/[`withRaw()`](replace-with.md)
+ - Replace occurrences with a value from callback - [`callback()`](replace-callback.md)
 
 ## Limiting replacements
 
