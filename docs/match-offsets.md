@@ -16,7 +16,8 @@ $offset = pattern('\d+')->match('I was born in 1996')->first(function (Match $ma
 });
 ```
 
-> Remember that `offset()` is UTF-8 safe and returns offsets in characters, not bytes. For bytes, consider using `byteOffset()` method.
+> Remember that [`offset()`](match-details.md#offsets) is UTF-8 safe and returns offsets in characters, not bytes. 
+> For bytes, consider using [`byteOffset()`](match-details.md#offsets) method.
 
 ## Using inline `offsets()` method
 
