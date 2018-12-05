@@ -28,28 +28,19 @@
       "match-groups",
       "match-group"
     ],
-    "Offsets": [],
+    "Pattern Building": [
+      "handling-user-input",
+      "pattern-building",
+      "pattern-building-in-details",
+      "composite-pattern"
+    ],
     "Misc": [
       "split",
       "count",
       "filter",
       "valid",
-      "delimiters",
-      "composite-pattern"
+      "delimiters"
     ],
     "Advanced Replacement": []
-  },
-  "api": {
-    "Pattern": [
-      "api/api"
-    ],
-    "Details": [
-    ],
-    "CompositePattern": [
-      "composite-matching"
-    ],
-    "SafeRegex vs CleanRegex": [
-      "safe-regex"
-    ]
   }
 }
