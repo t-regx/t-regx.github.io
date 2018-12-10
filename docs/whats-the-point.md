@@ -89,6 +89,8 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
   `true`  | `['match', 2]` | `['match', 2']`
   `false` | `''`           | `[null, -1]`
 
+- `preg_quote()` quotes different characters for different PHP versions.
+
 ### Deliberately buggy
 
 - `preg_match` and `preg_match_all` return either:
@@ -112,9 +114,9 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
 
 That's why T-Regx happened. It addresses all of PHP regular expressions flaws:
 
- - [It's descriptive](whats-the-point.md#it-s-descriptive)
- - [It's for developers](whats-the-point.md#it-s-for-developers)
- - [It's explicit](whats-the-point.md#it-s-explicit)
+ - [It's descriptive](#it-s-descriptive)
+ - [It's for developers](#it-s-for-developers)
+ - [It's explicit](#it-s-explicit)
 
 ### It's descriptive
 
@@ -130,7 +132,7 @@ pattern('Bob')->replace('Bob likes applees')->only($limit)->with('Robert');
 pattern('Bob')->count('Bob likes applees');
 ```
 
-### It's for developers
+### It's for developers (it's reliable)
 
 If you try to use an invalid regular expression in Java or JavaScript, you would probably get a `SyntaxError` exception
 and you'd be forced to handle it. Such things don't happen in PHP regular expressions. If any `preg_` method fails, 
@@ -163,6 +165,21 @@ catch (CleanRegexException $exception) {
 }
 ```
 
+Furthermore, T-Regx throws different exceptions for different errors:
+- SubjectNotMatchedException
+- InvalidPatternException
+- FlagNotAllowedException
+- GroupNotMatchedException
+- NonexistentGroupException
+- InvalidReplacementException
+- InvalidReturnValueException
+- MissingSplitDelimiterGroupException
+- InternalCleanRegexException
+
+They all extend `CleanRegexException` though.
+
+Further, furthermore, if you pass an invalid data type to any of the T-Regx methods, `\InvalidArgumentException` is thrown.
+
 ### It's explicit
 
 Poor design of PHP `preg_*` methods does not make them really descriptive. Someone who's not familiar with it will probably
@@ -183,3 +200,22 @@ pattern('[A-Z]+')->replace($subject)->first()->with('word');
 ```
 
 Looking at this code is like reading a book.
+
+---
+
+You will not find arrays of arrays of arrays in T-Regx API. Each functionality has a dedicated set of methods.
+
+```php
+pattern($pattern)->match($subject)->first(function (Match $match) {
+
+    $match->offset();           // The offset of a matched occurrence
+
+    $match->group(2)->offset(); // The offset of a matched capturing group
+    
+    $match->hasGroup('uri');    // validating groups
+    
+    $match->hasGroup('2asd');   // throws \CleanRegex\InvalidArgumentException
+});
+```
+
+Read more about [`Match` details](match-details.md).

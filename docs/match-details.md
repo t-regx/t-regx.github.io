@@ -1,6 +1,6 @@
 ---
 id: match-details
-title: Matched occurrence details
+title: Match details
 ---
 
 When using `pattern()->match()`, some methods receive a callback that accepts `Match` details object. These methods 
@@ -140,29 +140,6 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
   ['match' => 'cool',   'all' => ['Apples', 'are', 'cool']]
 ]
 ```
-
-### Identities
-
-A curious reader might notice that:
- - calling `match()->all()`
- - calling `Match.all()` for `first()`
- - mapping `Match.text()`
- 
-are identical calls:
-
-```php
-$all      = pattern($p)->match($s)->all();
-
-$allFirst = pattern($p)->match($s)->first(function (Match $match) {
-    return $match->all();
-});
-
-$allMap   = pattern($p)->match($s)->map(function (Match $match) {
-    return $match->text();
-});
-```
-
-Arrays `$all`, `$allFirst` and  `$allMap` are equal.
 
 ## Groups
 

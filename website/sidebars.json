@@ -38,7 +38,7 @@
       "split",
       "count",
       "filter",
-      "valid",
+      "is-valid",
       "delimiters"
     ],
     "Advanced Replacement": []

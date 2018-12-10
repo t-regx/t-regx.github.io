@@ -34,8 +34,8 @@ $ composer require rawr/t-regx:dev-master-php5.3
 ```
 
 Remember that those versions can still be run and tested on PHP 7.1+ environments. They will just lack the 
-new PHP features like scalar params, nullable types, return type hints; and also won't use PHP 7.1 `PREG_EMPTY_AS_NULL`, 
-`error_clear_last()`, `preg_replace_callback_array` etc., so alternatives are used. 
+new PHP features like scalar params, nullable types, return type hints; but they will use PHP 7.1 `PREG_EMPTY_AS_NULL`, 
+`error_clear_last()`, `preg_replace_callback_array` etc.
 
-Of course, the API is **exactly** the same, regardless of PHP version. A single set of unit/integration tests is run 
+Of course, the API is **exactly** the same, regardless of PHP version. A single set of integration tests is run 
 for each environment.

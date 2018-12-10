@@ -6,7 +6,7 @@ title: Match a subject
 Using `pattern()->match()` you can:
  - Test a subject against a pattern: [`matches()`](#test-a-subject)/[`fails()`](#test-a-subject)
  - Retrieve matches from the subject: [`first()`](#one)/[`all()`](#many)/[`only()`](#many)
- - Get capturing groups from matches: `group()`/`Match.group()`/`groups()`
+ - Get capturing groups from matches: [`group()`](match-details.md)/[`Match.group()`](match-details.md)/[`groups()`](match-details.md)
  - Invoke callbacks for matches: [`first()`](match-first.md#use-first-with-callback)/[`forFirst()`](match-for-first.md)/[`forEach()`](match-for-each.md)/[`map()`](match-map.md)/[`flatMap()`](match-flat-map.md)
 
 ## Test a subject
