@@ -14,14 +14,14 @@ Callback passed to `replace()->callback()` will only be invoked:
 ## Replace first
 
 ```php
-$subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
 pattern('[A-Z][a-z]+')->replace($subject)->first()->callback(function (Match $m) {
     return strtoupper($m->text());
 });
 ```
 ```php
-'I like scandinavia: SWEDEN, Norway and Denmark'
+'I like Scandinavia: SWEDEN, Norway and Denmark'
 ```
 
 > Of course, the callback is only invoked **if** your subject is matched with the pattern.
@@ -31,25 +31,25 @@ pattern('[A-Z][a-z]+')->replace($subject)->first()->callback(function (Match $m)
 ### `all()`
 
 ```php
-$subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
 pattern('[A-Z][a-z]+')->replace($subject)->all()->callback(function (Match $m) {
    return strtoupper($m->text());
 });
 ```
 ```php
-'I like scandinavia: SWEDEN, NORWAY and DENMARK'
+'I like Scandinavia: SWEDEN, NORWAY and DENMARK'
 ```
 
 ### `only()`
 
 ```php
-$subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
 pattern('[A-Z][a-z]+')->replace($subject)->only(2)->callback('strtoupper');
 ```
 ```php
-'I like scandinavia: SWEDEN, NORWAY and Denmark'
+'I like Scandinavia: SWEDEN, NORWAY and Denmark'
 ```
 
 ## Return types

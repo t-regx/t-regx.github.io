@@ -9,12 +9,12 @@ replacements should be done.
 ## Replace first
 
 ```php
-$subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
 pattern('[A-Z][a-z]+')->replace($subject)->first()->with('XXX');
 ```
 ```php
-'I like scandinavia: XXX, Norway and Denmark'
+'I like Scandinavia: XXX, Norway and Denmark'
 ```
 
 ## Replace more
@@ -22,23 +22,23 @@ pattern('[A-Z][a-z]+')->replace($subject)->first()->with('XXX');
 ### `all()`
 
 ```php
-$subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
 pattern('[A-Z][a-z]+')->replace($subject)->all()->with('XXX');
 ```
 ```php
-'I like scandinavia: XXX, XXX and XXX'
+'I like Scandinavia: XXX, XXX and XXX'
 ```
 
 ### `only()`
 
 ```php
-$subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
 pattern('[A-Z][a-z]+')->replace($subject)->only(2)->with('XXX');
 ```
 ```php
-'I like scandinavia: XXX, XXX and Denmark'
+'I like Scandinavia: XXX, XXX and Denmark'
 ```
 
 ---
