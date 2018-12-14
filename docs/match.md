@@ -66,7 +66,7 @@ Read on the [next page](match-first.md) to learn more about [`first()`](match-fi
 
 ### `all()`/`only()`
 
-If you call `all()` or `only()` on a subject that isn't matched with your pattern, you'll receive an empty array.
+If you call `all()` or `only()` on a subject that doesn't match your pattern, you'll receive an empty array.
 ```php
 pattern('\d+')->match('Word')->all();
 ```
@@ -76,7 +76,7 @@ pattern('\d+')->match('Word')->all();
 
 ### `first()`
 
-If, however, you call `first()` on a subject that isn't matched, `SubjectNotMatchedException` is thrown.
+If, however, subject doesn't match your pattern and you use `first()` - `SubjectNotMatchedException` is thrown.
 
 ```php
 try {
