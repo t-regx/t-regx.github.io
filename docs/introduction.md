@@ -15,7 +15,7 @@ use TRegx\CleanRegex\Pattern;
 Pattern::of('[A-Z][a-z]+')->matches($subject);
 ```
 
-#### Global method style:
+#### Global function style:
 ```php
 pattern('[A-Z][a-z]+')->matches($subject);
 ```

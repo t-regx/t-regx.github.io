@@ -114,8 +114,8 @@ In other words, `offset()` treats bytes `[226, 130, 172]` as one multi-byte char
 one; whereas `byteOffset()` counts them as three.
 
 Use:
- - `offset()` with methods: `mb_substr()`, `mb_strpos()`
- - `byteOffset()` with methods: `substr()`, `strpos()`
+ - `offset()` with functions: `mb_substr()`, `mb_strpos()`
+ - `byteOffset()` with functions: `substr()`, `strpos()`
 
 ## Other occurrences
 

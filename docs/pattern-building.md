@@ -5,7 +5,7 @@ title: Pattern building API
 
 ## Old-school pattern quoting
 
-Have you chosen to work with regular PCRE methods, your code might look similar to this:
+Have you chosen to work with regular PCRE functions, your code might look similar to this:
 
 ```php
 preg_match('/(Pattern|pattern) with ' . preg_quote('quoted parts...', '/') . ' is ugly/');

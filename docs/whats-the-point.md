@@ -36,7 +36,7 @@ preg_replace(?, ?, ?, $count, $limit);
 ### Unintuitive
 
 Programming languages are **tools** created to solve problems. An experienced programmer **should** be able to look
-at the code and tell what it does. With PHP `preg_*` method it's just. not. possible.
+at the code and tell what it does. With PHP `preg_*` functions it's just. not. possible.
 
 Someone who doesn't know PHP regular expressions, can probably ask himself:
 
@@ -47,7 +47,7 @@ Someone who doesn't know PHP regular expressions, can probably ask himself:
 
 #### What's more 
  - Parameters:
-   - Methods with 4 or 5 parameters (3 of which are optional).
+   - Functions with 4 or 5 parameters (3 of which are optional).
    
      It means that, whoever looks at the code has to **remember** (or to look up) what those optional values are and in which order.
  - Return types:
@@ -104,11 +104,11 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
   ```
   there's no way of knowing whether your pattern is incorrect or whether it's correct but your subject isn't matched by 
   your pattern. You need to **remember** to add an explicit `false` check each time you use it.
-- All `preg_*` methods only return `false`/`null`/`[]` on error. You have to remember to call `preg_last_error()` to get 
+- All `preg_*` functions only return `false`/`null`/`[]` on error. You have to remember to call `preg_last_error()` to get 
   some insight in the nature of your error. Of course it only returns `int`! So you have to look up that `4` is 
   "invalid utf8 sequence" and `2` is "backtrack limit exceeded".
 - `preg_filter()` for arrays returns `[]` if an error occurred; even though `[]` is the perfectly valid result for this 
-  method. For example, it could have filtered out all values or its input was an empty array right from the beginning.
+  function. For example, it could have filtered out all values or its input was an empty array right from the beginning.
 
 ## T-Regx to the rescue
 
@@ -135,10 +135,10 @@ pattern('Bob')->count('Bob likes applees');
 ### It's for developers (it's reliable)
 
 If you try to use an invalid regular expression in Java or JavaScript, you would probably get a `SyntaxError` exception
-and you'd be forced to handle it. Such things don't happen in PHP regular expressions. If any `preg_` method fails, 
-it returns `false` (or sometimes `null`). You can always use `if`, if you remember about it, but...
+and you'd be forced to handle it. Such things don't happen in PHP regular expressions. If any `preg_*()` function fails, 
+it returns `false` (or sometimes `null` or an empty array). You can always use `if`, if you remember about it, but...
 
-...unfortunately these methods return values - some of which are `0` - which makes this code completely unreliable!
+...unfortunately these functions return values - some of which are `0` - which makes this code completely unreliable!
 ```php
 if (preg_match('//', $subject)) {
 ```
@@ -182,7 +182,7 @@ Further, furthermore, if you pass an invalid data type to any of the T-Regx meth
 
 ### It's explicit
 
-Poor design of PHP `preg_*` methods does not make them really descriptive. Someone who's not familiar with it will probably
+Poor design of PHP `preg_*` functions does not make them really descriptive. Someone who's not familiar with it will probably
 ask himself:
 
  - `preg_replace('//', $r, $s)` - will this replace all or just one occurrence?
