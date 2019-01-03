@@ -36,7 +36,7 @@ const siteConfig = {
         secondaryColor: '#2495B0',
     },
 
-    copyright: `Copyright © ${new Date().getFullYear()} Daniel Wilkowski`,
+    copyright: `Copyright © 2017-${new Date().getFullYear()} Daniel Wilkowski`,
 
     highlight: {
         theme: 'github',

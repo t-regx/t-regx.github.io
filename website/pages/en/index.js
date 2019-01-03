@@ -27,7 +27,7 @@ const SplashContainer = props => (
 
 const Logo = props => (
     <div className="projectLogo">
-        <img src={props.img_src} alt="Project Logo"/>
+        <img src={props.src} alt="Project Logo" title={props.title || ''}/>
     </div>
 );
 
@@ -46,12 +46,24 @@ const PromoSection = props => (
     </div>
 );
 
+class SplashImage extends React.Component {
+    render() {
+        const images = {
+            regular: {src: 't.regx.png', title: 'T-Regx'},
+            christmas: {src: 't.regx.santa.png', title: 'Santa T-Regx'},
+            carnival: {src: 't.regx.carnival.png', title: 'Carnival T-Regx'}
+        };
+        const splash = images[this.props.name];
+        return <Logo src={imgUrl(splash.src)} title={splash.name}/>;
+    }
+}
+
 class HomeSplash extends React.Component {
     render() {
         const language = this.props.language || '';
         return (
             <SplashContainer>
-                <Logo img_src={imgUrl('t.regx.santa.png')}/>
+                <SplashImage name='carnival'/>
                 <div className="inner">
                     <ProjectTitle/>
                     <PromoSection>
@@ -156,7 +168,7 @@ const WarningsToExceptions = () => (
         {[
             {
                 title: 'SafeRegex | Converts warnings to exceptions',
-                content: "SafeRegex watches for warnings, analyzes `preg_()` return values and looks up `last_preg_error()` to validate a call. If it fails, an exception is thrown.",
+                content: "SafeRegex watches for warnings, analyzes `preg_()` methods return values and looks up `preg_last_error ()` to validate a call. If it fails, an exception is thrown.",
                 image: gifUrl('safe.regex.gif'),
                 imageAlign: 'left',
             },
@@ -172,11 +184,11 @@ class Index extends React.Component {
                 <HomeSplash language={language}/>
                 <div className="mainContainer">
                     <AutomaticDelimiters/>
-                    <FunctionalProgramming/>
+                    <Installation/>
                     <MatchDetails/>
                     <Features/>
-                    <Installation/>
                     <WarningsToExceptions/>
+                    <FunctionalProgramming/>
                 </div>
             </div>
         );
