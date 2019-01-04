@@ -36,6 +36,11 @@ const ProjectTitle = () => (
     <h2 className="projectTitle">
         {siteConfig.title}
         <small>{siteConfig.tagline}</small>
+        <ul className="iconList">
+            <li>Performance</li>
+            <li>Consistency</li>
+            <li>Reliability</li>
+        </ul>
     </h2>
 );
 

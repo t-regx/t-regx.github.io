@@ -45,3 +45,20 @@ img.blog-img.t-regx-santa {
   float: right;
   margin-left: 25px;
 }
+
+ul.iconList {
+  list-style: none;
+  text-align: center;
+  color: #26768c;
+  font-size: 14px;
+
+  li {
+    display: inline;
+    margin-right: 8px;
+
+    &:before {
+      content: '✓ ';
+    }
+  }
+}
+
