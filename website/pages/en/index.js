@@ -4,6 +4,7 @@ const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 const HeaderButton = require(`${process.cwd()}/core/HeaderButton`);
+const DisqusSection = require(`${process.cwd()}/core/DisqusSection`);
 
 function gifUrl(img) {
     return `${siteConfig.baseUrl}gif/${img}`;
@@ -86,6 +87,15 @@ const Block = props => (
         id={props.id}
         background={props.background}>
         <GridBlock align="center" contents={props.children} layout={props.layout}/>
+    </Container>
+);
+
+const CommentsSection = props => (
+    <Container
+        padding={['bottom', 'top']}
+        id={props.id}
+        background={props.background}>
+        <DisqusSection/>
     </Container>
 );
 
@@ -189,6 +199,7 @@ class Index extends React.Component {
                     <Features/>
                     <WarningsToExceptions/>
                     <FunctionalProgramming/>
+                    <CommentsSection/>
                 </div>
             </div>
         );
