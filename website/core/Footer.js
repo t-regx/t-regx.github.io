@@ -1,7 +1,8 @@
 const React = require('react');
 const GithubButton = require('./GithubButton.js');
 const FooterIcon = require('./FooterIcon.js');
-const DisqusThread = require(`./DisqusThread.js`);
+const DisqusSection = require(`./DisqusSection.js`);
+
 class Footer extends React.Component {
     docUrl(doc) {
         return `${this.props.config.baseUrl}docs/${doc}`;
@@ -51,7 +52,7 @@ class Footer extends React.Component {
                 <section className="copyright">{this.props.config.copyright}</section>
 
                 <section className="sitemap">
-                    <DisqusThread id="46dff8e37535ddb3571510672d1af48683bad013" title="Questions about T-Regx" path="/"/>
+                    <DisqusSection/>
                 </section>
             </footer>
         );

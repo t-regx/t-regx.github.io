@@ -3,39 +3,36 @@ import PropTypes from 'prop-types';
 
 class DisqusThread extends React.Component {
     static propTypes = {
-        id: PropTypes.string.isRequired,
+        shortName: PropTypes.string.isRequired,
+        identifier: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
-        path: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
     };
 
     render() {
-        const WEBSITE_URL = 'http://www.t-regx.github.io';
-        let {id, title, path, ...other} = this.props;
-        if (process.env.BROWSER) {
-            window.disqus_shortname = 't-regx';
-            window.disqus_identifier = id;
-            window.disqus_title = title;
-            window.disqus_url = WEBSITE_URL + path;
-        }
+        let {shortName, identifier, title, url, ...other} = this.props;
         return (
             <div>
-                <div dangerouslySetInnerHTML={this.createMarkup()}/>
+                <div dangerouslySetInnerHTML={this.createMarkup(shortName, identifier, title, url)}/>
                 <div {...other} id="disqus_thread"/>
             </div>
         );
     }
 
-    createMarkup() {
+    createMarkup(shortName, identifier, title, url) {
         return {
             __html: `
 <script>
     (function () {
+        window.disqus_shortname = '${shortName}';
+        window.disqus_identifier = '${identifier}';
+        window.disqus_title = '${title}';
+        window.disqus_url = '${url}';
         if (window.DISQUS === undefined) {
             const script = document.createElement('script');
             script.async = true;
             script.src = 'https://t-regx.disqus.com/embed.js';
             document.getElementsByTagName('head')[0].appendChild(script);
-    
         } else {
             window.DISQUS.reset({reload: true});
         }

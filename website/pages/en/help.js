@@ -4,7 +4,7 @@ const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 
 const siteConfig = require(`${process.cwd()}/siteConfig.js`);
-const DisqusThread = require(`${process.cwd()}/core/DisqusThread.js`);
+const DisqusSection = require(`${process.cwd()}/core/DisqusSection.js`);
 
 function pageUrl(page, language) {
     return siteConfig.baseUrl + (language ? `${language}/` : '') + page;
@@ -46,7 +46,7 @@ class Help extends React.Component {
 
                         <GridBlock contents={supportLinks} layout="threeColumn" className="discussion-tregx-grid"/>
 
-                        <DisqusThread id="46dff8e37535ddb3571510672d1af48683bad013" title="Questions about T-Regx" path="/help"/>
+                        <DisqusSection/>
                     </div>
                 </Container>
             </div>
