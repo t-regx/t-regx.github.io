@@ -91,6 +91,11 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
 
 - `preg_quote()` quotes different characters for different PHP versions.
 
+- PHP [documentation](http://php.net/manual/en/function.preg-filter.php) promises that 
+    > `preg_filter()` is identical to `preg_replace()` except it only returns the (possibly transformed) subjects...
+
+   but `preg_filter()` and `preg_replace()` actually return *completely* different values for **the same** parameters.
+
 ### Deliberately buggy
 
 - `preg_match` and `preg_match_all` return either:
