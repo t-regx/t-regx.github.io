@@ -43,9 +43,7 @@ class Help extends React.Component {
                             This project is maintained by a dedicated group of people. If you have experienced any bugs
                             or problems, you're welcome to submit an <a href={issueLink}>issue on github!</a> :)
                         </p>
-
                         <GridBlock contents={supportLinks} layout="threeColumn" className="discussion-tregx-grid"/>
-
                         <DisqusSection/>
                     </div>
                 </Container>

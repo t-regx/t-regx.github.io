@@ -24,6 +24,9 @@ class DisqusThread extends React.Component {
             __html: `
 <script>
     (function () {
+       if (typeof window.disqus_shortname !== 'undefined') {
+            return;
+        }
         window.disqus_shortname = '${shortName}';
         window.disqus_identifier = '${identifier}';
         window.disqus_title = '${title}';
