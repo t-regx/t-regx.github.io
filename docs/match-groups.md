@@ -25,9 +25,15 @@ $s = '192mm and 168cm or 18mm and 12cm';
 
 pattern($p) ->match($s) ->iterate(function (Match $match) {
     
-    $match->group('unit')->text()       // '168'
+    $match->group('value')->text()      // '168'
+    $match->group('value')->isInt()     // true
+    $match->group('value')->parseInt()  // 168
+    
     $match->group('unit')->offset()     // 13
     $match->group('unit')->index()      // 2
+    $match->group('unit')->text()       // 'cm'
+    $match->group('unit')->isInt()      // false
+    $match->group('unit')->parseInt()   // throws IntegerFormatException
     $match->group(2)->name()            // 'unit'
 });
 ```
