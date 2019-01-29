@@ -97,10 +97,7 @@ const Block = props => (
 );
 
 const CommentsSection = props => (
-    <Container
-        padding={['bottom', 'top']}
-        id={props.id}
-        background={props.background}>
+    <Container id={props.id} background={props.background}>
         <DisqusSection/>
     </Container>
 );
@@ -183,11 +180,11 @@ const AutomaticDelimiters = () => (
 );
 
 const WarningsToExceptions = () => (
-    <Block id="try" background="dark">
+    <Block background="dark" id="scroll-background">
         {[
             {
                 title: 'SafeRegex | Converts warnings to exceptions',
-                content: "SafeRegex watches for warnings, analyzes `preg_()` methods return values and looks up `preg_last_error ()` to validate a call. If it fails, an exception is thrown.",
+                content: "SafeRegex watches for warnings, analyzes `preg_()` methods return values and looks up `preg_last_error()` to validate a call. If it fails, an exception is thrown.",
                 image: gifUrl('safe.regex.gif'),
                 imageAlign: 'left',
             },
