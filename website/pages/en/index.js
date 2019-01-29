@@ -4,6 +4,7 @@ const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 const HeaderButton = require(`${process.cwd()}/core/HeaderButton`);
+const BadgesSection = require(`${process.cwd()}/core/BadgesSection`);
 const DisqusSection = require(`${process.cwd()}/core/DisqusSection`);
 
 function gifUrl(img) {
@@ -147,21 +148,24 @@ const Features = () => (
 );
 
 const Installation = () => (
-    <Block layout="threeColumn" align="left">
-        {[
-            {
-                title: '',
-                content: '![](img/t.regx.installation.png)',
-            },
-            {
-                title: 'Installation',
-                content: '    composer require rawr/t-regx',
-            },
-            {
-                title: ''
-            }
-        ]}
-    </Block>
+    <div>
+        <BadgesSection/>
+        <Block layout="threeColumn" align="left">
+            {[
+                {
+                    title: '',
+                    content: '![](img/t.regx.installation.png)',
+                },
+                {
+                    title: 'Installation',
+                    content: '    composer require rawr/t-regx',
+                },
+                {
+                    title: ''
+                }
+            ]}
+        </Block>
+    </div>
 );
 
 const AutomaticDelimiters = () => (

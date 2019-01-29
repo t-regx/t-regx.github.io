@@ -118,3 +118,24 @@ table.comparison-table {
     }
   }
 }
+
+
+.badges-section {
+  margin-top: 5em;
+
+  .upper-badges {
+    margin-bottom: 17px;
+  }
+
+  .upper-badges,
+  .lower-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a {
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+  }
+}
