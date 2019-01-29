@@ -34,6 +34,11 @@
 @media only screen and (min-width: 1500px) {
 }
 
+footer.nav-footer {
+  background: url("/img/footer.background.png");
+  background-size: cover;
+}
+
 @import "links";
 @import "splash";
 
