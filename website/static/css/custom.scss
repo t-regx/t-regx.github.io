@@ -1,44 +1,4 @@
-@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
-}
-
-@media only screen and (max-width: 1023px) {
-  .section.promoSection {
-    .separator {
-      display: none;
-    }
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .section.promoSection {
-    .separator:after {
-      display: block;
-      content: '|';
-      padding: 0 10px;
-    }
-  }
-
-  input.aa-input#search_input_react {
-    width: 300px;
-    line-height: 29px;
-  }
-
-  footer {
-    margin-top: 50px;
-  }
-}
-
-@media only screen and (min-width: 1400px) {
-}
-
-@media only screen and (min-width: 1500px) {
-}
-
-footer.nav-footer {
-  background: url("/img/footer.background.png");
-  background-size: cover;
-}
-
+@import "layout";
 @import "links";
 @import "splash";
 
@@ -145,7 +105,7 @@ table.comparison-table {
 }
 
 #scroll-background {
-  background: url("/img/scroll.background.png") fixed;
+  background: #1c3c45 url("/img/scroll.background.png") fixed;
   background-size: cover;
 
   code {

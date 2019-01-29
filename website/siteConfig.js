@@ -56,7 +56,8 @@ const siteConfig = {
     algolia: {
         apiKey: '6d3eef6432e87213c7f031ee898b73a1',
         indexName: 't-regx',
-        algoliaOptions: {}
+        algoliaOptions: {},
+        placeholder: 'Search the website'
     },
 };
 

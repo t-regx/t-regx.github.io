@@ -166,7 +166,7 @@ const Installation = () => (
 );
 
 const AutomaticDelimiters = () => (
-    <Block background="light">
+    <Block background="dark" id="scroll-background">
         {[
             {
                 title: 'Automatic delimiters',
