@@ -7,7 +7,11 @@ authorFBID: 100001025937739
 The library changes its name! Now it's called [T-Regx](https://github.com/T-Regx/T-Regx)! It's a combination of 
 words *"T-Rex"* - the dinosaur - and *"RegExp"*.
 
-Also, I've invested much more time into the development of ~~CleanRegex~~ T-Regx. Here are the results:
+Also, I've invested much more time into the development of ~~CleanRegex~~ T-Regx. Read on, for a detailed list of features.
+
+<!--truncate-->
+
+Here are the results:
  - Library changed its name. :D
  - PHP silences almost all of buggy situations, so T-Regx is now throwing different exceptions for:
    - Invalid pattern - *should never happen in prod*
