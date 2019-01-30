@@ -51,7 +51,7 @@ class Footer extends React.Component {
 
                 <section className="copyright">{this.props.config.copyright}</section>
 
-                <section className="sitemap">
+                <section className="sitemap discussion-section">
                     <DisqusSection/>
                 </section>
             </footer>
