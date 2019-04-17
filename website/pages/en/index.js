@@ -58,7 +58,8 @@ class SplashImage extends React.Component {
         const images = {
             regular: {src: 't.regx.png', title: 'T-Regx'},
             christmas: {src: 't.regx.santa.png', title: 'Santa T-Regx'},
-            carnival: {src: 't.regx.carnival.png', title: 'Carnival T-Regx'}
+            carnival: {src: 't.regx.carnival.png', title: 'Carnival T-Regx'},
+            easter: {src: 't.regx.easter.png', title: 'Easter T-Regx'}
         };
         const splash = images[this.props.name];
         return <Logo src={imgUrl(splash.src)} title={splash.name}/>;
@@ -70,7 +71,7 @@ class HomeSplash extends React.Component {
         const language = this.props.language || '';
         return (
             <SplashContainer>
-                <SplashImage name='carnival'/>
+                <SplashImage name='easter'/>
                 <div className="inner">
                     <ProjectTitle/>
                     <PromoSection>
