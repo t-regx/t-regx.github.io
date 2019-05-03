@@ -6,14 +6,10 @@ const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 const HeaderButton = require(`${process.cwd()}/core/HeaderButton`);
 const BadgesSection = require(`${process.cwd()}/core/BadgesSection`);
 const DisqusSection = require(`${process.cwd()}/core/DisqusSection`);
-const ValentineDino = require(`${process.cwd()}/core/ValentineDino`);
+const AutomaticSplashLogo = require(`${process.cwd()}/core/AutomaticSplashLogo`);
 
 function gifUrl(img) {
     return `${siteConfig.baseUrl}gif/${img}`;
-}
-
-function imgUrl(img) {
-    return `${siteConfig.baseUrl}img/${img}`;
 }
 
 function docUrl(doc, language) {
@@ -25,12 +21,6 @@ const SplashContainer = props => (
         <div className="homeSplashFade">
             <div className="wrapper homeWrapper">{props.children}</div>
         </div>
-    </div>
-);
-
-const Logo = props => (
-    <div className="projectLogo">
-        <img src={props.src} alt="Project Logo" title={props.title || ''}/>
     </div>
 );
 
@@ -54,28 +44,12 @@ const PromoSection = props => (
     </div>
 );
 
-class SplashImage extends React.Component {
-    render() {
-        if (this.props.name === 'valentine') {
-            return <ValentineDino heart={imgUrl('heart.png')} dino={imgUrl('t.regx.png')}/>
-        }
-        const images = {
-            regular: {src: 't.regx.png', title: 'T-Regx'},
-            christmas: {src: 't.regx.santa.png', title: 'Santa T-Regx'},
-            carnival: {src: 't.regx.carnival.png', title: 'Carnival T-Regx'},
-            easter: {src: 't.regx.easter.png', title: 'Easter T-Regx'}
-        };
-        const splash = images[this.props.name];
-        return <Logo src={imgUrl(splash.src)} title={splash.name}/>;
-    }
-}
-
 class HomeSplash extends React.Component {
     render() {
         const language = this.props.language || '';
         return (
             <SplashContainer>
-                <SplashImage name='regular'/>
+                <AutomaticSplashLogo/>
                 <div className="inner">
                     <ProjectTitle/>
                     <PromoSection>
