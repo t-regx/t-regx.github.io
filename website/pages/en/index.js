@@ -6,6 +6,7 @@ const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 const HeaderButton = require(`${process.cwd()}/core/HeaderButton`);
 const BadgesSection = require(`${process.cwd()}/core/BadgesSection`);
 const DisqusSection = require(`${process.cwd()}/core/DisqusSection`);
+const ValentineDino = require(`${process.cwd()}/core/ValentineDino`);
 
 function gifUrl(img) {
     return `${siteConfig.baseUrl}gif/${img}`;
@@ -55,6 +56,9 @@ const PromoSection = props => (
 
 class SplashImage extends React.Component {
     render() {
+        if (this.props.name === 'valentine') {
+            return <ValentineDino heart={imgUrl('heart.png')} dino={imgUrl('t.regx.png')}/>
+        }
         const images = {
             regular: {src: 't.regx.png', title: 'T-Regx'},
             christmas: {src: 't.regx.santa.png', title: 'Santa T-Regx'},
@@ -71,7 +75,7 @@ class HomeSplash extends React.Component {
         const language = this.props.language || '';
         return (
             <SplashContainer>
-                <SplashImage name='easter'/>
+                <SplashImage name='regular'/>
                 <div className="inner">
                     <ProjectTitle/>
                     <PromoSection>
