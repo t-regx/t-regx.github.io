@@ -6,6 +6,7 @@ const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 const HeaderButton = require(`${process.cwd()}/core/HeaderButton`);
 const BadgesSection = require(`${process.cwd()}/core/BadgesSection`);
 const DisqusSection = require(`${process.cwd()}/core/DisqusSection`);
+const GithubButton = require(`${process.cwd()}/core/GithubButton`);
 const AutomaticSplashLogo = require(`${process.cwd()}/core/AutomaticSplashLogo`);
 
 function gifUrl(img) {
@@ -52,6 +53,7 @@ class HomeSplash extends React.Component {
                 <AutomaticSplashLogo/>
                 <div className="inner">
                     <ProjectTitle/>
+                    <GithubButton href={siteConfig.mainRepoUrl}/>
                     <PromoSection>
                         <HeaderButton href={docUrl('installation', language)}>Installation</HeaderButton>
                         <HeaderButton href={docUrl('match', language)}>Matching</HeaderButton>
