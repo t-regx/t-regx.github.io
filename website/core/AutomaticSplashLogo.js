@@ -37,9 +37,37 @@ class AutomaticSplashLogo extends React.Component {
     }
 
     splashName() {
-
-        return "regular";
+        const now = new Date();
+        return this.splashNameByDate(now.getDate(), now.getMonth() + 1);
     }
+
+    splashNameByDate(day, month) {
+        const image = this
+            .splashImages()
+            .find(({start, end}) => {
+                const _start = daysInYear(...start);
+                const _end = daysInYear(...end);
+                const current = daysInYear(day, month);
+
+                return _start <= current && current <= _end;
+            });
+
+        return image ? image.name : "regular";
+    }
+
+    splashImages() {
+        return [
+            {start: [11, 2], end: [15, 2], name: 'valentine'},
+            {start: [19, 2], end: [25, 2], name: 'carnival'},
+            {start: [20, 3], end: [4, 4], name: 'easter'},
+            {start: [30, 6], end: [31, 8], name: 'holiday'},
+            {start: [4, 12], end: [31, 12], name: 'christmas'},
+        ];
+    }
+}
+
+function daysInYear(day, month) {
+    return day + month * 31;
 }
 
 module.exports = AutomaticSplashLogo;
