@@ -57,11 +57,14 @@ class AutomaticSplashLogo extends React.Component {
 
     splashImages() {
         return [
-            {start: [11, 2], end: [15, 2], name: 'valentine'},
-            {start: [19, 2], end: [25, 2], name: 'carnival'},
+			{start: [30, 12], end: [2, 1], name: 'newyears'},
+            {start: [12, 2], end: [17, 2], name: 'valentine'},
+            {start: [6, 1], end: [25, 2], name: 'carnival'},
             {start: [20, 3], end: [4, 4], name: 'easter'},
             {start: [30, 6], end: [31, 8], name: 'holiday'},
-            {start: [4, 12], end: [31, 12], name: 'christmas'},
+			{start: [30, 10], end: [31, 10], name: 'halloween'},
+            {start: [6, 12], end: [29, 12], name: 'christmas'},
+	
         ];
     }
 }
