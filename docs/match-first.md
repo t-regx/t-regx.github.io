@@ -9,9 +9,20 @@ Matching a first occurrence in a string is the most common use-case.
 
 You can get the first occurrence of a pattern in a subject by calling `first()`.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")->first();
 ```
+<!--PHP-->
+```php
+if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
+    return $match[0];
+}
+throw new SubjectNotMatchedException();
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ```php
 '19'
 ```
@@ -29,11 +40,23 @@ method **has** to return a value and go on. No more bothers about empty arrays a
 You can call an anonymous function for the first matched occurrence. In this example, we'll print the matched text to the 
 standard output.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (string $match) {
     echo 'I matched ' . $match;
 });
 ```
+<!--PHP-->
+```php
+if (preg::match('/\w+/', "Apples are cool", $match)) {
+    echo 'I matched ' . $match[0];
+    return null;
+}
+throw new SubjectNotMatchedException();
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ```text
 I matched Apples
 ```
@@ -44,12 +67,26 @@ I matched Apples
 
 With `Match` details, you can gain access to useful information about the matched occurrence. 
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
     $subject = $match->subject();
     echo "Match '$match' was matched inside '$subject'.";
 });
 ```
+<!--PHP-->
+```php
+$subject = "Apples are cool";
+if (preg::match('/\w+/', $subject, $match)) {
+    $text = $match[0];
+    echo "Match '$text' was matched inside '$subject'.";
+    return null;
+}
+throw new SubjectNotMatchedException();
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ```text
 Match 'Apples' was matched inside 'Apples are cool'.
 ```

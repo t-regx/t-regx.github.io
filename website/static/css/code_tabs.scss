@@ -1,0 +1,15 @@
+.post article {
+  .tabs {
+    border-top: none;
+
+    .nav-tabs {
+      .nav-link {
+        margin-right: 0;
+
+        &:first-child {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+}
