@@ -1,8 +1,8 @@
 const siteConfig = {
     title: 'T-Regx',
-    tagline: 'Powerful Regular Expressions library',
+    tagline: 'The most advanced, powerful; regular expressions library',
 
-    url: 'https://t-regx.github.io',
+    url: 'https://t-regx.com',
     baseUrl: '/',
 
     organizationName: 'T-Regx',
