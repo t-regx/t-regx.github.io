@@ -1,6 +1,6 @@
 ---
-id: pattern-building-in-details
-title: Pattern builders in details
+id: prepared-patterns-in-details
+title: Prepared Patterns in details
 ---
 
 ## Details about `Pattern::prepare()`

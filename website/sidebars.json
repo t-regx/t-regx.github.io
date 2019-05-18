@@ -28,10 +28,10 @@
       "match-groups",
       "match-group"
     ],
-    "Pattern Building": [
+    "Prepared Patterns": [
       "handling-user-input",
-      "pattern-building",
-      "pattern-building-in-details",
+      "prepared-patterns",
+      "prepared-patterns-in-details",
       "composite-pattern"
     ],
     "Misc": [
