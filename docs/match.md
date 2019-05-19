@@ -33,7 +33,7 @@ pattern('[0-9]{3}')->fails("I'm 19 years old");
 ```
 <!--PHP-->
 ```php
-preg::match('/[0-9]+/', "I'm 19 years old") === 0;
+preg::match('/[0-9]{3}/', "I'm 19 years old") === 0;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
