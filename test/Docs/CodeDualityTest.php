@@ -1,13 +1,19 @@
 <?php
 namespace Test\Docs;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class CodeDualityTest extends TestCase
 {
     function snippets(): array
     {
-        return (new CodeTabsParser('../../docs/'))->getSnippets();
+        try {
+            return (new CodeTabsParser('../../docs/'))->getSnippets();
+        } catch (InvalidArgumentException $exception) {
+            echo PHP_EOL . $exception . $this->getStatusMessage() . PHP_EOL . $exception->getTraceAsString();
+            throw $exception;
+        }
     }
 
     /**
@@ -19,6 +25,9 @@ class CodeDualityTest extends TestCase
     function testDuality(array $tregx, array $php): void
     {
         // given
+        $this->assertGreaterThan(0, count($tregx));
+        $this->assertGreaterThan(0, count($php));
+
         $one = $this->arrayToString($this->addSingleLineReturn($tregx));
         $two = $this->arrayToString($this->addSingleLineReturn($php));
 
@@ -40,12 +49,12 @@ class CodeDualityTest extends TestCase
         return join(PHP_EOL, array_merge($namespaces, $lines));
     }
 
-    private function invoke(string $one): array
+    private function invoke(string $code): array
     {
         ob_start();
-        $return1 = eval($one);
-        $echo1 = ob_get_clean();
-        return array($return1, $echo1);
+        $result = eval($code);
+        $output = ob_get_clean();
+        return [$result, $output];
     }
 
     private function addSingleLineReturn(array $code): array
