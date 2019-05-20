@@ -67,8 +67,8 @@ const ComparisonTable = () => {
             </tr>
             <tr className="logo-row">
                 <th/>
-                <th><img src={"img/comparison/php.png"} alt="Plain PHP"/></th>
-                <th><img src={"img/t.regx.png"} alt="T-Regx"/></th>
+                <th><img src={"/img/comparison/php.png"} alt="Plain PHP"/></th>
+                <th><img src={"/img/t.regx.png"} alt="T-Regx"/></th>
             </tr>
             </thead>
             <tbody>

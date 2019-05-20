@@ -12,11 +12,11 @@ const siteConfig = {
 
     headerLinks: [
         {search: true},
-        {doc: 'installation', label: 'Docs'},
-        {page: 'comparison', label: 'Compare'},
-        {page: 'help', label: 'Help'},
-        {blog: true, label: 'Blog'},
-        {href: 'https://github.com/T-Regx/T-Regx', label: 'GitHub', external: true},
+        {label: 'Docs', doc: 'installation'},
+        {label: 'Compare', page: 'comparison'},
+        {label: 'Help', page: 'help'},
+        {label: 'Blog', blog: true},
+        {label: 'GitHub', href: 'https://github.com/T-Regx/T-Regx', external: true},
         {languages: true}
     ],
     blogSidebarCount: 'ALL',
@@ -50,8 +50,8 @@ const siteConfig = {
     cleanUrl: true,
 
     // Open Graph and Twitter card images.
-    ogImage: 'img/docusaurus.png',
-    twitterImage: 'img/docusaurus.png',
+    ogImage: '/img/docusaurus.png',
+    twitterImage: '/img/docusaurus.png',
 
     algolia: {
         apiKey: '6d3eef6432e87213c7f031ee898b73a1',
