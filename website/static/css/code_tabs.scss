@@ -6,6 +6,10 @@
       .nav-link {
         margin-right: 0;
 
+        &:hover {
+          background-color: lightblue;
+        }
+
         &:first-child {
           margin-left: auto;
         }
