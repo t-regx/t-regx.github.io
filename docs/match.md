@@ -88,7 +88,7 @@ To get the first occurrence of a matched pattern, call [`first()`](match-first.m
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-pattern('\d+')->match("I'm 19 years old. I was born in 1999")->first();
+pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999")->first();
 ```
 <!--PHP-->
 ```php
@@ -131,11 +131,26 @@ return $match[0];
 
 If, however, subject doesn't match your pattern and you use `first()` - `SubjectNotMatchedException` is thrown.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 try {
     return pattern('\d+')->match('Word')->first();
 }
-catch (SujectNotMatchedException $e) {
+catch (SubjectNotMatchedException $e) {
     // handle
 }
 ```
+<!--PHP-->
+```php
+try {
+    if (preg::match('/\d+/', 'Word', $match)) {
+        return $match[0];
+    }
+    throw new SubjectNotMatchedException();
+}
+catch (SubjectNotMatchedException $e) {
+    // handle
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->

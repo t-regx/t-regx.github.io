@@ -28,8 +28,8 @@ class CodeDualityTest extends TestCase
         $this->assertGreaterThan(0, count($tregx));
         $this->assertGreaterThan(0, count($php));
 
-        $one = $this->arrayToString($this->addSingleLineReturn($tregx));
-        $two = $this->arrayToString($this->addSingleLineReturn($php));
+        $one = $this->arrayToString($tregx);
+        $two = $this->arrayToString($php);
 
         // when
         list($return1, $echo1) = $this->invoke($one);
@@ -42,11 +42,19 @@ class CodeDualityTest extends TestCase
 
     private function arrayToString(array $lines): string
     {
+        return join(PHP_EOL, $this->preprocessCode($lines));
+    }
+
+    private function preprocessCode(array $lines): array
+    {
+        $lines = $this->addSingleLineReturn($lines);
+        $lines = $this->polyfillForSubjectNotMatched($lines);
         $namespaces = [
+            'use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;',
             'use TRegx\CleanRegex\Match\Details\Match;',
-            'use TRegx\SafeRegex\preg;'
+            'use TRegx\SafeRegex\preg;',
         ];
-        return join(PHP_EOL, array_merge($namespaces, $lines));
+        return array_merge($namespaces, $lines);
     }
 
     private function invoke(string $code): array
@@ -65,5 +73,12 @@ class CodeDualityTest extends TestCase
             }
         }
         return $code;
+    }
+
+    private function polyfillForSubjectNotMatched(array $lines)
+    {
+        return array_map(function (string $line) {
+            return str_replace('new SubjectNotMatchedException()', 'new SubjectNotMatchedException("","")', $line);
+        }, $lines);
     }
 }
