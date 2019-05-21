@@ -1,7 +1,7 @@
 const React = require('react');
 const CompLibrary = require('../../core/CompLibrary.js');
 const Container = CompLibrary.Container;
-const GridBlock = CompLibrary.GridBlock;
+const CustomGridBlock = require(`${process.cwd()}/core/CustomGridBlock`);
 const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 const HeaderButton = require(`${process.cwd()}/core/HeaderButton`);
 const BadgesSection = require(`${process.cwd()}/core/BadgesSection`);
@@ -9,8 +9,8 @@ const DisqusSection = require(`${process.cwd()}/core/DisqusSection`);
 const GithubButton = require(`${process.cwd()}/core/GithubButton`);
 const AutomaticSplashLogo = require(`${process.cwd()}/core/AutomaticSplashLogo`);
 
-function gifUrl(img) {
-    return `${siteConfig.baseUrl}gif/${img}`;
+function mp4Url(img) {
+    return `${siteConfig.baseUrl}mp4/${img}`;
 }
 
 function docUrl(doc, language) {
@@ -73,7 +73,7 @@ const Block = props => (
         padding={['bottom', 'top']}
         id={props.id}
         background={props.background}>
-        <GridBlock align="center" contents={props.children} layout={props.layout}/>
+        <CustomGridBlock align="center" contents={props.children} layout={props.layout}/>
     </Container>
 );
 
@@ -90,8 +90,8 @@ const FunctionalProgramming = () => (
                 title: 'Functional programming',
                 content: "T-Regx utilizes chainable, functional programming with methods like `filter()`, [`map()`](docs/match-map), "
                     + "[`flatMap()`](docs/match-map#flatmap), [`first()`](docs/match-first)/[`forFirst()`](docs/match-for-first), etc.",
-                image: gifUrl('functional.gif'),
-                imageAlign: 'left',
+                video: mp4Url('functional.mp4'),
+                videoAlign: 'left',
             },
         ]}
     </Block>
@@ -103,8 +103,8 @@ const MatchDetails = () => (
             {
                 title: 'Match details',
                 content: "With [`pattern()->match()`](docs/match) and [`pattern()->replace()`](docs/replace), it's trivial to retrieve, iterate, map and filter matches with callbacks and a detailed [`Match` object](docs/match-details).",
-                image: gifUrl('match-details.gif'),
-                imageAlign: 'right',
+                video: mp4Url('match-details.mp4'),
+                videoAlign: 'right',
             },
         ]}
     </Block>
@@ -153,8 +153,8 @@ const AutomaticDelimiters = () => (
                 title: 'Automatic delimiters',
                 content: "You no longer need to delimiter your patterns. [T-Regx' smart delimiterer](docs/delimiters) will add one of many"
                     + " delimiters for you, if they're not already present.",
-                image: gifUrl('delimiters.gif'),
-                imageAlign: 'right',
+                video: mp4Url('delimiters.mp4'),
+                videoAlign: 'right',
             },
         ]}
     </Block>
@@ -166,8 +166,8 @@ const WarningsToExceptions = () => (
             {
                 title: 'SafeRegex | Converts warnings to exceptions',
                 content: "SafeRegex watches for warnings, analyzes `preg_()` methods return values and looks up `preg_last_error()` to validate a call. If it fails, an exception is thrown.",
-                image: gifUrl('safe.regex.gif'),
-                imageAlign: 'left',
+                video: mp4Url('safe.regex.mp4'),
+                videoAlign: 'left',
             },
         ]}
     </Block>
