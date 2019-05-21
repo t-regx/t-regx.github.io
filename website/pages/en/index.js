@@ -88,7 +88,8 @@ const FunctionalProgramming = () => (
         {[
             {
                 title: 'Functional programming',
-                content: "T-Regx utilizes chainable, functional programming with methods like `filter()`, `map()`, `flatMap()`, `first()`/`forFirst()` etc.",
+                content: "T-Regx utilizes chainable, functional programming with methods like `filter()`, [`map()`](docs/match-map), "
+                    + "[`flatMap()`](docs/match-map#flatmap), [`first()`](docs/match-first)/[`forFirst()`](docs/match-for-first), etc.",
                 image: gifUrl('functional.gif'),
                 imageAlign: 'left',
             },
@@ -101,7 +102,7 @@ const MatchDetails = () => (
         {[
             {
                 title: 'Match details',
-                content: "With `pattern()->match()` and `pattern()->replace()`, it's trivial to retrieve, iterate, map and filter matches with callbacks and a detailed `Match` object.",
+                content: "With [`pattern()->match()`](docs/match) and [`pattern()->replace()`](docs/replace), it's trivial to retrieve, iterate, map and filter matches with callbacks and a detailed [`Match` object](docs/match-details).",
                 image: gifUrl('match-details.gif'),
                 imageAlign: 'right',
             },
