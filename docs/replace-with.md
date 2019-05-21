@@ -79,10 +79,10 @@ might interfere with logic and cause bugs that are very hard to find.
 ## Intentional references
 
 If you, however, would like to intentionally use regular expression references and have validated your input 
-against *an unexpected* `\` or `$` - feel free to use `withRaw()` which **will** resolve replacement references.
+against *an unexpected* `\` or `$` - feel free to use `withReferences()` which **will** resolve replacement references.
 
 ```php
-pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->withRaw('<$1>');
+pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->withReferences('<$1>');
 ```
 ```text
 I have <15> and <192>
