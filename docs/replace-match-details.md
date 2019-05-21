@@ -3,9 +3,6 @@ id: replace-match-details
 title:  Advanced replace details
 ---
 
-This chapter is about a rather advanced matter. It's also, not so crucial to the overall usage of T-Regx. Feel free to 
-[skip this chapter](match-details.md), if you don't find it necessary.
-
 ## Introduction
 
 When using `pattern()->match()` all [callbacks](match-for-each.md) receive one parameter when called - `Match` details 

@@ -19,8 +19,7 @@
     "Replacing": [
       "replace",
       "replace-with",
-      "replace-callback",
-      "replace-match-details"
+      "replace-callback"
     ],
     "Match Details": [
       "match-details",
@@ -31,16 +30,18 @@
     "Prepared Patterns": [
       "handling-user-input",
       "prepared-patterns",
-      "prepared-patterns-in-details",
       "composite-pattern"
     ],
     "Misc": [
-      "split",
+      "delimiters",
       "count",
-      "filter",
       "is-valid",
-      "delimiters"
+      "split",
+      "filter"
     ],
-    "Advanced Replacement": []
+    "Advanced": [
+      "replace-match-details",
+      "prepared-patterns-in-details"
+    ]
   }
 }
