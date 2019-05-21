@@ -114,8 +114,7 @@ const Features = () => (
         {[
             {
                 title: 'Written with clean design in mind',
-                content: '`No varargs`, `No boolean arguments`, `No flags`, `No Reflection used`',
-                image: gifUrl('delimiters.gif'),
+                content: '`No varargs`, `No boolean arguments`, `No flags`, `No Reflection used`'
             },
             {
                 title: 'Always and exception!',
