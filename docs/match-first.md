@@ -110,7 +110,7 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(
 ```
 <!--PHP-->
 ```php
-if (preg_match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
+if (preg::match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
     $capital = $match['capital'][0];
     
     return $capital;
@@ -138,8 +138,10 @@ Of course, `first()` callback will only be invoked if your pattern matches the s
 It's also possible to return your custom value from within `first()` callback. This custom value will be then returned 
 from `first()` function.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
+pattern('\w+')->match('Apples are cool')->first(function (Match $match) {
     return [
         $match->text(), 
         strtoupper($match->text()),
@@ -147,6 +149,22 @@ pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
     ];
 });
 ```
+<!--PHP-->
+```php
+if (preg::match('/\w+/', 'Apples are cool', $match)) {
+    return [
+        $match[0],
+        strtoupper($match[0]),
+        lcfirst($match[0])
+    ];
+}
+else {
+    throw new SubjectNotMatchedException();
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-0---->
+
 ```php
 ['Apples', 'APPLES', 'apples']
 ```
@@ -155,9 +173,23 @@ pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
 
 You can call `first()` for any valid PHP `callable` which accepts one string parameter (or no parameters).
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-return pattern('\w+')->match("Apples are cool")->first('strtoupper');
+return pattern('\w+')->match('Apples are cool')->first('strtoupper');
 ```
+<!--PHP-->
+```php
+if (preg::match('/\w+/', 'Apples are cool', $match)) {
+    $method = 'strtoupper';
+    return $method($match[0]);
+}
+else {
+    throw new SubjectNotMatchedException();
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ```php
 'APPLES'
 ```
@@ -170,9 +202,23 @@ In this example `Match` will be cast to string, which is the same as calling `Ma
 
 From within `first()` callback, you can return any value:
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-return pattern('\w+')->match("Apples are cool")->first('str_split');
+return pattern('\w+')->match('Apples are cool')->first('str_split');
 ```
+<!--PHP-->
+```php
+if (preg::match('/\w+/', 'Apples are cool', $match)) {
+    $method = 'str_split';
+    return $method($match[0]);
+}
+else {
+    throw new SubjectNotMatchedException();
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ```php
 ['A', 'p', 'p', 'l', 'e', 's']
 ```
@@ -193,13 +239,26 @@ pattern($p)->match($s)->first('strlen')          // 5
 This method allows you to explicitly specify how to handle an unmatched subject. Just chain `forFirst()` with
 one of the following `orReturn()`, `orElse()` or `orThrow()`.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-$func = function (Match $match) {
-    return "Yay $match";
-};
-
-echo pattern('\w+')->match('Dog')->forFirst($func)->orReturn('Aw, man :/');
+echo pattern('\w+')->match('Dog')
+         ->forFirst(function (Match $match) {
+             return "Yay $match";
+         })
+         ->orReturn('Aw, man :/');
 ```
+<!--PHP-->
+```php
+if (preg::match('/\w+/', 'Dog', $match)) {
+    echo "Yay {$match[0]}";
+}
+else {
+    echo 'Aw, man :/';
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ```text
 Yay Dog
 ```
