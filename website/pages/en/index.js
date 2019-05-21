@@ -115,10 +115,10 @@ const Features = () => (
         {[
             {
                 title: 'Written with clean design in mind',
-                content: '`No varargs`, `No boolean arguments`, `No flags`, `No Reflection used`'
+                content: '`No Reflection used`, `No (...varargs)`, `No (boolean arguments, true)`, `(No flags, 1)`'
             },
             {
-                title: 'Always and exception!',
+                title: 'Based on exceptions!',
                 content: 'If any error occurs while using regexp (invalid pattern, malformed UTF8, backtrack limit, nonexistent group, anything!) T-Regx throws an exception.'
             },
         ]}
