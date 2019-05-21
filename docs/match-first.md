@@ -51,9 +51,10 @@ pattern('\w+')->match("Apples are cool")->first(function (string $match) {
 ```php
 if (preg::match('/\w+/', "Apples are cool", $match)) {
     echo 'I matched ' . $match[0];
-    return null;
+} 
+else {
+    throw new SubjectNotMatchedException();
 }
-throw new SubjectNotMatchedException();
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
@@ -81,9 +82,10 @@ $subject = "Apples are cool";
 if (preg::match('/\w+/', $subject, $match)) {
     $text = $match[0];
     echo "Match '$text' was matched inside '$subject'.";
-    return null;
+} 
+else {
+    throw new SubjectNotMatchedException();
 }
-throw new SubjectNotMatchedException();
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
@@ -97,13 +99,29 @@ You can learn more about `Match` on [Advanced details](match-details.md) page.
 
 Retrieving capturing groups from a match is really simple.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(Match $match) {
+pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(function (Match $match) {
     $capital = $match->group('capital')->text();
     
     return $capital;
 });
+<!--test-return-0-->
 ```
+<!--PHP-->
+```php
+if (preg_match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
+    $capital = $match['capital'][0];
+    
+    return $capital;
+}
+else {
+    throw new SubjectNotMatchedException();
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ```php
 'G'
 ```

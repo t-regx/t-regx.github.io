@@ -110,9 +110,19 @@ Read on the [next page](match-first.md) to learn more about [`first()`](match-fi
 ### `all()`/`only()`
 
 If you call `all()` or `only()` on a subject that doesn't match your pattern, you'll receive an empty array.
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('\d+')->match('Word')->all();
 ```
+<!--PHP-->
+```php
+preg::match_all('/\d+/', 'Word', $match);
+return $match[0];
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ```php
 []
 ```
