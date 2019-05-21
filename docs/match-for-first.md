@@ -25,7 +25,6 @@ pattern('[0-9]+')->match("I'm 19 years old")
    })
    ->orReturn('Unmatched :/');
 ```
-<!--test-return-0-->
 <!--PHP-->
 ```php
 if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
@@ -35,6 +34,7 @@ if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
 return 'Unmatched :/';
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-0---->
 
 ```php
 'I was born 19 years ago'

@@ -107,7 +107,6 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(
     
     return $capital;
 });
-<!--test-return-0-->
 ```
 <!--PHP-->
 ```php
@@ -121,6 +120,7 @@ else {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-0---->
 
 ```php
 'G'
