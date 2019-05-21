@@ -75,11 +75,12 @@ literals - just return them **explicitly**.
 
 ```php
 pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
-    return strval(2);                  // ok
-    return true ? 'true' : 'false';    // ok
-    return (string) $match;            // ok
-    return null ? '' : $something;     // ok
-    return $match->group('captured');  // ok, if group exists and was matched
+    return strval(2);                          // ok
+    return true ? 'true' : 'false';            // ok
+    return (string) $match;                    // ok
+    return null ? '' : $something;             // ok
+    return $match->group('captured');          // ok, if group exists and was matched
+    return $match->group('captured')->text();  // ok, if group exists and was matched
 });
 ```
 
