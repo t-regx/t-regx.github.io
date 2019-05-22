@@ -31,8 +31,8 @@ const UpperBadges = () =>
 
         <Badge
             title="GitHub last commit"
-            src="https://img.shields.io/github/last-commit/T-Regx/T-Regx.svg"
-            href="https://github.com/T-Regx/T-Regx"/>
+            src="https://img.shields.io/github/last-commit/T-Regx/T-Regx/develop.svg"
+            href="https://github.com/T-Regx/T-Regx/commits/develop"/>
         <Badge
             title="GitHub commit activity"
             src="https://img.shields.io/github/commit-activity/y/T-Regx/T-Regx.svg"
@@ -51,7 +51,7 @@ const LowerBadges = () =>
             href="https://github.com/T-Regx/T-Regx/branches/all"/>
         <Badge
             title="PHP Version"
-            src="https://img.shields.io/badge/PHP-7.1.0%2B-blue.svg"
+            src="https://img.shields.io/badge/PHP-7.1-blue.svg"
             href="https://github.com/T-Regx/T-Regx/branches/all"/>
         <Badge
             title="PHP Version"
