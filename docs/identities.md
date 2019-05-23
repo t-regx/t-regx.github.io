@@ -5,6 +5,8 @@ title: Identities
 
 A curious user might notice, that some parts of T-Regx API are redundant and can be simplified. Here's a list of them:
 
+---
+
 ```php
 pattern($p)->match($s)->forFirst($callback)->orThrow();
 ```

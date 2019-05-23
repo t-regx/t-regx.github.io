@@ -3,8 +3,8 @@ id: match-details
 title: Match details
 ---
 
-When using `pattern()->match()`, some methods receive a callback that accepts `Match` details object. These methods 
-are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `map()`, `flatMap()`.
+When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details 
+object. These methods are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `map()`, `flatMap()`, `callback()`.
 
 Using `Match` details, you gain access to:
 
