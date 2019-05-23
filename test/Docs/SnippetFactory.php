@@ -10,10 +10,13 @@ class SnippetFactory
 
     public function snippetsFromFile(string $path): ?array
     {
+        if (is_dir($path)) {
+            return null;
+        }
         $file = file_get_contents($path);
         $snippets = [];
         $type = null;
-        foreach (explode("\n", $file) as $line) {
+        foreach (preg_split("/[\n\r]?[\n\r]/", $file) as $line) {
             if ($line == self::START_TOKEN) {
                 $snippet = ['T-Regx' => [], 'PHP' => []];
             }
