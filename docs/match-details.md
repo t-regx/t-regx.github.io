@@ -8,14 +8,15 @@ object. These methods are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `ma
 
 Using `Match` details, you gain access to:
 
- - [value of a matched occurrence](#matched-text) - `text()`
- - [ordinal value](#ordinal-value-index) of a matched occurrence - `index()`
- - [subject](#subject) against which the pattern was matched - `subject()`
- - [limit](#limit) which was put on the matches - `limit()`
+ - [`text()`](#matched-text) - value of a matched occurrence
+ - [`parseInt()`](#integers)/[`isInt()`](#integers) which allow you to handle integers safely
+ - [`subject()`](#subject) - subject against which the pattern was matched
+ - [`index()`](#ordinal-value-index) - ordinal value of a matched occurrence
+ - [`limit()`](#limit) - limit which was put on the matches
  - [offsets of matched values](#offsets) in the subject:
-   - character offsets (UTF-8 safe) - `offset()`
-   - byte offsets - `byteOffset()`
- - [other matched occurrences](#other-occurrences) - `all()`
+   - character offsets (UTF-8 safe) - [`offset()`](#offsets)
+   - byte offsets - [`byteOffset()`](#offsets)
+ - [`all()`](#other-occurrences) - other matched occurrences
  - details about capturing groups, in the next chapter: [Capturing groups](match-groups.md)
 
 ## Matched text
@@ -42,25 +43,40 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (string $match) {
 
 All of them are equal to each other.
 
-## Ordinal value (index)
+## Integers
 
-`Match.index()` returns the ordinal number of a matched occurrence.
+Method `isInt()` returns `true` if, and only if matched occurrence is numeric. And by "numeric", we mean "real" numeric,
+not PHP numeric:
 
-In this example, we'll modify every second word:
+| Value    | `isInt()` |
+| -------- | --------- |
+| `'14'`   | `true`    |
+| `'-14'`  | `true`    |
+| `'+14'`  | `true`    |
+| `'000'`  | `true`    |
+| `' 10'`  | `false`   |
+| `'10 '`  | `false`   |
+| `'1e0'`  | `false`   |
+| `''`     | `false`   |
+| `' '`    | `false`   |
+| `'0.0'`  | `false`   |
+| `'0,0'`  | `false`   |
+
+*PS: It's implemented with `filter_var()`, but you can think of it as:* `/^[-+]?\d+$/`
 
 ```php
-pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Match $match) {
-    if ($match->index() % 2 === 0) {
-        return strtolower($match);
+pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) {
+    if ($match->isInt()) {
+        $times = $match->parseInt(); 
+        for ($i = 0; $i < $times; $i++) {
+            // tasks
+        }
     }
-    return strtoupper($match);
 });
 ```
-```php
-['i', 'LIKE', 'trains', 'BUT', 'i', 'ALSO', 'like', 'BIKES']
-```
 
-Results of `Match.index()` are always **continuous integer**  numbers, going from `0` to `1`, `2`, `3` etc.
+So to recap, `$match->isInt()` returns `true`/`false` depending on whether the matched occurrence is numeric; and `parseInt()`
+returns said numeric occurrence, or throws `IntegerFormatException` instead.
 
 ## Subject
 
@@ -84,6 +100,26 @@ pattern('[A-Z][a-z]+')->match($subject)->map(function (Match $match) use ($subje
     return $subject;
 });
 ```
+
+## Ordinal value (index)
+
+`Match.index()` returns the ordinal number of a matched occurrence.
+
+In this example, we'll modify every second word:
+
+```php
+pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Match $match) {
+    if ($match->index() % 2 === 0) {
+        return strtolower($match);
+    }
+    return strtoupper($match);
+});
+```
+```php
+['i', 'LIKE', 'trains', 'BUT', 'i', 'ALSO', 'like', 'BIKES']
+```
+
+Results of `Match.index()` are always **continuous integer**  numbers, going from `0` to `1`, `2`, `3` etc.
 
 ## Limit
 
@@ -165,8 +201,9 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
 
 ## Groups
 
-With `Match.group()`, you can easily retrieve capturing groups. Just like with `Match`, retrieving matched occurrence 
-value is done with `text()` method or by casting it to `string`.
+With `Match.group()`, you can easily retrieve capturing groups. 
+
+Just like with `Match`, retrieving matched occurrence value is done with `text()` method or by casting it to `string`.
 
 ```php
 $p = '(?<value>\d+)(?<unit>cm|mm)';
