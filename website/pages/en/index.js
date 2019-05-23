@@ -132,7 +132,7 @@ const Installation = () => (
             {[
                 {
                     title: '',
-                    content: '![](img/t.regx.installation.png)',
+                    content: '[![](img/t.regx.installation.png)](docs/installation)',
                 },
                 {
                     title: 'Installation',
