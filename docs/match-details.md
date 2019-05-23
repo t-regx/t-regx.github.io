@@ -9,13 +9,14 @@ object. These methods are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `ma
 Using `Match` details, you gain access to:
 
  - [value of a matched occurrence](#matched-text) - `text()`
- - [ordinal value](#ordinal-value-index) of a matched occurrence - `index()`.
- - [subject](#subject) against which the pattern was matched - `subject()`.
+ - [ordinal value](#ordinal-value-index) of a matched occurrence - `index()`
+ - [subject](#subject) against which the pattern was matched - `subject()`
+ - [limit](#limit) which was put on the matches - `limit()`
  - [offsets of matched values](#offsets) in the subject:
-   - character offsets (UTF-8 safe)
-   - byte offsets.
+   - character offsets (UTF-8 safe) - `offset()`
+   - byte offsets - `byteOffset()`
  - [other matched occurrences](#other-occurrences) - `all()`
- - details about capturing groups, in the next chapter: [Capturing groups](match-groups.md).
+ - details about capturing groups, in the next chapter: [Capturing groups](match-groups.md)
 
 ## Matched text
 
@@ -81,6 +82,27 @@ $subject = 'I like Trains';
 
 pattern('[A-Z][a-z]+')->match($subject)->map(function (Match $match) use ($subject) {
     return $subject;
+});
+```
+
+## Limit
+
+Depending on whether you used `all()`, `first()` or `only(int)` - `limit()` will return `-1`, `1` or an 
+argument given to `only()`
+
+```php
+pattern('\w+')->replace($string)->all()->callback(function (Match $match) {
+    $match->limit();   // -1
+});
+```
+```php
+pattern('\w+')->replace($string)->first()->callback(function (Match $match) {
+    $match->limit();   // 1
+});
+```
+```php
+pattern('\w+')->replace($string)->only(5)->callback(function (Match $match) {
+    $match->limit();   // 5
 });
 ```
 
