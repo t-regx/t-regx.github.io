@@ -22,9 +22,11 @@ class SplashImage extends React.Component {
         }
         const images = {
             regular: {src: 't.regx.png', title: 'T-Regx'},
-            christmas: {src: 't.regx.santa.png', title: 'Santa T-Regx'},
             carnival: {src: 't.regx.carnival.png', title: 'Carnival T-Regx'},
-            easter: {src: 't.regx.easter.png', title: 'Easter T-Regx'}
+            easter: {src: 't.regx.easter.png', title: 'Easter T-Regx'},
+            holiday: {src: 't.regx.summer.png', title: 'Holiday T-Regx'},
+            halloween: {src: 't.regx.halloween.png', title: 'Halloween T-Regx'},
+            christmas: {src: 't.regx.santa.png', title: 'Santa T-Regx'},
         };
         const splash = images[this.props.name];
         return <Logo src={imgUrl(splash.src)} title={splash.name}/>;
