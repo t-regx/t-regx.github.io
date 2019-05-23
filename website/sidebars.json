@@ -19,7 +19,8 @@
     "Replacing": [
       "replace",
       "replace-with",
-      "replace-callback"
+      "replace-callback",
+      "replace-by"
     ],
     "Match Details": [
       "match-details",

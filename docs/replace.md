@@ -10,6 +10,7 @@ Using `pattern()->replace()` you can:
    - `replace()->only(int)`
  - Replace occurrences with a constant value - [`with()`](replace-with.md)/[`withReferences()`](replace-with.md)
  - Replace occurrences with a value from callback - [`callback()`](replace-callback.md)
+ - Replace occurrences based on an associative array - [`by()->map()`](replace-by.md)
 
 ## Limiting replacements
 
