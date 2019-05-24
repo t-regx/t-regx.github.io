@@ -23,6 +23,17 @@ pattern('#[A-Z][a-z]+#')->match($subject)->first();
 
 The code snippets above are equal.
 
+## Returning a delimitered pattern
+
+To change undelimitered pattern into a delimitered one - use `delimiter()` method;
+
+```php
+pattern('Welcome/Or not')->delimiter();
+```
+```text
+#Welcome/Or not#
+```
+
 ### Ambiguity
 
 How does T-Regx decide whether a pattern is already delimitered, or whether it's not and needs to be delimitered again?
