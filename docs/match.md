@@ -4,7 +4,7 @@ title: Match a subject
 ---
 
 Using `pattern()->match()` you can:
- - Test a subject against a pattern: [`matches()`](#test-a-subject)/[`fails()`](#test-a-subject)
+ - Test a subject against a pattern: [`test()`](#test-a-subject)/[`fails()`](#test-a-subject)
  - Retrieve matches from the subject: [`first()`](#one)/[`all()`](#many)/[`only()`](#many)
  - Get capturing groups from matches: [`group()`](match-details.md)/[`Match.group()`](match-details.md)/[`groups()`](match-details.md)
  - Invoke callbacks for matches: [`first()`](match-first.md#use-first-with-callback)/[`forFirst()`](match-for-first.md)/[`forEach()`](match-for-each.md)/[`map()`](match-map.md)/[`flatMap()`](match-flat-map.md)
@@ -16,7 +16,7 @@ If you only need to check whether a pattern matches a subject, use:
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-pattern('[0-9]+')->matches("I'm 19 years old");
+pattern('[0-9]+')->test("I'm 19 years old");
 ```
 <!--PHP-->
 ```php
@@ -39,7 +39,7 @@ preg::match('/[0-9]{3}/', "I'm 19 years old") === 0;
 
 Of course `pattern()->match()` throws an exception if the pattern is invalid (or in case of any other error).
 
-> You can also use `pattern()->match()->matches()` and `pattern()->match()->fails()`.
+> You can also use `pattern()->match()->test()` and `pattern()->match()->fails()`.
 
 ## Retrieve matches
 

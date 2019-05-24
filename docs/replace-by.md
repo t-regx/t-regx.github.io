@@ -45,7 +45,7 @@ pattern('\w{3}')->replace($message)->all()->by()->map([
 If you don't need to specify all your possible `[match => replacement]` pairs, you should use one of the following functions:
 
  - `by()->mapIfExists()` - leaves the superfluous matches unchanged
- - `by()->mapDefault()` - replaces the superfluous matches with a default string
+ - `by()->mapOrDefault()` - replaces the superfluous matches with a default string
 
 ### Ignored replacements
 
@@ -72,7 +72,7 @@ Superfluous occurrences are replaced with a default string:
 <?php
 $message = "Extensions: mp3, mp4, jpg, jpeg, png, gif"; 
 
-pattern('\w{3,4}')->replace($message)->all()->by()->mapIfExists([
+pattern('\w{3,4}')->replace($message)->all()->by()->mapOrDefault([
    'mp3'   => '"Audio"',
    'gif'   => '"Animation"'
 ], 'Unknown');

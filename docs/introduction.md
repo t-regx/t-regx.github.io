@@ -12,12 +12,12 @@ as the first argument and optional flags as the second argument.
 ```php
 use TRegx\CleanRegex\Pattern;
  
-Pattern::of('[A-Z][a-z]+')->matches($subject);
+Pattern::of('[A-Z][a-z]+')->test($subject);
 ```
 
 #### Global function style:
 ```php
-pattern('[A-Z][a-z]+')->matches($subject);
+pattern('[A-Z][a-z]+')->test($subject);
 ```
 
 ## Automatic delimiters
@@ -25,7 +25,7 @@ pattern('[A-Z][a-z]+')->matches($subject);
 Notice, that these patterns **don't have to** be delimitered. Smart T-Regx will conveniently add them for you.
 You can add flags to your regular expression by passing a second argument.
 ```php
-pattern('[A-Z]+', 'im')->matches($subject);
+pattern('[A-Z]+', 'im')->test($subject);
 ```
 
 To learn more, go to [Automatic Delimiters](delimiters.md).
@@ -34,5 +34,5 @@ To learn more, go to [Automatic Delimiters](delimiters.md).
 
 Of course, you can still use delimitered patterns with flags. Both versions are equal with each other.
 ```php
-pattern('/[A-Z]+/im')->matches($subject);
+pattern('/[A-Z]+/im')->test($subject);
 ```

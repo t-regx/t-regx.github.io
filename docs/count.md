@@ -73,16 +73,16 @@ true
 ```
 
 ...but that would be wasteful. You're much better off using 
-[`matches()`](match.md#test-a-subject)/[`fails()`](match.md#test-a-subject):
+[`test()`](match.md#test-a-subject)/[`fails()`](match.md#test-a-subject):
 
 ```php
-pattern('[aeiouy]')->matches('Computer')
+pattern('[aeiouy]')->test('Computer')
 ```
 ```php
 true
 ```
 
-This is because `count()` will go through each occurrence of a pattern in a subject, counting it; whereas `matches()` 
+This is because `count()` will go through each occurrence of a pattern in a subject, counting it; whereas `test()` 
 will return right after it finds the first occurrence.
 
-> Under the hood, `count()` uses `preg::match_all()`, whereas `matches()`/`fails()`/ use `preg::match()`.
+> Under the hood, `count()` uses `preg::match_all()`, whereas `test()`/`fails()`/ use `preg::match()`.
