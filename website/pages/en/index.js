@@ -13,8 +13,8 @@ function mp4Url(img) {
     return `${siteConfig.baseUrl}mp4/${img}`;
 }
 
-function docUrl(doc, language) {
-    return `${siteConfig.baseUrl}docs/${language ? `${language}/` : ''}${doc}`;
+function docUrl(doc) {
+    return `${siteConfig.baseUrl}docs/${doc}`;
 }
 
 const SplashContainer = props => (
@@ -47,7 +47,6 @@ const PromoSection = props => (
 
 class HomeSplash extends React.Component {
     render() {
-        const language = this.props.language || '';
         return (
             <SplashContainer>
                 <AutomaticSplashLogo/>
@@ -55,12 +54,12 @@ class HomeSplash extends React.Component {
                     <ProjectTitle/>
                     <GithubButton href={siteConfig.mainRepoUrl}/>
                     <PromoSection>
-                        <HeaderButton href={docUrl('installation', language)}>Installation</HeaderButton>
-                        <HeaderButton href={docUrl('match', language)}>Matching</HeaderButton>
-                        <HeaderButton href={docUrl('replace-with', language)}>Replacing</HeaderButton>
+                        <HeaderButton href={docUrl('installation')}>Installation</HeaderButton>
+                        <HeaderButton href={docUrl('match')}>Matching</HeaderButton>
+                        <HeaderButton href={docUrl('replace-with')}>Replacing</HeaderButton>
                         <div className="separator"/>
-                        <HeaderButton href={docUrl('overview', language)}>What's T-Regx</HeaderButton>
-                        <HeaderButton href={docUrl('whats-the-point', language)}>Why use T-Regx?</HeaderButton>
+                        <HeaderButton href={docUrl('overview')}>What's T-Regx</HeaderButton>
+                        <HeaderButton href={docUrl('whats-the-point')}>Why use T-Regx?</HeaderButton>
                     </PromoSection>
                 </div>
             </SplashContainer>
@@ -175,10 +174,9 @@ const WarningsToExceptions = () => (
 
 class Index extends React.Component {
     render() {
-        const language = this.props.language || '';
         return (
             <div>
-                <HomeSplash language={language}/>
+                <HomeSplash/>
                 <div className="mainContainer">
                     <AutomaticDelimiters/>
                     <Installation/>
