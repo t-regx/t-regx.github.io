@@ -14,7 +14,7 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6.4",
+    "phpunit/phpunit": "^7.5",
     "rawr/t-regx": "dev-master"
   }
 }
