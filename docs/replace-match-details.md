@@ -1,14 +1,14 @@
 ---
 id: replace-match-details
-title:  Advanced replace details
+title: Advanced replace details
 ---
 
 ## Introduction
 
-When using `pattern()->match()` all [callbacks](match-for-each.md) receive one parameter when called - `Match` details 
-object. You can learn more about `Match` on [Advanced details page](match-details.md).
+When using `pattern()->match()` all [callbacks](match-for-each.md) receive one parameter when called - 
+[`Match`](match-details.md). You can learn more about it on [`Match` details](match-details.md) page.
 
-The callback's signature can accept either `Match` details or `string`. 
+The callback's signature can accept either [`Match`](match-details.md) details or `string`. 
 
  - `function (Match $match) {}`
  - `function (string $match) {}`
@@ -21,7 +21,8 @@ Additionally, `ReplaceMatch` has two separate methods:
  - `ReplaceMatch.modifiedOffset(): int`
  - `ReplaceMatch.modifiedSubject(): string`
 
-They work similarly to `offset()` and `subject()` methods, but they take into account **results of previous callbacks**.
+They work similarly to [`offset()`](match-offsets.md) and [`subject()`](match-details.md#subject) methods, but they
+take into account **results of previous callbacks**.
 
  - `modifiedOffset()` returns occurrence's offset, but according to a newly replaced subject.
  - `modifiedSubject()` returns current state of a newly replaced subject.
@@ -40,8 +41,9 @@ $result = pattern("[A-Z][a-z]+")->replace($subject)->all()->callback(function ()
 });
 ```
 
-having iterated the subject looking for `[A-Z][a-z]+` - for each `Match` the result of `Match.subject()` method would 
-always be the same. There are 4 occurrences matched by the pattern, so callback is invoked 4 times.
+having iterated the subject looking for `[A-Z][a-z]+` - for each [`Match`](match-offsets.md) the result of 
+`Match.subject()` method would always be the same. There are 4 occurrences matched by the pattern, so callback is 
+invoked 4 times.
 
 ```text
 Me, Rihanna and my Mom really like Sweden

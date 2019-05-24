@@ -23,7 +23,7 @@ Welcome\How are you?
 ```
 
 Please, keep in mind that this **is not** a safe way to create patterns with unsafe characters - for that, consider
-using [Prepared Patterns](/docs/prepared-patterns).
+using [Prepared Patterns](prepared-patterns.md).
 
 ## Contract
 

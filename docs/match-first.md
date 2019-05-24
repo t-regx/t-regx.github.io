@@ -93,7 +93,7 @@ else {
 Match 'Apples' was matched inside 'Apples are cool'.
 ```
 
-You can learn more about `Match` on [Advanced details](match-details.md) page.
+You can learn more about `Match` on [`Match` details](match-details.md) page.
 
 ### Groups in match
 
