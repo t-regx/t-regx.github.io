@@ -17,6 +17,7 @@ Using `Match` details, you gain access to:
    - character offsets (UTF-8 safe) - [`offset()`](#offsets)
    - byte offsets - [`byteOffset()`](#offsets)
  - [`all()`](#other-occurrences) - other matched occurrences
+ - [User data](#other-occurrences) - sharing custom data between callbacks
  - details about capturing groups, in the next chapter: [Capturing groups](match-groups.md)
 
 ## Matched text
@@ -198,6 +199,28 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
   ['match' => 'cool',   'all' => ['Apples', 'are', 'cool']]
 ]
 ```
+
+## User data
+
+To most users this functionality will occur as redundant - it's only use case are multiple calls to callbacks, for example
+when using chained `filter()->map()`. You perform an operation in `filter()`, store it's value in user data, and then use
+the value in [`map()`](match-map.md).
+
+```php
+pattern('\w{2}')->match('Languages: en, de, xd, sv')
+    ->filter(function (Match $match) {
+        $languageInfo = HeavyService::fetch($match->text());
+        $match->setUserData($languageInfo);  
+        return $languageInfo->isValid();
+    })
+    ->map(function (Match $match) {
+        $languageInfo = $match->getUserData();  
+        return $languageInfo->languages():
+    });
+```
+
+> There were ideas of adding structures for user data, like `setUserData('key', $value)`/`getUserData('key')`,
+> but we decided to give more control to the user about it's structure. That's why user data is `mixed`.
 
 ## Groups
 
