@@ -6,6 +6,8 @@ title: Match details
 When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details 
 object. These methods are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `map()`, `flatMap()`, `callback()`.
 
+## Overview
+
 Using `Match` details, you gain access to:
 
  - [`text()`](#matched-text) - value of a matched occurrence
@@ -242,4 +244,4 @@ pattern($p)->match($s)->first(function (Match $match) {
 
 ---
 
-Read on to learn more about [Capturing groups](match-groups.md).
+More about capturing groups can be found in the next section: [Capturing groups](match-groups.md).

@@ -24,8 +24,8 @@
     ],
     "Match Details": [
       "match-details",
-      "match-offsets",
       "match-groups",
+      "match-offsets",
       "match-group"
     ],
     "Prepared Patterns": [
