@@ -34,3 +34,10 @@ Pattern::of("(My|Our) dog's name is (Barky!");
 They need to be escaped!
 
 Read on, to learn about proper handling of user input.
+
+## Why not just `preg_quote()`
+
+Good question.
+
+The same reason why good programmers use Prepared SQL Statements, instead of `mysql_real_escape_string()`. 
+They're modern and more recent, and thus better adapted to programmers needs.

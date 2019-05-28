@@ -57,6 +57,7 @@ class HomeSplash extends React.Component {
                         <HeaderButton href={docUrl('installation')}>Installation</HeaderButton>
                         <HeaderButton href={docUrl('match')}>Matching</HeaderButton>
                         <HeaderButton href={docUrl('replace-with')}>Replacing</HeaderButton>
+                        <HeaderButton href={docUrl('handling-user-input')}>Prepared Patterns</HeaderButton>
                         <div className="separator"/>
                         <HeaderButton href={docUrl('overview')}>What's T-Regx</HeaderButton>
                         <HeaderButton href={docUrl('whats-the-point')}>Why use T-Regx?</HeaderButton>
