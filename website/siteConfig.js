@@ -1,6 +1,6 @@
 const siteConfig = {
     title: 'T-Regx',
-    tagline: 'The most advanced, powerful; regular expressions library',
+    tagline: 'Bulletproof and powerful Regular Expressions for PHP',
 
     url: 'https://t-regx.com',
     baseUrl: '/',
