@@ -4,7 +4,11 @@ title: What's the point?
 sidebar_label: Why would I use T-Regx?
 ---
 
-Here is a few reasons why one might consider using T-Regx.
+Here is a few reasons why one might consider using T-Regx. Main of which are:
+ - It's **bulletproof**
+ - It's **powerful**
+ - It's **reliable**
+ - It's **readable**
 
 ## What's wrong with PHP Regular Expressions:
 
@@ -119,9 +123,24 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
 
 That's why T-Regx happened. It addresses all of PHP regular expressions flaws:
 
- - [It's descriptive](#it-s-descriptive)
- - [It's for developers](#it-s-for-developers)
- - [It's explicit](#it-s-explicit)
+ - [It's descriptive](#its-descriptive)
+ - [It's for developers](#its-for-developers-its-reliable)
+ - [It's explicit](#its-explicit)
+
+### It's bulletproof
+
+What happens when you make a mistake when using PHP Regular Expressions:
+ - In some cases a warning is emitted
+ - In others, you can check `preg_last_error()`
+ - In most of the cases, the bug is silently ignored
+
+What happens when you make any mistake when using T-Regx:
+ - In some cases `IllegalArgumentException` is thrown
+ - In other, more frequent cases - one of the `CleanRegexException` implementations os thrown:
+   - `SubjectNotMatchedException`
+   - `InvalidPatternException`
+   - `InvalidReplacementException`
+   - etc.
 
 ### It's descriptive
 
