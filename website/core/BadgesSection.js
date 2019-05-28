@@ -44,27 +44,31 @@ const LowerBadges = () =>
         <Badge
             title="PHP Version"
             src="https://img.shields.io/badge/PHP-5.3%2B-blue.svg"
-            href="https://github.com/T-Regx/T-Regx/branches/all"/>
+            href="https://packagist.org/packages/rawr/t-regx"/>
         <Badge
             title="PHP Version"
             src="https://img.shields.io/badge/PHP-5.6%2B-blue.svg"
-            href="https://github.com/T-Regx/T-Regx/branches/all"/>
+            href="https://packagist.org/packages/rawr/t-regx"/>
         <Badge
             title="PHP Version"
             src="https://img.shields.io/badge/PHP-7.1-blue.svg"
-            href="https://github.com/T-Regx/T-Regx/branches/all"/>
+            href="https://travis-ci.org/T-Regx/T-Regx"/>
         <Badge
             title="PHP Version"
             src="https://img.shields.io/badge/PHP-7.2-blue.svg"
-            href="https://github.com/T-Regx/T-Regx/branches/all"/>
+            href="https://travis-ci.org/T-Regx/T-Regx"/>
         <Badge
             title="PHP Version"
             src="https://img.shields.io/badge/PHP-7.3-blue.svg"
-            href="https://github.com/T-Regx/T-Regx/branches/all"/>
+            href="https://travis-ci.org/T-Regx/T-Regx"/>
         <Badge
             title="PHP Version"
             src="https://img.shields.io/badge/PHP-7.4-blue.svg"
-            href="https://github.com/T-Regx/T-Regx/branches/all"/>
+            href="https://travis-ci.org/T-Regx/T-Regx"/>
+        <Badge
+            title="PHP Version"
+            src="https://img.shields.io/badge/PHP-8.0-yellow.svg"
+            href="https://travis-ci.org/T-Regx/T-Regx"/>
         <Badge
             title="PRs Welcome"
             src="https://img.shields.io/badge/PR-welcome-brightgreen.svg?style=popout"
