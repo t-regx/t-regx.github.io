@@ -10,12 +10,12 @@ object. These methods are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `ma
 
 Using `Match` details, you gain access complete information about capturing groups:
  - [`group(int|string)`](#group-details) - capturing group details. If group is matched, below methods are available:
-     - [`matched()`] - whether the group was matched by the subject
-     - [`text()`] - value of the group
-     - [`parseInt()`]/[`isInt()`] - allow you to handle integers safely
+     - `matched()` - whether the group was matched by the subject
+     - `text()` - value of the group
+     - `parseInt()`/`isInt()` - allow you to handle integers safely
      - [offsets of matched values](#offsets) in the subject:
-       - character offsets (UTF-8 safe) - [`offset()`]
-       - byte offsets - [`byteOffset()`]
+       - character offsets (UTF-8 safe) - `offset()`
+       - byte offsets - `byteOffset()`
      - [`orReturn()`](#optional-groups)/[`orElse()`](#optional-groups)/[`orThrow()`](#optional-groups) - returns a group, or controls the absence of the group
      - [`index()`](#index-name-and-identifier) - ordinal value of the capturing group in a pattern
      - [`name()`](#index-name-and-identifier) - name of the capturing group, or `null` of group is not named
@@ -26,8 +26,8 @@ Using `Match` details, you gain access complete information about capturing grou
  - [`groupNames()`](#group-names) - string list of named groups used in a pattern
  - [`all()`](#other-occurrences) - other matched occurrences of the group
 
-> With PHP, both groups' syntax: `(?<name>)` and `(?P<name>)` are considered "named". Regular, indexed groups 
-> are use with syntax `()`.
+> With PHP, all groups' syntax: `(?<name>)`, `(?'name')` and `(?P<name>)` are considered "named". Regular, indexed groups 
+> are use with syntax `()`. Group `(?:)` is considered a non-capturing group.
 
 ## Group details
 
@@ -287,14 +287,17 @@ And T-Regx **hates** it. We **hate** it.
 
 That's why T-Regx has 3 separate methods to deal with each of these cases separately. Here's how they work:
 
-|Method used with|`hasGroup()`|`matched()`|`text()`|
-|---|---|---|---|
-|Invalid group|`InvalidArgumentException`|`InvalidArgumentException`|`InvalidArgumentException`| 
-|Non-existent group|`false`|`NonexistentGroupException`|`NonexistentGroupException`|
-|Not matched group|`true`|`false`|`GroupNotMatchedException`|
-|Matched group|`true`|`true`|Value of the group|
+|Group|Invalid|Non-existent|Not matched|Matched|
+|---|---|---|---|---|
+|`hasGroup()`|`InvalidArgument`|`false`|`true`|`true`|
+|`matched()`|`InvalidArgument`|`NonexistentGroup`|`false`|`true`|
+|`text()`|`InvalidArgument`|`NonexistentGroup`|`GroupNotMatched`|Value of the group|
 
 In short:
  - You can't use an invalid group (`2startingWithDigit` or negative `-1`)
- - You can't use a non-existent method, except with `hasGroup()`
- - You can't use a non-matched group, except with `hasGroup()` and with `matched()`
+ - You can't use a non-existent method (except with `hasGroup()`)
+ - You can't use a non-matched group (except with `hasGroup()` and with `matched()`)
+
+> - `InvalidArgument` is `\InvalidArgumentException`
+> - `NonexistentGroup` is `NonexistentGroupException`
+> - `GroupNotMatched` is `GroupNotMatchedException`
