@@ -127,7 +127,7 @@ Of course, your custom exception must meet certain requirements:
 
    - `__construct()`
    - `__construct($message)`, where `$message` can be a string
-   - `__construct($message, subject)`, where `$message` and `$subject` can be strings
+   - `__construct($message, $subject)`, where `$message` and `$subject` can be strings
 
 ## I don't like functional
 
