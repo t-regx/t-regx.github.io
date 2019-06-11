@@ -10,7 +10,7 @@ T-Regx recommended way of installation is using <a href="https://packagist.org/p
 The installation of T-Regx for `PHP 7.1` is really simple. Just add a composer dependency:
 
 ```bash
-$ composer require rawr/t-regx
+$ composer require rawr/t-regx:0.9
 ```
 
 If you're using PHP 7.1 or newer, feel free to skip to [Introduction](introduction.md).
