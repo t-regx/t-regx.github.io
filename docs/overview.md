@@ -4,13 +4,12 @@ title: What's T-Regx?
 ---
 
 T-Regx (*a combination of T-Rex and RegExp*) is a lightweight Regular Expressions library. Its main features are:
- - Descriptive interface *(and we mean it)*
- - Working **with** and **for** a developer
- - Being explicit *(and we mean it too)*
+ - Being **Bullet-proof** *(and we mean it)*
+ - Being explicit and descriptive *(and we mean it too)* - [Why is explicit interface so important?](#why-is-explicit-interface-so-important)
  - Cleaning the [mess after PHP regular expressions API](whats-the-point.md)
  - Relieving developers from [**brain strain**](#brain-strain)
 
-## Why is descriptive interface so important?
+## Why is explicit interface so important?
 
 T-Regx' aim is to relieve programmers from [**brain strain**](overview.md#brain-strain) while reading and writing code. 
 Our mission is to make developers write/read a line and **immediately** go on, without thinking about what it does or 
