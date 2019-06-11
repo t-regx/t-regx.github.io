@@ -20,7 +20,8 @@
       "replace",
       "replace-with",
       "replace-callback",
-      "replace-by"
+      "replace-by-group",
+      "replace-by-map"
     ],
     "Match Details": [
       "match-details",

@@ -1,5 +1,5 @@
 ---
-id: replace-by
+id: replace-by-map
 title: Replace by map
 ---
 
