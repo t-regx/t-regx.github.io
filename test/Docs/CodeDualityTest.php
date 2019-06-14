@@ -52,6 +52,7 @@ class CodeDualityTest extends TestCase
         $namespaces = [
             'use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;',
             'use TRegx\CleanRegex\Match\Details\Match;',
+            'use TRegx\CleanRegex\Match\Details\NotMatched;',
             'use TRegx\SafeRegex\preg;',
         ];
         return array_merge($namespaces, $lines);

@@ -76,6 +76,8 @@ $s; // 'Match is not found'
 
 If a match is not found, it calls `orElse()` callback and uses *it* to evaluate a return value.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 $s = pattern('[0-9]+')->match("I'm a dog")
     ->forFirst(function (Match $match) {
@@ -85,8 +87,22 @@ $s = pattern('[0-9]+')->match("I'm a dog")
         return "I couldn't match subject: " . $notMatched->subject();
     });
     
-$s // "I couldn't match subject: I'm a dog"
+$s; // "I couldn't match subject: I'm a dog"
 ```
+<!--PHP-->
+```php
+$subject = "I'm a dog";
+if (preg::match('/[0-9]+/', $subject)) {
+    $s = 'Match is found!';
+} else {
+    $s = "I couldn't match subject: $subject";
+}
+
+$s; // 'Match is not found'
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-8---->
+<!----test-return-PHP-7---->
 
 ### `orThrow()`
 
