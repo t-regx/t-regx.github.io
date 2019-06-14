@@ -2,6 +2,7 @@
 namespace Test\Docs;
 
 use InvalidArgumentException;
+use ParseError;
 use PHPUnit\Framework\TestCase;
 
 class CodeDualityTest extends TestCase
@@ -32,8 +33,8 @@ class CodeDualityTest extends TestCase
         $two = $this->arrayToString($php);
 
         // when
-        list($return1, $echo1) = $this->invoke($one);
-        list($return2, $echo2) = $this->invoke($two);
+        list($return1, $echo1) = $this->invoke($one, 'T-Regx');
+        list($return2, $echo2) = $this->invoke($two, 'PHP');
 
         // then
         $this->assertEquals($return1, $return2);
@@ -58,7 +59,16 @@ class CodeDualityTest extends TestCase
         return array_merge($namespaces, $lines);
     }
 
-    private function invoke(string $code): array
+    private function invoke(string $code, string $snippetName): array
+    {
+        try {
+            return $this->tryInvoke($code);
+        } catch (ParseError $error) {
+            throw new ParseError($error->getMessage() . " - in $snippetName snippet");
+        }
+    }
+
+    private function tryInvoke(string $code): array
     {
         ob_start();
         $result = eval($code);
