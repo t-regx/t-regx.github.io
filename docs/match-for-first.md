@@ -108,10 +108,11 @@ $s; // 'Match is not found'
 
 If a match is not found, it throws `SubjectNotMatchedException` by default.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-try 
-{
-    pattern('[0-9]+')->match("I'm a dog")
+try {
+    return pattern('[0-9]+')->match("I'm a dog")
         ->forFirst(function (Match $match) {
             return 'Match is found!';
         })
@@ -119,8 +120,23 @@ try
 }
 catch (SubjectNotMatchedException $e) {
     // React to an unmatched subject
+    echo 'Not matched';
 }
 ```
+<!--PHP-->
+```php
+try {
+    if (preg::match('/[0-9]+/', "I'm a dog")) {
+        return 'Match is found!';
+    } 
+    throw new SubjectNotMatchedException();
+}
+catch (SubjectNotMatchedException $e) {
+    // React to an unmatched subject
+    echo 'Not matched';
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 ### Custom exceptions for `orThrow()`
 
