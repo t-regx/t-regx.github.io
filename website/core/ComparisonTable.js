@@ -6,7 +6,7 @@ const rows = [
     {
         title: 'Invalid pattern<sup>(eg. `/unclosed[A-/`)</sup>',
         php: 'Issues a warning',
-        tRegx: 'throws `InvalidPatternException` with descriptive error message'
+        tRegx: 'throws `MalformedPatternException` with descriptive error message'
     },
     {
         title: 'Corrupted subject<sup>(eg. malformed utf-8 sequence)</sup>',
