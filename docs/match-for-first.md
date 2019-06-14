@@ -47,15 +47,30 @@ handling of an unmatched subject relies in the chained method.
 
 If a match is not found, it returns a default value.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 $s = pattern('[0-9]+')->match("I'm a dog")
     ->forFirst(function (Match $match) {
         return 'Match is found!';
     })
     ->orReturn('Match is not found');
-    
-$s // 'Match is not found'
+
+$s; // 'Match is not found'
 ```
+<!--PHP-->
+```php
+if (preg::match('/[0-9]+/', "I'm a dog")) {
+    $s = 'Match is found!';
+} else {
+    $s = 'Match is not found';
+}
+
+$s; // 'Match is not found'
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-6---->
+<!----test-return-PHP-6---->
 
 ### `orElse()`
 
