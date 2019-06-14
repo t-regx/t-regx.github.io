@@ -10,11 +10,24 @@ It's possible to easily iterate matched occurrences with `forEach()`.
 You can call `forEach()` with a callback that's invoked with [`Match`](match-details.md) details just like 
 [`first()`](match-first.md) and [`forFirst()`](match-for-first.md).
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")->forEach(function (Match $m) {
-    echo 'I matched' . $m->text();
+pattern('\w+')->match('Apples are cool')->forEach(function (string $text) {
+    echo "I matched $text";
 });
 ```
+<!--PHP-->
+```php
+if (preg::match_all('/\w+/', 'Apples are cool', $matches)) {
+    foreach ($matches[0] as $text) {
+        echo "I matched $text";
+    }
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+> Of course, `forEach()` accepts [Match](match-details.md) details, but [Match](match-details.md) can be cast to `(string)`.
 
 ## PHP Support
 
