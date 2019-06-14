@@ -176,6 +176,8 @@ Of course, your custom exception must meet certain requirements:
    - `__construct($message)`, where `$message` can be a string
    - `__construct($message, $subject)`, where `$message` and `$subject` can be strings
 
+> Notice, that using `forFirst()->orThrow()` without your custom exception is **identical** to `first()`.
+
 ## I don't like functional
 
 If you don't like functional programming style, you are free to use [`first()`](match-first.md) (which throws an exception) 
