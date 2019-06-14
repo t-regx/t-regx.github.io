@@ -32,9 +32,10 @@ class SnippetFactory
                 $type = $match[1];
                 continue;
             }
-            if (preg_match('/<!----test-return-(T-Regx|PHP)-(\d+)---->/', $line, $match)) {
+            if (preg_match('/<!----test-return-(T-Regx|PHP)-(\d+|last)---->/', $line, $match)) {
                 $forType = $match[1];
                 $returnLine = $match[2];
+                $returnLine = $returnLine === 'last' ? count($snippet[$forType]) - 1 : $returnLine;
                 if (array_key_exists($returnLine, $snippet[$forType])) {
                     $snippet[$forType][$returnLine] = 'return ' . $snippet[$forType][$returnLine];
                     array_pop($snippets);

@@ -69,8 +69,8 @@ if (preg::match('/[0-9]+/', "I'm a dog")) {
 $s; // 'Match is not found'
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-6---->
-<!----test-return-PHP-6---->
+<!----test-return-T-Regx-last---->
+<!----test-return-PHP-last---->
 
 ### `orElse()`
 
@@ -101,8 +101,8 @@ if (preg::match('/[0-9]+/', $subject)) {
 $s; // 'Match is not found'
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-8---->
-<!----test-return-PHP-7---->
+<!----test-return-T-Regx-last---->
+<!----test-return-PHP-last---->
 
 ### `orThrow()`
 
