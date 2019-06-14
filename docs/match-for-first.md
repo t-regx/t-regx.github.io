@@ -10,7 +10,7 @@ But what if you **expected** the subject not to be matched? And how do you to re
 
 ## Optional matches with `forFirst()`
 
-Method `forFirst()` can be called with a callback (that accepts `Match` details) just like `first()`. The difference is:
+Method `forFirst()` can be called with a callback (that accepts [`Match`](match-details.md) details) just like `first()`. The difference is:
 `forFirst()` never throws `SubjectNotMatchedException`, and allows you to control an unmatched subject by appropriate 
 control methods: `orThrow()`, `orReturn()` and `orElse()`.
 

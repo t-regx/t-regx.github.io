@@ -3,12 +3,12 @@ id: match-groups
 title: Capturing groups
 ---
 
-When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details 
+When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts [`Match`](match-details.md) details 
 object. These methods are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `map()`, `flatMap()`, `callback()`.
 
 ## Overview
 
-Using `Match` details, you gain access complete information about capturing groups:
+Using [`Match`](match-details.md) details, you gain access complete information about capturing groups:
  - [`group(int|string)`](#group-details) - capturing group details. If group is matched, below methods are available:
      - `matched()` - whether the group was matched by the subject
      - `text()` - value of the group

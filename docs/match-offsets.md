@@ -7,7 +7,7 @@ There are several ways to read offsets of your matched occurrences and your capt
 
 ## Using `Match` details
 
-If you use `Match` details object (like the one passed to `first()`, `forEach()` or `map()` callback) you can just use
+If you use [`Match`](match-details.md) details object (like the one passed to `first()`, `forEach()` or `map()` callback) you can just use
 `offset()` method.
 
 ```php
@@ -56,7 +56,7 @@ As any other `first()` method, it throws `SubjectNotMatchedException` if the sub
 
 ## Group offsets
 
-In a similar manner you can get offsets of your capturing groups, either using `Match` details or an inline method.
+In a similar manner you can get offsets of your capturing groups, either using [`Match`](match-details.md) details or an inline method.
 
 These two snippets below are equal to each other.
 

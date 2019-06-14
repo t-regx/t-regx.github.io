@@ -3,8 +3,9 @@ id: match-map
 title: Map occurrences
 ---
 
-Mapping works a bit like a combination of `all()` and `forEach()`. It returns all matched elements, after they 
-have been iterated (and potentially altered) using `map()` callback (which accepts `Match` details).
+Mapping works a bit like a combination of [`all()`](match.md#many) and [`forEach()`](match-for-each.md). It returns all 
+matched elements, after they have been iterated (and potentially altered) using `map()` callback 
+(which accepts [`Match`](match-details.md) details).
 
 ## Map matched occurrences
 

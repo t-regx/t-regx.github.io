@@ -13,7 +13,7 @@ The callback's signature can accept either [`Match`](match-details.md) details o
  - `function (Match $match) {}`
  - `function (string $match) {}`
 
-However, when using `pattern()->replace()` the callback receives `ReplaceMatch` details object. It extends `Match` object,
+However, when using `pattern()->replace()` the callback receives `ReplaceMatch` details object. It extends [`Match`](match-details.md) object,
 so they have exactly alike interfaces.
 
 Additionally, `ReplaceMatch` has two separate methods:

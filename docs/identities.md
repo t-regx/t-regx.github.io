@@ -20,7 +20,7 @@ for `orThrow()`.
 
 ---
  
-Getting the matched text from `Match`.
+Getting the matched text from [`Match`](match-details.md).
 
 ```php
 pattern($p)->match($subject)->map(function (Match $match) {

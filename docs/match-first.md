@@ -62,11 +62,11 @@ else {
 I matched Apples
 ```
 
-> Casting `Match` to a string is the same as calling a `text()` method.
+> Casting [`Match`](match-details.md) to a string is the same as calling a `text()` method.
 
 ### Match details
 
-With `Match` details, you can gain access to useful information about the matched occurrence. 
+With [`Match`](match-details.md) details, you can gain access to useful information about the matched occurrence. 
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
@@ -194,7 +194,7 @@ else {
 'APPLES'
 ```
 
-In this example `Match` will be cast to string, which is the same as calling `Match.text()` method.
+In this example [`Match`](match-details.md) will be cast to string, which is the same as calling `Match.text()` method.
 
 > Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
 

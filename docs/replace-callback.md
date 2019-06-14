@@ -96,4 +96,4 @@ pattern('\w+')->replace('Apples are cool')->first()->callback('strtoupper');
 'APPLES are cool'
 ```
 
-> In this example `Match` will be cast to string, which is the same as calling `Match.text()` method.
+> In this example [`Match`](match-details.md) will be cast to string, which is the same as calling `Match.text()` method.

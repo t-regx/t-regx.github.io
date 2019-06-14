@@ -3,10 +3,10 @@ id: replace-by-map
 title: Replace by map
 ---
 
-There are cases when you have to use more than one replacement, but you also don't need `Match` details or 
+There are cases when you have to use more than one replacement, but you also don't need [`Match`](match-details.md) details or 
 any replacement logic, really, so both `with()` and `callback()` are a little unfit.
 
-Replacing by map allows T-Regx to save a little performance overhead, by not creating `Match` object.
+Replacing by map allows T-Regx to save a little performance overhead, by not creating [`Match`](match-details.md) object.
 
 ## Standard map
 
