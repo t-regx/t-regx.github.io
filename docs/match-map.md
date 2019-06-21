@@ -57,9 +57,20 @@ return array_map(function ($match) {
 You can invoke `map()` with any valid PHP `callable` which accepts one string parameter (or no parameters) - just 
 like [`first()`](match-first.md).
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map('strtoupper');
 ```
+<!--PHP-->
+```php
+preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
+return array_map('strtoupper', $matches[0]);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-0---->
+<!--Result-Value-->
+
 ```php
 ["I'M", "19", "YEARS", "OLD"]
 ```
