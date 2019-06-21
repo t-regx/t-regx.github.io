@@ -232,13 +232,13 @@ You will not find arrays of arrays of arrays in T-Regx API. Each functionality h
 ```php
 pattern($pattern)->match($subject)->first(function (Match $match) {
 
-    $match->offset();           // The offset of a matched occurrence
+    $match->offset();           // offset of a matched occurrence
 
-    $match->group(2)->offset(); // The offset of a matched capturing group
+    $match->group(2)->offset(); // offset of a matched capturing group
     
-    $match->hasGroup('uri');    // validating groups
+    $match->hasGroup('uri');    // group validation
     
-    $match->hasGroup('2asd');   // throws \CleanRegex\InvalidArgumentException
+    $match->hasGroup('2asd');   // throws \InvalidArgumentException
 });
 ```
 
