@@ -10,21 +10,42 @@ matched elements, after they have been iterated (and potentially altered) using 
 ## Map matched occurrences
 
 So instead of returning all elements:
-
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->all();
 ```
+<!--PHP-->
 ```php
-["I'm", "19", "years", "old"]
+preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
+return $matches[0];
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-0---->
+
+```php
+["I'm", '19', 'years', 'old']
 ```
 
-...you can map them - to any other value:
+...you can map them - to any other value, by callback:
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map(function (Match $m) {
     return strlen($m->text());
 });
 ```
+<!--PHP-->
+```php
+preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
+return array_map(function ($match) {
+    return strlen($match);
+}, $matches[0]);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-0---->
+
 ```php
 [3, 2, 5, 3]
 ```
