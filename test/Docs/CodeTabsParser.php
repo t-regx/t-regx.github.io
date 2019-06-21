@@ -20,13 +20,13 @@ class CodeTabsParser
         return array_merge(...array_filter($snippetsArray));
     }
 
-    function flatMapSnippetsFromFile(string $filename)
+    private function flatMapSnippetsFromFile(string $filename)
     {
         $snippets = (new SnippetFactory())->snippetsFromFile($filename);
         if ($snippets === null) {
             return null;
         }
-        return array_combine($this->array(basename($filename), count($snippets)), $snippets);
+        return $this->formatKeys($filename, $snippets);
     }
 
     private function filesInDirectory(string $path): array
@@ -43,5 +43,10 @@ class CodeTabsParser
             $result[] = $value . " #$i";
         }
         return $result;
+    }
+
+    private function formatKeys(string $filename, array $snippets): array
+    {
+        return array_combine($this->array(basename($filename), count($snippets)), $snippets);
     }
 }

@@ -18,17 +18,21 @@ class SnippetFactory
         $type = null;
         foreach (preg_split("/[\n\r]?[\n\r]/", $file) as $line) {
             if ($line == self::START_TOKEN) {
-                $snippet = ['T-Regx' => [], 'PHP' => []];
+                $snippet = ['T-Regx' => [], 'PHP' => [], 'Result-Value' => [], 'Result-Output' => []];
             }
             if ($line == self::END_TOKEN) {
                 $type = null;
                 $snippets[] = array_values($snippet);
                 continue;
             }
-            if (in_array($line, ['```', '```php'])) {
+            if (in_array($line, ['```', '```php', '```text'])) {
+                if ($line === '```' && in_array($type, ['Result-Value', 'Result-Output'])) {
+                    $snippets[] = array_values($snippet);
+                    $type = null;
+                }
                 continue;
             }
-            if (preg_match('/<!--(T-Regx|PHP)-->/', $line, $match)) {
+            if (preg_match('/<!--(T-Regx|PHP|Result-(Value|Output))-->/', $line, $match)) {
                 $type = $match[1];
                 continue;
             }

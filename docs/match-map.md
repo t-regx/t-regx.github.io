@@ -22,6 +22,7 @@ return $matches[0];
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!----test-return-T-Regx-0---->
+<!--Result-Value-->
 
 ```php
 ["I'm", '19', 'years', 'old']
@@ -45,6 +46,7 @@ return array_map(function ($match) {
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!----test-return-T-Regx-0---->
+<!--Result-Value-->
 
 ```php
 [3, 2, 5, 3]

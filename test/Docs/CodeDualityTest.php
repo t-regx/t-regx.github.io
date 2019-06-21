@@ -22,8 +22,10 @@ class CodeDualityTest extends TestCase
      * @dataProvider snippets
      * @param array $tregx
      * @param array $php
+     * @param array $expectedResult
+     * @param array $expectedOutput
      */
-    function testDuality(array $tregx, array $php): void
+    function testDuality(array $tregx, array $php, array $expectedResult, array $expectedOutput): void
     {
         // given
         $this->assertGreaterThan(0, count($tregx));
@@ -39,6 +41,13 @@ class CodeDualityTest extends TestCase
         // then
         $this->assertEquals($return1, $return2);
         $this->assertEquals($echo1, $echo2);
+
+        if (count($expectedResult)) {
+            $this->assertEquals($return1, $this->parseExpectedResult($expectedResult));
+        }
+        if (count($expectedOutput)) {
+            $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput));
+        }
     }
 
     private function arrayToString(array $lines): string
@@ -91,5 +100,26 @@ class CodeDualityTest extends TestCase
         return array_map(function (string $line) {
             return str_replace('new SubjectNotMatchedException()', 'new SubjectNotMatchedException("","")', $line);
         }, $lines);
+    }
+
+    private function parseExpectedResult(array $input)
+    {
+        $expectedResult = array_values(array_filter($input));
+        if (count($expectedResult) === 1) {
+            $expectedResult[0] = 'return ' . $expectedResult[0] . ';';
+        }
+        try {
+            return eval(join(PHP_EOL, $expectedResult));
+        } catch (ParseError $error) {
+            echo join(PHP_EOL, $expectedResult);
+            throw $error;
+        }
+    }
+
+    private function parseExpectedOutput(array $expectedOutput): string
+    {
+        return join(PHP_EOL, array_values(array_filter($expectedOutput, function (string $input) {
+            return trim($input);
+        })));
     }
 }

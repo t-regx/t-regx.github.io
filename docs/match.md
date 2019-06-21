@@ -58,6 +58,7 @@ preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
 return $matches[0];
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
 
 ```php
 ['19', '1999', '12']
@@ -76,6 +77,7 @@ preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
 return array_slice($matches[0], 0, 2);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
 
 ```php
 ['19', '1999']
@@ -98,6 +100,7 @@ if (preg::match('/[0-9]+/', "I'm 19 years old. I was born in 1999", $match)) {
 throw new SubjectNotMatchedException();
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
 
 ```php
 '19'
@@ -122,6 +125,7 @@ preg::match_all('/\d+/', 'Word', $match);
 return $match[0];
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
 
 ```php
 []

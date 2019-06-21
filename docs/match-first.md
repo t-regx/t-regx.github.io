@@ -22,6 +22,7 @@ if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
 throw new SubjectNotMatchedException();
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
 
 ```php
 '19'
@@ -57,6 +58,7 @@ else {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Output-->
 
 ```text
 I matched Apples
@@ -88,6 +90,7 @@ else {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Output-->
 
 ```text
 Match 'Apples' was matched inside 'Apples are cool'.
@@ -121,6 +124,7 @@ else {
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!----test-return-T-Regx-0---->
+<!--Result-Value-->
 
 ```php
 'G'
@@ -164,6 +168,7 @@ else {
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!----test-return-T-Regx-0---->
+<!--Result-Value-->
 
 ```php
 ['Apples', 'APPLES', 'apples']
@@ -189,6 +194,7 @@ else {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
 
 ```php
 'APPLES'
@@ -218,6 +224,7 @@ else {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
 
 ```php
 ['A', 'p', 'p', 'l', 'e', 's']
@@ -258,6 +265,7 @@ else {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Output-->
 
 ```text
 Yay Dog
