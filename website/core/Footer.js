@@ -16,29 +16,16 @@ class Footer extends React.Component {
                     <div>
                         <h5>Docs</h5>
                         <a href={this.docUrl('installation')}>
+                            Installation
+                        </a>
+                        <a href={this.docUrl('introduction')}>
                             Getting Started
                         </a>
-                        <a href={this.docUrl('match-for-first')}>
+                        <a href={this.docUrl('match')}>
                             Documentation
                         </a>
-                        <a href={this.docUrl('api/api')}>
+                        <a href="https://github.com/T-Regx/T-Regx/blob/master/ChangeLog.md#api">
                             API Reference
-                        </a>
-                    </div>
-                    <div>
-                        <h5>Community</h5>
-                        <a
-                            href="http://stackoverflow.com/questions/tagged/"
-                            target="_blank"
-                            rel="noreferrer noopener">
-                            Stack Overflow
-                        </a>
-                        <a href="https://discordapp.com/">Project Chat</a>
-                        <a
-                            href="https://twitter.com/"
-                            target="_blank"
-                            rel="noreferrer noopener">
-                            Twitter
                         </a>
                     </div>
                     <div>
