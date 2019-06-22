@@ -26,7 +26,6 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
 Links: google, socket, facebook, t-regx
 ```
 
-
 What happens when replacing with an unmatched group? There is a number of ways of reacting to unmatched groups:
  - `orIgnore()` - leaves the match unchanged
  - `orEmpty()` - matched occurrence is replaced with an empty string

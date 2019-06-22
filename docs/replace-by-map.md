@@ -42,10 +42,7 @@ pattern('\w{3}')->replace($message)->all()->by()->map([
 
 ...as long as `gif` is matched by your pattern, of course :)
 
-If you don't need to specify all your possible `[match => replacement]` pairs, you should use one of the following functions:
-
- - `by()->mapIfExists()` - leaves the superfluous matches unchanged
- - `by()->mapOrDefault()` - replaces the superfluous matches with a default string
+If you don't need to specify all your possible `[match => replacement]` pairs, you should use one of the below `mapIfExists()`.
 
 ### Ignored replacements
 
@@ -62,23 +59,6 @@ pattern('\w{3,4}')->replace($message)->all()->by()->mapIfExists([
 ```
 ```text
 Extensions: "Audio", mp4, jpg, jpeg, png, "Animation"
-```
-
-### Default replacements
-
-With `mapOrDefault()` - superfluous occurrences are replaced with a default string:
-
-```php
-<?php
-$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif"; 
-
-pattern('\w{3,4}')->replace($message)->all()->by()->mapOrDefault([
-   'mp3'   => '"Audio"',
-   'gif'   => '"Animation"'
-], 'Unknown');
-```
-```text
-Extensions: "Audio", Unknown, Unknown, Unknown, Unknown, "Animation"
 ```
 
 ## Groups
