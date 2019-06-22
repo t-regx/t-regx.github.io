@@ -1,12 +1,11 @@
 {
   "type": "project",
-  "license": "CC-BY-NC-ND",
   "autoload-dev": {
     "classmap": [
       "test/"
     ],
     "psr-4": {
-      "Test\\": "test/"
+      "Test\\": "/"
     }
   },
   "require": {

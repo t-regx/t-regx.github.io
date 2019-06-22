@@ -1,5 +1,5 @@
 <?php
-namespace Test\Docs;
+namespace Docs;
 
 use InvalidArgumentException;
 use ParseError;
@@ -10,7 +10,7 @@ class CodeDualityTest extends TestCase
     function snippets(): array
     {
         try {
-            return (new CodeTabsParser('../../docs/'))->getSnippets();
+            return (new CodeTabsDataProvider('../../docs/'))->getSnippets();
         } catch (InvalidArgumentException $exception) {
             echo PHP_EOL . $exception . $this->getStatusMessage() . PHP_EOL . $exception->getTraceAsString();
             throw $exception;

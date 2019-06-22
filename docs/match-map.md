@@ -80,9 +80,20 @@ return array_map('strtoupper', $matches[0]);
 Again, just like [`first()`](match-first.md), this method can return values of any type, including: objects, arrays, 
 booleans and `null`.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map('str_split');
 ```
+<!--PHP-->
+```php
+preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
+return array_map('str_split', $matches[0]);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!----test-return-T-Regx-0---->
+<!--Result-Value-->
+
 ```php
 [
   ['I', '\'', 'm'], 
@@ -91,6 +102,7 @@ pattern("[\w']+")->match("I'm 19 years old")->map('str_split');
   ['o', 'l', 'd']
 ]
 ```
+<!----test-return-semi-Result-Value---->
 
 ## `flatMap()`
 

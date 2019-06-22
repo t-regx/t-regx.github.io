@@ -1,7 +1,9 @@
 <?php
-namespace Test\Docs;
+namespace Docs;
 
-class CodeTabsParser
+use Docs\Parser\MarkdownParsingSnippetFactory;
+
+class CodeTabsDataProvider
 {
     /** @var string */
     private $basePath;
@@ -22,7 +24,7 @@ class CodeTabsParser
 
     private function flatMapSnippetsFromFile(string $filename)
     {
-        $snippets = (new SnippetFactory())->snippetsFromFile($filename);
+        $snippets = (new MarkdownParsingSnippetFactory())->snippetsFromFile($filename);
         if ($snippets === null) {
             return null;
         }
