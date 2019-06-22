@@ -21,7 +21,7 @@ preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return $matches[0];
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-0---->
+<!--T-Regx:{return(0)}-->
 <!--Result-Value-->
 
 ```php
@@ -45,7 +45,7 @@ return array_map(function ($match) {
 }, $matches[0]);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-0---->
+<!--T-Regx:{return(0)}-->
 <!--Result-Value-->
 
 ```php
@@ -68,7 +68,7 @@ preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return array_map('strtoupper', $matches[0]);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-0---->
+<!--T-Regx:{return(0)}-->
 <!--Result-Value-->
 
 ```php
@@ -91,7 +91,7 @@ preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return array_map('str_split', $matches[0]);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-0---->
+<!--T-Regx:{return(0)}-->
 <!--Result-Value-->
 
 ```php
@@ -102,7 +102,7 @@ return array_map('str_split', $matches[0]);
   ['o', 'l', 'd']
 ]
 ```
-<!----test-return-semi-Result-Value---->
+<!--Result-Value:{return-semi}-->
 
 ## `flatMap()`
 

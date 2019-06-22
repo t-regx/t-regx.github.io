@@ -34,7 +34,7 @@ if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
 return 'Unmatched :/';
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-0---->
+<!--T-Regx:{return(0)}-->
 <!--Result-Value-->
 
 ```php
@@ -70,8 +70,8 @@ if (preg::match('/[0-9]+/', "I'm a dog")) {
 $s; // 'Match is not found'
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-last---->
-<!----test-return-PHP-last---->
+<!--T-Regx:{return(last)}-->
+<!--PHP:{return(last)}-->
 
 ### `orElse()`
 
@@ -102,8 +102,8 @@ if (preg::match('/[0-9]+/', $subject)) {
 $s; // 'Match is not found'
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-last---->
-<!----test-return-PHP-last---->
+<!--T-Regx:{return(last)}-->
+<!--PHP:{return(last)}-->
 
 ### `orThrow()`
 

@@ -123,7 +123,7 @@ else {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-0---->
+<!--T-Regx:{return(0)}-->
 <!--Result-Value-->
 
 ```php
@@ -167,7 +167,7 @@ else {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!----test-return-T-Regx-0---->
+<!--T-Regx:{return(0)}-->
 <!--Result-Value-->
 
 ```php

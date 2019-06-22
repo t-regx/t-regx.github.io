@@ -36,6 +36,7 @@ class MarkdownParsingSnippetFactory
         foreach (preg_split("/[\n\r]?[\n\r]/", $file) as $line) {
             if ($line == self::START_TOKEN) {
                 $snippet = $this->emptySnippet();
+                continue;
             }
             if ($line == self::END_TOKEN) {
                 $type = null;
@@ -49,20 +50,20 @@ class MarkdownParsingSnippetFactory
                 }
                 continue;
             }
-            if (preg::match('/<!--(T-Regx|PHP|Result-(Value|Output))-->/', $line, $match)) {
+            if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output))-->/', $line, $match)) {
                 $type = $match[1];
                 continue;
             }
-            if (preg::match('/<!----test-([a-z-]+)-(T-Regx|PHP|Result-(?:Value|Output))(?:-(\d+|last|first))?---->/', $line, $match)) {
-                $mod = $match[1];
-                $forType = $match[2];
+            if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([a-z-]+)(?:\((?:(\w+))\))?\}-->/', $line, $match)) {
+                $forType = $match[1];
+                $mod = $match[2];
                 $modLine = array_key_exists(3, $match) ? $match[3] : null;
                 if ($modLine) {
                     $modLine = $this->modLineStringToInt($modLine, count($snippet[$forType]));
                 }
 
                 if (array_key_exists($modLine, $snippet[$forType]) || $modLine === null) {
-                    $snippet[$forType] = $this->modByName($mod)->modify($snippet, $modLine);
+                    $snippet[$forType] = $this->modByName($mod)->modify($snippet[$forType], $modLine);
                     array_pop($snippets);
                     $snippets[] = array_values($snippet);
                     continue;
@@ -70,7 +71,7 @@ class MarkdownParsingSnippetFactory
                 throw new InvalidArgumentException("Can't put return in $modLine");
             }
             if ($type) {
-                $snippet[$type][] = $line;
+                array_push($snippet[$type], $line);
             }
         }
 
