@@ -49,7 +49,7 @@ If you don't need to specify all your possible `[match => replacement]` pairs, y
 
 ### Ignored replacements
 
-Superfluous occurrences are left unchanged:
+With `mapIfExists()` - superfluous occurrences are left unchanged:
 
 ```php
 <?php
@@ -66,7 +66,7 @@ Extensions: "Audio", mp4, jpg, jpeg, png, "Animation"
 
 ### Default replacements
 
-Superfluous occurrences are replaced with a default string:
+With `mapOrDefault()` - superfluous occurrences are replaced with a default string:
 
 ```php
 <?php

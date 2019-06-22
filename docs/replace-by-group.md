@@ -26,14 +26,13 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
 Links: google, socket, facebook, t-regx
 ```
 
-There is a number of ways of reacting to unmatched groups.
 
-What happens when replacing with an unmatched group:
+What happens when replacing with an unmatched group? There is a number of ways of reacting to unmatched groups:
  - `orIgnore()` - leaves the match unchanged
- - `orEmpty()` - match is replaced with an empty string
+ - `orEmpty()` - matched occurrence is replaced with an empty string
  - `orReturn(string)` - match is replaced with the given argument 
  - `orElse(callable)` - uses a callback with [`Match`](match-details.md) argument, in order to evaluate a replacement
- - `orThrow()` - throws a default or a custom exception (just like [forFirst()](match-for-first.md))
+ - `orThrow()` - throws a default or a custom exception (just like [forFirst()->orThrow()](match-for-first.md))
 
 > `orEmpty()` is the most performance-light method, because it uses `preg_replace()`, whereas `orReturn()`, `orIgnore()`, 
 > `orElse()` and `orThrow()` use `preg_replace_callback()`.

@@ -48,7 +48,8 @@ Read on to learn more about replacing with [a callback](replace-callback.md).
 ## Regular expression references
 
 Normally, had you passed a replacement to `preg_replace()`, that contains a backslash or a dollar sign followed by a 
-number (eg. `\1` or `$2`) - that reference would be replaced by a corresponding capturing group.
+number (eg. `\1` or `$2`) - that reference would be replaced by a corresponding capturing group (or by an empty string, 
+if the group wasn't matched).
 
 ```php
 preg::replace('/(\d+)cm/', '<$1>', 'I have 15cm and 192cm');
@@ -74,7 +75,7 @@ You can be sure, what's put into `with()` will certainly be present unchanged in
 Some replacement strings containing a backslash or a dollar sign (like file system paths, URL addresses or even user input) 
 might interfere with logic and cause bugs that are very hard to find.
 
-> Neither of types of references will be resolved: `$12`, `\12` nor `${12}`.
+> Neither of types of references are resolved: `$12`, `\12` nor `${12}`.
 
 ## Intentional references
 
