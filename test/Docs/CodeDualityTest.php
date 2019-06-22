@@ -1,6 +1,7 @@
 <?php
 namespace Docs;
 
+use CodeTest\CodeTabsDataProvider;
 use InvalidArgumentException;
 use ParseError;
 use PHPUnit\Framework\TestCase;
@@ -42,10 +43,10 @@ class CodeDualityTest extends TestCase
         $this->assertEquals($return1, $return2);
         $this->assertEquals($echo1, $echo2);
 
-        if (count($expectedResult)) {
+        if (count($expectedResult) > 0) {
             $this->assertEquals($return1, $this->parseExpectedResult($expectedResult));
         }
-        if (count($expectedOutput)) {
+        if (count($expectedOutput) > 0) {
             $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput));
         }
     }

@@ -5,7 +5,8 @@
       "test/"
     ],
     "psr-4": {
-      "Test\\": "/"
+      "CodeTest\\": "CodeTest/src",
+      "Test\\CodeTest\\": "CodeTest/test"
     }
   },
   "require": {

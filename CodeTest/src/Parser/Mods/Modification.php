@@ -1,5 +1,5 @@
 <?php
-namespace Docs\Parser\Mods;
+namespace CodeTest\Parser\Mods;
 
 interface Modification
 {

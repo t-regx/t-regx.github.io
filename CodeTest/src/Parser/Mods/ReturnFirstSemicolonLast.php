@@ -1,7 +1,7 @@
 <?php
-namespace Docs\Parser\Mods;
+namespace CodeTest\Parser\Mods;
 
-use Docs\Parser\Arrays;
+use CodeTest\Parser\Arrays;
 
 class ReturnFirstSemicolonLast implements Modification
 {

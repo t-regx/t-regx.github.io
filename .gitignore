@@ -16,4 +16,5 @@ website/package-lock.json
 website/i18n/*
 
 vendor
-composer.*
+composer.lock
+composer.phar

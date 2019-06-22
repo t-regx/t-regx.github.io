@@ -1,5 +1,5 @@
 <?php
-namespace Docs\Parser;
+namespace CodeTest\Parser;
 
 class Arrays
 {

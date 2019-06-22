@@ -1,7 +1,7 @@
 <?php
-namespace Docs;
+namespace CodeTest;
 
-use Docs\Parser\MarkdownParsingSnippetFactory;
+use CodeTest\Parser\MarkdownParsingSnippetFactory;
 
 class CodeTabsDataProvider
 {

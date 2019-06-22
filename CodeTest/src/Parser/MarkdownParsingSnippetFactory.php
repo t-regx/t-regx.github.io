@@ -1,9 +1,9 @@
 <?php
-namespace Docs\Parser;
+namespace CodeTest\Parser;
 
-use Docs\Parser\Mods\Modification;
-use Docs\Parser\Mods\ReturnAt;
-use Docs\Parser\Mods\ReturnFirstSemicolonLast;
+use CodeTest\Parser\Mods\Modification;
+use CodeTest\Parser\Mods\ReturnAt;
+use CodeTest\Parser\Mods\ReturnFirstSemicolonLast;
 use Exception;
 use InvalidArgumentException;
 use TRegx\SafeRegex\preg;
@@ -45,6 +45,7 @@ class MarkdownParsingSnippetFactory
             }
             if (in_array($line, ['```', '```php', '```text'])) {
                 if ($line === '```' && in_array($type, ['Result-Value', 'Result-Output'])) {
+                    array_pop($snippets);
                     $snippets[] = array_values($snippet);
                     $type = null;
                 }
