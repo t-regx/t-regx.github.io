@@ -30,8 +30,11 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
                 '    ->orThrow();',
             ],
             [
-                "return \$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';",
-                ''
+                "\$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';",
+                '',
+                "return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)\\.(com|io)#', function (\$match) {",
+                '    return $match[3];',
+                '}, $links);'
             ],
             [],
             [

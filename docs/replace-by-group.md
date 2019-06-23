@@ -6,22 +6,47 @@ title: Replace by group
 Method `replace()->by()->group()` can be used when you would just like to replace a whole match by one of its capturing group,
 optionally handling what should happen when a group is not matched.
 
-> Of course, `NonExistentGroupException` is thrown when `by()->group()` is used with a non-existent group. Likewise, 
+> Of course, `NonexistentGroupException` is thrown when `by()->group()` is used with a non-existent group. Likewise, 
 > `\InvalidArgumentException` is thrown for a malformed group, e.g. `-2` or `"2name"`.
 
 For example, you would only like to take the domain name from a link:
-
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-<?php
 $links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
 
-pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
+echo pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
     ->replace($links)
     ->all()
     ->by()
     ->group('domain')
-    ->orThrow();
+    ->orThrow(MyCustomException::class);
 ```
+<!--PHP-->
+```php
+$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
+
+echo preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', function($match){
+    if (!array_key_exists('domain', $match)) {
+        // group is either un-matched or non-existent
+        if (validateGroupExists('domain', $match)) {
+            throw new MyCustomException();
+        } else {
+            throw new NonexistentGroupException('domain');
+        }
+    }
+    if ($match['domain'] === '') {
+        // group is either un-matched or matched an empty string
+        if (!validateGroupMatched('domain', $match)) {
+            throw new MyCustomException();
+        }
+    }
+    return $match['domain'];
+}, $links);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Output-->
+
 ```text
 Links: google, socket, facebook, t-regx
 ```

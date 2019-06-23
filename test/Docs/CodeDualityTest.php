@@ -2,6 +2,7 @@
 namespace Docs;
 
 use CodeTest\CodeTabsDataProvider;
+use Error;
 use InvalidArgumentException;
 use ParseError;
 use PHPUnit\Framework\TestCase;
@@ -60,13 +61,21 @@ class CodeDualityTest extends TestCase
     {
         $lines = $this->addSingleLineReturn($lines);
         $lines = $this->polyfillForSubjectNotMatched($lines);
+        $functions = $this->polyfillGlobalFunctions([
+            'validateGroupExists'  => true,
+            'validateGroupMatched' => true,
+        ]);
+        $classes = [
+            "if (!class_exists('MyCustomException')) { class MyCustomException extends Exception {} }"
+        ];
         $namespaces = [
+            'use TRegx\CleanRegex\Exception\CleanRegex\NonExistentGroupException;',
             'use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;',
             'use TRegx\CleanRegex\Match\Details\Match;',
             'use TRegx\CleanRegex\Match\Details\NotMatched;',
             'use TRegx\SafeRegex\preg;',
         ];
-        return array_merge($namespaces, $lines);
+        return array_merge($namespaces, $functions, $classes, $lines);
     }
 
     private function invoke(string $code, string $snippetName): array
@@ -75,6 +84,8 @@ class CodeDualityTest extends TestCase
             return $this->tryInvoke($code);
         } catch (ParseError $error) {
             throw new ParseError($error->getMessage() . " - in $snippetName snippet");
+        } catch (Error $error) {
+            throw new Error($error->getMessage() . " - in $snippetName snippet");
         }
     }
 
@@ -99,8 +110,18 @@ class CodeDualityTest extends TestCase
     private function polyfillForSubjectNotMatched(array $lines)
     {
         return array_map(function (string $line) {
-            return str_replace('new SubjectNotMatchedException()', 'new SubjectNotMatchedException("","")', $line);
+            $polyfills = [
+                'new SubjectNotMatchedException()' => 'new SubjectNotMatchedException("","")'
+            ];
+            return str_replace(array_keys($polyfills), array_values($polyfills), $line);
         }, $lines);
+    }
+
+    private function polyfillGlobalFunctions(array $namesAndResults): array
+    {
+        return array_map(function ($key, $value) {
+            return "if (!function_exists('$key')) { function $key() { return " . var_export($value, true) . "; }}";
+        }, array_keys($namesAndResults), $namesAndResults);
     }
 
     private function parseExpectedResult(array $input)
