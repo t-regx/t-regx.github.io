@@ -59,7 +59,7 @@ Someone who doesn't know PHP regular expressions, can probably ask himself:
 
 ### Messy
 
-- `PREG_CAPTURE_OFFSET` is a night mare! It changes return type from "an array of arrays" to "an array of arrays of arrays".
+- `PREG_OFFSET_CAPTURE` is a night mare! It changes return type from "an array of arrays" to "an array of arrays of arrays".
 - `PREG_SET_ORDER` / `PREG_PATTERN_ORDER` change return values. It's either "groups of matches" or "matches of groups",
    depending on the flag.
 
@@ -86,7 +86,7 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
   $count    = preg_match($p, $s, $matched);
   ```
 
-- If you use `PREG_CAPTURE_OFFSET` and your subject isn't matched with the pattern; these are the results:
+- If you use `PREG_OFFSET_CAPTURE` and your subject isn't matched with the pattern; these are the results:
   
   Success | `preg_match()`   | `preg_match_all()`
   ------- | -------------- | ---------------
