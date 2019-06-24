@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use ParseError;
 use PHPUnit\Framework\TestCase;
 
-class CodeDualityTest extends TestCase
+class MarkupResultConsistencyTest extends TestCase
 {
     function snippets(): array
     {
@@ -27,18 +27,15 @@ class CodeDualityTest extends TestCase
      * @param array $expectedResult
      * @param array $expectedOutput
      */
-    function testDuality(array $tregx, array $php, array $expectedResult, array $expectedOutput): void
+    function test(array $tregx, array $php, array $expectedResult, array $expectedOutput): void
     {
         // given
-        $this->assertGreaterThan(0, count($tregx));
-        $this->assertGreaterThan(0, count($php));
-
         $one = $this->arrayToString($tregx);
         $two = $this->arrayToString($php);
 
         // when
-        list($return1, $echo1) = $this->invoke($one, 'T-Regx');
-        list($return2, $echo2) = $this->invoke($two, 'PHP');
+        [$return1, $echo1] = $this->invoke($one, 'T-Regx');
+        [$return2, $echo2] = $this->invoke($two, 'PHP');
 
         // then
         $this->assertEquals($return1, $return2);
