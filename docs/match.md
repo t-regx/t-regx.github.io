@@ -24,7 +24,7 @@ preg::match('/[0-9]+/', "I'm 19 years old") > 0;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
-...or to check whether it doesn't.
+...or to check whether it doesn't:
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
@@ -64,7 +64,7 @@ return $matches[0];
 ['19', '1999', '12']
 ```
 
-You can also limit your matches.
+You can limit your matches with `only(int)`.
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->

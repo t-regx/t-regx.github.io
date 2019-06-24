@@ -32,15 +32,17 @@ Using `Match` details, you gain access to:
 
 ## Matched text
 
-There are 5 similar ways to get the value of a matched occurrence:
+There are 6 similar ways to get the value of a matched occurrence:
 
 ```php
 pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
 
-    return $match->text();      // using text() method
-    return $match->group(0);    // group #0 is the whole match in all regexp engines
-    return (string) $match;     // cast it to string
-    return "$match";            // enclose it in double quotes
+    return $match->text();             // using text() method
+    return $match->group(0)->text();   // group #0 is the whole match in all regexp engines
+    
+    return (string) $match;            // cast it to string
+    return (string) $match->group(0);  // cast group #0 to string
+    return "$match";                   // enclose it in double quotes
 });
 ```
 
