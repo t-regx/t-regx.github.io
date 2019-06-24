@@ -33,15 +33,15 @@ return $matches[0];
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-pattern("[\w']+")->match("I'm 19 years old")->map(function (Match $m) {
-    return strlen($m->text());
+pattern("[\w']+")->match("I'm 19 years old")->map(function (Match $match) {
+    return strlen($match->text());
 });
 ```
 <!--PHP-->
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
-return array_map(function ($match) {
-    return strlen($match);
+return array_map(function ($text) {
+    return strlen($text);
 }, $matches[0]);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
@@ -108,13 +108,25 @@ return array_map('str_split', $matches[0]);
 
 You can just as easily create a flattened map.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
+<!--PHP-->
+```php
+preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
+return array_merge(...array_map('str_split', $matches[0]));
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return(0)}-->
+<!--Result-Value-->
+
 ```php
 [
   'I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd'
 ]
 ```
+<!--Result-Value:{return-semi}-->
 
 Read more about [`flatMap()`](match-flat-map.md) on the next page.

@@ -3,10 +3,20 @@ id: match-groups
 title: Capturing groups
 ---
 
-When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts [`Match`](match-details.md) details 
-object. These methods are: `first()`, `forFirst()`, `forEach()`/`iterate()`, `map()`, `flatMap()`, `callback()`.
+When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts 
+[`Match`](match-details.md) details object. These methods are: 
+[`first()`](match-first.md), 
+[`forFirst()`](match-for-first.md), 
+[`forEach()`](match-for-each.md)/[`iterate()`](match-for-each.md), 
+[`map()`](match-map.md), 
+[`flatMap()`](match-flat-map.md), 
+[`callback()`](replace-callback.md).
+
+<!-- Copy the above paragraph to match-details.md -->
 
 ## Overview
+
+> This page only concerns **capturing groups** of [`Match`](match-details.md), specifically. See [`Match`](match-details.md) details for more throughout documentation.
 
 Using [`Match`](match-details.md) details, you gain access complete information about capturing groups:
  - [`group(int|string)`](#group-details) - capturing group details. If group is matched, below methods are available:
@@ -16,10 +26,10 @@ Using [`Match`](match-details.md) details, you gain access complete information 
      - [offsets of matched values](#offsets) in the subject:
        - character offsets (UTF-8 safe) - `offset()`
        - byte offsets - `byteOffset()`
-     - [`orReturn()`](#optional-groups)/[`orElse()`](#optional-groups)/[`orThrow()`](#optional-groups) - returns a group, or controls the absence of the group
-     - [`index()`](#index-name-and-identifier) - ordinal value of the capturing group in a pattern
-     - [`name()`](#index-name-and-identifier) - name of the capturing group, or `null` of group is not named
-     - [`usedIdentifier()`](#index-name-and-identifier) - either `index()` or `name()`, depending on the argument of `group(int|string)`
+ - [`orReturn()`](#optional-groups)/[`orElse()`](#optional-groups)/[`orThrow()`](#optional-groups) - returns a group, or controls the absence of the group
+ - [`index()`](#index-name-and-identifier) - ordinal value of the capturing group in a pattern
+ - [`name()`](#index-name-and-identifier) - name of the capturing group, or `null` of group is not named
+ - [`usedIdentifier()`](#index-name-and-identifier) - either `index()` or `name()`, depending on the argument of `group(int|string)`
  - [`matched(int|string)`](#group-is-matched) - whether the group was matched by the subject
  - [`hasGroup(int|string)`](#group-exists) - whether group was used in a pattern
  - [`groups()`](#composite-groups)/[`namedGroups()`](#composite-groups) - interface for composite operations for all groups
@@ -37,15 +47,16 @@ $s = '192mm and 168cm or 18mm and 12cm';
 
 pattern($p) ->match($s) ->iterate(function (Match $match) {
     
-    $match->group('value')->text()      // '168'
-    $match->group('value')->isInt()     // true
-    $match->group('value')->parseInt()  // 168
+    $match->group('value')->text()      // '168' (string)
+    $match->group('value')->isInt()     // true  (boolean)
+    $match->group('value')->parseInt()  // 168   (int)
     
     $match->group('unit')->offset()     // 13
-    $match->group('unit')->index()      // 2
     $match->group('unit')->text()       // 'cm'
     $match->group('unit')->isInt()      // false
     $match->group('unit')->parseInt()   // throws IntegerFormatException
+    
+    $match->group('unit')->index()      // 2
     $match->group(2)->name()            // 'unit'
 });
 ```
@@ -201,9 +212,7 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('')->first(function (Match $match)
 #### Invalid groups and arguments
 - `hasGroup()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any other type than `string` or `int`)*.
 
-> Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic, they're more often content; hence
-> the developer doesn't have to check whether the group exists - because the pattern is constant, thus the collection
-> of groups is also constant.
+> Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic - they're constant much more often; hence the developer doesn't have to check whether the group exists. The pattern is constant - the collection of groups is also constant.
 
 ## Composite groups
 

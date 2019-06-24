@@ -12,6 +12,8 @@ object. These methods are:
 [`flatMap()`](match-flat-map.md), 
 [`callback()`](replace-callback.md).
 
+<!-- Copy the above paragraph to match-groups.md -->
+
 ## Overview
 
 Using `Match` details, you gain access to:
