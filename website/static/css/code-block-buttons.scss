@@ -1,0 +1,38 @@
+pre {
+  position: relative;
+
+  .btnIcon {
+    position: absolute;
+    opacity: 0.5;
+    top: 4px;
+    z-index: 2;
+    cursor: pointer;
+    padding: 0;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+  }
+
+  .btnIcon:hover {
+    text-decoration: none;
+  }
+
+  .btnIcon__body {
+    align-items: center;
+    display: flex;
+  }
+
+  .btnIcon svg {
+    fill: currentColor;
+    margin-right: .4em;
+  }
+
+  .btnIcon__label {
+    font-size: 11px;
+  }
+
+  .btnClipboard {
+    right: 10px;
+  }
+}
