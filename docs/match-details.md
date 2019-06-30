@@ -18,7 +18,7 @@ object. These methods are:
 
 Using `Match` details, you gain access to:
 
- - [`text()`](#matched-text) - value of a matched occurrence
+ - [`text()`](#matched-text)/[`textLength()`](#matched-text) - value of a matched occurrence
  - [`parseInt()`](#integers)/[`isInt()`](#integers) which allow you to handle integers safely
  - [`subject()`](#subject) - subject against which the pattern was matched
  - [`index()`](#ordinal-value-index) - ordinal value of a matched occurrence
@@ -55,6 +55,17 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (string $match) {
 ```
 
 All of them are equal to each other.
+
+There's also UTF8-safe method `textLength()` which, you guessed it, returns the length of a matched text.
+
+```php
+pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
+
+    return $match->text();         // 'Trains'
+    return $match->textLength();   // 6
+
+});
+```
 
 ## Integers
 
