@@ -10,22 +10,32 @@ and without coming up with a suitable delimiter.
 pattern('[A-Z][a-z]+')->match($subject)->first();
 ```
 
-## Detecting a delimitered pattern
-
-Automatic delimiters work perfectly fine, regardless of whether you passed a delimitered pattern or not.
+Automatic delimiters work perfectly fine, regardless of whether you passed a delimited pattern or not.
 
 ```php
 pattern('[A-Z][a-z]+')->match($subject)->first();
-```
-```php
 pattern('#[A-Z][a-z]+#')->match($subject)->first();
 ```
 
 The code snippets above are equal.
 
-## Returning a delimitered pattern
+## Is pattern delimited
 
-To change undelimitered pattern into a delimitered one - use `delimiter()` method;
+You can check whether a pattern is delimited with `is()->delimited()` method.
+
+```php
+pattern('[A-Z][a-z]+')->is()->delimited();
+pattern('#[A-Z][a-z]+#')->is()->delimited();
+```
+
+```php
+false
+true
+```
+
+## Adding delimiters
+
+To change undelimited pattern into a delimited one - use `delimiter()` method;
 
 ```php
 pattern('Welcome/Or not')->delimiter();
@@ -36,11 +46,11 @@ pattern('Welcome/Or not')->delimiter();
 
 ### Ambiguity
 
-How does T-Regx decide whether a pattern is already delimitered, or whether it's not and needs to be delimitered again?
+How does T-Regx decide whether a pattern is already delimited, or whether it's not and needs to be delimited again?
 
 The rule is simple.
 
-If a pattern *can* be thought of, as delimitered - T-Regx assumes it's delimitered.
+If a pattern *can* be thought of as delimited - T-Regx assumes it's delimited.
 
 ## Flags
 
@@ -52,12 +62,11 @@ Either pass a second argument to the [`pattern()`](introduction.md#entry-points)
 pattern('[A-Z][a-z]+', 'i')->match($subject)->first();
 ```
 
-or use a regular delimitered pattern with a flag:
+or use a regular delimited pattern with a flag:
 
 ```php
 pattern('/[A-Z][a-z]+/i')->match($subject)->first();
 ```
-
 
 ## I want to break it
 
@@ -66,3 +75,6 @@ that doesn't occur in your pattern. If you exhaust each of them; if you use ever
 T-Regx will throw `ExplicitDelimiterRequiredException`.
 
 In that case, you simply have to use an explicit, regular delimiter and automatic delimiter won't be used.
+
+If you think another automatic delimiter can be used, 
+please create [a github issue](https://github.com/T-Regx/T-Regx/issues/new/choose).

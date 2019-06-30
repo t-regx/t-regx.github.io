@@ -11,6 +11,6 @@ I don't see any reason why developers should keep including those.
 
 <!--truncate-->
 
-How delimitering works? CleanRegex has a number of potential delimiters. Firstly, it checks whether a pattern is already
-delimitered and if it's not, it adds a potential delimiter - one that isn't used in a pattern. Then in adds the 
+How delimiting works? CleanRegex has a number of potential delimiters. At first, it checks whether a pattern is already
+delimited and if it's not, it adds a potential delimiter - one that isn't used in a pattern. Then in adds the 
 flags :) As simple as that.

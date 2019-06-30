@@ -138,7 +138,7 @@ What happens when you make any mistake when using T-Regx:
  - In some cases `IllegalArgumentException` is thrown
  - In other, more frequent cases - one of the `CleanRegexException` implementations os thrown:
    - `SubjectNotMatchedException`
-   - `InvalidPatternException`
+   - `MalformedPatternException`
    - `InvalidReplacementException`
    - etc.
 
@@ -191,7 +191,7 @@ catch (CleanRegexException $exception) {
 
 Furthermore, T-Regx throws different exceptions for different errors:
 - SubjectNotMatchedException
-- InvalidPatternException
+- MalformedPatternException
 - FlagNotAllowedException
 - GroupNotMatchedException
 - NonexistentGroupException

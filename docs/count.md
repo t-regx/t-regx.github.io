@@ -46,13 +46,13 @@ pattern('[0-9]')->count('Computer');
 
 ## Invalid
 
-Every use of `pattern()` with invalid pattern will cause `InvalidPatternException`.
+Every use of `pattern()` with invalid pattern will cause `MalformedPatternException`.
 
 ```php
 try {
     pattern('[aeiouy')->count('Computer');
 }
-catch (InvalidPatternException $ex) {
+catch (MalformedPatternException $ex) {
     echo $ex->getMessage();
 }
 ```

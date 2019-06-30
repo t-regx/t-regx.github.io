@@ -5,7 +5,7 @@ title: Validate a pattern
 
 ## Validating
 
-Validate a pattern is done with `is()->valid()` method.
+You can check whether a pattern is valid and ready to use with `is()->valid()` method.
 
 ```php
 pattern('/I am a valid pattern/')->is()->valid();
@@ -14,7 +14,7 @@ pattern('/I am a valid pattern/')->is()->valid();
 true
 ```
 
-Neither `is()->valid()` nor `is()->usable()` methods throws an exception or issues a warning. They only return `true`/`false`.
+Neither `is()->valid()` nor `is()->usable()` throws an exception or issues any warnings. They only return `true`/`false`.
 
 ```php
 pattern('I am an invalid pattern')->is()->valid();
@@ -23,24 +23,22 @@ pattern('I am an invalid pattern')->is()->valid();
 false
 ```
 
+> Patterns validated with `is()->valid()` are also valid for methods `preg_match()`, `preg_replace()` etc.
+
 ## Usable pattern
 
-Usable pattern is a valid, but not necessarily delimitered pattern. In other words, a usable pattern becomes valid after 
-being [automatically delimitered](delimiters.md).
+A usable pattern is a valid, but not necessarily delimited pattern. In other words:
+ - `is()->valid()` valid in terms of PCRE `preg_match()`, `preg_replace` methods (must be delimited)
+ - `is()->usable()` valid in terms of `pattern()` method (not necessarily delimited, can be [automatically delimited](delimiters.md))
+
+The pattern doesn't have to be delimited.
 
 ```php
-pattern('/I am a usable pattern/')->is()->usable();
+pattern('/I am a usable pattern/')->is()->usable();      // valid and usable
+pattern('I am still a usable pattern')->is()->usable();  // usable
 ```
 ```php
 true
-```
-
-The pattern doesn't have to be delimitered.
-
-```php
-pattern('I am still a usable pattern')->is()->usable();
-```
-```php
 true
 ```
 
@@ -53,13 +51,12 @@ pattern('I am (invalid')->is()->usable();
 false
 ```
 
-## Delimitered pattern
+## Delimited pattern
 
-Method `is()->delimitered()` is used to verify whether a pattern is delimitered or not.
-
+Method `is()->delimited()` is used to verify whether a pattern is delimited or not.
 
 ```php
-pattern('#I am delimitered#')->is()->delimitered();
+pattern('#I am delimited#')->is()->delimited();
 ```
 ```php
 true
@@ -68,22 +65,25 @@ true
 ---
 
 ```php
-pattern('I am not delimitered')->is()->delimitered();
+pattern('I am not delimited')->is()->delimited();
 ```
 ```php
 false
 ```
 
+> [Automatic delimiters](delimiters.md) use the same implementation as `is()->delimited()`, so if a bug is found
+> for `is()->delimited()` - it means `pattern()` is also prone to that bug.
+
 ### Exception
 
-Keep in mind, however, that an invalid (delimitered or not) pattern will 
-throw `InvalidPatternException` with `is()->delimitered()`.
+Keep in mind, however, that an invalid (delimited or not) pattern will 
+throw `MalformedPatternException` with `is()->delimited()`.
 
 ```php
 try {
-    pattern('I am (invalid')->is()->delimitered();
+    return pattern('I am (invalid')->is()->delimited();
 }
-catch (InvalidPatternException $exception) {
+catch (MalformedPatternException $exception) {
 
 }
 ```

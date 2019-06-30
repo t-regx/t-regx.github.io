@@ -44,7 +44,7 @@ Both code snippets are equal (but now `' and '` is also a string literal).
     - The inner array can only consist of `string`
     - Any other values cause `InvalidArgumentException`
  - Values inside the inner array:
-    - **don't contribute** to the pattern being automatically delimitered. Otherwise,  user-input data could influence the pattern being invalid or not
+    - **don't contribute** to the pattern being automatically delimited. Otherwise,  user-input data could influence the pattern being invalid or not
     - are always quoted (using `preg::quote()`) with regard to the delimiter chosen by [Automatic Delimiters](delimiters.md)
 
 ## Details about `Pattern::inject()`
@@ -121,7 +121,7 @@ Pattern::inject($input, $values);
 
  - Values in `$values`:
     - are always quoted (using `preg::quote()`) with regard to the delimiter chosen by [Automatic Delimiters](delimiters.md)
-    - **don't contribute** to the pattern being automatically delimitered. Otherwise,  user-input data could influence the pattern being invalid or not
+    - **don't contribute** to the pattern being automatically delimited. Otherwise,  user-input data could influence the pattern being invalid or not
 
 
 ## Building process
