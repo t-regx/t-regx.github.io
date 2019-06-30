@@ -40,4 +40,9 @@ Read on, to learn about proper handling of user input.
 Good question.
 
 The same reason why good programmers use Prepared SQL Statements, instead of `mysql_real_escape_string()`. 
-They're modern and more recent, and thus better adapted to programmers needs.
+They allow you to separate regular expression from unsafe data, which helps with making the pattern safer:
+ - delimiters become an implementation detail, about which programmer doesn't have to care
+ - some flags (e.g. `x`) require spaces and whitespaces to also be quoted, which `preg_quote()` doesn't quote
+ - inside comments (`\Q` and `\E`), values shouldn't be quoted! This would cause double quotation, which `preg_quote()` does
+   *(kinda how `>` becomes `&amp;gt;` when double quoted)*.
+ - `preg_quote()` doesn't quote comments before PHP 7.1.3

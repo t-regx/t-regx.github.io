@@ -3,11 +3,12 @@ id: quoting
 title: Quoting
 ---
 
-There are two methods `Pattern::quote()` and `Pattern::unquote()`, first of which works as `preg_quote()` is supposed to
-work:
+There are two methods `Pattern::quote()` and `Pattern::unquote()`. 
+
+First of which works as `preg_quote()` is supposed to
+work (except for the fact that `preg_quote()` is broken before PHP 7.1.3 version, and `Pattern::quote()` fixes it)...
 
 ```php
-<?php
 Pattern::quote("Welcome\How are you?");
 ```
 ```text
@@ -15,7 +16,6 @@ Welcome\\How are you\?
 ```
 ...second of which is the direct opposite:
 ```php
-<?php
 Pattern::unquote("Welcome\\How are you\?");
 ```
 ```text
@@ -30,7 +30,6 @@ using [Prepared Patterns](prepared-patterns.md).
 These two methods should be transitive, so:
 
 ```php
-<?php
 $output = Pattern::unquote(Pattern::quote($input));
 ```
 
