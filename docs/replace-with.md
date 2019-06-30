@@ -11,10 +11,10 @@ replacements should be done.
 ```php
 $subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
-pattern('[A-Z][a-z]+')->replace($subject)->first()->with('XXX');
+pattern('[A-Z][a-z]+')->replace($subject)->first()->with('___');
 ```
 ```php
-'I like Scandinavia: XXX, Norway and Denmark'
+'I like Scandinavia: ___, Norway and Denmark'
 ```
 
 ## Replace more
@@ -24,10 +24,10 @@ pattern('[A-Z][a-z]+')->replace($subject)->first()->with('XXX');
 ```php
 $subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
-pattern('[A-Z][a-z]+')->replace($subject)->all()->with('XXX');
+pattern('[A-Z][a-z]+')->replace($subject)->all()->with('___');
 ```
 ```php
-'I like Scandinavia: XXX, XXX and XXX'
+'I like Scandinavia: ___, ___ and ___'
 ```
 
 ### `only()`
@@ -35,10 +35,10 @@ pattern('[A-Z][a-z]+')->replace($subject)->all()->with('XXX');
 ```php
 $subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
 
-pattern('[A-Z][a-z]+')->replace($subject)->only(2)->with('XXX');
+pattern('[A-Z][a-z]+')->replace($subject)->only(2)->with('___');
 ```
 ```php
-'I like Scandinavia: XXX, XXX and Denmark'
+'I like Scandinavia: ___, ___ and Denmark'
 ```
 
 ---

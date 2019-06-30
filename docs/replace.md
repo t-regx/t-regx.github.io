@@ -22,10 +22,10 @@ replacements should be done.
 Using `first()`, you can explicitly replace only the first matched occurrence of a pattern.
 
 ```php
-pattern('\d+')->replace("I'm 19, I have 192cm and I was born in 1999")->first()->with('XXX');
+pattern('\d+')->replace("I'm 19, I have 192cm and I was born in 1999")->first()->with('___');
 ```
 ```text
-I'm XXX, I have 192cm and I was born in 1999
+I'm ___, I have 192cm and I was born in 1999
 ```
 
 ### `all()`
@@ -33,10 +33,10 @@ I'm XXX, I have 192cm and I was born in 1999
 You can also replace all of the occurrences, with `all()`.
 
 ```php
-pattern('\d+')->replace("I'm 19, I have 192cm and I was born in 1999")->all()->with('XXX');
+pattern('\d+')->replace("I'm 19, I have 192cm and I was born in 1999")->all()->with('___');
 ```
 ```text
-I'm XXX, I have XXXcm and I was born in XXX
+I'm ___, I have ___cm and I was born in ___
 ```
 
 ### `only()`
@@ -44,10 +44,10 @@ I'm XXX, I have XXXcm and I was born in XXX
 As with matching, you can also limit your replacements to a fixed number.
 
 ```php
-pattern('\d+')->replace("I'm 19, I have 192cm and I was born in 1999")->only(2)->with('XXX');
+pattern('\d+')->replace("I'm 19, I have 192cm and I was born in 1999")->only(2)->with('___');
 ```
 ```text
-I'm XXX, I have XXXcm and I was born in 1999
+I'm ___, I have ___cm and I was born in 1999
 ```
 
 ---
