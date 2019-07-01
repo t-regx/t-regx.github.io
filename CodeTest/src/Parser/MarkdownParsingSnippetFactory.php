@@ -2,6 +2,7 @@
 namespace CodeTest\Parser;
 
 use CodeTest\Parser\Mods\Modification;
+use CodeTest\Parser\Mods\MultipleReturnValues;
 use CodeTest\Parser\Mods\ReturnAt;
 use CodeTest\Parser\Mods\ReturnFirstSemicolonLast;
 use Exception;
@@ -19,9 +20,10 @@ class MarkdownParsingSnippetFactory
     public function __construct()
     {
         $this->mods = [
-            'return'      => new ReturnAt(),
-            'return-semi' => new ReturnFirstSemicolonLast()
-        ];;
+            'return'                 => new ReturnAt(),
+            'return-semi'            => new ReturnFirstSemicolonLast(),
+            'packed-return-from-end' => new MultipleReturnValues(),
+        ];
     }
 
     public function snippetsFromFile(string $path): ?array
