@@ -42,7 +42,7 @@ preg_replace(?, ?, ?, $count, $limit);
 Programming languages are **tools** created to solve problems. An experienced programmer **should** be able to look
 at the code and tell what it does. With PHP `preg_*` functions it's just. not. possible.
 
-Someone who doesn't know PHP regular expressions, can probably ask himself:
+Someone who doesn't know PHP regular expressions, can probably ask themselves:
 
 - `preg_replace('//', $r, $s)` - will this replace all occurrences? Or just one?
 - `preg_match('//', $subject)` - will *this* match the first occurrence? Or all?
@@ -207,7 +207,7 @@ Further, furthermore, if you pass an invalid data type to any of the T-Regx meth
 ### It's explicit
 
 Poor design of PHP `preg_*` functions does not make them really descriptive. Someone who's not familiar with it will probably
-ask himself:
+ask themselves:
 
  - `preg_replace('//', $r, $s)` - will this replace all or just one occurrence?
  - `preg_match('//', $subject)` - will *this* match the first occurrence? Or all?
