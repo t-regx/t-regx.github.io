@@ -57,7 +57,7 @@ $s = pattern('[0-9]+')->match("I'm a dog")
     })
     ->orReturn('Match is not found');
 
-$s; // 'Match is not found'
+return $s;
 ```
 <!--PHP-->
 ```php
@@ -67,11 +67,14 @@ if (preg::match('/[0-9]+/', "I'm a dog")) {
     $s = 'Match is not found';
 }
 
-$s; // 'Match is not found'
+return $s;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return(last)}-->
-<!--PHP:{return(last)}-->
+<!--Result-Value-->
+
+```php
+'Match is not found'
+```
 
 ### `orElse()`
 
@@ -88,7 +91,7 @@ $s = pattern('[0-9]+')->match("I'm a dog")
         return "I couldn't match subject: " . $notMatched->subject();
     });
     
-$s; // "I couldn't match subject: I'm a dog"
+return $s;
 ```
 <!--PHP-->
 ```php
@@ -99,12 +102,14 @@ if (preg::match('/[0-9]+/', $subject)) {
     $s = "I couldn't match subject: $subject";
 }
 
-$s; // 'Match is not found'
+return $s;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return(last)}-->
-<!--PHP:{return(last)}-->
+<!--Result-Value-->
 
+```php
+"I couldn't match subject: I'm a dog"
+```
 ### `orThrow()`
 
 If a match is not found, it throws `SubjectNotMatchedException` by default.
