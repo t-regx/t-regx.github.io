@@ -3,8 +3,8 @@ pre {
 
   .btnIcon {
     position: absolute;
-    opacity: 0.5;
-    top: 4px;
+    opacity: 0.15;
+    top: -4px;
     z-index: 2;
     cursor: pointer;
     padding: 0;
@@ -12,20 +12,21 @@ pre {
     border: none;
     background-color: transparent;
     outline: none;
-  }
 
-  .btnIcon:hover {
-    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      opacity: 0.6;
+    }
+
+    svg {
+      fill: currentColor;
+      margin-right: .4em;
+    }
   }
 
   .btnIcon__body {
     align-items: center;
     display: flex;
-  }
-
-  .btnIcon svg {
-    fill: currentColor;
-    margin-right: .4em;
   }
 
   .btnIcon__label {
