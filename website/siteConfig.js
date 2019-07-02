@@ -16,8 +16,7 @@ const siteConfig = {
         {label: 'Compare', page: 'comparison'},
         {label: 'Help', page: 'help'},
         {label: 'Blog', blog: true},
-        {label: 'GitHub', href: 'https://github.com/T-Regx/T-Regx', external: true},
-        {languages: true}
+        {label: 'GitHub', href: 'https://github.com/T-Regx/T-Regx', external: true}
     ],
     blogSidebarCount: 'ALL',
     enableUpdateTime: true,
