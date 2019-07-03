@@ -70,6 +70,7 @@ class MarkupResultConsistencyTest extends TestCase
             'use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;',
             'use TRegx\CleanRegex\Match\Details\Match;',
             'use TRegx\CleanRegex\Match\Details\NotMatched;',
+            'use TRegx\SafeRegex\Exception\CompileSafeRegexException;',
             'use TRegx\SafeRegex\preg;',
         ];
         return array_merge($namespaces, $functions, $classes, $lines);
@@ -97,7 +98,7 @@ class MarkupResultConsistencyTest extends TestCase
     private function addSingleLineReturn(array $code): array
     {
         if (count($code) === 1) {
-            if (substr($code[0], 0, 6) !== 'return') {
+            if (substr($code[0], 0, 7) !== 'return ') {
                 return ['return ' . $code[0]];
             }
         }

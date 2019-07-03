@@ -3,6 +3,9 @@ id: delimiters
 title: Automatic delimiters
 ---
 
+> This chapter doesn't contain `PHP` code snippets, because PHP PCRE require delimiters. There is no way to omit them
+> in Vanilla PHP.
+
 Thanks to automatic delimiters, one can use regular expressions without [brain strain](overview.md#brain-strain)
 and without coming up with a suitable delimiter.
 
