@@ -1,11 +1,13 @@
 <?php
 namespace Docs;
 
+use AssertionError;
 use CodeTest\CodeTabsDataProvider;
 use Error;
 use InvalidArgumentException;
 use ParseError;
 use PHPUnit\Framework\TestCase;
+use TRegx\SafeRegex\preg;
 
 class MarkupResultConsistencyTest extends TestCase
 {
@@ -58,6 +60,7 @@ class MarkupResultConsistencyTest extends TestCase
     {
         $lines = $this->addSingleLineReturn($lines);
         $lines = $this->polyfillForSubjectNotMatched($lines);
+        $lines = $this->protectAgainstClassRedeclaration($lines);
         $functions = $this->polyfillGlobalFunctions([
             'validateGroupExists'  => true,
             'validateGroupMatched' => true,
@@ -105,13 +108,27 @@ class MarkupResultConsistencyTest extends TestCase
         return $code;
     }
 
-    private function polyfillForSubjectNotMatched(array $lines)
+    private function polyfillForSubjectNotMatched(array $lines): array
     {
         return array_map(function (string $line) {
             $polyfills = [
                 'new SubjectNotMatchedException()' => 'new SubjectNotMatchedException("","")'
             ];
             return str_replace(array_keys($polyfills), array_values($polyfills), $line);
+        }, $lines);
+    }
+
+    private function protectAgainstClassRedeclaration(array $lines): array
+    {
+        return array_map(function (string $line) {
+            if (preg::match('/^class (\w+) extends ([\\\\\\w+]+) {}/', $line, $match)) {
+                [$text, $child, $parent] = $match;
+                return "if (!class_exists('$child')) { class $child extends $parent {} }";
+            }
+            if (preg::match('/^class /', $line)) {
+                throw new AssertionError();
+            }
+            return $line;
         }, $lines);
     }
 
