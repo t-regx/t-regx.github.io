@@ -200,7 +200,7 @@ else {
 'APPLES'
 ```
 
-In this example [`Match`](match-details.md) will be cast to string, which is the same as calling `Match.text()` method.
+In this example, [`Match`](match-details.md) will be cast to string, which is the same as calling `Match.text()` method.
 
 > Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
 
