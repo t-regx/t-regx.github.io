@@ -148,11 +148,12 @@ catch (SubjectNotMatchedException $e) {
 
 You can also supply your own exception class name.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 class MyException extends \Exception {}
 
-try 
-{
+try {
     pattern('[0-9]+')->match("I'm a dog")
         ->forFirst(function (Match $match) {
             return 'Match is found!';
@@ -160,8 +161,26 @@ try
         ->orThrow(MyException::class);
 }
 catch (MyException $e) {
+    // React to an unmatched subject
+    echo 'Not matched';
 }
 ```
+<!--PHP-->
+```php
+class MyException extends \Exception {}
+
+try {
+    if (preg::match('/[0-9]+/', "I'm a dog")) {
+        return 'Match is found!';
+    } 
+    throw new MyException();
+}
+catch (MyException $e) {
+    // React to an unmatched subject
+    echo 'Not matched';
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 Of course, your custom exception must meet certain requirements:
 
