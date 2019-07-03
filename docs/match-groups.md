@@ -34,6 +34,7 @@ Using [`Match`](match-details.md) details, you gain access complete information 
  - [`hasGroup(int|string)`](#group-exists) - whether group was used in a pattern
  - [`groups()`](#composite-groups)/[`namedGroups()`](#composite-groups) - interface for composite operations for all groups
  - [`groupNames()`](#group-names) - string list of named groups used in a pattern
+ - [`groupsCount()`](#groups-count) - counts number of capturing groups (without duplicates of named and regular groups)
  - [`all()`](#other-occurrences) - other matched occurrences of the group
 
 > With PHP, all groups' syntax: `(?<name>)`, `(?'name')` and `(?P<name>)` are considered "named". Regular, indexed groups 
@@ -241,6 +242,16 @@ If there are no named groups, it simply returns an empty array:
 ```php
 pattern('(\d+)(cm|mm)')->match('14cm')->first(function (Match $match) {
     $match->groupNames();    // []
+});
+```
+
+### Groups count
+
+Method `groupsCount()` returns a number of the capturing groups (without duplicates of named and regular groups)
+
+```php
+pattern('(?<value>\d+)(?<unit>cm|mm)')->match('14cm')->first(function (Match $match) {
+    $match->groupsCount();    // 2
 });
 ```
 
