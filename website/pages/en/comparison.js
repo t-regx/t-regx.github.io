@@ -5,6 +5,7 @@ const MarkdownBlock = CompLibrary.MarkdownBlock;
 
 const DisqusThread = require(`${process.cwd()}/core/DisqusThread.js`);
 const ComparisonTable = require(`${process.cwd()}/core/ComparisonTable.js`);
+const metaDescription = require(`${process.cwd()}/core/MetaDescription`);
 
 class Comparison extends React.Component {
     render() {
@@ -34,4 +35,5 @@ class Comparison extends React.Component {
     }
 }
 
+Comparison.description = metaDescription;
 module.exports = Comparison;

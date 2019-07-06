@@ -3,6 +3,7 @@ const CompLibrary = require('../../core/CompLibrary');
 const Container = CompLibrary.Container;
 const CWD = process.cwd();
 const versions = require(`${CWD}/versions.json`);
+const metaDescription = require(`${process.cwd()}/core/MetaDescription`);
 
 function Versions(props) {
     const {config: siteConfig} = props;
@@ -84,5 +85,6 @@ function Versions(props) {
 }
 
 Versions.title = 'Versions';
+Versions.description = metaDescription;
 
 module.exports = Versions;

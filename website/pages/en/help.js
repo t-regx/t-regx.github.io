@@ -5,6 +5,7 @@ const GridBlock = CompLibrary.GridBlock;
 
 const siteConfig = require(`${process.cwd()}/siteConfig.js`);
 const DisqusSection = require(`${process.cwd()}/core/DisqusSection.js`);
+const metaDescription = require(`${process.cwd()}/core/MetaDescription`);
 
 function pageUrl(page, language) {
     return siteConfig.baseUrl + (language ? `${language}/` : '') + page;
@@ -53,4 +54,5 @@ class Help extends React.Component {
     }
 }
 
+Help.description = metaDescription;
 module.exports = Help;

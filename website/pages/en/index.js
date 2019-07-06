@@ -8,6 +8,7 @@ const BadgesSection = require(`${process.cwd()}/core/BadgesSection`);
 const DisqusSection = require(`${process.cwd()}/core/DisqusSection`);
 const GithubButton = require(`${process.cwd()}/core/GithubButton`);
 const AutomaticSplashLogo = require(`${process.cwd()}/core/AutomaticSplashLogo`);
+const metaDescription = require(`${process.cwd()}/core/MetaDescription`);
 
 function mp4Url(img) {
     return `${siteConfig.baseUrl}mp4/${img}`;
@@ -191,5 +192,7 @@ class Index extends React.Component {
         );
     }
 }
+
+Index.description = metaDescription;
 
 module.exports = Index;
