@@ -6,8 +6,12 @@
       .nav-link {
         margin-right: 0;
 
-        &:hover {
-          background-color: lightblue;
+        &.active {
+          background-color: #dcf2f8;
+        }
+
+        &:hover:not(.active) {
+          background: #eef9fc;
         }
       }
     }
