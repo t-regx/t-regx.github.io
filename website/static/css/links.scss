@@ -16,5 +16,17 @@
         background-color: initial;
       }
     }
+
+    blockquote {
+      *:not(h1) > a:not(.hash-link) {
+        color: #6b7177;
+        background-color: #f3e397;
+
+        &:hover {
+          color: #6b7177;
+          background-color: #ffe150;
+        }
+      }
+    }
   }
 }
