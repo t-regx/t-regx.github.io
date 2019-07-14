@@ -5,10 +5,12 @@ use CodeTest\Parser\Mods\Modification;
 use CodeTest\Parser\Mods\MultipleReturnValues;
 use CodeTest\Parser\Mods\ReturnAt;
 use CodeTest\Parser\Mods\ReturnFirstSemicolonLast;
+use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
+use CodeTest\Parser\Snippet\SnippetListener;
 use Exception;
 use TRegx\SafeRegex\preg;
 
-class MarkdownParsingSnippetFactory
+class MarkdownParsingSnippetFactory implements SnippetListener
 {
     const START_TOKEN = '<!--DOCUSAURUS_CODE_TABS-->';
     const END_TOKEN = '<!--END_DOCUSAURUS_CODE_TABS-->';
@@ -17,6 +19,9 @@ class MarkdownParsingSnippetFactory
     private $path;
     /** @var Modification[] */
     private $mods;
+
+    /** @var array[] */
+    private $snippets = [];
 
     public function __construct(string $path)
     {
@@ -34,29 +39,22 @@ class MarkdownParsingSnippetFactory
             return null;
         }
         $file = file_get_contents($this->path);
-        $snippets = [];
-        $consumer = null;
-        $snippet = $this->emptySnippet();
+
+        $builder = new CodeTabSnippetBuilder($this);
+
         foreach (preg_split("/[\n\r]?[\n\r]/", $file) as $line) {
             if ($line == self::START_TOKEN) {
-                $snippet = $this->emptySnippet();
-                continue;
-            }
-            if ($line == self::END_TOKEN) {
-                $consumer = null;
-                $snippets[] = array_values($snippet);
-                continue;
-            }
-            if (in_array($line, ['```', '```php', '```text'])) {
-                if ($line === '```' && in_array($consumer, ['Result-Value', 'Result-Output'])) {
-                    array_pop($snippets);
-                    $snippets[] = array_values($snippet);
-                    $consumer = null;
+                if (!$this->builder->isEmpty()) {
+                    $this->builder->flush();
                 }
                 continue;
             }
+            if (in_array($line, ['```', '```php', '```text'])) {
+                $builder->controlMark($line);
+                continue;
+            }
             if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output))-->/', $line, $match)) {
-                $consumer = $match[1];
+                $builder->setConsumer($match[1]);
                 continue;
             }
             if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([a-z-]+)(?:\((?:(\w+))\))?\}-->/', $line, $match)) {
@@ -64,17 +62,14 @@ class MarkdownParsingSnippetFactory
                 $mod = $match[2];
                 $arg = array_key_exists(3, $match) ? $match[3] : null;
 
-                $snippet[$forType] = $this->modByName($mod)->modify($snippet[$forType], $arg);
-                array_pop($snippets);
-                $snippets[] = array_values($snippet);
+                $builder->modify($forType, $this->modByName($mod), $arg);
                 continue;
             }
-            if ($consumer) {
-                array_push($snippet[$consumer], $line);
-            }
+
+            $builder->feedLine($line);
         }
 
-        return empty($snippets) ? null : $snippets;
+        $this->builder->flush();
     }
 
     private function modByName(string $mod): Modification
@@ -85,8 +80,8 @@ class MarkdownParsingSnippetFactory
         throw new Exception("Unknown mod '$mod' used in $this->path");
     }
 
-    private function emptySnippet(): array
+    public function created(array $snippet): void
     {
-        return ['T-Regx' => [], 'PHP' => [], 'Result-Value' => [], 'Result-Output' => []];
+        $this->snippets[] = $snippet;
     }
 }
