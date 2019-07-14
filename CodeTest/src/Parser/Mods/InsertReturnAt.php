@@ -1,7 +1,7 @@
 <?php
 namespace CodeTest\Parser\Mods;
 
-class ReturnAt implements Modification
+class InsertReturnAt implements Modification
 {
     public function modify(array $snippet, ?string $argument): array
     {
