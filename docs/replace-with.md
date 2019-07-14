@@ -11,13 +11,13 @@ replacements should be done.
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-$subject = 'I like Scandinavia: Sweden, Norway and Denmark';
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 pattern('[A-Z][a-z]+')->replace($subject)->first()->with('___');
 ```
 <!--PHP-->
 ```php
-$subject = 'I like Scandinavia: Sweden, Norway and Denmark';
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 preg_replace('/[A-Z][a-z]+/', '___', $subject, 1);
 ```
@@ -27,7 +27,7 @@ preg_replace('/[A-Z][a-z]+/', '___', $subject, 1);
 <!--Result-Value-->
 
 ```php
-'I like ___: Sweden, Norway and Denmark'
+'I like scandinavia: ___, Norway and Denmark'
 ```
 
 ## Replace more
@@ -43,7 +43,7 @@ pattern('[A-Z][a-z]+')->replace($subject)->all()->with('___');
 ```
 <!--PHP-->
 ```php
-$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 preg::replace('/[A-Z][a-z]+/', '___', $subject);
 ```
@@ -53,18 +53,18 @@ preg::replace('/[A-Z][a-z]+/', '___', $subject);
 <!--Result-Value-->
 
 ```php
-'I like Scandinavia: ___, ___ and ___'
+'I like scandinavia: ___, ___ and ___'
 ```
 
 ### `only()`
 
 ```php
-$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
 
 pattern('[A-Z][a-z]+')->replace($subject)->only(2)->with('___');
 ```
 ```php
-'I like Scandinavia: ___, ___ and Denmark'
+'I like scandinavia: ___, ___ and Denmark'
 ```
 
 ---
