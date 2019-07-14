@@ -1,7 +1,9 @@
 <?php
 namespace CodeTest;
 
-use CodeTest\Parser\MarkdownParsingSnippetFactory;
+use CodeTest\Parser\MarkdownSnippetParser;
+use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
+use CodeTest\Parser\Snippet\SnippetsStore;
 
 class CodeTabsDataProvider
 {
@@ -24,7 +26,9 @@ class CodeTabsDataProvider
 
     private function flatMapSnippetsFromFile(string $filename): ?array
     {
-        $snippets = (new MarkdownParsingSnippetFactory($filename))->snippetsFromFile();
+        $store = new SnippetsStore();
+        (new MarkdownSnippetParser($filename, new CodeTabSnippetBuilder($store)))->loadFromFile();
+        $snippets = $store->snippets();
         if ($snippets === null) {
             return null;
         }

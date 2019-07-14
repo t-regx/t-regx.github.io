@@ -1,6 +1,8 @@
 <?php
 namespace CodeTest\Parser;
 
+use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
+use CodeTest\Parser\Snippet\SnippetsStore;
 use PHPUnit\Framework\TestCase;
 
 class MarkdownParsingSnippetFactoryTest extends TestCase
@@ -11,10 +13,11 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
     public function shouldSnippetsFromFile()
     {
         // given
-        $factory = new MarkdownParsingSnippetFactory($this->file('replace-by-group.md'));
+        $store = new SnippetsStore();
+        $factory = new MarkdownSnippetParser($this->file('replace-by-group.md'), new CodeTabSnippetBuilder($store));
 
         // when
-        $snippets = $factory->snippetsFromFile();
+        $factory->loadFromFile();
 
         // then
         $expected = [
@@ -41,11 +44,11 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
                 'Links: google, socket, facebook, t-regx'
             ]
         ];
-        $this->assertEquals([$expected], $snippets);
+        $this->assertEquals([$expected], $store->snippets());
     }
 
     private function file(string $str): string
     {
-        return getcwd() . "/../../../docs/$str";
+        return getcwd() . "/../../docs/$str";
     }
 }
