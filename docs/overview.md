@@ -36,9 +36,28 @@ What should be obvious, is now complicated and causes many questions and assumpt
 
 While using T-Regx, some things are **certain**. For example:
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 $result = pattern($p)->match($subject)->first();
+return $result;
 ```
+<!--PHP-->
+```php
+if (preg::match("/$p/", $subject, $match) === 1) {
+    $result = $match[0];
+} else {
+    throw new SubjectNotMatchedException();
+}
+return $result;
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{mock($subject)}-->
+<!--T-Regx:{mockPattern($p)}-->
+<!---T-Regx:{return($result)}-->
+<!--PHP:{mock($subject)}-->
+<!--PHP:{mockPattern($p)}-->
+<!---PHP:{return($result)}-->
 
 Here, `$result` **must** contain the first occurrence. It must contain *your value*.
 
