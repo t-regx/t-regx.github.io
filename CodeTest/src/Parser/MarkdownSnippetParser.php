@@ -49,7 +49,7 @@ class MarkdownSnippetParser
                 $this->builder->setConsumer($match[1]);
                 continue;
             }
-            if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([a-z-]+)(?:\((?:(\w+))\))?\}-->/', $line, $match)) {
+            if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([a-z-]+)(?:\((?:([\w\$]+))\))?\}-->/', $line, $match)) {
                 $forType = $match[1];
                 $mod = $match[2];
                 $arg = array_key_exists(3, $match) ? $match[3] : null;
