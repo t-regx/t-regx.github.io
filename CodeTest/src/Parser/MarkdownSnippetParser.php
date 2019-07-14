@@ -1,6 +1,7 @@
 <?php
 namespace CodeTest\Parser;
 
+use CodeTest\Parser\Mods\MockVariable;
 use CodeTest\Parser\Mods\Modification;
 use CodeTest\Parser\Mods\MultipleReturnValues;
 use CodeTest\Parser\Mods\ReturnAt;
@@ -29,6 +30,8 @@ class MarkdownSnippetParser
             'return-at'              => new ReturnAt(),
             'return-semi'            => new ReturnFirstSemicolonLast(),
             'packed-return-from-end' => new MultipleReturnValues(),
+            'mock'                   => new MockVariable(false),
+            'mockPattern'            => new MockVariable(true),
         ];
     }
 
@@ -49,7 +52,7 @@ class MarkdownSnippetParser
                 $this->builder->setConsumer($match[1]);
                 continue;
             }
-            if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([a-z-]+)(?:\((?:([\w\$]+))\))?\}-->/', $line, $match)) {
+            if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([\w-]+)(?:\((?:([\w\$]+))\))?\}-->/', $line, $match)) {
                 $forType = $match[1];
                 $mod = $match[2];
                 $arg = array_key_exists(3, $match) ? $match[3] : null;
