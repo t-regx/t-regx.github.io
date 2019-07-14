@@ -39,8 +39,8 @@ $input = [
 array_values(preg::grep("/[A-Z][a-z]+$/", $input));
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return(first)}-->
-<!--PHP:{return(last)}-->
+<!--T-Regx:{return-at(first)}-->
+<!--PHP:{return-at(last)}-->
 <!--Result-Value-->
 
 ```php
@@ -78,8 +78,8 @@ $input = [
 preg::grep("/[A-Z][a-z]+$/", $input);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return(first)}-->
-<!--PHP:{return(last)}-->
+<!--T-Regx:{return-at(first)}-->
+<!--PHP:{return-at(last)}-->
 <!--Result-Value-->
 
 ```php
@@ -116,8 +116,8 @@ $filteredKeys = preg::grep("/[A-Z][a-z]+$/", array_keys($input));
 array_intersect_key($input, array_flip($filteredKeys));
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return(first)}-->
-<!--PHP:{return(last)}-->
+<!--T-Regx:{return-at(first)}-->
+<!--PHP:{return-at(last)}-->
 <!--Result-Value-->
 
 ```php

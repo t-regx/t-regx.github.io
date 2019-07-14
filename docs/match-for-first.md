@@ -34,7 +34,7 @@ if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
 return 'Unmatched :/';
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return(0)}-->
+<!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
 ```php

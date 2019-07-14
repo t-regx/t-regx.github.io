@@ -20,7 +20,7 @@ class MarkdownParsingSnippetFactory
     public function __construct()
     {
         $this->mods = [
-            'return'                 => new ReturnAt(),
+            'return-at'              => new ReturnAt(),
             'return-semi'            => new ReturnFirstSemicolonLast(),
             'packed-return-from-end' => new MultipleReturnValues(),
         ];
@@ -102,6 +102,9 @@ class MarkdownParsingSnippetFactory
         if ($modLine === 'last') {
             return $count - 1;
         }
-        return $modLine;
+        if (is_numeric($modLine)) {
+            return $modLine;
+        }
+        throw new InvalidArgumentException("Mod line \"first\", \"last\" or of type integer expected, '$modLine' given");
     }
 }

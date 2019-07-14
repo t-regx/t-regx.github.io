@@ -38,8 +38,8 @@ preg::match_all('/[aeiouy]/', 'Computer', $match);
 count($match[0]);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return(last)}-->
-<!--PHP:{return(last)}-->
+<!--T-Regx:{return-at(last)}-->
+<!--PHP:{return-at(last)}-->
 <!--Result-Value-->
 
 ```php
