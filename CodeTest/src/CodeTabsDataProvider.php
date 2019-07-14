@@ -13,7 +13,7 @@ class CodeTabsDataProvider
         $this->basePath = $basePath;
     }
 
-    public function getSnippets()
+    public function getSnippets(): array
     {
         $files = $this->filesInDirectory($this->basePath);
         $snippetsArray = array_map(function (string $filename) {
@@ -22,9 +22,9 @@ class CodeTabsDataProvider
         return array_merge(...array_filter($snippetsArray));
     }
 
-    private function flatMapSnippetsFromFile(string $filename)
+    private function flatMapSnippetsFromFile(string $filename): ?array
     {
-        $snippets = (new MarkdownParsingSnippetFactory())->snippetsFromFile($filename);
+        $snippets = (new MarkdownParsingSnippetFactory($filename))->snippetsFromFile();
         if ($snippets === null) {
             return null;
         }

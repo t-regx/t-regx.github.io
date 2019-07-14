@@ -11,11 +11,10 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
     public function shouldSnippetsFromFile()
     {
         // given
-        $factory = new MarkdownParsingSnippetFactory();
-        $filename = $this->file('replace-by-group.md');
+        $factory = new MarkdownParsingSnippetFactory($this->file('replace-by-group.md'));
 
         // when
-        $snippets = $factory->snippetsFromFile($filename);
+        $snippets = $factory->snippetsFromFile();
 
         // then
         $expected = [

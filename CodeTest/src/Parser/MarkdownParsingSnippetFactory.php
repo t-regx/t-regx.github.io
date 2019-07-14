@@ -16,22 +16,25 @@ class MarkdownParsingSnippetFactory
 
     /** @var Modification[] */
     private $mods;
+    /** @var string */
+    private $path;
 
-    public function __construct()
+    public function __construct(string $path)
     {
         $this->mods = [
             'return-at'              => new ReturnAt(),
             'return-semi'            => new ReturnFirstSemicolonLast(),
             'packed-return-from-end' => new MultipleReturnValues(),
         ];
+        $this->path = $path;
     }
 
-    public function snippetsFromFile(string $path): ?array
+    public function snippetsFromFile(): ?array
     {
-        if (is_dir($path)) {
+        if (is_dir($this->path)) {
             return null;
         }
-        $file = file_get_contents($path);
+        $file = file_get_contents($this->path);
         $snippets = [];
         $type = null;
         $snippet = $this->emptySnippet();
@@ -86,7 +89,7 @@ class MarkdownParsingSnippetFactory
         if (array_key_exists($mod, $this->mods)) {
             return $this->mods[$mod];
         }
-        throw new Exception("Unknown mod '$mod'");
+        throw new Exception("Unknown mod '$mod' used in $this->path");
     }
 
     private function emptySnippet(): array
@@ -105,6 +108,6 @@ class MarkdownParsingSnippetFactory
         if (is_numeric($modLine)) {
             return $modLine;
         }
-        throw new InvalidArgumentException("Mod line \"first\", \"last\" or of type integer expected, '$modLine' given");
+        throw new InvalidArgumentException("Mod line \"first\", \"last\" or of type integer expected, '$modLine' given, in $this->path");
     }
 }
