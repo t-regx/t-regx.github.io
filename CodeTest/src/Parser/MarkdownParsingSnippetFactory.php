@@ -35,7 +35,7 @@ class MarkdownParsingSnippetFactory
         }
         $file = file_get_contents($this->path);
         $snippets = [];
-        $type = null;
+        $consumer = null;
         $snippet = $this->emptySnippet();
         foreach (preg_split("/[\n\r]?[\n\r]/", $file) as $line) {
             if ($line == self::START_TOKEN) {
@@ -43,20 +43,20 @@ class MarkdownParsingSnippetFactory
                 continue;
             }
             if ($line == self::END_TOKEN) {
-                $type = null;
+                $consumer = null;
                 $snippets[] = array_values($snippet);
                 continue;
             }
             if (in_array($line, ['```', '```php', '```text'])) {
-                if ($line === '```' && in_array($type, ['Result-Value', 'Result-Output'])) {
+                if ($line === '```' && in_array($consumer, ['Result-Value', 'Result-Output'])) {
                     array_pop($snippets);
                     $snippets[] = array_values($snippet);
-                    $type = null;
+                    $consumer = null;
                 }
                 continue;
             }
             if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output))-->/', $line, $match)) {
-                $type = $match[1];
+                $consumer = $match[1];
                 continue;
             }
             if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([a-z-]+)(?:\((?:(\w+))\))?\}-->/', $line, $match)) {
@@ -69,8 +69,8 @@ class MarkdownParsingSnippetFactory
                 $snippets[] = array_values($snippet);
                 continue;
             }
-            if ($type) {
-                array_push($snippet[$type], $line);
+            if ($consumer) {
+                array_push($snippet[$consumer], $line);
             }
         }
 
