@@ -32,14 +32,9 @@ class MarkdownSnippetParser
         ];
     }
 
-    public function loadFromFile(): void
+    public function parse(string $content): void
     {
-        if (is_dir($this->path)) {
-            return;
-        }
-        $file = file_get_contents($this->path);
-
-        foreach (preg_split("/[\n\r]?[\n\r]/", $file) as $line) {
+        foreach (preg_split("/[\n\r]?[\n\r]/", $content) as $line) {
             if ($line == self::START_TOKEN) {
                 if (!$this->builder->isEmpty()) {
                     $this->builder->flush();

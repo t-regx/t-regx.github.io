@@ -24,22 +24,33 @@ class CodeTabsDataProvider
         return array_merge(...array_filter($snippetsArray));
     }
 
+    private function filesInDirectory(string $path): array
+    {
+        return array_map(function (string $filename) use ($path) {
+            return $path . $filename;
+        }, array_values(array_diff(scandir($path), ['.', '..'])));
+    }
+
     private function flatMapSnippetsFromFile(string $filename): ?array
     {
-        $store = new SnippetsStore();
-        (new MarkdownSnippetParser($filename, new CodeTabSnippetBuilder($store)))->loadFromFile();
-        $snippets = $store->snippets();
+        $content = file_get_contents($filename);
+        $snippets = $this->parse($filename, $content);
         if ($snippets === null) {
             return null;
         }
         return $this->formatKeys($filename, $snippets);
     }
 
-    private function filesInDirectory(string $path): array
+    private function parse(string $filename, string $content): array
     {
-        return array_map(function (string $filename) use ($path) {
-            return $path . $filename;
-        }, array_values(array_diff(scandir($path), ['.', '..'])));
+        $store = new SnippetsStore();
+        (new MarkdownSnippetParser($filename, new CodeTabSnippetBuilder($store)))->parse($content);
+        return $store->snippets();
+    }
+
+    private function formatKeys(string $filename, array $snippets): array
+    {
+        return array_combine($this->array(basename($filename), count($snippets)), $snippets);
     }
 
     private function array(string $value, int $count): array
@@ -49,10 +60,5 @@ class CodeTabsDataProvider
             $result[] = $value . " #$i";
         }
         return $result;
-    }
-
-    private function formatKeys(string $filename, array $snippets): array
-    {
-        return array_combine($this->array(basename($filename), count($snippets)), $snippets);
     }
 }

@@ -14,10 +14,11 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
     {
         // given
         $store = new SnippetsStore();
-        $factory = new MarkdownSnippetParser($this->file('replace-by-group.md'), new CodeTabSnippetBuilder($store));
+        [$path, $file] = $this->fileAndPath('replace-by-group.md');
+        $factory = new MarkdownSnippetParser($path, new CodeTabSnippetBuilder($store));
 
         // when
-        $factory->loadFromFile();
+        $factory->parse($file);
 
         // then
         $expected = [
@@ -50,5 +51,11 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
     private function file(string $str): string
     {
         return getcwd() . "/../../docs/$str";
+    }
+
+    public function fileAndPath(string $filename): array
+    {
+        $path = $this->file($filename);
+        return [$path, file_get_contents($path)];
     }
 }
