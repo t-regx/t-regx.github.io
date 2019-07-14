@@ -3,7 +3,7 @@ namespace CodeTest\Parser\Mods;
 
 class ReturnAt implements Modification
 {
-    public function modify(array $snippet, $argument): array
+    public function modify(array $snippet, ?string $argument): array
     {
         return $this->forModLine($snippet, (new LineArg($argument))->lineAsInt(count($snippet)));
     }
