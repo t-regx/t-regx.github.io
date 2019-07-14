@@ -26,7 +26,7 @@ echo pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
 ```php
 $links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
 
-echo preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', function($match){
+echo preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', function ($match) {
     if (!array_key_exists('domain', $match)) {
         // group is either un-matched or non-existent
         if (validateGroupExists('domain', $match)) {
