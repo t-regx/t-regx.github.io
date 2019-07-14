@@ -58,11 +58,24 @@ preg::replace('/[A-Z][a-z]+/', '___', $subject);
 
 ### `only()`
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-$subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 pattern('[A-Z][a-z]+')->replace($subject)->only(2)->with('___');
 ```
+<!--PHP-->
+```php
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
+
+preg::replace('/[A-Z][a-z]+/', '___', $subject, 2);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return-at(last)}-->
+<!--PHP:{return-at(last)}-->
+<!--Result-Value-->
+
 ```php
 'I like scandinavia: ___, ___ and Denmark'
 ```
