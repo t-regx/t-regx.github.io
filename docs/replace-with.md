@@ -8,24 +8,50 @@ replacements should be done.
 
 ## Replace first
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark';
 
 pattern('[A-Z][a-z]+')->replace($subject)->first()->with('___');
 ```
+<!--PHP-->
 ```php
-'I like Scandinavia: ___, Norway and Denmark'
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark';
+
+preg_replace('/[A-Z][a-z]+/', '___', $subject, 1);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return-at(last)}-->
+<!--PHP:{return-at(last)}-->
+<!--Result-Value-->
+
+```php
+'I like ___: Sweden, Norway and Denmark'
 ```
 
 ## Replace more
 
 ### `all()`
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 pattern('[A-Z][a-z]+')->replace($subject)->all()->with('___');
 ```
+<!--PHP-->
+```php
+$subject = 'I like Scandinavia: Sweden, Norway and Denmark'; 
+
+preg::replace('/[A-Z][a-z]+/', '___', $subject);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return-at(last)}-->
+<!--PHP:{return-at(last)}-->
+<!--Result-Value-->
+
 ```php
 'I like Scandinavia: ___, ___ and ___'
 ```
