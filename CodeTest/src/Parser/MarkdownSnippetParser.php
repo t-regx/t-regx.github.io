@@ -6,6 +6,7 @@ use CodeTest\Parser\Mods\MockVariable;
 use CodeTest\Parser\Mods\Modification;
 use CodeTest\Parser\Mods\MultipleReturnValues;
 use CodeTest\Parser\Mods\ReturnFirstSemicolonLast;
+use CodeTest\Parser\Mods\ReturnVariable;
 use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
 use Exception;
 use TRegx\SafeRegex\preg;
@@ -27,6 +28,7 @@ class MarkdownSnippetParser
         $this->path = $path;
         $this->builder = $builder;
         $this->mods = [
+            'return'                 => new ReturnVariable(),
             'return-at'              => new InsertReturnAt(),
             'return-semi'            => new ReturnFirstSemicolonLast(),
             'packed-return-from-end' => new MultipleReturnValues(),

@@ -40,7 +40,6 @@ While using T-Regx, some things are **certain**. For example:
 <!--T-Regx-->
 ```php
 $result = pattern($p)->match($subject)->first();
-return $result;
 ```
 <!--PHP-->
 ```php
@@ -49,15 +48,14 @@ if (preg::match("/$p/", $subject, $match) === 1) {
 } else {
     throw new SubjectNotMatchedException();
 }
-return $result;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!--T-Regx:{mock($subject)}-->
 <!--T-Regx:{mockPattern($p)}-->
-<!---T-Regx:{return($result)}-->
+<!--T-Regx:{return($result)}-->
 <!--PHP:{mock($subject)}-->
 <!--PHP:{mockPattern($p)}-->
-<!---PHP:{return($result)}-->
+<!--PHP:{return($result)}-->
 
 Here, `$result` **must** contain the first occurrence. It must contain *your value*.
 
