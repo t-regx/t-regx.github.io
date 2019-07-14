@@ -6,7 +6,6 @@ use CodeTest\Parser\Mods\MultipleReturnValues;
 use CodeTest\Parser\Mods\ReturnAt;
 use CodeTest\Parser\Mods\ReturnFirstSemicolonLast;
 use Exception;
-use InvalidArgumentException;
 use TRegx\SafeRegex\preg;
 
 class MarkdownParsingSnippetFactory
@@ -14,19 +13,19 @@ class MarkdownParsingSnippetFactory
     const START_TOKEN = '<!--DOCUSAURUS_CODE_TABS-->';
     const END_TOKEN = '<!--END_DOCUSAURUS_CODE_TABS-->';
 
-    /** @var Modification[] */
-    private $mods;
     /** @var string */
     private $path;
+    /** @var Modification[] */
+    private $mods;
 
     public function __construct(string $path)
     {
+        $this->path = $path;
         $this->mods = [
             'return-at'              => new ReturnAt(),
             'return-semi'            => new ReturnFirstSemicolonLast(),
             'packed-return-from-end' => new MultipleReturnValues(),
         ];
-        $this->path = $path;
     }
 
     public function snippetsFromFile(): ?array
@@ -63,18 +62,12 @@ class MarkdownParsingSnippetFactory
             if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([a-z-]+)(?:\((?:(\w+))\))?\}-->/', $line, $match)) {
                 $forType = $match[1];
                 $mod = $match[2];
-                $modLine = array_key_exists(3, $match) ? $match[3] : null;
-                if ($modLine) {
-                    $modLine = $this->modLineStringToInt($modLine, count($snippet[$forType]));
-                }
+                $arg = array_key_exists(3, $match) ? $match[3] : null;
 
-                if (array_key_exists($modLine, $snippet[$forType]) || $modLine === null) {
-                    $snippet[$forType] = $this->modByName($mod)->modify($snippet[$forType], $modLine);
-                    array_pop($snippets);
-                    $snippets[] = array_values($snippet);
-                    continue;
-                }
-                throw new InvalidArgumentException("Can't put return in $modLine");
+                $snippet[$forType] = $this->modByName($mod)->modify($snippet[$forType], $arg);
+                array_pop($snippets);
+                $snippets[] = array_values($snippet);
+                continue;
             }
             if ($type) {
                 array_push($snippet[$type], $line);
@@ -95,19 +88,5 @@ class MarkdownParsingSnippetFactory
     private function emptySnippet(): array
     {
         return ['T-Regx' => [], 'PHP' => [], 'Result-Value' => [], 'Result-Output' => []];
-    }
-
-    private function modLineStringToInt($modLine, int $count): int
-    {
-        if ($modLine === 'first') {
-            return 0;
-        }
-        if ($modLine === 'last') {
-            return $count - 1;
-        }
-        if (is_numeric($modLine)) {
-            return $modLine;
-        }
-        throw new InvalidArgumentException("Mod line \"first\", \"last\" or of type integer expected, '$modLine' given, in $this->path");
     }
 }
