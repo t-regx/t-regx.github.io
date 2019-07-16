@@ -101,7 +101,7 @@ class MarkupResultConsistencyTest extends TestCase
     private function addSingleLineReturn(array $code): array
     {
         if (count($code) === 1) {
-            if (substr($code[0], 0, 7) !== 'return ') {
+            if (!$this->startsWith($code[0], 'return ') && !$this->startsWith($code[0], 'echo ')) {
                 return ['return ' . $code[0]];
             }
         }
@@ -158,5 +158,10 @@ class MarkupResultConsistencyTest extends TestCase
         return join(PHP_EOL, array_values(array_filter($expectedOutput, function (string $input) {
             return trim($input);
         })));
+    }
+
+    private function startsWith(string $haystack, string $needle): bool
+    {
+        return substr($haystack, 0, strlen($needle)) === $needle;
     }
 }
