@@ -1,7 +1,7 @@
 <?php
 namespace CodeTest\Parser;
 
-use CodeTest\Parser\Mods\InsertReturnAt;
+use CodeTest\Parser\Mods\InsertKeywordAt;
 use CodeTest\Parser\Mods\MockVariable;
 use CodeTest\Parser\Mods\Modification;
 use CodeTest\Parser\Mods\MultipleReturnValues;
@@ -29,7 +29,8 @@ class MarkdownSnippetParser
         $this->builder = $builder;
         $this->mods = [
             'return'                 => new ReturnVariable(),
-            'return-at'              => new InsertReturnAt(),
+            'return-at'              => new InsertKeywordAt('return'),
+            'echo-at'                => new InsertKeywordAt('echo'),
             'return-semi'            => new ReturnFirstSemicolonLast(),
             'packed-return-from-end' => new MultipleReturnValues(),
             'mock'                   => new MockVariable(false),
