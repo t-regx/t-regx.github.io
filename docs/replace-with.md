@@ -6,7 +6,16 @@ title: Replace with a constant value
 After `replace()`, you need to explicitly use one of `first()`/`all()`/`only(int)` methods, to express how many
 replacements should be done.
 
-## Replace first
+Specifying limits is done to relieve you from [**brain strain**](overview.md#brain-strain) - so you can immediately 
+recognize author's intentions.
+
+## Limits
+
+Using `first()`/`all()`/`only(int)` is semantically identical to passing `$limit` argument to `preg::replace()`/`preg::replace_callback()`.
+
+Neither of methods `first()`/`all()`/`only(int)` modify the subject if it wasn't matched by a pattern. 
+
+### First occurrence - `first()`
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
@@ -30,9 +39,7 @@ preg_replace('/[A-Z][a-z]+/', '___', $subject, 1);
 'I like scandinavia: ___, Norway and Denmark'
 ```
 
-## Replace more
-
-### `all()`
+### All occurrences - `all()`
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
@@ -56,7 +63,7 @@ preg::replace('/[A-Z][a-z]+/', '___', $subject);
 'I like scandinavia: ___, ___ and ___'
 ```
 
-### `only()`
+### Limited occurrences - `only()`
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
@@ -100,11 +107,24 @@ I have <15> and <192>
 Resolving such references won't happen with T-Regx.
  
 This is done to relieve you from the [**brain strain**](overview.md#brain-strain). A programmer should be able to merely 
-replace a string with a constant value without cognitive load about possible `\` or `$` hiding somewhere.
+replace a string with a constant value without [cognitive load](overview.md#brain-strain) about possible `\` or `$` hiding somewhere.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->with('<$1>');
 ```
+<!--PHP-->
+```php
+preg::replace('/(\d+)cm/', '<\$1>', 'I have 15cm and 192cm');
+//                            ↑
+// in T-Regx, special function is used to quote all references
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{echo-at(first)}-->
+<!--PHP:{echo-at(first)}-->
+<!--Result-Output-->
+
 ```text
 I have <$1> and <$1>
 ```
@@ -121,9 +141,22 @@ might interfere with logic and cause bugs that are very hard to find.
 If you, however, would like to intentionally use regular expression references and have validated your input 
 against *an unexpected* `\` or `$` - feel free to use `withReferences()` which **will** resolve replacement references.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->withReferences('<$1>');
 ```
+<!--PHP-->
+```php
+preg::replace('/(\d+)cm/', '<$1>', 'I have 15cm and 192cm');
+//                            ↑
+// using withReferences(), back references are preserved
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{echo-at(first)}-->
+<!--PHP:{echo-at(first)}-->
+<!--Result-Output-->
+
 ```text
 I have <15> and <192>
 ```
