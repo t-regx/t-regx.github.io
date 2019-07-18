@@ -5,16 +5,17 @@ use AssertionError;
 use CodeTest\CodeTabsDataProvider;
 use Error;
 use InvalidArgumentException;
+use Iterator;
 use ParseError;
 use PHPUnit\Framework\TestCase;
 use TRegx\SafeRegex\preg;
 
 class MarkupResultConsistencyTest extends TestCase
 {
-    function snippets(): array
+    function snippets(): Iterator
     {
         try {
-            return (new CodeTabsDataProvider('../../docs/'))->getSnippets();
+            return (new CodeTabsDataProvider('../../docs/'))->getSnippetsIterator();
         } catch (InvalidArgumentException $exception) {
             echo PHP_EOL . $exception . $this->getStatusMessage() . PHP_EOL . $exception->getTraceAsString();
             throw $exception;
