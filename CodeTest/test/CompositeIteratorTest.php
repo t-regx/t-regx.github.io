@@ -1,8 +1,7 @@
 <?php
-namespace CodeTest\Parser;
+namespace CodeTest;
 
 use ArrayIterator;
-use CodeTest\CompositeIterator;
 use EmptyIterator;
 use PHPUnit\Framework\TestCase;
 
@@ -14,19 +13,44 @@ class CompositeIteratorTest extends TestCase
     function test(): void
     {
         // given
-        $iterators = new ArrayIterator([
+        $compositeIterator = new CompositeIterator(new ArrayIterator([
             new ArrayIterator([1, 2]),
             new EmptyIterator(),
             new ArrayIterator([3, 4, 5, 6]),
             new EmptyIterator(),
             new EmptyIterator(),
             new ArrayIterator([7]),
-        ]);
+        ]));
+
         // when
-        $result = iterator_to_array(new CompositeIterator($iterators));
+        $result = iterator_to_array($compositeIterator);
 
         // then
         $this->assertEquals([1, 2, 3, 4, 5, 6, 7], $result);
+    }
+
+    /**
+     * @test
+     */
+    function shouldRewind(): void
+    {
+        // given
+        $iterator = new CompositeIterator(new ArrayIterator([
+            new ArrayIterator([1, 2]),
+            new EmptyIterator(),
+            new ArrayIterator([3, 4, 5, 6]),
+            new EmptyIterator(),
+            new EmptyIterator(),
+            new ArrayIterator([7]),
+        ]));
+
+        // when
+        $result1 = iterator_to_array($iterator);
+        $result2 = iterator_to_array($iterator);
+
+        // then
+        $this->assertEquals([1, 2, 3, 4, 5, 6, 7], $result1);
+        $this->assertEquals([1, 2, 3, 4, 5, 6, 7], $result2);
     }
 
     /**

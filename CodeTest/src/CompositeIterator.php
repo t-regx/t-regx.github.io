@@ -19,7 +19,7 @@ class CompositeIterator implements Iterator
         $this->nestedIterator = $this->firstIterator($iterator);
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return $this->nestedIterator->valid();
     }
@@ -37,17 +37,19 @@ class CompositeIterator implements Iterator
         return null;
     }
 
-    public function next()
+    public function next(): void
     {
         $this->nestedIterator->next();
         $this->key++;
         if (!$this->nestedIterator->valid()) {
+            $this->nestedIterator->rewind();
             $this->nestedIterator = $this->nextIterator();
         }
     }
 
-    public function rewind()
+    public function rewind(): void
     {
+        $this->key = 0;
         $this->iterator->rewind();
         $this->nestedIterator = $this->firstIterator($this->iterator);
     }
