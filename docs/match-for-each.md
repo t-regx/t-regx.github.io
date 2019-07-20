@@ -20,9 +20,9 @@ pattern('\w+')->match('Apples are cool')->forEach(function (string $text) {
 <!--PHP-->
 ```php
 if (preg::match_all('/\w+/', 'Apples are cool', $matches)) {
-    foreach ($matches[0] as $text) {
+    array_map(function (string $text) {
         echo "I matched $text, ";
-    }
+    }, $matches[0]);
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
