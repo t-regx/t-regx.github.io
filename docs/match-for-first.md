@@ -208,6 +208,8 @@ Of course, your custom exception must meet certain requirements:
 If you don't like functional programming style, you are free to use [`first()`](match-first.md) (which throws an exception) 
 and just catch it.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 try {
     return pattern('[0-9]+')->match("I'm a dog")->first();
@@ -216,3 +218,16 @@ catch (SubjectNotMatchedException $e) {
     return 'Some other value';
 }
 ```
+<!--PHP-->
+```php
+try {
+    if (preg::match('/[0-9]+/', "I'm a dog", $match)) {
+        return $match[0];
+    }
+    throw new SubjectNotMatchedException();
+}
+catch (SubjectNotMatchedException $e) {
+    return 'Some other value';
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
