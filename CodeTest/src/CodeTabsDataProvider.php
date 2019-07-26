@@ -22,7 +22,9 @@ class CodeTabsDataProvider
         return new CompositeIterator(new LazyMapperIterator(new FilesIterator($this->basePath), function (string $filename) {
             $store = new SnippetsStore();
             (new MarkdownSnippetParser($filename, new CodeTabSnippetBuilder($store)))->parse(file_get_contents($filename));
-            return new ArrayIterator($store->snippets());
-        }));
+            return new KeyMapperIterator(new ArrayIterator($store->snippets()), function (int $key) use ($filename) {
+                return basename($filename) . " #$key";
+            });
+        }), false);
     }
 }
