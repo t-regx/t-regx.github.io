@@ -67,4 +67,35 @@ class CompositeIteratorTest extends TestCase
         // then
         $this->assertFalse($result);
     }
+
+    /**
+     * @test
+     */
+    function shouldNotReindexKeys(): void
+    {
+        // given
+        $iterator = new CompositeIterator(new ArrayIterator([
+            new ArrayIterator(['a' => 1, 'b' => 2]),
+            new EmptyIterator(),
+            new ArrayIterator(['c' => 3, 'd' => 4, 'e' => 5, 'f' => 6]),
+            new EmptyIterator(),
+            new EmptyIterator(),
+            new ArrayIterator(['g' => 7]),
+        ]), false);
+
+        // when
+        $result1 = iterator_to_array($iterator);
+
+        // then
+        $expected = [
+            'a' => 1,
+            'b' => 2,
+            'c' => 3,
+            'd' => 4,
+            'e' => 5,
+            'f' => 6,
+            'g' => 7
+        ];
+        $this->assertEquals($expected, $result1);
+    }
 }

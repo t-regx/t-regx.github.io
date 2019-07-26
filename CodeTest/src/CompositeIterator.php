@@ -12,11 +12,14 @@ class CompositeIterator implements Iterator
     private $nestedIterator;
     /** @var int */
     private $key = 0;
+    /** @var bool */
+    private $reindex;
 
-    public function __construct(Iterator $iterator)
+    public function __construct(Iterator $iterator, bool $reindexKeys = true)
     {
         $this->iterator = $iterator;
         $this->nestedIterator = $this->firstIterator($iterator);
+        $this->reindex = $reindexKeys;
     }
 
     public function valid(): bool
@@ -29,10 +32,16 @@ class CompositeIterator implements Iterator
         return $this->nestedIterator->current();
     }
 
-    public function key(): ?int
+    /**
+     * @return int|string|null
+     */
+    public function key()
     {
         if ($this->nestedIterator->valid()) {
-            return $this->key;
+            if ($this->reindex) {
+                return $this->key;
+            }
+            return $this->nestedIterator->key();
         }
         return null;
     }
