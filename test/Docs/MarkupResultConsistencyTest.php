@@ -64,7 +64,7 @@ class MarkupResultConsistencyTest extends TestCase
         $lines = $this->protectAgainstClassRedeclaration($lines);
         $functions = $this->polyfillGlobalFunctions([
             'validateGroupExists'  => true,
-            'validateGroupMatched' => true,
+            'validateGroupMatched' => false, // doesn't work for matched empty strings
             'validateGroupName'    => true
         ]);
         $classes = [
@@ -118,9 +118,7 @@ class MarkupResultConsistencyTest extends TestCase
     private function polyfillForSubjectNotMatched(array $lines): array
     {
         return array_map(function (string $line) {
-            $polyfills = [
-                'new SubjectNotMatchedException()' => 'new SubjectNotMatchedException("","")'
-            ];
+            $polyfills = ['new SubjectNotMatchedException()' => 'new SubjectNotMatchedException("","")'];
             return str_replace(array_keys($polyfills), array_values($polyfills), $line);
         }, $lines);
     }
