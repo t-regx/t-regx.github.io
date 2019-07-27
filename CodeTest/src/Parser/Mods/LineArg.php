@@ -28,6 +28,11 @@ class LineArg
             return $collectionSize - 1;
         }
         if (is_numeric($this->argument)) {
+            if ($this->argument < 0) {
+                if (abs($this->argument) <= $collectionSize) {
+                    return $collectionSize + $this->argument;
+                }
+            }
             if ($this->argument < $collectionSize) {
                 return $this->argument;
             }

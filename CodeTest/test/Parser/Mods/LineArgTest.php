@@ -30,7 +30,9 @@ class LineArgTest extends TestCase
             ['first', 10, 0],
             ['last', 10, 9],
             ['4', 10, 4],
-            ['0', 1, 0]
+            ['0', 1, 0],
+            ['-3', 10, 7],
+            ['-3', 3, 0]
         ];
     }
 
@@ -56,6 +58,7 @@ class LineArgTest extends TestCase
             ['foo', 10],
             [5, 2],
             [2, 2],
+            [-4, 2],
         ];
     }
 }
