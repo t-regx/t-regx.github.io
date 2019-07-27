@@ -8,6 +8,11 @@ use InvalidArgumentException;
 use Iterator;
 use ParseError;
 use PHPUnit\Framework\TestCase;
+use TRegx\CleanRegex\Exception\CleanRegex\NonExistentGroupException;
+use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;
+use TRegx\CleanRegex\Match\Details\Match;
+use TRegx\CleanRegex\Match\Details\NotMatched;
+use TRegx\SafeRegex\Exception\CompileSafeRegexException;
 use TRegx\SafeRegex\preg;
 
 class MarkupResultConsistencyTest extends TestCase
@@ -70,14 +75,14 @@ class MarkupResultConsistencyTest extends TestCase
         $classes = [
             "if (!class_exists('MyCustomException')) { class MyCustomException extends Exception {} }"
         ];
-        $namespaces = [
-            'use TRegx\CleanRegex\Exception\CleanRegex\NonExistentGroupException;',
-            'use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;',
-            'use TRegx\CleanRegex\Match\Details\Match;',
-            'use TRegx\CleanRegex\Match\Details\NotMatched;',
-            'use TRegx\SafeRegex\Exception\CompileSafeRegexException;',
-            'use TRegx\SafeRegex\preg;',
-        ];
+        $namespaces = $this->polyfillNamespaces([
+            NonExistentGroupException::class,
+            SubjectNotMatchedException::class,
+            Match::class,
+            NotMatched::class,
+            CompileSafeRegexException::class,
+            preg::class,
+        ]);
         return array_merge($namespaces, $functions, $classes, $lines);
     }
 
@@ -142,6 +147,13 @@ class MarkupResultConsistencyTest extends TestCase
         return array_map(function ($key, $value) {
             return "if (!function_exists('$key')) { function $key() { return " . var_export($value, true) . "; }}";
         }, array_keys($namesAndResults), $namesAndResults);
+    }
+
+    private function polyfillNamespaces(array $classes): array
+    {
+        return array_map(function (string $className) {
+            return "use $className;";
+        }, $classes);
     }
 
     private function parseExpectedResult(array $input)
