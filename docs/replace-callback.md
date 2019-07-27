@@ -160,7 +160,7 @@ preg::replace_callback('/\w+/', function (array $m) {
 }, 'Apples are cool', 1);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--PHP:{return-at(8)}-->
+<!--PHP:{return-at(-3)}-->
 <!--Result-Value-->
 
 ```php
