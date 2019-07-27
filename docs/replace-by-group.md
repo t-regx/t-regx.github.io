@@ -120,6 +120,50 @@ return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)
 'My links are: google, , facebook,  :)'
 ```
 
+### `orReturn()`
+
+Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
+are replaced with a given parameter string:
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
+```php
+$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
+
+pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
+    ->all()
+    ->by()->group('domain')->orReturn('UNKNOWN');
+```
+<!--PHP-->
+```php
+$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
+
+return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)#', function ($match) {
+    validateGroupName('domain');
+    if (!array_key_exists('domain', $match)) {
+        // group is either un-matched or non-existent
+        if (validateGroupExists('domain', $match)) {
+            return 'UNKNOWN';
+        } else {
+            throw new NonexistentGroupException('domain');
+        }
+    }
+    if ($match['domain'] === '') {
+        // group is either un-matched or matched an empty string
+        if (!validateGroupMatched('domain', $match)) {
+            return 'UNKNOWN';
+        }
+    }
+    return $match['domain'];
+}, $links);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return-at(2)}-->
+<!--Result-Value-->
+
+```php
+'My links are: google, UNKNOWN, facebook, UNKNOWN :)'
+```
 ### `orThrow()`
 
 You can either call this method without parameters, or with your custom exception class name (just like [`forFirst()`](match-for-first.md) parameter):
