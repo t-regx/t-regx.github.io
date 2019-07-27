@@ -80,6 +80,46 @@ code snippets illustrating the usage of each of those:
 Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
 are simply left as they were (ignored):
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
+```php
+$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
+
+pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
+    ->all()
+    ->by()->group('domain')->orIgnore();
+```
+<!--PHP-->
+```php
+$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
+
+return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)#', function ($match) {
+    validateGroupName('domain');
+    if (!array_key_exists('domain', $match)) {
+        // group is either un-matched or non-existent
+        if (validateGroupExists('domain', $match)) {
+            return $match[0];
+        } else {
+            throw new NonexistentGroupException('domain');
+        }
+    }
+    if ($match['domain'] === '') {
+        // group is either un-matched or matched an empty string
+        if (!validateGroupMatched('domain', $match)) {
+            return $match[0];
+        }
+    }
+    return $match['domain'];
+}, $links);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return-at(2)}-->
+<!--Result-Value-->
+
+```php
+'My links are: google, http://.io, facebook, https://.com :)'
+```
+
 ### `orEmpty()`
 
 Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
