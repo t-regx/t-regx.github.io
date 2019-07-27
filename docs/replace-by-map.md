@@ -116,6 +116,8 @@ Extensions: "Audio", mp4, jpg, jpeg, png, "Animation"
 Resolving a replacement based on a **whole match** however, is both uncommon and unpractical. It's much more elastic to resolve
 it based on a specific capturing group, using `by()->group()->map()`:
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 $links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
 
@@ -129,8 +131,56 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
        'socket'   => 'Documentation',
        'facebook' => 'Social Portal',
        't-regx'   => 'Documentation',
-    ]);
+    ])
+    ->orThrow();
 ```
+<!--PHP-->
+```php
+$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
+
+preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', function (array $match) {
+    // possible invalid group, e.g. "2group" or -2
+    validateGroupName('domain');                      
+
+    $group = $match['domain'];
+    if (!array_key_exists('domain', $match)) {
+        // group is either un-matched or non-existent
+        if (validateGroupExists('domain', $match)) {
+            $group = $match['domain'];
+        } else {
+            throw new NonexistentGroupException('domain');
+        }
+    }
+    if ($match['domain'] === '') {
+        // group is either un-matched or matched an empty string
+        if (validateGroupMatched('domain', $match)) {
+            $group = $match['domain'];
+        } else {
+            throw new GroupNotMatchedException();
+        }
+    }
+
+    $map = [
+        'google'   => 'Search Engine',
+        'socket'   => 'Documentation',
+        'facebook' => 'Social Portal',
+        't-regx'   => 'Documentation',
+    ];
+    if (!array_key_exists($group, $map)) {
+        throw new MissingReplacementKeyException();
+    }
+    $result = $map[$group];
+    if (!is_string($result)) {
+        throw new InvalidArgumentException();
+    }
+    return $result;
+}, $links);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{echo-at(2)}-->
+<!--PHP:{echo-at(2)}-->
+<!--Result-Output-->
+
 ```text
 Links: Search Engine, Documentation, Social Portal, Documentation
 ```
