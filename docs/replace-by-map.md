@@ -10,15 +10,42 @@ Replacing by map allows T-Regx to save a little performance overhead, by not cre
 
 ## Standard map
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 $message = 'My words: "mp3", "mp4", "gif"'; 
 
-pattern('\w{3}')->replace($message)->all()->by()->map([
+pattern('\b\w{3}\b')->replace($message)->all()->by()->map([
     'mp3' => 'Audio file',
     'mp4' => 'Video file',
     'gif' => 'Animation'
 ]);
 ```
+<!--PHP-->
+```php
+$message = 'My words: "mp3", "mp4", "gif"'; 
+
+preg::replace_callback('/\b\w{3}\b/', function ($match) {
+    $map = [
+        'mp3' => 'Audio file',
+        'mp4' => 'Video file',
+        'gif' => 'Animation'
+    ];
+    if (!array_key_exists($match[0], $map)) {
+        throw new MissingReplacementKeyException();
+    }
+    $result = $map[$match[0]];
+    if (!is_string($result)) {
+        throw new InvalidArgumentException();
+    }
+    return $result;
+}, $message);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{echo-at(2)}-->
+<!--PHP:{echo-at(2)}-->
+<!--Result-Output-->
+
 ```text
 My words: "Audio file", "Video file", "Animation"
 ```

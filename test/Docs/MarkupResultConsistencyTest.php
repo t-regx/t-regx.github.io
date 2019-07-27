@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Iterator;
 use ParseError;
 use PHPUnit\Framework\TestCase;
+use TRegx\CleanRegex\Exception\CleanRegex\MissingReplacementKeyException;
 use TRegx\CleanRegex\Exception\CleanRegex\NonExistentGroupException;
 use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;
 use TRegx\CleanRegex\Match\Details\Match;
@@ -50,10 +51,10 @@ class MarkupResultConsistencyTest extends TestCase
         $this->assertEquals($echo1, $echo2, 'In code snippet: PHP');
 
         if (count($expectedResult) > 0) {
-            $this->assertEquals($return1, $this->parseExpectedResult($expectedResult));
+            $this->assertEquals($return1, $this->parseExpectedResult($expectedResult), 'In expected result value');
         }
         if (count($expectedOutput) > 0) {
-            $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput));
+            $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput), 'In expected result output');
         }
     }
 
@@ -76,6 +77,7 @@ class MarkupResultConsistencyTest extends TestCase
             "if (!class_exists('MyCustomException')) { class MyCustomException extends Exception {} }"
         ];
         $namespaces = $this->polyfillNamespaces([
+            MissingReplacementKeyException::class,
             NonExistentGroupException::class,
             SubjectNotMatchedException::class,
             Match::class,
