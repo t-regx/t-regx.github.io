@@ -11,7 +11,6 @@ Replacing by map allows T-Regx to save a little performance overhead, by not cre
 ## Standard map
 
 ```php
-<?php
 $message = 'My words: "mp3", "mp4", "gif"'; 
 
 pattern('\w{3}')->replace($message)->all()->by()->map([
@@ -30,7 +29,6 @@ And of course `all()`/`first()`/`only(int)` modifiers are taken into account.
 
 Normally, had you found a match that's not present in your map - `MissingReplacementKeyException` would be thrown:
 ```php
-<?php
 $message = 'My words: "mp3", "mp4", "gif"'; 
 
 pattern('\w{3}')->replace($message)->all()->by()->map([
@@ -49,7 +47,6 @@ If you don't need to specify all your possible `[match => replacement]` pairs, y
 With `mapIfExists()` - superfluous occurrences are left unchanged:
 
 ```php
-<?php
 $message = "Extensions: mp3, mp4, jpg, jpeg, png, gif"; 
 
 pattern('\w{3,4}')->replace($message)->all()->by()->mapIfExists([
@@ -67,7 +64,6 @@ Resolving a replacement based on a **whole match** however, is both uncommon and
 it based on a specific capturing group, using `by()->group()->map()`:
 
 ```php
-<?php
 $links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
 
 pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
