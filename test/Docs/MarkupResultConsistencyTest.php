@@ -41,8 +41,8 @@ class MarkupResultConsistencyTest extends TestCase
         [$return2, $echo2] = $this->invoke($two, 'PHP');
 
         // then
-        $this->assertEquals($return1, $return2);
-        $this->assertEquals($echo1, $echo2);
+        $this->assertEquals($return1, $return2, 'In code snippet: T-Regx');
+        $this->assertEquals($echo1, $echo2, 'In code snippet: PHP');
 
         if (count($expectedResult) > 0) {
             $this->assertEquals($return1, $this->parseExpectedResult($expectedResult));
