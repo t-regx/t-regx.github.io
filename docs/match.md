@@ -158,3 +158,8 @@ catch (SubjectNotMatchedException $e) {
 }
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+
+## Protect the developer
+
+Please, keep in mind that T-Regx aims to relieve you (a programmer) from any [**brain strain**](overview.md#brain-strain),
+therefore if you 

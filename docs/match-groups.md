@@ -182,7 +182,7 @@ pattern('(?<schema>https?://)?\w+\.\w+')->match($subject)->first(function (Match
 
 #### Invalid groups and arguments
 - `matched()` will throw `NonexistentGroupException`, when used with a non-existent group *(i.e. `asdf`)*.
-- `matched()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any other type than `string` or `int`)*.
+- `matched()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any type other than `string` or `int`)*.
 
 ## Group exists
 
@@ -211,7 +211,7 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('')->first(function (Match $match)
 ```
 
 #### Invalid groups and arguments
-- `hasGroup()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any other type than `string` or `int`)*.
+- `hasGroup()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any type other than `string` or `int`)*.
 
 > Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic - they're constant much more often; hence the developer doesn't have to check whether the group exists. The pattern is constant - the collection of groups is also constant.
 
@@ -260,10 +260,10 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('14cm')->first(function (Match $ma
 Method `group()->all()` allows you to get the group from all other matches:
 
 ```php
-$p = '(?<value>\d+)(?<unit>cm|mm)';
-$s = '192mm and 168cm or 18mm and 12cm';
+$pattern = '(?<value>\d+)(?<unit>cm|mm)';
+$subject = '192mm and 168cm or 18mm and 12cm';
 
-pattern($p)->match($s)->first(function (Match $match) {
+pattern($pattern)->match($subject)->first(function (Match $match) {
     $match->group('value')->all();   // ['192', '168', '18', '12']
     $match->group('unit')->all();    // ['mm', 'cm', 'mm', 'cm']
 });
@@ -272,10 +272,10 @@ pattern($p)->match($s)->first(function (Match $match) {
 If the group is not matched in other occurrences, its value in `all()` result array will be `null`:
 
 ```php
-$p = '(?<value>\d+)(?<unit>cm|mm)?';
-$s = '192mm and 168 or 18mm and 12';
+$pattern = '(?<value>\d+)(?<unit>cm|mm)?';
+$subject = '192mm and 168 or 18mm and 12';
 
-pattern($p)->match($s)->first(function (Match $match) {
+pattern($pattern)->match($subject)->first(function (Match $match) {
     $match->group('value')->all();   // ['192', '168', '18', '12']
     $match->group('unit')->all();    // ['mm', null, 'mm', null]
 });
@@ -299,19 +299,28 @@ as the third.
 Since PHP 7.2, there's `PREG_UNMATCHED_AS_NULL` - it's a little better, it allows to distinguish unmatched from matched empty string,
 but to distinguish invalid and non-existent groups from unmatched - you have to use `array_key_exists()`.
 
+For `preg_match()`/`preg_match_all()` we can use `PREG_UNMATCHED_AS_NULL`, for `preg_replace_callback()` we have... nothing. There's no way to verify it.
+
 ---
 
 And T-Regx **hates** it. We **hate** it.
 
 ---
 
-That's why T-Regx has 3 separate methods to deal with each of these cases separately. Here's how they work:
+That's why in T-Regx, [`Match`](match-details.md) details has 3 separate methods to deal with each of these cases separately. 
 
-|Group|Invalid|Non-existent|Not matched|Matched|
-|---|---|---|---|---|
-|`hasGroup()`|`InvalidArgument`|`false`|`true`|`true`|
-|`matched()`|`InvalidArgument`|`NonexistentGroup`|`false`|`true`|
-|`text()`|`InvalidArgument`|`NonexistentGroup`|`GroupNotMatched`|Value of the group|
+Of course, the interface of [`Match`](match-details.md) is the same for matching, replacing and any other operation, 
+so validation of groups in T-Regx works completely alike for `pattern()->match()`, `pattern()->replace()` and any other 
+method. It's bulletproof.
+
+Here's how they work:
+
+|Group             |`hasGroup()`     |`matched()`       |`text()`          |
+|------------------|-----------------|------------------|------------------|
+|Invalid group     |`InvalidArgument`|`InvalidArgument` |`InvalidArgument` |
+|Non-existent group|`false`          |`NonexistentGroup`|`NonexistentGroup`|
+|Not matched group |`true`           |`false`           |`GroupNotMatched` |
+|Matched group     |`true`           |`true`            |Value of the group|
 
 In short:
  - You can't use an invalid group (`2startingWithDigit` or negative `-1`)

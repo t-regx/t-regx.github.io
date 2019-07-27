@@ -147,7 +147,7 @@ Results of `Match.index()` are always **continuous integer**  numbers, going fro
 
 ## Limit
 
-Depending on whether you used `all()`, `first()` or `only(int)` - `limit()` will return `-1`, `1` or an 
+Depending on whether you used `all()`, `first()` or `only(int)` - method `limit()` will return `-1`, `1` or an 
 argument given to `only()`
 
 ```php
