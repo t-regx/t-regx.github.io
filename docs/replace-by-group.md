@@ -6,7 +6,8 @@ title: Replace by group
 Method `replace()->by()->group()` can be used when you would just like to replace a whole match by one of its capturing group,
 optionally handling what should happen when a group is not matched.
 
-This is, in fact, a shorthand for a rather common use of `callback()` replacing with a capturing group.
+This is, in fact, a shorthand for a rather common usage of `callback()` with a function replacing by a capturing 
+group - [Scroll down to see an example](replace-by-group.md#identity).
 
 ## Overview
 
@@ -18,23 +19,20 @@ capturing the URL domain, you can easily leave off only the domain in the matche
 ```php
 $links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
 
-pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
-    ->replace($links)
+pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')->replace($links)
     ->all()
-    ->by()
-    ->group('domain')
-    ->orThrow();
+    ->by()->group('domain')->orThrow();
 ```
 <!--PHP-->
 ```php
 $links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
 
 return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', function ($match) {
-    // This code is just a simplification.
-    // The PHP equivalent is actually a bit more complicated. Please, see the PHP snippets below
-
     return $match['domain'];
 }, $links);
+
+// This code is just a simplification.
+// The PHP equivalent is actually a bit more complicated. Please, see PHP snippets below.
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!--T-Regx:{return-at(2)}-->
@@ -56,16 +54,16 @@ always going to be replaced with it.
 How do you handle unmatched/optional groups?
  
 For example, a group `(?<name>\w+)?` is optional. For an occurrence with the optional `'name'` group that happened not 
-to be matched,  you can chose either to ignore it (just don't replace the match), replace with a default or an empty 
-string, or call a producer to return what should the match be replaced with.
+to be matched,  you can chose either to ignore the replacement (simply don't perform any replace in the match),
+replace with a default or an empty string, or call a producer to return what should the match be replaced with.
 
 You can also chose to throw an exception, if the unmatched group is not supposed to be optional, to ensure integrity.
 
- - `orIgnore()` - leaves the match unchanged
+ - `orIgnore()` - leaves the match unchanged - doesn't replace the match, if the group itself is not matched
  - `orEmpty()` - matched occurrence is replaced with an empty string
- - `orReturn(string)` - match is replaced with the given argument 
+ - `orReturn(string)` - match is replaced with the given `string` argument
  - `orElse(callable)` - uses a callback with [`Match`](match-details.md) argument, in order to evaluate a replacement
- - `orThrow()` - throws a default or a custom exception (just like [forFirst()->orThrow()](match-for-first.md))
+ - `orThrow()` - throws a default or a custom exception, just like [forFirst()->orThrow()](match-for-first.md)
 
 > `orEmpty()` is the most performance-light method, because it uses `preg_replace()`, whereas `orReturn()`, `orIgnore()`, 
 > `orElse()` and `orThrow()` use `preg_replace_callback()`.
@@ -120,6 +118,12 @@ return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)
 'My links are: google, http://.io, facebook, https://.com :)'
 ```
 
+Description:
+ - Match `www.google.com` was replaced with the matched occurrence of it's capturing group - `google`
+ - Match `facebook.com` was replaced with the matched occurrence of it's capturing group - `facebook`
+ - Matches `http://.io` and `https://.com` were matched, but the capturing group `'domain'` inside wasn't, so those matches
+   are ignored, in this case.
+
 ### `orEmpty()`
 
 Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
@@ -159,6 +163,10 @@ return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)
 ```php
 'My links are: google, , facebook,  :)'
 ```
+
+Description:
+ - Matches `http://.io` and `https://.com` were matched, but the capturing group `'domain'` inside wasn't, so those matches
+   are replaced with an empty string, in this case.
 
 ### `orReturn(string)`
 
@@ -204,6 +212,10 @@ return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)
 ```php
 'My links are: google, UNKNOWN, facebook, UNKNOWN :)'
 ```
+
+Description:
+ - Matches `http://.io` and `https://.com` were matched, but the capturing group `'domain'` inside wasn't, so those matches
+   are replaced with a given `'UNKNOWN'` string, in this case.
 
 ### `orElse(callable)`
 
@@ -255,6 +267,11 @@ return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)
 ```php
 'My links are: google, Not found **http://.io**, facebook, Not found **https://.com** :)'
 ```
+
+Description:
+ - Matches `http://.io` and `https://.com` were matched, but the capturing group `'domain'` inside wasn't, so callback 
+   function is called with `Match` details (first with `http://.io`, and then with `https://.com`), and the link is replaced
+   with a result of that function.
 
 ### `orThrow()`
 
