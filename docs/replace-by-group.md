@@ -120,7 +120,7 @@ return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)
 'My links are: google, , facebook,  :)'
 ```
 
-### `orReturn()`
+### `orReturn(string)`
 
 Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
 are replaced with a given parameter string:
@@ -164,6 +164,58 @@ return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)
 ```php
 'My links are: google, UNKNOWN, facebook, UNKNOWN :)'
 ```
+
+### `orElse(callable)`
+
+Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
+are then passed to the producer, which result is then replaced in place of the link:
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
+```php
+$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
+
+pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
+    ->all()
+    ->by()->group('domain')->orElse(function (Match $match) {
+        return "Not found **$match**";
+    });
+```
+<!--PHP-->
+```php
+$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
+
+$producer = function (array $match) {
+    return "Not found **{$match[0]}**";
+};
+
+return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)#', function ($match) use ($producer) {
+    validateGroupName('domain');
+    if (!array_key_exists('domain', $match)) {
+        // group is either un-matched or non-existent
+        if (validateGroupExists('domain', $match)) {
+            return $producer($match);
+        } else {
+            throw new NonexistentGroupException('domain');
+        }
+    }
+    if ($match['domain'] === '') {
+        // group is either un-matched or matched an empty string
+        if (!validateGroupMatched('domain', $match)) {
+            return $producer($match);
+        }
+    }
+    return $match['domain'];
+}, $links);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return-at(2)}-->
+<!--Result-Value-->
+
+```php
+'My links are: google, Not found **http://.io**, facebook, Not found **https://.com** :)'
+```
+
 ### `orThrow()`
 
 You can either call this method without parameters, or with your custom exception class name (just like [`forFirst()`](match-for-first.md) parameter):
