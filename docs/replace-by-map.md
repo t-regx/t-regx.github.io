@@ -73,14 +73,40 @@ If you don't need to specify all your possible `[match => replacement]` pairs, y
 
 With `mapIfExists()` - superfluous occurrences are left unchanged:
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif"; 
+$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";
 
-pattern('\w{3,4}')->replace($message)->all()->by()->mapIfExists([
-   'mp3'   => '"Audio"',
-   'gif'   => '"Animation"'
+pattern('\b\w{3,4}\b')->replace($message)->all()->by()->mapIfExists([
+   'mp3' => '"Audio"',
+   'gif' => '"Animation"'
 ]);
 ```
+<!--PHP-->
+```php
+$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";
+
+preg::replace_callback('/\b\w{3}\b/', function ($match) {
+    $map = [
+        'mp3' => '"Audio"',
+        'gif' => '"Animation"'
+    ];
+    if (!array_key_exists($match[0], $map)) {
+        return $match[0];
+    }
+    $result = $map[$match[0]];
+    if (!is_string($result)) {
+        throw new InvalidArgumentException();
+    }
+    return $result;
+}, $message);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{echo-at(2)}-->
+<!--PHP:{echo-at(2)}-->
+<!--Result-Output-->
+
 ```text
 Extensions: "Audio", mp4, jpg, jpeg, png, "Animation"
 ```
