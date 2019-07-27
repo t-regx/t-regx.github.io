@@ -30,21 +30,9 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
 $links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
 
 return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', function ($match) {
-    validateGroupName('domain');
-    if (!array_key_exists('domain', $match)) {
-        // group is either un-matched or non-existent
-        if (validateGroupExists('domain', $match)) {
-            throw new MyCustomException();
-        } else {
-            throw new NonexistentGroupException('domain');
-        }
-    }
-    if ($match['domain'] === '') {
-        // group is either un-matched or matched an empty string
-        if (!validateGroupMatched('domain', $match)) {
-            throw new GroupNotMatchedException();
-        }
-    }
+    // This code is just a simplification.
+    // The PHP equivalent is actually a bit more complicated. Please, see the PHP snippets below
+
     return $match['domain'];
 }, $links);
 ```
@@ -81,6 +69,57 @@ You can also chose to throw an exception, if the unmatched group is not supposed
 
 > `orEmpty()` is the most performance-light method, because it uses `preg_replace()`, whereas `orReturn()`, `orIgnore()`, 
 > `orElse()` and `orThrow()` use `preg_replace_callback()`.
+
+---
+
+Now, for the sake of this example, let's say a domain is an optional part of an URL address. Below, you'll find 4 
+code snippets illustrating the usage of each of those:
+
+### `orThrow()`
+
+You can either call this method without parameters, or with your custom exception class name (just like [`forFirst()`](match-for-first.md) parameter):
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
+```php
+$links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
+
+pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
+    ->all()
+    ->by()->group('domain')->orThrow(MyCustomException::class);
+```
+<!--PHP-->
+```php
+$links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
+
+return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)#', function ($match) {
+    validateGroupName('domain');
+    if (!array_key_exists('domain', $match)) {
+        // group is either un-matched or non-existent
+        if (validateGroupExists('domain', $match)) {
+            throw new MyCustomException();
+        } else {
+            throw new NonexistentGroupException('domain');
+        }
+    }
+    if ($match['domain'] === '') {
+        // group is either un-matched or matched an empty string
+        if (!validateGroupMatched('domain', $match)) {
+            throw new MyCustomException();
+        }
+    }
+    return $match['domain'];
+}, $links);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return-at(2)}-->
+<!--Result-Value-->
+
+```php
+'My links are: google, socket, facebook, t-regx :)'
+```
+
+Of course, for subject `$links` equal to `'My links are: www..com'` (optional group `'domain'` is unmatched) - `MyCustomException` would be thrown.
 
 ## Identity
 
