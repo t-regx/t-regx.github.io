@@ -85,9 +85,9 @@ class MarkupResultConsistencyTest extends TestCase
         try {
             return $this->tryInvoke($code);
         } catch (ParseError $error) {
-            throw new ParseError($error->getMessage() . " - in $snippetName snippet");
+            throw new ParseError($this->errorMessage($error, $code, $snippetName));
         } catch (Error $error) {
-            throw new Error($error->getMessage() . " - in $snippetName snippet");
+            throw new Error($this->errorMessage($error, $code, $snippetName));
         }
     }
 
@@ -97,6 +97,11 @@ class MarkupResultConsistencyTest extends TestCase
         $result = eval($code);
         $output = ob_get_clean();
         return [$result, $output];
+    }
+
+    private function errorMessage(Error $error, string $code, string $snippetName): string
+    {
+        return $error->getMessage() . ', on line ' . $error->getLine() . " in $snippetName snippet:" . PHP_EOL . PHP_EOL . $code;
     }
 
     private function addSingleLineReturn(array $code): array
