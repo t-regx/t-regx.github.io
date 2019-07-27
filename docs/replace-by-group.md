@@ -75,6 +75,51 @@ You can also chose to throw an exception, if the unmatched group is not supposed
 Now, for the sake of this example, let's say a domain is an optional part of an URL address. Below, you'll find 4 
 code snippets illustrating the usage of each of those:
 
+### `orIgnore()`
+
+Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
+are simply left as they were (ignored):
+
+### `orEmpty()`
+
+Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
+are replaced with an empty string:
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
+```php
+$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
+
+pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
+    ->all()
+    ->by()->group('domain')->orEmpty();
+```
+<!--PHP-->
+```php
+$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
+
+return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)#', function ($match) {
+    validateGroupName('domain');
+    if (!array_key_exists('domain', $match)) {
+        // group is either un-matched or non-existent
+        if (validateGroupExists('domain', $match)) {
+            return '';
+        } else {
+            throw new NonexistentGroupException('domain');
+        }
+    }
+    // Check between unmatched and matched-empty is unnecessary
+    return $match['domain'];
+}, $links);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{return-at(2)}-->
+<!--Result-Value-->
+
+```php
+'My links are: google, , facebook,  :)'
+```
+
 ### `orThrow()`
 
 You can either call this method without parameters, or with your custom exception class name (just like [`forFirst()`](match-for-first.md) parameter):
