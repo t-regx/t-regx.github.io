@@ -30,6 +30,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
 $links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
 
 return preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', function ($match) {
+    validateGroupName('domain');
     if (!array_key_exists('domain', $match)) {
         // group is either un-matched or non-existent
         if (validateGroupExists('domain', $match)) {

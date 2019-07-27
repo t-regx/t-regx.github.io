@@ -65,6 +65,7 @@ class MarkupResultConsistencyTest extends TestCase
         $functions = $this->polyfillGlobalFunctions([
             'validateGroupExists'  => true,
             'validateGroupMatched' => true,
+            'validateGroupName'    => true
         ]);
         $classes = [
             "if (!class_exists('MyCustomException')) { class MyCustomException extends Exception {} }"
