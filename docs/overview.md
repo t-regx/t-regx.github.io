@@ -3,11 +3,29 @@ id: overview
 title: What's T-Regx?
 ---
 
-T-Regx (*a combination of T-Rex and RegExp*) is a lightweight Regular Expressions library. Its main features are:
- - Being **Bullet-proof** *(and we mean it)*
- - Being explicit and descriptive *(and we mean it too)* - [Why is explicit interface so important?](#why-is-explicit-interface-so-important)
- - Cleaning the [mess after PHP regular expressions API](whats-the-point.md)
- - Relieving developers from [**brain strain**](#brain-strain)
+T-Regx (*T-Rex and RegExp*) is a lightweight, high-level Regular Expressions library. 
+
+Its main features are:
+ - Being **bulletproof**:
+   - [Automatic delimiters](delimiters.md) for your patterns
+   - Each and every unexpected situation ends in an exception
+   - UTF-8 support out of the box
+   - [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user-input)
+
+ - Cleaning the [mess after PHP regular expressions API](whats-the-point.md):
+   - All false positives and false negatives are eliminated
+   - Special values like `null`, `false`, `''` aren't used to indicate errors.
+   - Unifying interface between matching, replacing, splitting - all operations
+   - No default parameters
+   - No flags
+   - No var-args
+   - Results aren't a dull `string[][]` array, but a dedicated [`Match`](match-details.md) details.
+   - Based on exceptions - No warnings, errors or fatal errors or notices.
+   - Relieving developers from [**brain strain**](#brain-strain):
+
+ - Being explicit and descriptive - ([why is explicit interface so important?](#why-is-explicit-interface-so-important)):
+   - Each function obeys SRP
+   - Functionalities are represented with methods (and not flags or default arguments)
 
 ## Why is explicit interface so important?
 
@@ -20,17 +38,19 @@ what side effects it may cause.
 While reading this code...
 
 ```php
-preg_match($p, $subject, $matches);
+preg_match($pattern, $subject, $match);
 ```
 
 ...developers must stop for a moment and think:
- - Will the `$subject` match the pattern `$p`?
- - Will this trigger a warning if I mess up my regexp?
+ - Will this match the first occurrence? Or all of them?
+ - Will the `$subject` match the pattern `$pattern`?
+ - Will this trigger a warning, if I mess up my regexp?
+ - Will this return `null`/`false` or raise a warning, on error?
  - Will this return `null`/`''`, if the `$subject` doesn't match?
  - Is `$match` a `string[]` or a `string[][]`?
- - Will this return *my value*? Or *my value* nested in arrays?
+ - Will this return **my value**? Or **my value** nested in arrays?
 
-What should be obvious, is now complicated and causes many questions and assumptions.
+What should be obvious, is now complicated and causes many questions and assumptions for the reader.
 
 ### What's good
 
@@ -39,11 +59,11 @@ While using T-Regx, some things are **certain**. For example:
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-$result = pattern($p)->match($subject)->first();
+$result = pattern($pattern)->match($subject)->first();
 ```
 <!--PHP-->
 ```php
-if (preg::match("/$p/", $subject, $match) === 1) {
+if (preg::match("/$pattern/", $subject, $match) === 1) {
     $result = $match[0];
 } else {
     throw new SubjectNotMatchedException();
@@ -51,19 +71,20 @@ if (preg::match("/$p/", $subject, $match) === 1) {
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!--T-Regx:{mock($subject)}-->
-<!--T-Regx:{mockPattern($p)}-->
+<!--T-Regx:{mockPattern($pattern)}-->
 <!--T-Regx:{return($result)}-->
 <!--PHP:{mock($subject)}-->
-<!--PHP:{mockPattern($p)}-->
+<!--PHP:{mockPattern($pattern)}-->
 <!--PHP:{return($result)}-->
 
 Here, `$result` **must** contain the first occurrence. It must contain *your value*.
 
-It will **never** contain `null`, `false` or an empty array. `SubjectNotMatchedException` would be thrown in 
-that case. Even if  `first()` does return `''`, it's only because it supposed to do that; that is "when a pattern matched 
+It will **never** contain `null`, `false` or an empty array. `MalformedPatternException` would be thrown, if `$pattern` 
+is malformed. It would also throw `SubjectNotMatchedException` if the `$pattern` doesn't match the `$subject`. 
+Even if  `first()` does return `''`, it's only because it supposed to do that; that is "when a pattern matched 
 a string of length 0".
 
-Also, it will never trigger a warning, but throw `SafeRegexException` with a descriptive message.
+It also never raises any warnings or fatal errors.
 
 ## Brain Strain
 

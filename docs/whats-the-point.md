@@ -14,7 +14,7 @@ Here is a few reasons why one might consider using T-Regx. Main of which are:
 
 PHP regular expressions API is far from perfect. Here's only a handful of what's wrong with it:
 
-### Implicit
+### PHP is Implicit
 
 You are probably a PHP developer. I would like to get `'Robert likes apples'`. Can you tell me which is the correct signature 
 for this task?
@@ -37,7 +37,7 @@ preg_replace(?, ?, ?, $count, $limit);
 // ??
 ```
 
-### Unintuitive
+### PHP is Unintuitive
 
 Programming languages are **tools** created to solve problems. An experienced programmer **should** be able to look
 at the code and tell what it does. With PHP `preg_*` functions it's just. not. possible.
@@ -57,7 +57,7 @@ Someone who doesn't know PHP regular expressions, can probably ask themselves:
  - Return types:
    - Array of arrays, which contain either a `string`, `null`, or an array of `null`s, `strings` and `int`s.
 
-### Messy
+### PHP is Messy
 
 - `PREG_OFFSET_CAPTURE` is a night mare! It changes return type from "an array of arrays" to "an array of arrays of arrays".
 - `PREG_SET_ORDER` / `PREG_PATTERN_ORDER` change return values. It's either "groups of matches" or "matches of groups",
@@ -72,7 +72,7 @@ return $match[1][0];
 having no idea what. it. does. You have to see whether you're using `preg_match()` or `preg_match_all()` and
 whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were used.
 
-### Inconsistent
+### PHP is Inconsistent
 
 - How do you get results and the count of the results?
 
@@ -100,7 +100,7 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were 
 
    but `preg_filter()` and `preg_replace()` actually return *completely* different values for **the same** parameters.
 
-### Deliberately buggy
+### PHP is Deliberately buggy
 
 - `preg_match` and `preg_match_all` return either:
   - `(int) x` - a number of matches, if a match is found
@@ -127,22 +127,7 @@ That's why T-Regx happened. It addresses all of PHP regular expressions flaws:
  - [It's for developers](#its-for-developers-its-reliable)
  - [It's explicit](#its-explicit)
 
-### It's bulletproof
-
-What happens when you make a mistake when using PHP Regular Expressions:
- - In some cases a warning is emitted
- - In others, you can check `preg_last_error()`
- - In most of the cases, the bug is silently ignored
-
-What happens when you make any mistake when using T-Regx:
- - In some cases `IllegalArgumentException` is thrown
- - In other, more frequent cases - one of the `CleanRegexException` implementations os thrown:
-   - `SubjectNotMatchedException`
-   - `MalformedPatternException`
-   - `InvalidReplacementException`
-   - etc.
-
-### It's descriptive
+### T-Regx is descriptive
 
 What about now? Is the task easier?
 
@@ -156,7 +141,7 @@ pattern('Bob')->replace('Bob likes applees')->only($limit)->with('Robert');
 pattern('Bob')->count('Bob likes applees');
 ```
 
-### It's for developers (it's reliable)
+### T-Regx is for developers (it's reliable)
 
 If you try to use an invalid regular expression in Java or JavaScript, you would probably get a `SyntaxError` exception
 and you'd be forced to handle it. Such things don't happen in PHP regular expressions. If any `preg_*()` function fails, 
@@ -204,7 +189,7 @@ They all extend `CleanRegexException` though.
 
 Further, furthermore, if you pass an invalid data type to any of the T-Regx methods, `\InvalidArgumentException` is thrown.
 
-### It's explicit
+### T-Regx is explicit
 
 Poor design of PHP `preg_*` functions does not make them really descriptive. Someone who's not familiar with it will probably
 ask themselves:
