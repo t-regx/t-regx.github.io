@@ -88,7 +88,7 @@ $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 // This code is actually impossible in Vanilla-PHP.
 // In T-Regx, Match details can be cast to string - that's the matched text
-// In Vanilla, $match is an array, which won't cast to string that easily
+// In Vanilla, $match is an array, and arrays won't cast to string that easily
 
 // preg::replace_callback('/[A-Z][a-z]+/', 'strtoupper', $subject, 2);
 
@@ -151,7 +151,7 @@ pattern('\w+')->replace('Apples are cool')->first()->callback('strtoupper');
 ```php
 // This code is actually impossible in Vanilla-PHP.
 // In T-Regx, Match details can be cast to string - that's the matched text
-// In Vanilla, $match is an array, which won't cast to string that easily
+// In Vanilla, $match is an array, and arrays won't cast to string that easily
 
 // preg::replace_callback('/\w+/', 'strtoupper', $subject, 1);
 
