@@ -19,11 +19,13 @@ For example:
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-pattern('[0-9]+')->match("I'm 19 years old")
+$first = pattern('[0-9]+')->match("I'm 19 years old")
    ->forFirst(function (Match $match) {
        return "I was born $match years ago";
    })
    ->orReturn('Unmatched :/');
+
+return $first;
 ```
 <!--PHP-->
 ```php
@@ -34,7 +36,6 @@ if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
 return 'Unmatched :/';
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
 ```php
@@ -51,23 +52,23 @@ If a match is not found, it returns a default value.
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-$s = pattern('[0-9]+')->match("I'm a dog")
+$first = pattern('[0-9]+')->match("I'm a dog")
     ->forFirst(function (Match $match) {
         return 'Match is found!';
     })
     ->orReturn('Match is not found');
 
-return $s;
+return $first;
 ```
 <!--PHP-->
 ```php
 if (preg::match('/[0-9]+/', "I'm a dog")) {
-    $s = 'Match is found!';
+    $first = 'Match is found!';
 } else {
-    $s = 'Match is not found';
+    $first = 'Match is not found';
 }
 
-return $s;
+return $first;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!--Result-Value-->
@@ -83,7 +84,7 @@ If a match is not found, it calls `orElse()` callback and uses *it* to evaluate 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-$s = pattern('[0-9]+')->match("I'm a dog")
+$first = pattern('[0-9]+')->match("I'm a dog")
     ->forFirst(function (Match $match) {
         return 'Match is found!';
     })
@@ -91,18 +92,18 @@ $s = pattern('[0-9]+')->match("I'm a dog")
         return "I couldn't match subject: " . $notMatched->subject();
     });
     
-return $s;
+return $first;
 ```
 <!--PHP-->
 ```php
 $subject = "I'm a dog";
 if (preg::match('/[0-9]+/', $subject)) {
-    $s = 'Match is found!';
+    $first = 'Match is found!';
 } else {
-    $s = "I couldn't match subject: $subject";
+    $first = "I couldn't match subject: $subject";
 }
 
-return $s;
+return $first;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!--Result-Value-->
@@ -154,7 +155,7 @@ You can also supply your own exception class name.
 class MyException extends \Exception {}
 
 try {
-    pattern('[0-9]+')->match("I'm a dog")
+    return pattern('[0-9]+')->match("I'm a dog")
         ->forFirst(function (Match $match) {
             return 'Match is found!';
         })

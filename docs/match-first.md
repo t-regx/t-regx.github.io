@@ -145,18 +145,20 @@ from `first()` function.
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-pattern('\w+')->match('Apples are cool')->first(function (Match $match) {
+$first = pattern('\w+')->match('Apples are cool')->first(function (Match $match) {
     return [
         $match->text(), 
         strtoupper($match->text()),
         lcfirst($match->text())
     ];
 });
+
+return $first;
 ```
 <!--PHP-->
 ```php
 if (preg::match('/\w+/', 'Apples are cool', $match)) {
-    return [
+    $first = [
         $match[0],
         strtoupper($match[0]),
         lcfirst($match[0])
@@ -165,9 +167,10 @@ if (preg::match('/\w+/', 'Apples are cool', $match)) {
 else {
     throw new SubjectNotMatchedException();
 }
+
+return $first;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
 ```php
