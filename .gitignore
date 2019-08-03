@@ -15,6 +15,6 @@ website/node_modules
 website/package-lock.json
 website/i18n/*
 
-vendor
+dependencies
 composer.lock
 composer.phar
