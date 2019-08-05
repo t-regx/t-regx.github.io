@@ -44,7 +44,7 @@ pattern(',')->split('One,Two,,Three')->ex();
 //             empty string between delimiters
 ```
 
-To avoid that, you can use `filter()->ex()` or `filter()->inc()` which utilize `PREG_SPLIT_NO_EMPTY` flag to filter out
+To avoid that, you can use `filter()->ex()` or `filter()->inc()` which utilize [`PREG_SPLIT_NO_EMPTY`][1] flag to filter out
 empty strings:
 
 ```php
@@ -65,13 +65,13 @@ pattern(',')->split('Cersei, Joffrey, Ilyn Payne, The Hound')->inc();
 ```
 ...then `MissingSplitDelimiterGroupException` will be thrown. 
 
-This is because of `preg_split()` flag `PREG_SPLIT_DELIM_CAPTURE` bad design. 
+This is because of [`preg_split()`][1] flag [`PREG_SPLIT_NO_EMPTY`][1] bad design. 
 
 It promises to include the delimiter, but unfortunately, does so **only** with the part of the delimiter that's inside 
 a capturing group. If there's no capturing group in the pattern, `PREG_SPLIT_DELIM_CAPTURE` has no effect 
 (which makes no sense for us).
 
-For that reason (and for the sake of [explicity](whats-the-point#t-regx-to-the-rescue)) - T-Regx won't allow you to use 
+For that reason (and for the sake of [explicity](whats-the-point.md#t-regx-to-the-rescue)) - T-Regx won't allow you to use 
 `split()->inc()` with a pattern that lacks an explicit capturing group:
 
  - To exclude the delimiter: use `ex()`
@@ -82,3 +82,5 @@ For that reason (and for the sake of [explicity](whats-the-point#t-regx-to-the-r
    //        ↑ 
    //        explicit capturing group
    ```
+
+[1]: https://www.php.net/manual/en/function.preg-split.php
