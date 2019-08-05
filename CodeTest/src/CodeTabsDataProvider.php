@@ -17,6 +17,11 @@ class CodeTabsDataProvider
         $this->basePath = $basePath;
     }
 
+    public function getSnippets(): array
+    {
+        return iterator_to_array($this->getSnippetsIterator());
+    }
+
     public function getSnippetsIterator(): Iterator
     {
         return new CompositeIterator(new LazyMapperIterator(new FilesIterator($this->basePath), function (string $filename) {
