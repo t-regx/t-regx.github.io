@@ -35,7 +35,7 @@ class MarkupResultConsistencyTest extends TestCase
      * @param array $expectedResult
      * @param array $expectedOutput
      */
-    function test(array $tregx, array $php, array $expectedResult, array $expectedOutput): void
+    function test(array $tregx, array $php, ?array $expectedResult, ?array $expectedOutput): void
     {
         // given
         $one = $this->arrayToString($tregx);
@@ -49,10 +49,10 @@ class MarkupResultConsistencyTest extends TestCase
         $this->assertEquals($return1, $return2, 'In code snippet: T-Regx');
         $this->assertEquals($echo1, $echo2, 'In code snippet: PHP');
 
-        if (count($expectedResult) > 0) {
+        if ($expectedResult) {
             $this->assertEquals($return1, $this->parseExpectedResult($expectedResult), 'In expected result value');
         }
-        if (count($expectedOutput) > 0) {
+        if ($expectedOutput) {
             $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput), 'In expected result output');
         }
     }

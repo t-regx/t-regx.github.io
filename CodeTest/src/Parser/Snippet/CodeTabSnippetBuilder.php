@@ -3,6 +3,7 @@ namespace CodeTest\Parser\Snippet;
 
 use CodeTest\Parser\Mods\Modification;
 use InvalidArgumentException;
+use LogicException;
 
 class CodeTabSnippetBuilder
 {
@@ -12,6 +13,8 @@ class CodeTabSnippetBuilder
     private $consumer;
     /** @var array[] */
     private $snippet;
+    /** @var bool */
+    private $feeding = false;
 
     public function __construct(SnippetListener $listener)
     {
@@ -24,6 +27,10 @@ class CodeTabSnippetBuilder
     {
         $this->validateType($consumer);
         $this->consumer = $consumer;
+        if ($this->snippet[$consumer] !== null) {
+            throw new LogicException();
+        }
+        $this->snippet[$consumer] = [];
     }
 
     public function controlMark(string $mark): void
@@ -31,11 +38,12 @@ class CodeTabSnippetBuilder
         if ($mark === '```') {
             $this->consumer = null;
         }
+        $this->feeding = in_array($mark, ['```php', '```text']);
     }
 
     public function feedLine(string $line): void
     {
-        if ($this->consumer !== null) {
+        if ($this->consumer !== null && $this->feeding) {
             $this->snippet[$this->consumer][] = $line;
         }
     }
@@ -43,6 +51,9 @@ class CodeTabSnippetBuilder
     public function modify(string $type, Modification $modification, $argument): void
     {
         $this->validateType($type);
+        if ($this->snippet[$type] === null) {
+            throw new LogicException();
+        }
         $this->snippet[$type] = $modification->modify($this->snippet[$type], $argument);
     }
 
@@ -56,6 +67,7 @@ class CodeTabSnippetBuilder
         $this->listener->created(array_values($this->snippet));
         $this->snippet = $this->emptySnippet();
         $this->consumer = null;
+        $this->feeding = false;
     }
 
     private function validateType(string $consumer): void
@@ -72,7 +84,7 @@ class CodeTabSnippetBuilder
 
     private function emptySnippet(): array
     {
-        return ['T-Regx' => [], 'PHP' => [], 'Result-Value' => [], 'Result-Output' => []];
+        return ['T-Regx' => null, 'PHP' => null, 'Result-Value' => null, 'Result-Output' => null];
     }
 
     public function isEmpty(): bool
