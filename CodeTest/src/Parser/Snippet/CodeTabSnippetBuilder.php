@@ -10,7 +10,7 @@ class CodeTabSnippetBuilder
     /** @var SnippetListener */
     private $listener;
     /** @var string|null */
-    private $consumer;
+    private $consumer = null;
     /** @var array[] */
     private $snippet;
     /** @var bool */
@@ -19,7 +19,6 @@ class CodeTabSnippetBuilder
     public function __construct(SnippetListener $listener)
     {
         $this->listener = $listener;
-        $this->consumer = null;
         $this->snippet = $this->emptySnippet();
     }
 
@@ -27,6 +26,9 @@ class CodeTabSnippetBuilder
     {
         $this->validateType($consumer);
         $this->consumer = $consumer;
+        if ($this->feeding) {
+            throw new LogicException();
+        }
         if ($this->snippet[$consumer] !== null) {
             throw new LogicException();
         }

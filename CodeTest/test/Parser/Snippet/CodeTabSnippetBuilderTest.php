@@ -103,4 +103,21 @@ class CodeTabSnippetBuilderTest extends TestCase implements SnippetListener
 
         $builder->flush();
     }
+
+    /**
+     * @test
+     */
+    public function shouldThrowForMidFeedingConsumerChange()
+    {
+        // given
+        $builder = new CodeTabSnippetBuilder($this);
+        $builder->setConsumer('T-Regx');
+        $builder->controlMark('```php');
+
+        // then
+        $this->expectException(LogicException::class);
+
+        // when
+        $builder->setConsumer('PHP');
+    }
 }
