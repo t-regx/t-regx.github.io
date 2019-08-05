@@ -3,7 +3,7 @@ namespace Test\CodeTest\Parser;
 
 use CodeTest\Parser\MarkdownSnippetParser;
 use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
-use CodeTest\Parser\Snippet\SnippetsStore;
+use CodeTest\Parser\Snippet\NonEmptySnippetsStore;
 use PHPUnit\Framework\TestCase;
 
 class MarkdownParsingSnippetFactoryTest extends TestCase
@@ -14,7 +14,7 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
     public function shouldGetOnlyOneSnippet()
     {
         // given
-        $store = new SnippetsStore();
+        $store = new NonEmptySnippetsStore();
         [$path, $file] = $this->fileAndPath('delimiters.md');
         $factory = new MarkdownSnippetParser($path, new CodeTabSnippetBuilder($store));
 
