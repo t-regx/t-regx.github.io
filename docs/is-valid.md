@@ -7,18 +7,28 @@ title: Validate a pattern
 
 You can check whether a pattern is valid and ready to use with `is()->valid()` method.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('/I am a valid pattern/')->is()->valid();
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
+
 ```php
 true
 ```
 
 Neither `is()->valid()` nor `is()->usable()` throws an exception or issues any warnings. They only return `true`/`false`.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-pattern('I am an invalid pattern')->is()->valid();
+pattern('I am an (( invalid }} pattern')->is()->valid();
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
+
 ```php
 false
 ```
@@ -33,20 +43,32 @@ A usable pattern is a valid, but not necessarily delimited pattern. In other wor
 
 The pattern doesn't have to be delimited.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-pattern('/I am a usable pattern/')->is()->usable();      // valid and usable
-pattern('I am still a usable pattern')->is()->usable();  // usable
+pattern('/I am a valid and usable pattern/')->is()->usable();
+pattern('I am not delimited, but still a usable pattern')->is()->usable();
 ```
+<!--T-Regx:{packed-return-from-end(2)}-->
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
+
 ```php
 true
 true
 ```
+<!--Result-Value:{packed-return-from-end(2)}-->
 
 But it can't be invalid.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('I am (invalid')->is()->usable();
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
+
 ```php
 false
 ```
@@ -55,18 +77,28 @@ false
 
 Method `is()->delimited()` is used to verify whether a pattern is delimited or not.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-pattern('#I am delimited#')->is()->delimited();
+pattern('#I am delimited#')->is()->delimitered();
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
+
 ```php
 true
 ```
 
 ---
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-pattern('I am not delimited')->is()->delimited();
+pattern('I am not delimited')->is()->delimitered();
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--Result-Value-->
+
 ```php
 false
 ```
