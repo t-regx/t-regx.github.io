@@ -35,25 +35,27 @@ class MarkupResultConsistencyTest extends TestCase
      * @param array $expectedResult
      * @param array $expectedOutput
      */
-    function test(array $tregx, array $php, ?array $expectedResult, ?array $expectedOutput): void
+    function test(array $tregx, ?array $php, ?array $expectedResult, ?array $expectedOutput): void
     {
         // given
-        $one = $this->arrayToString($tregx);
-        $two = $this->arrayToString($php);
+        $one = $tregx ? $this->arrayToString($tregx) : null;
+        $two = $php ? $this->arrayToString($php) : null;
 
         // when
-        [$return1, $echo1] = $this->invoke($one, 'T-Regx');
-        [$return2, $echo2] = $this->invoke($two, 'PHP');
+        [$return1, $echo1] = $one ? $this->invoke($one, 'T-Regx') : [null, null];
+        [$return2, $echo2] = $two ? $this->invoke($two, 'PHP') : [null, null];
 
         // then
-        $this->assertEquals($return1, $return2, 'In code snippet: T-Regx');
-        $this->assertEquals($echo1, $echo2, 'In code snippet: PHP');
+        if ($one && $two) {
+            $this->assertEquals($return1, $return2, 'In code snippet: T-Regx');
+            $this->assertEquals($echo1, $echo2, 'In code snippet: PHP');
+        }
 
         if ($expectedResult) {
-            $this->assertEquals($return1, $this->parseExpectedResult($expectedResult), 'In expected result value');
+            $this->assertEquals($return1, $this->parseExpectedResult($expectedResult), 'Failed asserting that T-Regx snippet returned expected result');
         }
         if ($expectedOutput) {
-            $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput), 'In expected result output');
+            $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput), 'Failed asserting that T-Regx snippet printed expected output');
         }
     }
 
