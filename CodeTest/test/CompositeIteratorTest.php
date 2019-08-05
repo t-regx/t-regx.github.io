@@ -1,7 +1,8 @@
 <?php
-namespace CodeTest;
+namespace Test\CodeTest;
 
 use ArrayIterator;
+use CodeTest\CompositeIterator;
 use EmptyIterator;
 use PHPUnit\Framework\TestCase;
 

@@ -1,6 +1,7 @@
 <?php
-namespace CodeTest\Parser;
+namespace Test\CodeTest\Parser;
 
+use CodeTest\Parser\MarkdownSnippetParser;
 use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
 use CodeTest\Parser\Snippet\SnippetsStore;
 use PHPUnit\Framework\TestCase;
@@ -53,13 +54,49 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
                 "    return \$match['domain'];",
                 '}, $links);'
             ],
-            [],
+            null,
             [
                 '',
                 'Links: google, socket, facebook, t-regx'
             ]
         ];
         $this->assertEquals([$expected], $store->snippets());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetOnlyOneSnippet()
+    {
+        // given
+        $store = new SnippetsStore();
+        [$path, $file] = $this->fileAndPath('delimiters.md');
+        $factory = new MarkdownSnippetParser($path, new CodeTabSnippetBuilder($store));
+
+        // when
+        $factory->parse($file);
+
+        // then
+        $snippet = $store->snippets()[0];
+
+        $expected = [
+            [
+                "return [",
+                'pattern(\'[A-Z][a-z]+\')->is()->delimitered(),',
+                'pattern(\'#[A-Z][a-z]+#\')->is()->delimitered(),',
+                '];',
+            ],
+            null,
+            [
+                'return [',
+                'false,',
+                'true,',
+                '];',
+            ],
+            null
+        ];
+        $this->assertNull($snippet[1], "Failed asserting that supposedly missing `PHP` snippet is null");
+        $this->assertEquals($expected, $snippet);
     }
 
     private function file(string $str): string

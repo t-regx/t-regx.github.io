@@ -1,7 +1,8 @@
 <?php
-namespace CodeTest;
+namespace Test\CodeTest;
 
 use ArrayIterator;
+use CodeTest\KeyMapperIterator;
 use PHPUnit\Framework\TestCase;
 
 class KeyMapperIteratorTest extends TestCase

@@ -1,6 +1,7 @@
 <?php
-namespace CodeTest\Parser\Mods;
+namespace Test\CodeTest\Parser\Mods;
 
+use CodeTest\Parser\Mods\LineArg;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

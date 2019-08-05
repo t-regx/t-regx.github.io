@@ -40,7 +40,7 @@ class MarkdownSnippetParser
 
     public function parse(string $content): void
     {
-        foreach (preg_split("/[\n\r]?[\n\r]/", $content) as $line) {
+        foreach (preg_split("/[\n\r]{1,2}/", $content) as $line) {
             if ($line == self::START_TOKEN) {
                 if (!$this->builder->isEmpty()) {
                     $this->builder->flush();

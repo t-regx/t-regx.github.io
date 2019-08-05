@@ -1,7 +1,8 @@
 <?php
-namespace CodeTest;
+namespace Test\CodeTest;
 
 use ArrayIterator;
+use CodeTest\LazyMapperIterator;
 use PHPUnit\Framework\TestCase;
 
 class LazyMapperIteratorTest extends TestCase
