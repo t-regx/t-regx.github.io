@@ -46,7 +46,7 @@ preg_replace('/\d+/', '___', $subject);
 "I'm ___, I have ___cm and I was born in 1999"
 "I'm ___, I have ___cm and I was born in ___"
 ```
-<!--Result-Value:{multiline-return(3)}-->
+<!--Result-Value:{multiline-return}-->
 
 ---
 

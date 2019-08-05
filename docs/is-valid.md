@@ -49,7 +49,7 @@ The pattern doesn't have to be delimited.
 pattern('/I am a valid and usable pattern/')->is()->usable();
 pattern('I am not delimited, but still a usable pattern')->is()->usable();
 ```
-<!--T-Regx:{multiline-return(2)}-->
+<!--T-Regx:{multiline-return}-->
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!--Result-Value-->
 
@@ -57,7 +57,7 @@ pattern('I am not delimited, but still a usable pattern')->is()->usable();
 true
 true
 ```
-<!--Result-Value:{multiline-return(2)}-->
+<!--Result-Value:{multiline-return}-->
 
 But it can't be invalid.
 
