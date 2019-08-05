@@ -33,14 +33,14 @@ pattern('[A-Z][a-z]+')->is()->delimitered();
 pattern('#[A-Z][a-z]+#')->is()->delimitered();
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{packed-return-from-end(2)}-->
+<!--T-Regx:{multiline-return(2)}-->
 <!--Result-Value-->
 
 ```php
 false
 true
 ```
-<!--Result-Value:{packed-return-from-end(2)}-->
+<!--Result-Value:{multiline-return(2)}-->
 
 ## Adding delimiters
 

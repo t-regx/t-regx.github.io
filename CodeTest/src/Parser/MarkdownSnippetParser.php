@@ -28,13 +28,13 @@ class MarkdownSnippetParser
         $this->path = $path;
         $this->builder = $builder;
         $this->mods = [
-            'return'                 => new ReturnVariable(),
-            'return-at'              => new InsertKeywordAt('return'),
-            'echo-at'                => new InsertKeywordAt('echo'),
-            'return-semi'            => new ReturnFirstSemicolonLast(),
-            'packed-return-from-end' => new MultipleReturnValues(),
-            'mock'                   => new MockVariable(false),
-            'mockPattern'            => new MockVariable(true),
+            'return'           => new ReturnVariable(),
+            'return-at'        => new InsertKeywordAt('return'),
+            'echo-at'          => new InsertKeywordAt('echo'),
+            'return-semi'      => new ReturnFirstSemicolonLast(),
+            'multiline-return' => new MultipleReturnValues(),
+            'mock'             => new MockVariable(false),
+            'mockPattern'      => new MockVariable(true),
         ];
     }
 

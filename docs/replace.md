@@ -37,8 +37,8 @@ preg_replace('/\d+/', '___', $subject, 2);
 preg_replace('/\d+/', '___', $subject);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
-<!--T-Regx:{packed-return-from-end(3)}-->
-<!--PHP:{packed-return-from-end(3)}-->
+<!--T-Regx:{multiline-return(3)}-->
+<!--PHP:{multiline-return(3)}-->
 <!--Result-Value-->
 
 ```php
@@ -46,7 +46,7 @@ preg_replace('/\d+/', '___', $subject);
 "I'm ___, I have ___cm and I was born in 1999"
 "I'm ___, I have ___cm and I was born in ___"
 ```
-<!--Result-Value:{packed-return-from-end(3)}-->
+<!--Result-Value:{multiline-return(3)}-->
 
 ---
 
