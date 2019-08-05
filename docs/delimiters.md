@@ -26,23 +26,35 @@ The code snippets above are equal.
 
 You can check whether a pattern is delimited with `is()->delimited()` method.
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
-pattern('[A-Z][a-z]+')->is()->delimited();
-pattern('#[A-Z][a-z]+#')->is()->delimited();
+pattern('[A-Z][a-z]+')->is()->delimitered();
+pattern('#[A-Z][a-z]+#')->is()->delimitered();
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{packed-return-from-end(2)}-->
+<!--Result-Value-->
 
 ```php
 false
 true
 ```
+<!--Result-Value:{packed-return-from-end(2)}-->
 
 ## Adding delimiters
 
 To change undelimited pattern into a delimited one - use `delimiter()` method;
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('Welcome/Or not')->delimiter();
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{echo-at(0)}-->
+<!--Result-Output-->
+
 ```text
 #Welcome/Or not#
 ```
