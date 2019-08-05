@@ -7,10 +7,10 @@ class MultipleReturnValues implements Modification
 {
     public function modify(array $snippet, ?string $argument): array
     {
-        return $this->forModLine($snippet, (new LineArg($argument))->lineAsInt(count($snippet)));
+        return $this->forModLine($snippet, $argument);
     }
 
-    private function forModLine(array $snippet, $modLine): array
+    private function forModLine(array $snippet, int $modLine): array
     {
         if ($modLine === null) {
             throw new AssertionError("Argument #1 is required");
