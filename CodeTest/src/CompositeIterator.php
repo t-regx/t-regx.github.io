@@ -50,17 +50,15 @@ class CompositeIterator implements Iterator
     {
         $this->nestedIterator->next();
         $this->key++;
-        if (!$this->nestedIterator->valid()) {
-            $this->nestedIterator->rewind();
-            $this->nestedIterator = $this->nextIterator();
-        }
+        $this->nextIteratorIfInvalid();
     }
 
     public function rewind(): void
     {
-        $this->key = 0;
         $this->iterator->rewind();
+        $this->key = 0;
         $this->nestedIterator = $this->firstIterator($this->iterator);
+        $this->nextIteratorIfInvalid();
     }
 
     private function firstIterator(Iterator $iterator): Iterator
@@ -85,5 +83,13 @@ class CompositeIterator implements Iterator
             }
         }
         return new EmptyIterator();
+    }
+
+    private function nextIteratorIfInvalid(): void
+    {
+        if (!$this->nestedIterator->valid()) {
+            $this->nestedIterator->rewind();
+            $this->nestedIterator = $this->nextIterator();
+        }
     }
 }
