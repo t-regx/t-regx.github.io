@@ -2,13 +2,14 @@
 namespace CodeTest\Parser\Mods;
 
 use InvalidArgumentException;
+use TRegx\CleanRegex\Exception\CleanRegex\IntegerFormatException;
 
 class LineArg
 {
     /** @var int|string */
     private $argument;
 
-    public function __construct($modArgument)
+    public function __construct(?string $modArgument)
     {
         if (!$this->isValidArgument($modArgument)) {
             throw new InvalidArgumentException();
@@ -27,24 +28,24 @@ class LineArg
         if ($this->argument === 'last') {
             return $collectionSize - 1;
         }
-        if (is_numeric($this->argument)) {
-            if ($this->argument < 0) {
-                if (abs($this->argument) <= $collectionSize) {
-                    return $collectionSize + $this->argument;
-                }
-            }
-            if ($this->argument < $collectionSize) {
-                return $this->argument;
-            }
+        if (!is_numeric($this->argument)) {
+            throw new IntegerFormatException();
         }
-        throw new InvalidArgumentException("Mod line \"first\", \"last\" or of type integer expected, '$this->argument' given");
+        if ($this->argument < 0) {
+            if (abs($this->argument) <= $collectionSize) {
+                return $collectionSize + $this->argument;
+            }
+        } else if ($this->argument < $collectionSize) {
+            return $this->argument;
+        }
+        throw new InvalidArgumentException("Mod line \"first\", \"last\" or of type integer expected, '$this->argument' given (for collection $collectionSize)");
     }
 
-    public function isValidArgument($modArgument): bool
+    public function isValidArgument(?string $modArgument): bool
     {
-        if (is_int($modArgument)) {
-            return $modArgument >= 0;
+        if (in_array($modArgument, ['first', 'last'])) {
+            return true;
         }
-        return is_string($modArgument);
+        return is_numeric($modArgument);
     }
 }

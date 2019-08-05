@@ -32,7 +32,8 @@ class LineArgTest extends TestCase
             ['4', 10, 4],
             ['0', 1, 0],
             ['-3', 10, 7],
-            ['-3', 3, 0]
+            ['-3', 3, 0],
+            [-2, 10, 8],
         ];
     }
 
@@ -54,11 +55,11 @@ class LineArgTest extends TestCase
     function invalidArguments(): array
     {
         return [
-            [-2, 10],
             ['foo', 10],
             [5, 2],
             [2, 2],
             [-4, 2],
+            [null, 2],
         ];
     }
 }
