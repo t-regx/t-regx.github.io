@@ -8,16 +8,28 @@ There are two methods `Pattern::quote()` and `Pattern::unquote()`.
 First of which works as `preg_quote()` is supposed to
 work (except for the fact that `preg_quote()` is broken before PHP 7.1.3 version, and `Pattern::quote()` fixes it)...
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 Pattern::quote("Welcome\How are you?");
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{echo-at(0)}-->
+<!--Result-Output-->
+
 ```text
 Welcome\\How are you\?
 ```
 ...second of which is the direct opposite:
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 Pattern::unquote("Welcome\\How are you\?");
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{echo-at(0)}-->
+<!--Result-Output-->
+
 ```text
 Welcome\How are you?
 ```

@@ -12,6 +12,7 @@ use TRegx\CleanRegex\Exception\CleanRegex\NonExistentGroupException;
 use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;
 use TRegx\CleanRegex\Match\Details\Match;
 use TRegx\CleanRegex\Match\Details\NotMatched;
+use TRegx\CleanRegex\Pattern;
 use TRegx\SafeRegex\Exception\CompileSafeRegexException;
 use TRegx\SafeRegex\preg;
 
@@ -85,6 +86,7 @@ class MarkupResultConsistencyTest extends TestCase
             NotMatched::class,
             CompileSafeRegexException::class,
             preg::class,
+            Pattern::class,
         ]);
         return array_merge($namespaces, $functions, $classes, $lines);
     }
