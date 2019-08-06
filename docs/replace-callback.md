@@ -80,25 +80,21 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $m) {
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
 
+// In T-Regx, Match details can be cast to string - that's the matched text
 pattern('[A-Z][a-z]+')->replace($subject)->only(2)->callback('strtoupper');
 ```
 <!--PHP-->
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark'; 
 
-// This code is actually impossible in Vanilla-PHP.
-// In T-Regx, Match details can be cast to string - that's the matched text
 // In Vanilla, $match is an array, and arrays won't cast to string that easily
 
-// preg::replace_callback('/[A-Z][a-z]+/', 'strtoupper', $subject, 2);
-
-preg::replace_callback('/[A-Z][a-z]+/', function (array $m) {
-    return strtoupper($m[0]);
-}, $subject, 2);
+// preg::replace_callback('/[A-Z][a-z]+/', 'strtoupper', $subject, 2);  
+// Warning, empty string is returned
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!--T-Regx:{return-at(last)}-->
-<!--PHP:{return-at(8)}-->
+<!--PHP:{ignore-snippet}-->
 <!--Result-Value-->
 
 ```php

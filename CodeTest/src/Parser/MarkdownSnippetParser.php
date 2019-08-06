@@ -1,6 +1,7 @@
 <?php
 namespace CodeTest\Parser;
 
+use CodeTest\Parser\Mods\IgnoreSnippetMod;
 use CodeTest\Parser\Mods\InsertKeywordAt;
 use CodeTest\Parser\Mods\MockVariable;
 use CodeTest\Parser\Mods\Modification;
@@ -28,6 +29,7 @@ class MarkdownSnippetParser
         $this->path = $path;
         $this->builder = $builder;
         $this->mods = [
+            'ignore-snippet'   => new IgnoreSnippetMod(),
             'return'           => new ReturnVariable(),
             'return-at'        => new InsertKeywordAt('return'),
             'echo-at'          => new InsertKeywordAt('echo'),
