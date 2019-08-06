@@ -8,7 +8,7 @@ as the first argument and optional flags as the second argument.
 
 ## Entry points
 
-#### Facade style:
+#### Class method style:
 ```php
 use TRegx\CleanRegex\Pattern;
  
