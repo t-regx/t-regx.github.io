@@ -1,6 +1,7 @@
 <?php
 namespace CodeTest\Parser;
 
+use CodeTest\Parser\Mods\ExpectExceptionMod;
 use CodeTest\Parser\Mods\IgnoreSnippetMod;
 use CodeTest\Parser\Mods\InsertKeywordAt;
 use CodeTest\Parser\Mods\MockVariable;
@@ -37,6 +38,7 @@ class MarkdownSnippetParser
             'multiline-return' => new MultipleReturnValues(),
             'mock'             => new MockVariable(false),
             'mockPattern'      => new MockVariable(true),
+            'expect-exception' => new ExpectExceptionMod(),
         ];
     }
 
