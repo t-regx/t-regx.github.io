@@ -3,6 +3,7 @@ namespace CodeTest\Parser\Snippet;
 
 use InvalidArgumentException;
 use LogicException;
+use Throwable;
 
 class Snippet
 {
@@ -12,6 +13,9 @@ class Snippet
     /** @var array */
     private $snippet;
 
+    /** @var array */
+    private $exception;
+
     public function __construct(array $consumers)
     {
         if (empty($consumers)) {
@@ -19,6 +23,7 @@ class Snippet
         }
         $this->consumers = $consumers;
         $this->snippet = $this->emptySnippet();
+        $this->exception = $this->emptySnippet();
     }
 
     private function emptySnippet(): array
@@ -69,8 +74,30 @@ class Snippet
         }
     }
 
+    public function setException(string $consumer, string $className): void
+    {
+        $this->validateType($consumer);
+        $this->validateExceptionType($className);
+        $this->exception[$consumer] = $className;
+    }
+
     public function toDataProviderArray(): array
     {
+        if (array_filter($this->exception)) {
+            return array_values($this->snippet + [$this->exception]);
+        }
         return array_values($this->snippet);
+    }
+
+    private function validateExceptionType(string $className): void
+    {
+        if (!class_exists($className) || !$this->isThrowable($className)) {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    private function isThrowable(string $className): bool
+    {
+        return in_array(Throwable::class, class_implements($className));
     }
 }
