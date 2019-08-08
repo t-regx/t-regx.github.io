@@ -1,6 +1,8 @@
 <?php
 namespace CodeTest\Parser\Mods;
 
+use CodeTest\Parser\LineArg;
+
 class InsertKeywordAt extends PureModification
 {
     /** @var string */

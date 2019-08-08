@@ -1,5 +1,5 @@
 <?php
-namespace CodeTest\Parser\Mods;
+namespace CodeTest\Parser;
 
 use InvalidArgumentException;
 use TRegx\CleanRegex\Exception\CleanRegex\IntegerFormatException;
