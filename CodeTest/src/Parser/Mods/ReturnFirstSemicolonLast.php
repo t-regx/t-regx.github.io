@@ -3,7 +3,7 @@ namespace CodeTest\Parser\Mods;
 
 use CodeTest\Parser\Arrays;
 
-class ReturnFirstSemicolonLast implements Modification
+class ReturnFirstSemicolonLast extends PureModification
 {
     public function modify(array $snippet, $ignored): array
     {

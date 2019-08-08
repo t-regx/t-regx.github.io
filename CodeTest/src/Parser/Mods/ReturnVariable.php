@@ -3,7 +3,7 @@ namespace CodeTest\Parser\Mods;
 
 use InvalidArgumentException;
 
-class ReturnVariable implements Modification
+class ReturnVariable extends PureModification
 {
     public function modify(array $snippet, ?string $argument): array
     {

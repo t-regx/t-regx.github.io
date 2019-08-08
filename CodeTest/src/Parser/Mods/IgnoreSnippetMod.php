@@ -1,7 +1,7 @@
 <?php
 namespace CodeTest\Parser\Mods;
 
-class IgnoreSnippetMod implements Modification
+class IgnoreSnippetMod extends PureModification
 {
     public function modify(array $snippet, ?string $argument): array
     {

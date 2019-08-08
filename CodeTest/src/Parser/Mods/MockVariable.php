@@ -3,7 +3,7 @@ namespace CodeTest\Parser\Mods;
 
 use InvalidArgumentException;
 
-class MockVariable implements Modification
+class MockVariable extends PureModification
 {
     /** @var bool */
     private $isPattern;

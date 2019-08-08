@@ -1,7 +1,7 @@
 <?php
 namespace CodeTest\Parser\Mods;
 
-class InsertKeywordAt implements Modification
+class InsertKeywordAt extends PureModification
 {
     /** @var string */
     private $keyword;

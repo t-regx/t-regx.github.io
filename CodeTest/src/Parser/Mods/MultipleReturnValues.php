@@ -3,7 +3,7 @@ namespace CodeTest\Parser\Mods;
 
 use AssertionError;
 
-class MultipleReturnValues implements Modification
+class MultipleReturnValues extends PureModification
 {
     public function modify(array $snippet, ?string $argument): array
     {
