@@ -1,7 +1,9 @@
 <?php
 namespace CodeTest\Parser\Mods;
 
+use CodeTest\Parser\Snippet\Snippet;
+
 interface Modification
 {
-    public function modify(array $snippet, ?string $argument): array;
+    public function forSnippet(Snippet $snippet, string $type, ?string $argument): void;
 }

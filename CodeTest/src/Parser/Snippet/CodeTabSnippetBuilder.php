@@ -52,7 +52,7 @@ class CodeTabSnippetBuilder
 
     public function modify(string $type, Modification $modification, $argument): void
     {
-        $this->snippet->set($type, $modification->modify($this->snippet->get($type), $argument));
+        $modification->forSnippet($this->snippet, $type, $argument);
     }
 
     public function flush(): void
