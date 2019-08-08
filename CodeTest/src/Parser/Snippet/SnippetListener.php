@@ -3,5 +3,5 @@ namespace CodeTest\Parser\Snippet;
 
 interface SnippetListener
 {
-    public function created(array $snippet): void;
+    public function created(Snippet $snippet): void;
 }

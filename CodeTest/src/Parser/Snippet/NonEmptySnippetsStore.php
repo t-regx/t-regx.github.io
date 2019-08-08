@@ -7,12 +7,12 @@ class NonEmptySnippetsStore implements SnippetListener
     /** @var array[] */
     private $snippets = [];
 
-    public function created(array $snippet): void
+    public function created(Snippet $snippet): void
     {
-        if (empty(array_filter($snippet))) {
+        if ($snippet->isEmpty()) {
             return;
         }
-        $this->snippets[] = $snippet;
+        $this->snippets[] = $snippet->toDataProviderArray();
     }
 
     public function snippets(): array

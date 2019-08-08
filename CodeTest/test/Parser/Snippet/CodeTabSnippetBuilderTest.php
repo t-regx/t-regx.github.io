@@ -3,6 +3,7 @@ namespace Test\CodeTest\Parser\Snippet;
 
 use CodeTest\Parser\Mods\ReturnVariable;
 use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
+use CodeTest\Parser\Snippet\Snippet;
 use CodeTest\Parser\Snippet\SnippetListener;
 use InvalidArgumentException;
 use LogicException;
@@ -24,12 +25,9 @@ class CodeTabSnippetBuilderTest extends TestCase implements SnippetListener
         $builder->flush();
     }
 
-    public function created(array $snippet): void
+    public function created(Snippet $snippet): void
     {
-        $this->assertNull($snippet[0]);
-        $this->assertNull($snippet[1]);
-        $this->assertNull($snippet[2]);
-        $this->assertNull($snippet[3]);
+        $this->assertTrue($snippet->isEmpty());
     }
 
     /**
@@ -66,7 +64,7 @@ class CodeTabSnippetBuilderTest extends TestCase implements SnippetListener
     /**
      * @test
      */
-    public function shouldThrowForInvalidConsumer()
+    public function shouldThrow_forInvalidConsumer()
     {
         // given
         $builder = new CodeTabSnippetBuilder($this);
@@ -86,9 +84,9 @@ class CodeTabSnippetBuilderTest extends TestCase implements SnippetListener
         // given
         $builder = new CodeTabSnippetBuilder(new class ($this) extends AssertionSnippetListenerAdapter
         {
-            function snippet(array $snippet, Assert $assert)
+            function snippet(Snippet $snippet, Assert $assert)
             {
-                $assert->assertEquals(['Accept 1', 'Accept 2',], $snippet[0]);
+                $assert->assertEquals(['Accept 1', 'Accept 2',], $snippet->get('T-Regx'));
             }
         });
 
@@ -107,7 +105,7 @@ class CodeTabSnippetBuilderTest extends TestCase implements SnippetListener
     /**
      * @test
      */
-    public function shouldThrowForMidFeedingConsumerChange()
+    public function shouldThrow_forMidFeedingConsumerChange()
     {
         // given
         $builder = new CodeTabSnippetBuilder($this);

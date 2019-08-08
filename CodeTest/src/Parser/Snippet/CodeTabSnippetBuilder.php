@@ -11,7 +11,7 @@ class CodeTabSnippetBuilder
     private $listener;
     /** @var string|null */
     private $consumer = null;
-    /** @var array[] */
+    /** @var Snippet */
     private $snippet;
     /** @var bool */
     private $feeding = false;
@@ -29,10 +29,10 @@ class CodeTabSnippetBuilder
         if ($this->feeding) {
             throw new LogicException();
         }
-        if ($this->snippet[$consumer] !== null) {
+        if ($this->snippet->isConsumerSet($consumer)) {
             throw new LogicException();
         }
-        $this->snippet[$consumer] = [];
+        $this->snippet->set($consumer, []);
     }
 
     public function controlMark(string $mark): void
@@ -46,27 +46,18 @@ class CodeTabSnippetBuilder
     public function feedLine(string $line): void
     {
         if ($this->consumer !== null && $this->feeding) {
-            $this->snippet[$this->consumer][] = $line;
+            $this->snippet->append($this->consumer, $line);
         }
     }
 
     public function modify(string $type, Modification $modification, $argument): void
     {
-        $this->validateType($type);
-        if ($this->snippet[$type] === null) {
-            throw new LogicException();
-        }
-        $this->snippet[$type] = $modification->modify($this->snippet[$type], $argument);
-    }
-
-    public function resetConsumer(): void
-    {
-        $this->consumer = null;
+        $this->snippet->set($type, $modification->modify($this->snippet->get($type), $argument));
     }
 
     public function flush(): void
     {
-        $this->listener->created(array_values($this->snippet));
+        $this->listener->created($this->snippet);
         $this->snippet = $this->emptySnippet();
         $this->consumer = null;
         $this->feeding = false;
@@ -74,23 +65,18 @@ class CodeTabSnippetBuilder
 
     private function validateType(string $consumer): void
     {
-        if (!$this->isConsumer($consumer)) {
+        if (!$this->snippet->exists($consumer)) {
             throw new InvalidArgumentException("Invalid consumer $consumer");
         }
     }
 
-    private function isConsumer(string $consumer): bool
+    private function emptySnippet(): Snippet
     {
-        return array_key_exists($consumer, $this->emptySnippet());
-    }
-
-    private function emptySnippet(): array
-    {
-        return ['T-Regx' => null, 'PHP' => null, 'Result-Value' => null, 'Result-Output' => null];
+        return new Snippet(['T-Regx', 'PHP', 'Result-Value', 'Result-Output']);
     }
 
     public function isEmpty(): bool
     {
-        return $this->snippet === $this->emptySnippet();
+        return $this->snippet->isEmpty();
     }
 }
