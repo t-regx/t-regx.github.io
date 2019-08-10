@@ -89,7 +89,7 @@ $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 // In Vanilla, $match is an array, and arrays won't cast to string that easily
 
-// preg::replace_callback('/[A-Z][a-z]+/', 'strtoupper', $subject, 2);  
+// preg::replace_callback('/[A-Z][a-z]+/', 'strtoupper', $subject, 2);
 // Warning, empty string is returned
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->

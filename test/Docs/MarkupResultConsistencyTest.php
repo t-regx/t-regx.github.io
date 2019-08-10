@@ -73,18 +73,7 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function preprocessCode(array $lines): array
     {
-        $lines = $this->addSingleLineReturn($lines);
-        $lines = $this->polyfillForSubjectNotMatched($lines);
-        $lines = $this->protectAgainstClassRedeclaration($lines);
-        $functions = $this->polyfillGlobalFunctions([
-            'validateGroupExists'  => true,
-            'validateGroupMatched' => false, // doesn't work for matched empty strings
-            'validateGroupName'    => true
-        ]);
-        $classes = [
-            "if (!class_exists('MyCustomException')) { class MyCustomException extends Exception {} }"
-        ];
-        $namespaces = $this->polyfillNamespaces([
+        $namespaces = $this->declareNamespaces([
             MissingReplacementKeyException::class,
             NonExistentGroupException::class,
             SubjectNotMatchedException::class,
@@ -94,6 +83,19 @@ class MarkupResultConsistencyTest extends TestCase
             preg::class,
             Pattern::class,
         ]);
+        $functions = $this->polyfillGlobalFunctions([
+            'validateGroupExists'  => true,
+            'validateGroupMatched' => false, // doesn't work for matched empty strings
+            'validateGroupName'    => true
+        ]);
+        $classes = [
+            "if (!class_exists('MyCustomException')) { class MyCustomException extends Exception {} }"
+        ];
+        $lines = $this->addSingleLineReturn($lines);
+        $lines = $this->replaceCodeFragments($lines, [
+            'new SubjectNotMatchedException()' => 'new SubjectNotMatchedException("","")'
+        ]);
+        $lines = $this->protectAgainstClassRedeclaration($lines);
         return array_merge($namespaces, $functions, $classes, $lines);
     }
 
@@ -134,11 +136,10 @@ class MarkupResultConsistencyTest extends TestCase
         return $code;
     }
 
-    private function polyfillForSubjectNotMatched(array $lines): array
+    private function replaceCodeFragments(array $lines, $replacements): array
     {
-        return array_map(function (string $line) {
-            $polyfills = ['new SubjectNotMatchedException()' => 'new SubjectNotMatchedException("","")'];
-            return str_replace(array_keys($polyfills), array_values($polyfills), $line);
+        return array_map(function (string $line) use ($replacements) {
+            return str_replace(array_keys($replacements), array_values($replacements), $line);
         }, $lines);
     }
 
@@ -163,7 +164,7 @@ class MarkupResultConsistencyTest extends TestCase
         }, array_keys($namesAndResults), $namesAndResults);
     }
 
-    private function polyfillNamespaces(array $classes): array
+    private function declareNamespaces(array $classes): array
     {
         return array_map(function (string $className) {
             return "use $className;";
@@ -186,9 +187,7 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function parseExpectedOutput(array $expectedOutput): string
     {
-        return join(PHP_EOL, array_values(array_filter($expectedOutput, function (string $input) {
-            return trim($input);
-        })));
+        return join(PHP_EOL, array_values(array_filter($expectedOutput, 'trim')));
     }
 
     private function startsWith(string $haystack, string $needle): bool
