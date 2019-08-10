@@ -40,11 +40,15 @@ return array_merge(...array_map(function (string $text) {
 `flatMap()` only accepts an `array` as its return type. Returning a single element and implicitly creating a one-element 
 array under the hood would break our ["Explicity rule"](whats-the-point.md#t-regx-to-the-rescue). 
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern("\w+")->match("I like trains")->flatMap(function (Match $match) {
     return $match;  // <- throws InvalidReturnValueException
 });
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->
 
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {

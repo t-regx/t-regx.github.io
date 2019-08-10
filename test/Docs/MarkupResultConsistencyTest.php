@@ -7,6 +7,7 @@ use Error;
 use InvalidArgumentException;
 use ParseError;
 use PHPUnit\Framework\TestCase;
+use Throwable;
 use TRegx\CleanRegex\Exception\CleanRegex\MissingReplacementKeyException;
 use TRegx\CleanRegex\Exception\CleanRegex\NonExistentGroupException;
 use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;
@@ -35,16 +36,17 @@ class MarkupResultConsistencyTest extends TestCase
      * @param array $php
      * @param array $expectedResult
      * @param array $expectedOutput
+     * @param array|null $exceptions
      */
-    function test(array $tregx, ?array $php, ?array $expectedResult, ?array $expectedOutput): void
+    function test(array $tregx, ?array $php, ?array $expectedResult, ?array $expectedOutput, array $exceptions = null): void
     {
         // given
         $one = $tregx ? $this->arrayToString($tregx) : null;
         $two = $php ? $this->arrayToString($php) : null;
 
         // when
-        [$return1, $echo1] = $one ? $this->invoke($one, 'T-Regx') : [null, null];
-        [$return2, $echo2] = $two ? $this->invoke($two, 'PHP') : [null, null];
+        [$return1, $echo1, $exception1] = $one ? $this->invoke($one, 'T-Regx') : [null, null, null];
+        [$return2, $echo2, $exception2] = $two ? $this->invoke($two, 'PHP') : [null, null, null];
 
         // then
         if ($one && $two) {
@@ -57,6 +59,10 @@ class MarkupResultConsistencyTest extends TestCase
         }
         if ($expectedOutput) {
             $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput), 'Failed asserting that T-Regx snippet printed expected output');
+        }
+        if ($exceptions) {
+            $exceptions['T-Regx'] && $this->assertInstanceOf($exceptions['T-Regx'], $exception1, "Failed asserting that T-Regx snippet threw {$exceptions['T-Regx']}");
+            $exceptions['PHP'] && $this->assertInstanceOf($exceptions['PHP'], $exception2, "Failed asserting that PHP snippet threw {$exceptions['T-Regx']}");
         }
     }
 
@@ -93,21 +99,24 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function invoke(string $code, string $snippetName): array
     {
+        $result = null;
+        $output = null;
+        $caughtException = null;
         try {
-            return $this->tryInvoke($code);
+            ob_start();
+            try {
+                $result = eval($code);
+            } catch (Throwable $exception) {
+                $caughtException = $exception;
+            } finally {
+                $output = ob_get_clean();
+            }
         } catch (ParseError $error) {
             throw new ParseError($this->errorMessage($error, $code, $snippetName));
         } catch (Error $error) {
             throw new Error($this->errorMessage($error, $code, $snippetName));
         }
-    }
-
-    private function tryInvoke(string $code): array
-    {
-        ob_start();
-        $result = eval($code);
-        $output = ob_get_clean();
-        return [$result, $output];
+        return [$result, $output, $caughtException];
     }
 
     private function errorMessage(Error $error, string $code, string $snippetName): string
