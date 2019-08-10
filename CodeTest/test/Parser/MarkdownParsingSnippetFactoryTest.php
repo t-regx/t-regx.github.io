@@ -16,10 +16,10 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
         // given
         $store = new NonEmptySnippetsStore();
         [$path, $file] = $this->fileAndPath('delimiters.md');
-        $factory = new MarkdownSnippetParser($path, new CodeTabSnippetBuilder($store));
+        $parser = new MarkdownSnippetParser($path, new CodeTabSnippetBuilder($store));
 
         // when
-        $factory->parse($file);
+        $parser->parse($file);
 
         // then
         $snippet = $store->snippets()[0];
@@ -44,14 +44,33 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
         $this->assertEquals($expected, $snippet);
     }
 
-    private function file(string $str): string
+    /**
+     * @test
+     */
+    public function shouldParseClassNames()
     {
-        return getcwd() . "/../../docs/$str";
+        // given
+        $store = new NonEmptySnippetsStore();
+        $parser = new MarkdownSnippetParser('', new CodeTabSnippetBuilder($store));
+
+        // when
+        $parser->parse('
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
+```php
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+<!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->');
+
+        // then
+        $snippet = $store->snippets()[0];
+        $this->assertArrayHasKey(4, $snippet, 'Failed asserting that resulting snippet has an "exceptions" field');
+        $this->assertEquals('\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException', $snippet[4]['T-Regx']);
     }
 
     public function fileAndPath(string $filename): array
     {
-        $path = $this->file($filename);
+        $path = getcwd() . "/../../docs/$filename";
         return [$path, file_get_contents($path)];
     }
 }
