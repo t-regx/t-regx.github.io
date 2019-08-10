@@ -92,7 +92,7 @@ class Snippet
     private function validateExceptionType(string $className): void
     {
         if (!class_exists($className) || !$this->isThrowable($className)) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException("Classname $className is not a class or is not throwable");
         }
     }
 

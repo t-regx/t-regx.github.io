@@ -23,7 +23,7 @@ class MockVariable extends PureModification
     private function validateArgument(string $argument): void
     {
         if (preg_match('/^\$(?!\d)\w+$/', $argument) === 0) {
-            throw new InvalidArgumentException("Invalid argument '$argument' for mod 'mock'");
+            throw new InvalidArgumentException("MockVariable: Invalid argument '$argument' for mod 'mock'");
         }
     }
 

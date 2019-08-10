@@ -13,10 +13,10 @@ class MultipleReturnValues extends PureModification
     private function forModLine(array $snippet, int $modLine): array
     {
         if (count($snippet) < $modLine) {
-            throw new AssertionError("Argument #1 '$modLine' is greater than the number of lines");
+            throw new AssertionError("MultipleReturnValues: Argument #1 '$modLine' is greater than the number of lines");
         }
         if ($modLine <= 0) {
-            throw new AssertionError("Argument #1 '$modLine' doesn't correspond to the number of lines");
+            throw new AssertionError("MultipleReturnValues: Argument #1 '$modLine' doesn't correspond to the number of lines");
         }
         return $this->performModification($snippet, $modLine);
     }

@@ -8,7 +8,7 @@ class ExpectExceptionMod implements Modification
     public function forSnippet(Snippet $snippet, string $type, ?string $argument): void
     {
         if ($argument === null) {
-            throw new \InvalidArgumentException("Exception class name is required");
+            throw new \InvalidArgumentException("ExpectExceptionMod: Exception class name is required");
         }
         $snippet->setException($type, $argument);
     }
