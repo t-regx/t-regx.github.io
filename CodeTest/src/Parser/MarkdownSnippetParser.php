@@ -62,12 +62,13 @@ class MarkdownSnippetParser
             if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([\w-]+)(?:\(([\w\\\\$-]+)\))?\}-->/', $line, $match)) {
                 $forType = $match[1];
                 $mod = $match[2];
-                $arg = array_key_exists(3, $match) ? $match[3] : null;
+                $arg = $match[3] ?? null;
 
                 $this->builder->modify($forType, $this->modByName($mod), $arg);
                 continue;
             }
 
+            $this->validateMalformedSyntax($line);
             $this->builder->feedLine($line);
         }
 
@@ -80,5 +81,14 @@ class MarkdownSnippetParser
             return $this->mods[$mod];
         }
         throw new Exception("Unknown mod '$mod' used in $this->path");
+    }
+
+    private function validateMalformedSyntax(string $line): void
+    {
+        if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):(.*)-->/', $line, $match)) {
+            $forType = $match[1];
+            $malformedSyntax = $match[2];
+            throw new Exception("Modification for $forType has malformed syntax: $malformedSyntax");
+        }
     }
 }
