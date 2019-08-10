@@ -240,4 +240,20 @@ class SnippetTest extends TestCase
         // when
         $snippet->isConsumerSet('Bar');
     }
+
+    /**
+     * @test
+     */
+    public function shouldNotConsiderSnippet_with0Lines_asEmpty()
+    {
+        // given
+        $snippet = new Snippet(['Foo']);
+        $snippet->set('Foo', []);
+
+        // when
+        $isEmpty = $snippet->isEmpty();
+
+        // then
+        $this->assertFalse($isEmpty, 'Failed asserting that snippet with 0 lines is not empty');
+    }
 }

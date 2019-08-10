@@ -53,7 +53,7 @@ class Snippet
 
     public function isEmpty(): bool
     {
-        return $this->snippet == $this->emptySnippet();
+        return $this->snippet === $this->emptySnippet();
     }
 
     public function exists(string $consumer): bool
