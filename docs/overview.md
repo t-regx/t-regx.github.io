@@ -15,10 +15,7 @@ Its main features are:
  - Cleaning the [mess after PHP regular expressions API](whats-the-point.md):
    - All false positives and false negatives are eliminated
    - Special values like `null`, `false`, `''` aren't used to indicate errors.
-   - Unifying interface between matching, replacing, splitting - all operations
-   - No default parameters
-   - No flags
-   - No var-args
+   - Unifying differences between matching, replacing, splitting - all operations
    - Results aren't a dull `string[][]` array, but a dedicated [`Match`](match-details.md) details.
    - Based on exceptions - No warnings, errors or fatal errors or notices.
    - Relieving developers from [**brain strain**](#brain-strain):
@@ -26,6 +23,9 @@ Its main features are:
  - Being explicit and descriptive - ([why is explicit interface so important?](#why-is-explicit-interface-so-important)):
    - Each function obeys SRP
    - Functionalities are represented with methods (and not flags or default arguments)
+   - No default parameters
+   - No flags
+   - No var-args
 
 ## Why is explicit interface so important?
 
@@ -50,7 +50,7 @@ preg_match($pattern, $subject, $match);
  - Is `$match` a `string[]` or a `string[][]`?
  - Will this return **my value**? Or **my value** nested in arrays?
 
-What should be obvious, is now complicated and causes many questions and assumptions for the reader.
+What should be obvious, is now complicated and causes **many** questions and assumptions for the reader.
 
 ### What's good
 

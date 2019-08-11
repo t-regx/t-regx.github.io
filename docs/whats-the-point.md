@@ -59,7 +59,7 @@ Someone who doesn't know PHP regular expressions, can probably ask themselves:
 
 ### PHP is Messy
 
-- `PREG_OFFSET_CAPTURE` is a night mare! It changes return type from "an array of arrays" to "an array of arrays of arrays".
+- `PREG_OFFSET_CAPTURE` is a nightmare! It changes return type from "an array of arrays" to "an array of arrays of arrays".
 - `PREG_SET_ORDER` / `PREG_PATTERN_ORDER` change return values. It's either "groups of matches" or "matches of groups",
    depending on the flag.
 
