@@ -60,10 +60,9 @@ class MarkupResultConsistencyTest extends TestCase
         if ($expectedOutput) {
             $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput), 'Failed asserting that T-Regx snippet printed expected output');
         }
-        if ($exceptions) {
-            $exceptions['T-Regx'] && $this->assertInstanceOf($exceptions['T-Regx'], $exception1, "Failed asserting that T-Regx snippet threw {$exceptions['T-Regx']}");
-            $exceptions['PHP'] && $this->assertInstanceOf($exceptions['PHP'], $exception2, "Failed asserting that PHP snippet threw {$exceptions['T-Regx']}");
-        }
+
+        $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, 'T-Regx');
+        $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, 'PHP');
     }
 
     private function arrayToString(array $lines): string
@@ -193,5 +192,20 @@ class MarkupResultConsistencyTest extends TestCase
     private function startsWith(string $haystack, string $needle): bool
     {
         return substr($haystack, 0, strlen($needle)) === $needle;
+    }
+
+    private function assertExceptionInstanceOf(?string $expected, ?Throwable $exception, string $snippet): void
+    {
+        if ($expected === null && $exception === null) {
+            $this->assertTrue(true);
+            return;
+        }
+        if ($expected && $exception) {
+            $this->assertInstanceOf($expected, $exception, "Failed asserting that T-Regx snippet threw $expected");
+            return;
+        }
+        if ($exception) {
+            throw new AssertionError("Snippet $snippet threw '\\" . get_class($exception) . "', but exception was not expected");
+        }
     }
 }
