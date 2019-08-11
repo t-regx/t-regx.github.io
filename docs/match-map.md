@@ -125,6 +125,5 @@ return array_merge(...array_map('str_split', $matches[0]));
 ```php
 ['I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd']
 ```
-<!--Result-Value:{return-semi}-->
 
 Read more about [`flatMap()`](match-flat-map.md) on the next page.
