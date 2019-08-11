@@ -1,0 +1,21 @@
+.toggleNav {
+  .navListItem {
+    a.navItem {
+      border-bottom: 2px solid transparent;
+      display: inline-block;
+      padding: 0 1px 2px;
+      font-size: 15px;
+
+      &:hover {
+        color: #717171;
+        border-bottom-color: #2cc1ea;
+      }
+    }
+
+    &.navListItemActive {
+      a.navItem {
+        color: #2cc1ea;
+      }
+    }
+  }
+}
