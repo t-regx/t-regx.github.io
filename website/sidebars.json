@@ -17,18 +17,18 @@
       "match-flat-map",
       "match-iterator"
     ],
+    "Match Details": [
+      "match-details",
+      "match-groups",
+      "match-offsets",
+      "match-group"
+    ],
     "Replacing": [
       "replace",
       "replace-with",
       "replace-callback",
       "replace-by-group",
       "replace-by-map"
-    ],
-    "Match Details": [
-      "match-details",
-      "match-groups",
-      "match-offsets",
-      "match-group"
     ],
     "Prepared Patterns": [
       "handling-user-input",
