@@ -123,9 +123,7 @@ return array_merge(...array_map('str_split', $matches[0]));
 <!--Result-Value-->
 
 ```php
-[
-  'I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd'
-]
+['I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd']
 ```
 <!--Result-Value:{return-semi}-->
 
