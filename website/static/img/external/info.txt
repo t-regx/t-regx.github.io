@@ -1,0 +1,2 @@
+Files present here are references from outside services (mostly https://github.com/T-Regx/T-Regx/blob/master/ReadMe.md).
+Before editing files here, please beware you can break some links outside of this project.
