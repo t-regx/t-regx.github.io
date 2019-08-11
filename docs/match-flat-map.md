@@ -43,18 +43,21 @@ array under the hood would break our ["Explicity rule"](whats-the-point.md#t-reg
 <!--DOCUSAURUS_CODE_TABS-->
 <!--T-Regx-->
 ```php
-pattern("\w+")->match("I like trains")->flatMap(function (Match $match) {
+pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
     return $match;  // <- throws InvalidReturnValueException
 });
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 <!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--T-Regx-->
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
     return [$match];  // ok
 });
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 ## Variable callbacks
 
