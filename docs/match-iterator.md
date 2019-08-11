@@ -3,7 +3,7 @@ id: match-iterator
 title: Iterator
 ---
 
-T-Regx uses vanilla PHP [`Iterator`](https://www.php.net/manual/en/class.iterator.php) with standard methods:
+T-Regx uses vanilla PHP [`Iterator`][1] with standard methods:
 
  - `current()`
  - `key(): scalar`
@@ -13,8 +13,8 @@ T-Regx uses vanilla PHP [`Iterator`](https://www.php.net/manual/en/class.iterato
 
 # Iterator to array
 
-Method `match()->iterator()` returns an implementation of PHP [`Iterator`](https://www.php.net/manual/en/class.iterator.php)
-which you can be used with other `Iterator` methods or your own code, for example PHP methods 
+Method `match()->iterator()` returns an implementation of PHP [`Iterator`][1]
+which you can be used with other [`Iterator`][1] methods or your own code, for example PHP methods 
 [iterator_to_array()](https://www.php.net/manual/en/function.iterator-to-array.php) and
 [iterator_count()](https://www.php.net/manual/en/function.iterator-count.php).
 
@@ -38,3 +38,5 @@ return iterator_to_array($iterator);
 ```php
 ['Apples', 'are', 'cool']
 ```
+
+[1]:https://www.php.net/manual/en/class.iterator.php
