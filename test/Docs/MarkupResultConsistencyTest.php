@@ -18,6 +18,21 @@ use TRegx\SafeRegex\preg;
 
 class MarkupResultConsistencyTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function testSnippets()
+    {
+        // given
+        $provider = new CodeTabsDataProvider('../../docs/');
+
+        // when
+        ($provider)->getSnippets();
+
+        // then
+        $this->assertTrue(true);
+    }
+
     function snippets(): array
     {
         return (new CodeTabsDataProvider('../../docs/'))->getSnippets();
