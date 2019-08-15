@@ -49,6 +49,9 @@ class MarkupResultConsistencyTest extends TestCase
         [$return2, $echo2, $exception2] = $two ? $this->invoke($two, 'PHP') : [null, null, null];
 
         // then
+        $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, 'T-Regx');
+        $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, 'PHP');
+
         if ($one && $two) {
             $this->assertEquals($return1, $return2, 'Return values from T-Regx (expected) and PHP (actual) differ');
             $this->assertEquals($echo1, $echo2, 'Printed texts from T-Regx (expected) and PHP (actual) differ');
@@ -60,9 +63,6 @@ class MarkupResultConsistencyTest extends TestCase
         if ($expectedOutput) {
             $this->assertEquals($this->parseExpectedOutput($expectedOutput), $echo1, 'Failed asserting that T-Regx snippet printed expected output');
         }
-
-        $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, 'T-Regx');
-        $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, 'PHP');
     }
 
     private function arrayToString(array $lines): string
@@ -205,7 +205,7 @@ class MarkupResultConsistencyTest extends TestCase
             return;
         }
         if ($exception) {
-            throw new AssertionError("Snippet $snippet threw '\\" . get_class($exception) . "', but exception was not expected");
+            throw $exception;
         }
     }
 }
