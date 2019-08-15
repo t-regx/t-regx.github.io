@@ -25,13 +25,13 @@ class CodeTabSnippetBuilder
     public function setConsumer(string $consumer): void
     {
         $this->validateType($consumer);
-        $this->consumer = $consumer;
         if ($this->feeding) {
-            throw new LogicException();
+            throw new LogicException("Changed customer (from $this->consumer to $consumer) while feeding");
         }
         if ($this->snippet->isConsumerSet($consumer)) {
             throw new LogicException();
         }
+        $this->consumer = $consumer;
         $this->snippet->set($consumer, []);
     }
 
