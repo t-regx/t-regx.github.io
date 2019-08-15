@@ -50,15 +50,15 @@ class MarkupResultConsistencyTest extends TestCase
 
         // then
         if ($one && $two) {
-            $this->assertEquals($return1, $return2, 'In code snippet: T-Regx');
-            $this->assertEquals($echo1, $echo2, 'In code snippet: PHP');
+            $this->assertEquals($return1, $return2, 'Return values from T-Regx (expected) and PHP (actual) differ');
+            $this->assertEquals($echo1, $echo2, 'Printed texts from T-Regx (expected) and PHP (actual) differ');
         }
 
         if ($expectedResult) {
-            $this->assertEquals($return1, $this->parseExpectedResult($expectedResult), 'Failed asserting that T-Regx snippet returned expected result');
+            $this->assertEquals($this->parseExpectedResult($expectedResult), $return1, 'Failed asserting that T-Regx snippet returned expected result');
         }
         if ($expectedOutput) {
-            $this->assertEquals($echo1, $this->parseExpectedOutput($expectedOutput), 'Failed asserting that T-Regx snippet printed expected output');
+            $this->assertEquals($this->parseExpectedOutput($expectedOutput), $echo1, 'Failed asserting that T-Regx snippet printed expected output');
         }
 
         $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, 'T-Regx');
