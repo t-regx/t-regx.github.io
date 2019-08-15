@@ -4,7 +4,6 @@ namespace Docs;
 use AssertionError;
 use CodeTest\CodeTabsDataProvider;
 use Error;
-use InvalidArgumentException;
 use ParseError;
 use PHPUnit\Framework\TestCase;
 use Throwable;
@@ -21,12 +20,7 @@ class MarkupResultConsistencyTest extends TestCase
 {
     function snippets(): array
     {
-        try {
-            return (new CodeTabsDataProvider('../../docs/'))->getSnippets();
-        } catch (InvalidArgumentException $exception) {
-            echo PHP_EOL . $exception . $this->getStatusMessage() . PHP_EOL . $exception->getTraceAsString();
-            throw $exception;
-        }
+        return (new CodeTabsDataProvider('../../docs/'))->getSnippets();
     }
 
     /**

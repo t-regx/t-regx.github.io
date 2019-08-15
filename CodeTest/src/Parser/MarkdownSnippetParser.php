@@ -11,6 +11,7 @@ use CodeTest\Parser\Mods\ReturnFirstSemicolonLast;
 use CodeTest\Parser\Mods\ReturnVariable;
 use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
 use Exception;
+use LogicException;
 use TRegx\SafeRegex\preg;
 
 class MarkdownSnippetParser
@@ -43,6 +44,15 @@ class MarkdownSnippetParser
     }
 
     public function parse(string $content): void
+    {
+        try {
+            $this->tryParse($content);
+        } catch (LogicException $exception) {
+            throw new SnippetParseException($exception);
+        }
+    }
+
+    private function tryParse(string $content): void
     {
         foreach (preg_split("/[\n\r]{1,2}/", $content) as $line) {
             if ($line == self::START_TOKEN) {
