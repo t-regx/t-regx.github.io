@@ -54,7 +54,8 @@ And of course `all()`/`first()`/`only(int)` modifiers are taken into account.
 
 ### Superfluous matches
 
-Normally, had you found a match that's not present in your map - `MissingReplacementKeyException` would be thrown:
+Normally, had you found a match that's not present in your map - `MissingReplacementKeyException` would be thrown 
+(as long as `gif` is matched by your pattern, of course):
 ```php
 $message = 'My words: "mp3", "mp4", "gif"'; 
 
@@ -64,8 +65,6 @@ pattern('\w{3}')->replace($message)->all()->by()->map([
   // 'gif'  => 'Animation'
 ]);
 ```
-
-...as long as `gif` is matched by your pattern, of course :)
 
 If you don't need to specify all your possible `[match => replacement]` pairs, you should use one of the below `mapIfExists()`.
 
@@ -79,8 +78,8 @@ With `mapIfExists()` - superfluous occurrences are left unchanged:
 $message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";
 
 pattern('\b\w{3,4}\b')->replace($message)->all()->by()->mapIfExists([
-   'mp3' => '"Audio"',
-   'gif' => '"Animation"'
+   'mp3' => 'Audio',
+   'gif' => 'Animation'
 ]);
 ```
 <!--PHP-->
@@ -89,8 +88,8 @@ $message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";
 
 preg::replace_callback('/\b\w{3}\b/', function ($match) {
     $map = [
-        'mp3' => '"Audio"',
-        'gif' => '"Animation"'
+        'mp3' => 'Audio',
+        'gif' => 'Animation'
     ];
     if (!array_key_exists($match[0], $map)) {
         return $match[0];
@@ -108,7 +107,7 @@ preg::replace_callback('/\b\w{3}\b/', function ($match) {
 <!--Result-Output-->
 
 ```text
-Extensions: "Audio", mp4, jpg, jpeg, png, "Animation"
+Extensions: Audio, mp4, jpg, jpeg, png, Animation
 ```
 
 ## Groups

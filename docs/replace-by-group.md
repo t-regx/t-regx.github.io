@@ -342,3 +342,6 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')->replace($links)
         return $match->group('domain')->orXXX();
     });
 ```
+
+> `by()->group()` is the most performance-light method, because it doesn't require creating `Match` details, for the sake
+> of `callback()`.
