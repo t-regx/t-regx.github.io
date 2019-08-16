@@ -9,6 +9,8 @@ optionally handling what should happen when a group is not matched.
 This is, in fact, a shorthand for a rather common usage of `callback()` with a function replacing by a capturing 
 group - [Scroll down to see an example](replace-by-group.md#identity).
 
+Apart from replacing by an inline group, you can also retrieve matched capturing groups with [inline groups](match-group.md).
+
 ## Overview
 
 There are several URL addresses in `$links` variable. Given a regular expression matching a URL, with a group 
