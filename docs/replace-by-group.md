@@ -77,7 +77,7 @@ code snippets illustrating the usage of each of those:
 
 ### `orIgnore()`
 
-Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
+Matched links with matched `'domain'` group are replaced with it. Links without the optional group matched, however, 
 are simply left as they were (ignored):
 
 <!--DOCUSAURUS_CODE_TABS-->
@@ -124,11 +124,11 @@ Description:
  - Match `www.google.com` was replaced with the matched occurrence of it's capturing group - `google`
  - Match `facebook.com` was replaced with the matched occurrence of it's capturing group - `facebook`
  - Matches `http://.io` and `https://.com` were matched, but the capturing group `'domain'` inside wasn't, so those matches
-   are ignored, in this case.
+   are left unchanged (ignored), in this case.
 
 ### `orEmpty()`
 
-Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
+Matched links with matched `'domain'` group are replaced with it. Links without the optional group matched, however, 
 are replaced with an empty string:
 
 <!--DOCUSAURUS_CODE_TABS-->
@@ -172,7 +172,7 @@ Description:
 
 ### `orReturn(string)`
 
-Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
+Matched links with matched `'domain'` group are replaced with it. Links without the optional group matched, however, 
 are replaced with a given parameter string:
 
 <!--DOCUSAURUS_CODE_TABS-->
@@ -221,7 +221,7 @@ Description:
 
 ### `orElse(callable)`
 
-Matched links with matched `'domain'` group are replaced with it. Links without matched optional groups, however, 
+Matched links with matched `'domain'` group are replaced with it. Links without the optional group matched, however, 
 are then passed to the producer, which result is then replaced in place of the link:
 
 <!--DOCUSAURUS_CODE_TABS-->
@@ -274,6 +274,9 @@ Description:
  - Matches `http://.io` and `https://.com` were matched, but the capturing group `'domain'` inside wasn't, so callback 
    function is called with `Match` details (first with `http://.io`, and then with `https://.com`), and the link is replaced
    with a result of that function.
+
+> Even this simple T-Regx snippet is represented as a massive PHP code. Using `Match.index()` or `Match.offset()` when 
+> replacing would make PHP code even more complex, introducing counting variables and `PREG_OFFSET_CAPTURE`..
 
 ### `orThrow()`
 
