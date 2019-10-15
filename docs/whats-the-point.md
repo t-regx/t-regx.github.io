@@ -70,7 +70,7 @@ return $match[1][0];
 ```
 
 having no idea what. it. does. You have to see whether you're using `preg_match()` or `preg_match_all()` and
-whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_CAPTURE_OFFSET` were used.
+whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_OFFSET_CAPTURE` were used.
 
 ### PHP is Inconsistent
 
