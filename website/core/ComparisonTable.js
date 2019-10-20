@@ -57,6 +57,11 @@ const rows = [
         title: `Worst case complexity`,
         php: '`(string|int|null)[][][]`<sup>array of arrays of arrays of string/null and integer - `preg_match_all()` with `PREG_OFFSET_CAPTURE`</sup>',
         tRegx: '`string[]`<sup>array of strings</sup>'
+    },
+    {
+        title: `Accidents of Fatal Errors <sup>(terminating the application)</sup>`,
+        php: `Allows fatal errors <sup>(e.g. \`preg_grep([ array() ])\`)`,
+        tRegx: '`\\InvalidArgumentException` with descriptive message'
     }
 ];
 
