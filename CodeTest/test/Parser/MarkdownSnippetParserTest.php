@@ -6,7 +6,7 @@ use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
 use CodeTest\Parser\Snippet\NonEmptySnippetsStore;
 use PHPUnit\Framework\TestCase;
 
-class MarkdownParsingSnippetFactoryTest extends TestCase
+class MarkdownSnippetParserTest extends TestCase
 {
     /**
      * @test
@@ -15,7 +15,7 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
     {
         // given
         $store = new NonEmptySnippetsStore();
-        [$path, $file] = $this->fileAndPath('delimiters.md');
+        [$path, $file] = $this->fileAndPath('code_tabs.md');
         $parser = new MarkdownSnippetParser($path, new CodeTabSnippetBuilder($store));
 
         // when
