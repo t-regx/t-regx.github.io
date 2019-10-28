@@ -70,7 +70,7 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
 
     public function fileAndPath(string $filename): array
     {
-        $path = getcwd() . "/../../docs/$filename";
+        $path = getcwd() . "/CodeTest/resources/$filename";
         return [$path, file_get_contents($path)];
     }
 }

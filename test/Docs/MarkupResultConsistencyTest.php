@@ -24,7 +24,7 @@ class MarkupResultConsistencyTest extends TestCase
     public function testSnippets()
     {
         // given
-        $provider = new CodeTabsDataProvider('../../docs/');
+        $provider = new CodeTabsDataProvider('docs');
 
         // when
         ($provider)->getSnippets();
@@ -35,7 +35,7 @@ class MarkupResultConsistencyTest extends TestCase
 
     function snippets(): array
     {
-        return (new CodeTabsDataProvider('../../docs/'))->getSnippets();
+        return (new CodeTabsDataProvider('docs'))->getSnippets();
     }
 
     /**
