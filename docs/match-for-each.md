@@ -10,14 +10,27 @@ It's possible to easily iterate matched occurrences with `forEach()`.
 You can call `forEach()` with a callback that's invoked with [`Match`](match-details.md) details just like 
 [`first()`](match-first.md) and [`forFirst()`](match-for-first.md).
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('\w+')->match('Apples are cool')->forEach(function (string $text) {
     echo "I matched $text, ";
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match_all('/\w+/', 'Apples are cool', $matches)) {
     array_map(function (string $text) {
@@ -25,9 +38,11 @@ if (preg::match_all('/\w+/', 'Apples are cool', $matches)) {
     }, $matches[0]);
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Output-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Output-->
 ```text
 I matched Apples, I matched are, I matched cool, 
 ```
@@ -43,15 +58,25 @@ Unfortunately, only since PHP 7.0 you can use keywords (like `foreach`) for meth
 That's why T-Regx also has a method called `iterate()` which works exactly like `forEach()`, and can be used for pre 
 PHP 7.0 environments:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")->iterate(function (Match $match) {
     echo 'I matched "' . $match->text() . '" at offset ' . $match->offset();
     // `$match->offset()` is the number of characters, not bytes
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all('/[0-9]+/', "I'm 19 years old", $matches, PREG_OFFSET_CAPTURE);
 foreach ($matches[0] as $match) {
@@ -59,4 +84,6 @@ foreach ($matches[0] as $match) {
     // Keep in mind that `$match[1]` is the number of bytes!, not characters!
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>

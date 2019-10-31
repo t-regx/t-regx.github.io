@@ -315,12 +315,12 @@ method. It's bulletproof.
 
 Here's how they work:
 
-|Group             |`hasGroup()`     |`matched()`       |`text()`          |
-|------------------|-----------------|------------------|------------------|
-|Invalid group     |`InvalidArgument`|`InvalidArgument` |`InvalidArgument` |
-|Non-existent group|`false`          |`NonexistentGroup`|`NonexistentGroup`|
-|Not matched group |`true`           |`false`           |`GroupNotMatched` |
-|Matched group     |`true`           |`true`            |Value of the group|
+| Group              | `hasGroup()`      | `matched()`        | `text()`           |
+|--------------------|-------------------|--------------------|--------------------|
+| Invalid group      | `InvalidArgument` | `InvalidArgument`  | `InvalidArgument`  |
+| Non-existent group | `false`           | `NonexistentGroup` | `NonexistentGroup` |
+| Not matched group  | `true`            | `false`            | `GroupNotMatched`  |
+| Matched group      | `true`            | `true`             | Value of the group |
 
 In short:
  - You can't use an invalid group (`2startingWithDigit` or negative `-1`)

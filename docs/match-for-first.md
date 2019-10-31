@@ -16,8 +16,18 @@ control methods: `orThrow()`, `orReturn()` and `orElse()`.
 
 For example:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 $first = pattern('[0-9]+')->match("I'm 19 years old")
    ->forFirst(function (Match $match) {
@@ -27,7 +37,10 @@ $first = pattern('[0-9]+')->match("I'm 19 years old")
 
 return $first;
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
     $text = $match[0];
@@ -35,9 +48,11 @@ if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
 }
 return 'Unmatched :/';
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Value-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Value-->
 ```php
 'I was born 19 years ago'
 ```
@@ -49,8 +64,15 @@ handling of an unmatched subject relies in the chained method.
 
 If a match is not found, it returns a default value.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 $first = pattern('[0-9]+')->match("I'm a dog")
     ->forFirst(function (Match $match) {
@@ -60,7 +82,10 @@ $first = pattern('[0-9]+')->match("I'm a dog")
 
 return $first;
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('/[0-9]+/', "I'm a dog")) {
     $first = 'Match is found!';
@@ -70,9 +95,11 @@ if (preg::match('/[0-9]+/', "I'm a dog")) {
 
 return $first;
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Value-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Value-->
 ```php
 'Match is not found'
 ```
@@ -81,8 +108,15 @@ return $first;
 
 If a match is not found, it calls `orElse()` callback and uses *it* to evaluate a return value.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 $first = pattern('[0-9]+')->match("I'm a dog")
     ->forFirst(function (Match $match) {
@@ -94,7 +128,10 @@ $first = pattern('[0-9]+')->match("I'm a dog")
     
 return $first;
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 $subject = "I'm a dog";
 if (preg::match('/[0-9]+/', $subject)) {
@@ -105,18 +142,28 @@ if (preg::match('/[0-9]+/', $subject)) {
 
 return $first;
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Value-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Value-->
 ```php
 "I couldn't match subject: I'm a dog"
 ```
+
 ### `orThrow()`
 
 If a match is not found, it throws `SubjectNotMatchedException` by default.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 try {
     return pattern('[0-9]+')->match("I'm a dog")
@@ -130,7 +177,10 @@ catch (SubjectNotMatchedException $e) {
     echo 'Not matched';
 }
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 try {
     if (preg::match('/[0-9]+/', "I'm a dog")) {
@@ -143,14 +193,24 @@ catch (SubjectNotMatchedException $e) {
     echo 'Not matched';
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 
 ### Custom exceptions for `orThrow()`
 
 You can also supply your own exception class name.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 class MyException extends \Exception {}
 
@@ -166,7 +226,10 @@ catch (MyException $e) {
     echo 'Not matched';
 }
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 class MyException extends \Exception {}
 
@@ -181,7 +244,9 @@ catch (MyException $e) {
     echo 'Not matched';
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
 
 Of course, your custom exception must meet certain requirements:
 
@@ -209,8 +274,15 @@ Of course, your custom exception must meet certain requirements:
 If you don't like functional programming style, you are free to use [`first()`](match-first.md) (which throws an exception) 
 and just catch it.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 try {
     return pattern('[0-9]+')->match("I'm a dog")->first();
@@ -219,7 +291,10 @@ catch (SubjectNotMatchedException $e) {
     return 'Some other value';
 }
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 try {
     if (preg::match('/[0-9]+/', "I'm a dog", $match)) {
@@ -231,4 +306,6 @@ catch (SubjectNotMatchedException $e) {
     return 'Some other value';
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>

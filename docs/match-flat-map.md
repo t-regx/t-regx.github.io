@@ -9,8 +9,18 @@ There are cases when you would like to create a single list of all your matches.
 
 Method `flatMap()` is basically method `map()`, from which you can return multiple values.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('\w+')->match('I have 19 trains')->flatMap(function (Match $match) {
     return [
@@ -18,7 +28,10 @@ pattern('\w+')->match('I have 19 trains')->flatMap(function (Match $match) {
     ];
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/\w+/", 'I have 19 trains', $matches);
 return array_merge(...array_map(function (string $text) {
@@ -27,7 +40,10 @@ return array_merge(...array_map(function (string $text) {
     ];
 }, $matches[0]));
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
@@ -37,44 +53,76 @@ return array_merge(...array_map(function (string $text) {
 
 ## Return types
 
-`flatMap()` only accepts an `array` as its return type. Returning a single element and implicitly creating a one-element 
-array under the hood would break our ["Explicity rule"](whats-the-point.md#t-regx-to-the-rescue). 
+`flatMap()` only accepts an `array` as its return type. Returning a single element and implicitly creating a one-element
+array under the hood would break our ["Explicity rule"](whats-the-point.md#t-regx-to-the-rescue).
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<!-- <Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+]
+}>
+<TabItem value="t-regx"> -->
+
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
     return $match;  // <- throws InvalidReturnValueException
 });
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+<!-- TODO: Tabs does not allow one tab now. Bug or not? -->
+
+<!-- </TabItem>
+</Tabs> -->
+
 <!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<!-- <Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+]
+}>
+<TabItem value="t-regx"> -->
+
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
     return [$match];  // ok
 });
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+<!-- </TabItem>
+</Tabs> -->
 
 ## Variable callbacks
 
-You can invoke `flatMap()` with any valid PHP `callable` which accepts one string parameter (or no parameters) - just 
+You can invoke `flatMap()` with any valid PHP `callable` which accepts one string parameter (or no parameters) - just
 like [`first()`](match-first.md) and [`map()`](match-map.md) - and returns `array`.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return array_merge(...array_map('str_split', $matches[0]));
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
@@ -82,7 +130,7 @@ return array_merge(...array_map('str_split', $matches[0]));
 ['I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd']
 ```
 
-The [`callable`](https://www.php.net/manual/en/language.types.callable.php) passed to `flatMap()` must return an array. 
+The [`callable`](https://www.php.net/manual/en/language.types.callable.php) passed to `flatMap()` must return an array.
 `InvalidReturnValueException` is thrown, otherwise.
 
 ## Mapping with keys
@@ -90,21 +138,34 @@ The [`callable`](https://www.php.net/manual/en/language.types.callable.php) pass
 Because `flatMap()` receives an array from its callback, it's possible to also return an associative array with
 specified keys:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
     return [$match->text() => $match->offset()];   // offset is UTF-8 safe
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/\w+/", "Apples are cool", $matches, PREG_OFFSET_CAPTURE);
 return array_merge(...array_map(function (array $match) {
     return [$match[0] => $match[1]];    // offset is given in bytes
 }, $matches[0]));
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
@@ -115,21 +176,29 @@ return array_merge(...array_map(function (array $match) {
     'cool'   => 11
 ]
 ```
+
 <!--Result-Value:{return-semi}-->
 
 > Keep in mind that `flatMap()` uses `array_merge()` to flatten the results! So If you use `int` as a key, or even
-a `string` with numeric values (like `'19'`) they will be **reindexed** by `array_merge()`.
+> a `string` with numeric values (like `'19'`) they will be **reindexed** by `array_merge()`.
 
-> `Match.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all` 
-> counts them as [bytes](match-details.md#offsets). To return bytes number with T-Regx as well, 
+> `Match.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all`
+> counts them as [bytes](match-details.md#offsets). To return bytes number with T-Regx as well,
 > use [`byteOffset()`](match-details.md#offsets).
 
 ## Duplicate keys
 
 Duplicate keys are not allowed in PHP arrays, so they'll only appear once in the results.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
     return [
@@ -138,7 +207,10 @@ pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
     ];
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 $subject = 'Apples are cool';
 preg::match_all("/\w+/", $subject, $matches, PREG_OFFSET_CAPTURE);
@@ -146,10 +218,13 @@ return array_merge(...array_map(function (array $match) use ($subject) {
     return [
         $match[0] => $match[1],   // offset is given in bytes
         'subject' => $subject
-    ];   
+    ];
 }, $matches[0]));
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
@@ -161,4 +236,5 @@ return array_merge(...array_map(function (array $match) use ($subject) {
     'cool'    => 11
 ]
 ```
+
 <!--Result-Value:{return-semi}-->

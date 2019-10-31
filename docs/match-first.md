@@ -9,21 +9,36 @@ Matching a first occurrence in a string is the most common use-case.
 
 You can get the first occurrence of a pattern in a subject by calling `first()`.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")->first();
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
     return $match[0];
 }
 throw new SubjectNotMatchedException();
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Value-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Value-->
 ```php
 '19'
 ```
@@ -41,14 +56,24 @@ method **has** to return a value and go on. No more bothers about empty arrays a
 You can call an anonymous function for the first matched occurrence. In this example, we'll print the matched text to the 
 standard output.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (string $match) {
     echo 'I matched ' . $match;
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('/\w+/', "Apples are cool", $match)) {
     echo 'I matched ' . $match[0];
@@ -57,9 +82,11 @@ else {
     throw new SubjectNotMatchedException();
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Output-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Output-->
 ```text
 I matched Apples
 ```
@@ -70,15 +97,25 @@ I matched Apples
 
 With [`Match`](match-details.md) details, you can gain access to useful information about the matched occurrence. 
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
     $subject = $match->subject();
     echo "Match '$match' was matched inside '$subject'.";
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 $subject = "Apples are cool";
 if (preg::match('/\w+/', $subject, $match)) {
@@ -89,9 +126,11 @@ else {
     throw new SubjectNotMatchedException();
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Output-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Output-->
 ```text
 Match 'Apples' was matched inside 'Apples are cool'.
 ```
@@ -102,8 +141,15 @@ You can learn more about `Match` on [`Match` details](match-details.md) page.
 
 Retrieving capturing groups from a match is really simple.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(function (Match $match) {
     $capital = $match->group('capital')->text();
@@ -111,7 +157,10 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(
     return $capital;
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
     $capital = $match['capital'][0];
@@ -122,10 +171,12 @@ else {
     throw new SubjectNotMatchedException();
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
-
 ```php
 'G'
 ```
@@ -142,8 +193,15 @@ Of course, `first()` callback will only be invoked if your pattern matches the s
 It's also possible to return your custom value from within `first()` callback. This custom value will be then returned 
 from `first()` function.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 $first = pattern('\w+')->match('Apples are cool')->first(function (Match $match) {
     return [
@@ -155,7 +213,10 @@ $first = pattern('\w+')->match('Apples are cool')->first(function (Match $match)
 
 return $first;
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('/\w+/', 'Apples are cool', $match)) {
     $first = [
@@ -170,9 +231,11 @@ else {
 
 return $first;
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Value-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Value-->
 ```php
 ['Apples', 'APPLES', 'apples']
 ```
@@ -181,12 +244,22 @@ return $first;
 
 You can call `first()` for any valid PHP `callable` which accepts one string parameter (or no parameters).
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 return pattern('\w+')->match('Apples are cool')->first('strtoupper');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('/\w+/', 'Apples are cool', $match)) {
     $method = 'strtoupper';
@@ -196,9 +269,11 @@ else {
     throw new SubjectNotMatchedException();
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Value-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Value-->
 ```php
 'APPLES'
 ```
@@ -211,12 +286,22 @@ In this example, [`Match`](match-details.md) will be cast to string, which is th
 
 From within `first()` callback, you can return any value:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 return pattern('\w+')->match('Apples are cool')->first('str_split');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('/\w+/', 'Apples are cool', $match)) {
     $method = 'str_split';
@@ -226,9 +311,11 @@ else {
     throw new SubjectNotMatchedException();
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Value-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Value-->
 ```php
 ['A', 'p', 'p', 'l', 'e', 's']
 ```
@@ -249,8 +336,15 @@ pattern($p)->match($s)->first('strlen')          // 5
 This method allows you to explicitly specify how to handle an unmatched subject. Just chain `forFirst()` with
 one of the following `orReturn()`, `orElse()` or `orThrow()`.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 echo pattern('\w+')->match('Dog')
          ->forFirst(function (Match $match) {
@@ -258,7 +352,10 @@ echo pattern('\w+')->match('Dog')
          })
          ->orReturn('Aw, man :/');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 if (preg::match('/\w+/', 'Dog', $match)) {
     echo "Yay {$match[0]}";
@@ -267,9 +364,11 @@ else {
     echo 'Aw, man :/';
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
-<!--Result-Output-->
 
+</TabItem>
+</Tabs>
+
+<!--Result-Output-->
 ```text
 Yay Dog
 ```

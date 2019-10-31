@@ -10,16 +10,18 @@ A curious user might notice, that some parts of T-Regx API are redundant and can
 ```php
 pattern($p)->match($s)->forFirst($callback)->orThrow();
 ```
+
 can be simplified to
+
 ```php
 pattern($p)->match($s)->first($callback);
 ```
 
-If the subject doesn't match the pattern - `first()` throws `SubjectNotMatchedException`, which is the default class 
+If the subject doesn't match the pattern - `first()` throws `SubjectNotMatchedException`, which is the default class
 for `orThrow()`.
 
 ---
- 
+
 Getting the matched text from [`Match`](match-details.md).
 
 ```php
@@ -40,12 +42,16 @@ Mapping `Match.text()` or returning `Match.all()` from `first()`:
 pattern($p)->match($s)->first(function (Match $match) {
     return $match->all();
 });
+
 // and
+
 pattern($p)->match($s)->map(function (Match $match) {
     return $match->text();
 });
 ```
+
 can be simplified to
+
 ```php
 pattern($p)->match($s)->all();
 ```
@@ -53,12 +59,15 @@ pattern($p)->match($s)->all();
 ---
 
 Similarly, mapping `Match.group()`
+
 ```php
 pattern($p)->match($s)->map(function (Match $match) {
     return $match->group("capital")->text();
 });
 ```
+
 can be simplified to
+
 ```php
 pattern($p)->match($s)->group("capital")->all();
 ```
@@ -70,7 +79,9 @@ pattern($p)->match($s)->map(function (Match $match) {
     return $match->group("capital")->offset();
 });
 ```
+
 can be simplified to
+
 ```php
 pattern($p)->match($s)->group("capital")->offsets()->all();
 ```

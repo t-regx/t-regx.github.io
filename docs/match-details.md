@@ -3,13 +3,13 @@ id: match-details
 title: Match details
 ---
 
-When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details 
-object. These methods are: 
-[`first()`](match-first.md), 
-[`forFirst()`](match-for-first.md), 
-[`forEach()`](match-for-each.md)/[`iterate()`](match-for-each.md), 
-[`map()`](match-map.md), 
-[`flatMap()`](match-flat-map.md), 
+When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details
+object. These methods are:
+[`first()`](match-first.md),
+[`forFirst()`](match-for-first.md),
+[`forEach()`](match-for-each.md)/[`iterate()`](match-for-each.md),
+[`map()`](match-map.md),
+[`flatMap()`](match-flat-map.md),
 [`callback()`](replace-callback.md).
 
 <!-- Copy the above paragraph to match-groups.md -->
@@ -18,17 +18,17 @@ object. These methods are:
 
 Using `Match` details, you gain access to:
 
- - [`text()`](#matched-text)/[`textLength()`](#matched-text) - value of a matched occurrence
- - [`parseInt()`](#integers)/[`isInt()`](#integers) which allow you to handle integers safely
- - [`subject()`](#subject) - subject against which the pattern was matched
- - [`index()`](#ordinal-value-index) - ordinal value of a matched occurrence
- - [`limit()`](#limit) - limit which was put on the matches
- - [offsets of matched values](#offsets) in the subject:
-   - character offsets (UTF-8 safe) - [`offset()`](#offsets)
-   - byte offsets - [`byteOffset()`](#offsets)
- - [`all()`](#other-occurrences) - other matched occurrences
- - [User data](#other-occurrences) - sharing custom data between callbacks
- - details about capturing groups, in the next chapter: [Capturing groups](match-groups.md)
+- [`text()`](#matched-text)/[`textLength()`](#matched-text) - value of a matched occurrence
+- [`parseInt()`](#integers)/[`isInt()`](#integers) which allow you to handle integers safely
+- [`subject()`](#subject) - subject against which the pattern was matched
+- [`index()`](#ordinal-value-index) - ordinal value of a matched occurrence
+- [`limit()`](#limit) - limit which was put on the matches
+- [offsets of matched values](#offsets) in the subject:
+  - character offsets (UTF-8 safe) - [`offset()`](#offsets)
+  - byte offsets - [`byteOffset()`](#offsets)
+- [`all()`](#other-occurrences) - other matched occurrences
+- [User data](#other-occurrences) - sharing custom data between callbacks
+- details about capturing groups, in the next chapter: [Capturing groups](match-groups.md)
 
 ## Matched text
 
@@ -39,7 +39,7 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
 
     return $match->text();             // using text() method
     return $match->group(0)->text();   // group #0 is the whole match in all regexp engines
-    
+
     return (string) $match;            // cast it to string
     return (string) $match->group(0);  // cast group #0 to string
     return "$match";                   // enclose it in double quotes
@@ -72,26 +72,26 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
 Method `isInt()` returns `true` if, and only if matched occurrence is numeric. And by "numeric", we mean "real" numeric,
 not PHP numeric:
 
-| Value    | `isInt()` |
-| -------- | --------- |
-| `'14'`   | `true`    |
-| `'-14'`  | `true`    |
-| `'+14'`  | `true`    |
-| `'000'`  | `true`    |
-| `' 10'`  | `false`   |
-| `'10 '`  | `false`   |
-| `'1e0'`  | `false`   |
-| `''`     | `false`   |
-| `' '`    | `false`   |
-| `'0.0'`  | `false`   |
-| `'0,0'`  | `false`   |
+| Value   | `isInt()` |
+| ------- | --------- |
+| `'14'`  | `true`    |
+| `'-14'` | `true`    |
+| `'+14'` | `true`    |
+| `'000'` | `true`    |
+| `' 10'` | `false`   |
+| `'10 '` | `false`   |
+| `'1e0'` | `false`   |
+| `''`    | `false`   |
+| `' '`   | `false`   |
+| `'0.0'` | `false`   |
+| `'0,0'` | `false`   |
 
-*PS: It's implemented with `filter_var()`, but you can think of it as:* `/^[-+]?\d+$/`
+_PS: It's implemented with `filter_var()`, but you can think of it as:_ `/^[-+]?\d+$/`
 
 ```php
 pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) {
     if ($match->isInt()) {
-        $times = $match->parseInt(); 
+        $times = $match->parseInt();
         for ($i = 0; $i < $times; $i++) {
             // tasks
         }
@@ -111,6 +111,7 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
     return $match->subject();
 });
 ```
+
 ```php
 'I like Trains'
 ```
@@ -139,15 +140,16 @@ pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Mat
     return strtoupper($match);
 });
 ```
+
 ```php
 ['i', 'LIKE', 'trains', 'BUT', 'i', 'ALSO', 'like', 'BIKES']
 ```
 
-Results of `Match.index()` are always **continuous integer**  numbers, going from `0` to `1`, `2`, `3` etc.
+Results of `Match.index()` are always **continuous integer** numbers, going from `0` to `1`, `2`, `3` etc.
 
 ## Limit
 
-Depending on whether you used `all()`, `first()` or `only(int)` - method `limit()` will return `-1`, `1` or an 
+Depending on whether you used `all()`, `first()` or `only(int)` - method `limit()` will return `-1`, `1` or an
 argument given to `only()`
 
 ```php
@@ -155,11 +157,13 @@ pattern('\w+')->replace($string)->all()->callback(function (Match $match) {
     $match->limit();   // -1
 });
 ```
+
 ```php
 pattern('\w+')->replace($string)->first()->callback(function (Match $match) {
     $match->limit();   // 1
 });
 ```
+
 ```php
 pattern('\w+')->replace($string)->only(5)->callback(function (Match $match) {
     $match->limit();   // 5
@@ -168,7 +172,7 @@ pattern('\w+')->replace($string)->only(5)->callback(function (Match $match) {
 
 ## Offsets
 
-`Match.offset()` is multi-byte character safe and returns offset in characters, whereas `Match.byteOffset()` returns 
+`Match.offset()` is multi-byte character safe and returns offset in characters, whereas `Match.byteOffset()` returns
 the offset in bytes.
 
 ```php
@@ -185,6 +189,7 @@ Apples for 0.30€, here
                   ↑
                   offset()
 ```
+
 ```text
 A  p   p   l   e   s      f   o   r      0  .  3  0  €           ,     h   e   r   e
 65 112 112 108 101 115 32 102 111 114 32 48 46 51 48 226 130 172 44 32 104 101 114 101
@@ -192,18 +197,20 @@ A  p   p   l   e   s      f   o   r      0  .  3  0  €           ,     h   e  
                                                                        byteOffset()
 ```
 
-In other words, `offset()` treats bytes `[226, 130, 172]` as one multi-byte character (euro sign `€`) and counts them as 
+In other words, `offset()` treats bytes `[226, 130, 172]` as one multi-byte character (euro sign `€`) and counts them as
 one; whereas `byteOffset()` counts them as three.
 
 Use:
- - `offset()` with functions: `mb_substr()`, `mb_strpos()`
- - `byteOffset()` with functions: `substr()`, `strpos()`
+
+- `offset()` with functions: `mb_substr()`, `mb_strpos()`
+- `byteOffset()` with functions: `substr()`, `strpos()`
 
 ## Other occurrences
 
 `Match` has access to other matched occurrences:
- - `Match.all()` - for whole matches (like `Match.text()`)
- - `Match.group().all()` - for capturing groups (like `Match.group().text()`)
+
+- `Match.all()` - for whole matches (like `Match.text()`)
+- `Match.group().all()` - for capturing groups (like `Match.group().text()`)
 
 Even if you use `first()` or `only(int)` methods, `Match.all()` always returns unlimited occurrences.
 
@@ -215,6 +222,7 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
     ];
 });
 ```
+
 ```php
 [
   ['match' => 'Apples', 'all' => ['Apples', 'are', 'cool']],
@@ -233,11 +241,11 @@ the value in [`map()`](match-map.md).
 pattern('\w{2}')->match('Languages: en, de, xd, sv')
     ->filter(function (Match $match) {
         $languageInfo = HeavyService::fetch($match->text());
-        $match->setUserData($languageInfo);  
+        $match->setUserData($languageInfo);
         return $languageInfo->isValid();
     })
     ->map(function (Match $match) {
-        $languageInfo = $match->getUserData();  
+        $languageInfo = $match->getUserData();
         return $languageInfo->languages():
     });
 ```
@@ -247,7 +255,7 @@ pattern('\w{2}')->match('Languages: en, de, xd, sv')
 
 ## Groups
 
-With `Match.group()`, you can easily retrieve capturing groups. 
+With `Match.group()`, you can easily retrieve capturing groups.
 
 Just like with `Match`, retrieving matched occurrence value is done with `text()` method or by casting it to `string`.
 
