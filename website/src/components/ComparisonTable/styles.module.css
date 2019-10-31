@@ -1,0 +1,48 @@
+.comparisonTable {
+  margin-top: 55px;
+  margin-bottom: 75px;
+}
+
+.comparisonTable sup {
+  font-size: 0.8em;
+  opacity: 0.65;
+  display: block;
+}
+
+.comparisonTable ul {
+  padding-left: 1.2em;
+  margin-bottom: 3px;
+}
+
+.comparisonTable thead tr {
+  border-top: none;
+}
+
+.comparisonTable thead tr th {
+  text-align: center;
+}
+
+.comparisonTable thead tr th:first-of-type {
+  border: none;
+  background-color: var(--ifm-background-color);
+}
+
+.comparisonTable thead tr.logoRow th {
+  padding: 13px;
+  vertical-align: middle;
+}
+
+.comparisonTable thead tr.logoRow th img {
+  margin: 0 auto;
+  display: block;
+  max-width: 110px;
+}
+
+.comparisonTable tbody tr td {
+  vertical-align: middle;
+  padding: 9px 16px;
+}
+
+.comparisonTable tbody tr td p {
+  margin-bottom: 0;
+}
