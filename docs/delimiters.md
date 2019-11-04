@@ -26,26 +26,24 @@ The code snippets above are equal.
 
 You can check whether a pattern is delimited with `is()->delimited()` method.
 
-<!-- TODO: stylize output code blocks -->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-<!-- import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem'; -->
-
-<!-- <Tabs
+<Tabs
 defaultValue="t-regx"
 values={[
 { label: 'T-Regx', value: 't-regx', },
 ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('[A-Z][a-z]+')->is()->delimitered();
 pattern('#[A-Z][a-z]+#')->is()->delimitered();
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 <!--T-Regx:{multiline-return}-->
 <!--Result-Value-->
@@ -65,20 +63,20 @@ true
 
 To change undelimited pattern into a delimited one - use `delimiter()` method;
 
-<!-- <Tabs
+<Tabs
 defaultValue="t-regx"
 values={[
 { label: 'T-Regx', value: 't-regx', },
 ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('Welcome/Or not')->delimiter();
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 <!--T-Regx:{echo-at(0)}-->
 <!--Result-Output-->

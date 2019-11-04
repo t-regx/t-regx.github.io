@@ -7,7 +7,7 @@ title: Validate a pattern
 
 You can check whether a pattern is valid and ready to use with `is()->valid()` method.
 
-<!-- import Tabs from '@theme/Tabs';
+import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
@@ -16,14 +16,14 @@ import TabItem from '@theme/TabItem';
     { label: 'T-Regx', value: 't-regx', },
   ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('/I am a valid pattern/')->is()->valid();
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 <div className="output-block">
 
@@ -37,21 +37,21 @@ true
 
 Neither `is()->valid()` nor `is()->usable()` throws an exception or issues any warnings. They only return `true`/`false`.
 
-<!-- <Tabs
+<Tabs
   defaultValue="t-regx"
   values={[
     { label: 'T-Regx', value: 't-regx', },
     { label: 'PHP', value: 'php', },
   ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('I am an (( invalid }} pattern')->is()->valid();
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 <div className="output-block">
 
@@ -74,22 +74,21 @@ A usable pattern is a valid, but not necessarily delimited pattern. In other wor
 
 The pattern doesn't have to be delimited.
 
-<!-- <Tabs
+<Tabs
   defaultValue="t-regx"
   values={[
     { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
   ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('/I am a valid and usable pattern/')->is()->usable();
 pattern('I am not delimited, but still a usable pattern')->is()->usable();
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 <div className="output-block">
 
@@ -106,21 +105,20 @@ true
 
 But it can't be invalid.
 
-<!-- <Tabs
+<Tabs
   defaultValue="t-regx"
   values={[
     { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
   ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('I am (invalid')->is()->usable();
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 <div className="output-block">
 
@@ -136,21 +134,20 @@ false
 
 Method `is()->delimited()` is used to verify whether a pattern is delimited or not.
 
-<!-- <Tabs
+<Tabs
   defaultValue="t-regx"
   values={[
     { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
   ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('#I am delimited#')->is()->delimitered();
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 <div className="output-block">
 
@@ -164,21 +161,20 @@ true
 
 ---
 
-<!-- <Tabs
+<Tabs
   defaultValue="t-regx"
   values={[
     { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
   ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('I am not delimited')->is()->delimitered();
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 <div className="output-block">
 

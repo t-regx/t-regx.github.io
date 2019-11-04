@@ -48,3 +48,16 @@ html[data-theme='dark']:root {
 .output-block:hover {
   opacity: 1;
 }
+
+[data-theme='dark'] #disqus_thread {
+  background: #333;
+  padding: 10px;
+}
+
+[data-theme='dark'] #disqus_thread iframe body {
+  color: #cbcbcb;
+}
+
+.post-message {
+  color: red;
+}

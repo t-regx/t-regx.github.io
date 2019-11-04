@@ -56,13 +56,13 @@ return array_merge(...array_map(function (string $text) {
 `flatMap()` only accepts an `array` as its return type. Returning a single element and implicitly creating a one-element
 array under the hood would break our ["Explicity rule"](whats-the-point.md#t-regx-to-the-rescue).
 
-<!-- <Tabs
+<Tabs
 defaultValue="t-regx"
 values={[
 { label: 'T-Regx', value: 't-regx', },
 ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
@@ -70,20 +70,18 @@ pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
 });
 ```
 
-<!-- TODO: Tabs does not allow one tab now. Bug or not? -->
-
-<!-- </TabItem>
+</TabItem>
 </Tabs> -->
 
 <!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->
 
-<!-- <Tabs
+<Tabs
 defaultValue="t-regx"
 values={[
 { label: 'T-Regx', value: 't-regx', },
 ]
 }>
-<TabItem value="t-regx"> -->
+<TabItem value="t-regx">
 
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
@@ -91,8 +89,8 @@ pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
 });
 ```
 
-<!-- </TabItem>
-</Tabs> -->
+</TabItem>
+</Tabs>
 
 ## Variable callbacks
 

@@ -19,10 +19,14 @@ function BlogPostPage(props) {
               <div className="margin-vert--xl">
                 <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
               </div>
-
-              <DisqusThread identifier={metadata.permalink} />
             </div>
           </div>
+
+          <DisqusThread
+            identifier={metadata.permalink}
+            path={metadata.permalink}
+            title={metadata.title}
+          />
         </div>
       )}
     </Layout>
