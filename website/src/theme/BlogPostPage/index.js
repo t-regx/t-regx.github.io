@@ -5,6 +5,7 @@ import BlogPostPaginator from '@theme/BlogPostPaginator';
 import { DisqusThread } from '@site/src/components';
 
 function BlogPostPage(props) {
+  console.log(props);
   const { content: BlogPostContents, metadata, nextItem, prevItem } = props;
   const { frontMatter } = BlogPostContents;
   return (
@@ -17,7 +18,10 @@ function BlogPostPage(props) {
                 <BlogPostContents />
               </BlogPostItem>
               <div className="margin-vert--xl">
-                <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
+                <BlogPostPaginator
+                  nextItem={metadata.nextItem}
+                  prevItem={metadata.prevItem}
+                />
               </div>
             </div>
           </div>

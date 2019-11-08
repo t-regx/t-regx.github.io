@@ -37,7 +37,9 @@ module.exports = {
       //   placeholder: 'Search the website',
     },
     sidebarCollapsible: false,
-    prismTheme: require('prism-react-renderer/themes/github'),
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+    },
     navbar: {
       title: 'T-Regx',
       logo: {
