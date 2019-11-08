@@ -39,6 +39,7 @@ module.exports = {
     sidebarCollapsible: false,
     prism: {
       theme: require('prism-react-renderer/themes/github'),
+      defaultLanguage: 'php',
     },
     navbar: {
       title: 'T-Regx',
@@ -46,7 +47,6 @@ module.exports = {
         alt: 'T-Regx',
         src: 'img/t.regx.borderless.png',
       },
-
       links: [
         { to: 'docs/installation', label: 'Docs' },
         { to: 'comparison', label: 'Compare' },
@@ -80,26 +80,18 @@ module.exports = {
           items: [
             { label: 'Blog', to: 'blog' },
             { label: 'GitHub', href: mainRepoUrl },
+            {
+              html: `<a class="github-button" href="${mainRepoUrl}"
+                        title="See this project on GitHub"
+                        data-icon="octicon-star"
+                        data-show-count="true"
+                        data-count-href="/T-Regx/T-Regx/stargazers"
+                        data-count-aria-label="# stargazers on GitHub"
+                        aria-label="Star this project on GitHub">T-Regx</a>`,
+            },
           ],
         },
       ],
     },
   },
-
-  //   scrollToTop: true,
-  //   scrollToTopOptions: {
-  //     showWhenScrollTopIs: 190,
-  //     scrollDuration: 400,
-  //     backgroundColor: '#26768c',
-  //   },
-
-  //   colors: {
-  //     primaryColor: '#26768c',
-  //     secondaryColor: '#2495B0',
-  //   },
-
-  //   highlight: {
-  //     theme: 'github',
-  //     defaultLang: 'php',
-  //   },
 };
