@@ -16,6 +16,11 @@ use TRegx\CleanRegex\Pattern;
 use TRegx\SafeRegex\Exception\CompileSafeRegexException;
 use TRegx\SafeRegex\preg;
 
+/**
+ * The working directory should be set at the base of this project, not the root of tests.
+ *
+ * Current working directory should be: /your/user/T-Regx.github.io
+ */
 class MarkupResultConsistencyTest extends TestCase
 {
     /**
@@ -24,10 +29,10 @@ class MarkupResultConsistencyTest extends TestCase
     public function testSnippets()
     {
         // given
-        $provider = new CodeTabsDataProvider('../../docs/');
+        $provider = new CodeTabsDataProvider('docs');
 
         // when
-        ($provider)->getSnippets();
+        $provider->getSnippets();
 
         // then
         $this->assertTrue(true);
@@ -35,7 +40,7 @@ class MarkupResultConsistencyTest extends TestCase
 
     function snippets(): array
     {
-        return (new CodeTabsDataProvider('../../docs/'))->getSnippets();
+        return (new CodeTabsDataProvider('docs'))->getSnippets();
     }
 
     /**

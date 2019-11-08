@@ -29,7 +29,7 @@ class CodeTabSnippetBuilder
             throw new LogicException("Changed customer (from $this->consumer to $consumer) while feeding");
         }
         if ($this->snippet->isConsumerSet($consumer)) {
-            throw new LogicException();
+            throw new LogicException("Tried to redeclare consumer '$consumer'");
         }
         $this->consumer = $consumer;
         $this->snippet->set($consumer, []);

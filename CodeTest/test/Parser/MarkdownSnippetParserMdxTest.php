@@ -1,12 +1,12 @@
 <?php
 namespace Test\CodeTest\Parser;
 
-use CodeTest\Parser\MarkdownSnippetParser;
+use CodeTest\Parser\MarkdownSnippetParserMdx;
 use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
 use CodeTest\Parser\Snippet\NonEmptySnippetsStore;
 use PHPUnit\Framework\TestCase;
 
-class MarkdownParsingSnippetFactoryTest extends TestCase
+class MarkdownSnippetParserMdxTest extends TestCase
 {
     /**
      * @test
@@ -15,8 +15,8 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
     {
         // given
         $store = new NonEmptySnippetsStore();
-        [$path, $file] = $this->fileAndPath('delimiters.md');
-        $parser = new MarkdownSnippetParser($path, new CodeTabSnippetBuilder($store));
+        [$path, $file] = $this->fileAndPath('code_tabs.v2.mdx');
+        $parser = new MarkdownSnippetParserMdx($path, new CodeTabSnippetBuilder($store));
 
         // when
         $parser->parse($file);
@@ -24,23 +24,20 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
         // then
         $snippet = $store->snippets()[0];
 
+        $this->assertCount(1, $store->snippets(), "Failed asserting that parser returned a single snippet");
         $expected = [
             [
-                "return [",
-                'pattern(\'[A-Z][a-z]+\')->is()->delimitered(),',
-                'pattern(\'#[A-Z][a-z]+#\')->is()->delimitered(),',
-                '];',
+                "pattern('[0-9]+')->match(\"I'm 19. I was born in 1999, on May 12\")->all();"
             ],
-            null,
             [
-                'return [',
-                'false,',
-                'true,',
-                '];',
+                'preg::match_all(\'/[0-9]+/\', "I\'m 19. I was born in 1999, on May 12", $matches);',
+                'return $matches[0];'
+            ],
+            [
+                "['19', '1999', '12']",
             ],
             null
         ];
-        $this->assertNull($snippet[1], "Failed asserting that supposedly missing `PHP` snippet is null");
         $this->assertEquals($expected, $snippet);
     }
 
@@ -51,15 +48,14 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
     {
         // given
         $store = new NonEmptySnippetsStore();
-        $parser = new MarkdownSnippetParser('', new CodeTabSnippetBuilder($store));
+        $parser = new MarkdownSnippetParserMdx('', new CodeTabSnippetBuilder($store));
 
         // when
         $parser->parse('
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs>
+<TabItem value="T-Regx">
 ```php
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
 <!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->');
 
         // then
@@ -70,7 +66,7 @@ class MarkdownParsingSnippetFactoryTest extends TestCase
 
     public function fileAndPath(string $filename): array
     {
-        $path = getcwd() . "/../../docs/$filename";
+        $path = getcwd() . "/CodeTest/resources/$filename";
         return [$path, file_get_contents($path)];
     }
 }

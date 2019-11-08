@@ -46,7 +46,7 @@ class Snippet
     public function get(string $consumer): array
     {
         if (!$this->isConsumerSet($consumer)) {
-            throw new LogicException();
+            throw new LogicException("Tried to retrieve '$consumer', but it was not set");
         }
         return $this->snippet[$consumer];
     }
@@ -70,7 +70,7 @@ class Snippet
     private function validateType(string $consumer): void
     {
         if (!in_array($consumer, $this->consumers)) {
-            throw new LogicException();
+            throw new LogicException("Invalid consumer '$consumer'");
         }
     }
 

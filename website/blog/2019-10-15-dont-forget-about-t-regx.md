@@ -7,7 +7,7 @@ authorFBID: 100001025937739
 Some of you might have noticed that not many new features have been added to 0.9.2 release candidate, since few weeks.
 But rest assured! :D Work on T-Regx hasn't slowed a bit! We've just put more effort on a more side-part of T-Regx.
 
-Thanks to the keen eye of T-Regx users' Andreas Leathley, it stroke us that phpDoc in public methods
+Thanks to the keen eye of T-Regx user, Andreas Leathley, it stroke us that phpDoc in public methods
 of `preg` class (so `preg::match()`, `preg::replace()`, etc.) were not only outdated, they were incorrect at times. 
 Thanks Andreas! :)
 
