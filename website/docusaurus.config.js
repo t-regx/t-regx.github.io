@@ -37,6 +37,7 @@ module.exports = {
       //   placeholder: 'Search the website',
     },
     sidebarCollapsible: false,
+    disableDarkMode: true,
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       defaultLanguage: 'php',
