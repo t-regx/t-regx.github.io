@@ -6,31 +6,47 @@ title: Replace with a constant value
 After `replace()`, you need to explicitly use one of `first()`/`all()`/`only(int)` methods, to express how many
 replacements should be done.
 
-Specifying limits is done to relieve you from [**brain strain**](overview.md#brain-strain) - so you can immediately 
+Specifying limits is done to relieve you from [**brain strain**](overview.md#brain-strain) - so you can immediately
 recognize author's intentions.
 
 ## Limits
 
 Using `first()`/`all()`/`only(int)` is semantically identical to passing `$limit` argument to `preg::replace()`/`preg::replace_callback()`.
 
-Neither of methods `first()`/`all()`/`only(int)` modify the subject if it wasn't matched by a pattern. 
+Neither of methods `first()`/`all()`/`only(int)` modify the subject if it wasn't matched by a pattern.
 
 ### First occurrence - `first()`
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 pattern('[A-Z][a-z]+')->replace($subject)->first()->with('___');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 preg_replace('/[A-Z][a-z]+/', '___', $subject, 1);
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(last)}-->
 <!--PHP:{return-at(last)}-->
 <!--Result-Value-->
@@ -41,20 +57,33 @@ preg_replace('/[A-Z][a-z]+/', '___', $subject, 1);
 
 ### All occurrences - `all()`
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 pattern('[A-Z][a-z]+')->replace($subject)->all()->with('___');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 preg::replace('/[A-Z][a-z]+/', '___', $subject);
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(last)}-->
 <!--PHP:{return-at(last)}-->
 <!--Result-Value-->
@@ -65,20 +94,33 @@ preg::replace('/[A-Z][a-z]+/', '___', $subject);
 
 ### Limited occurrences - `only()`
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 pattern('[A-Z][a-z]+')->replace($subject)->only(2)->with('___');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 preg::replace('/[A-Z][a-z]+/', '___', $subject, 2);
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(last)}-->
 <!--PHP:{return-at(last)}-->
 <!--Result-Value-->
@@ -93,34 +135,48 @@ Read on to learn more about replacing with [a callback](replace-callback.md).
 
 ## Regular expression references
 
-Normally, had you passed a replacement to `preg_replace()`, that contains a backslash or a dollar sign followed by a 
-number (eg. `\1` or `$2`) - that reference would be replaced by a corresponding capturing group (or by an empty string, 
+Normally, had you passed a replacement to `preg_replace()`, that contains a backslash or a dollar sign followed by a
+number (eg. `\1` or `$2`) - that reference would be replaced by a corresponding capturing group (or by an empty string,
 if the group wasn't matched).
 
 ```php
 preg::replace('/(\d+)cm/', '<$1>', 'I have 15cm and 192cm');
 ```
+
 ```text
 I have <15> and <192>
 ```
 
 Resolving such references won't happen with T-Regx.
- 
-This is done to relieve you from the [**brain strain**](overview.md#brain-strain). A programmer should be able to merely 
+
+This is done to relieve you from the [**brain strain**](overview.md#brain-strain). A programmer should be able to merely
 replace a string with a constant value without [cognitive load](overview.md#brain-strain) about possible `\` or `$` hiding somewhere.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->with('<$1>');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::replace('/(\d+)cm/', '<\$1>', 'I have 15cm and 192cm');
 //                            ↑
 // in T-Regx, special function is used to quote all references
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{echo-at(first)}-->
 <!--PHP:{echo-at(first)}-->
 <!--Result-Output-->
@@ -131,28 +187,41 @@ I have <$1> and <$1>
 
 You can be sure, what's put into `with()` will certainly be present unchanged in your final result.
 
-Some replacement strings containing a backslash or a dollar sign (like file system paths, URL addresses or even user input) 
+Some replacement strings containing a backslash or a dollar sign (like file system paths, URL addresses or even user input)
 might interfere with logic and cause bugs that are very hard to find.
 
 > Neither of types of references are resolved: `$12`, `\12` nor `${12}`.
 
 ## Intentional references
 
-If you, however, would like to intentionally use regular expression references and have validated your input 
-against *an unexpected* `\` or `$` - feel free to use `withReferences()` which **will** resolve replacement references.
+If you, however, would like to intentionally use regular expression references and have validated your input
+against _an unexpected_ `\` or `$` - feel free to use `withReferences()` which **will** resolve replacement references.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->withReferences('<$1>');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::replace('/(\d+)cm/', '<$1>', 'I have 15cm and 192cm');
 //                            ↑
 // using withReferences(), back references are preserved
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{echo-at(first)}-->
 <!--PHP:{echo-at(first)}-->
 <!--Result-Output-->

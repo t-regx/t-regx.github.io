@@ -4,23 +4,34 @@ title: Replacing a string
 ---
 
 Using `pattern()->replace()` you can:
- - Limit replacements with:
-   - `replace()->first()`
-   - `replace()->all()`
-   - `replace()->only(int)`
- - replace with a constant value - [`with()`](replace-with.md)/[`withReferences()`](replace-with.md)
- - replace with a computed value - [`callback()`](replace-callback.md)
- - replace based on an associative array - [`by()->map()`](replace-by-map.md)
- - replace with a capturing group - [`by()->group()`](replace-by-group.md)
- - handle subjects that don't match the pattern for replacements - `orElse()`/`orReturn()`/`orThrow()`
+
+- Limit replacements with:
+  - `replace()->first()`
+  - `replace()->all()`
+  - `replace()->only(int)`
+- replace with a constant value - [`with()`](replace-with.md)/[`withReferences()`](replace-with.md)
+- replace with a computed value - [`callback()`](replace-callback.md)
+- replace based on an associative array - [`by()->map()`](replace-by-map.md)
+- replace with a capturing group - [`by()->group()`](replace-by-group.md)
+- handle subjects that don't match the pattern for replacements - `orElse()`/`orReturn()`/`orThrow()`
 
 ## Limiting replacements
 
 After `replace()`, you need to explicitly use one of `first()`/`all()`/`only(int)` methods, to express how many
 replacements should be done.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 $subject = "I'm 19, I have 192cm and I was born in 1999";
 
@@ -28,7 +39,10 @@ pattern('\d+')->replace($subject)->first()->with('___');
 pattern('\d+')->replace($subject)->only(2)->with('___');
 pattern('\d+')->replace($subject)->all()->with('___');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 $subject = "I'm 19, I have 192cm and I was born in 1999";
 
@@ -36,7 +50,10 @@ preg_replace('/\d+/', '___', $subject, 1);
 preg_replace('/\d+/', '___', $subject, 2);
 preg_replace('/\d+/', '___', $subject);
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{multiline-return(3)}-->
 <!--PHP:{multiline-return(3)}-->
 <!--Result-Value-->
@@ -46,6 +63,7 @@ preg_replace('/\d+/', '___', $subject);
 "I'm ___, I have ___cm and I was born in 1999"
 "I'm ___, I have ___cm and I was born in ___"
 ```
+
 <!--Result-Value:{multiline-return}-->
 
 ---

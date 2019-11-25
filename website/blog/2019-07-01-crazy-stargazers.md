@@ -1,5 +1,5 @@
 ---
-title: "The best Stargazers!" Reloaded
+title: \"The best Stargazers!\" Reloaded
 author: Daniel Wilkowski
 authorFBID: 100001025937739
 ---

@@ -1,0 +1,71 @@
+.projectTitle {
+  color: var(--ifm-color-primary);
+  font-size: 300%;
+}
+.projectSubtitle {
+  font-weight: 400;
+  font-size: 50%;
+  line-height: 1em;
+  margin: 0.7em 0 1.3em;
+}
+.iconList {
+  list-style: none;
+  text-align: center;
+  color: #26768c;
+  font-size: 14px;
+}
+.iconList li {
+  display: inline;
+  margin-right: 8px;
+}
+.iconList li:before {
+  content: '✓ ';
+}
+.hero .container {
+  position: relative;
+}
+.promoSection {
+  font-size: 125%;
+  position: relative;
+}
+.headerButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+.headerButtons a {
+  margin: 0 2px;
+  background: var(--ifm-color-white);
+}
+.headerButtons a:hover {
+  color: var(--ifm-color-white);
+  background: var(--ifm-color-primary);
+}
+.separator:after {
+  display: flex;
+  content: '|';
+  padding: 0 10px;
+  align-items: center;
+  height: 100%;
+}
+.scrollBackground {
+  background: #1c3c45 url('/img/scroll.background.jpg') fixed;
+  background-size: cover;
+}
+.scrollBackground code {
+  background-color: rgba(27, 31, 35, 0.55);
+}
+.lightBackground {
+  background: #f7f7f7;
+}
+html[data-theme='dark'] .lightBackground {
+  background: #313131;
+}
+.darkBackground {
+  color: var(--ifm-color-white);
+}
+.darkBackground a,
+.darkBackground code {
+  color: #d6b3b8;
+}

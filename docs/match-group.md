@@ -6,25 +6,42 @@ title: Inline groups
 Apart from retrieving matched capturing groups, you can also replace by an [inline group](replace-by-group.md).
 
 Method `match()->group()` behaves exactly like [`Match.group(int|string)`](match-details.md):
-  - it can accept either group index (where #0 is the whole match) or a group name (when a group is named)
-  - it throws `\InvalidArgumentException` for an invalid index or an invalid group name (e.g. "2group" or -2) 
-  - and throws `NonexistentGroupException` if `group()` is used with a non-existent group
+
+- it can accept either group index (where #0 is the whole match) or a group name (when a group is named)
+- it throws `\InvalidArgumentException` for an invalid index or an invalid group name (e.g. "2group" or -2)
+- and throws `NonexistentGroupException` if `group()` is used with a non-existent group
 
 ## Matched occurrences of a group
 
 Similarly to how you can retrieve all matched occurrences of pattern from subject:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("(?<capital>[A-Z])[a-z]+")->match("Hello there, General Kenobi")->all();
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/(?<capital>[A-Z])[a-z]+/", "Hello there, General Kenobi", $matches);
 return $matches[0];
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--Result-Value-->
 
 ```php
@@ -33,12 +50,22 @@ return $matches[0];
 
 ...you can retrieve all matched occurrences of a capturing group in a subject:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("(?<capital>[A-Z])[a-z]+")->match("Hello there, General Kenobi")->group('capital')->all();
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 // possible invalid group, e.g. "2group" or -2
 validateGroupName('capital');
@@ -50,7 +77,10 @@ if (validateGroupExists('capital', $matches)) {
     throw new NonexistentGroupException('capital');
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--Result-Value-->
 
 ```php
@@ -61,12 +91,22 @@ if (validateGroupExists('capital', $matches)) {
 
 What does `match()->group()->all()` for unmatched capturing group?
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("(?<capital>[A-Z])?[a-z]+")->match("Hello there, General Kenobi")->group('capital')->all();
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 // possible invalid group, e.g. "2group" or -2
 validateGroupName('capital');
@@ -78,7 +118,10 @@ if (validateGroupExists('capital', $matches)) {
     throw new NonexistentGroupException('capital');
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--Result-Value-->
 
 ```php

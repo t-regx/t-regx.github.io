@@ -3,17 +3,12 @@
 
 node_modules
 
-lib/core/metadata.js
-lib/core/MetadataBlog.js
-
-website/translated_docs
+website/.docusaurus
+website/.cache-loader
 website/build/
-website/static/css/*.css
-website/static/css/*.css.map
 website/yarn.lock
 website/node_modules
 website/package-lock.json
-website/i18n/*
 
 dependencies
 composer.lock

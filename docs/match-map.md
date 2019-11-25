@@ -10,17 +10,34 @@ matched elements, after they have been iterated (and potentially altered) using 
 ## Map matched occurrences
 
 So instead of returning all elements:
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->all();
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return $matches[0];
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
@@ -30,21 +47,34 @@ return $matches[0];
 
 ...you can map them - to any other value, by callback:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map(function (Match $match) {
     return strlen($match->text());
 });
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return array_map(function ($text) {
     return strlen($text);
 }, $matches[0]);
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
@@ -57,17 +87,30 @@ return array_map(function ($text) {
 You can invoke `map()` with any valid PHP `callable` which accepts one string parameter (or no parameters) - just 
 like [`first()`](match-first.md).
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map('strtoupper');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return array_map('strtoupper', $matches[0]);
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
@@ -80,17 +123,30 @@ return array_map('strtoupper', $matches[0]);
 Again, just like [`first()`](match-first.md), this method can return values of any type, including: objects, arrays, 
 booleans and `null`.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map('str_split');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return array_map('str_split', $matches[0]);
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 
@@ -108,17 +164,30 @@ return array_map('str_split', $matches[0]);
 
 You can just as easily create a flattened map.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+  defaultValue="t-regx"
+  values={[
+    { label: 'T-Regx', value: 't-regx', },
+    { label: 'PHP', value: 'php', },
+  ]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
 return array_merge(...array_map('str_split', $matches[0]));
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(0)}-->
 <!--Result-Value-->
 

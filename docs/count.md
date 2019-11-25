@@ -3,19 +3,35 @@ id: count
 title: Count occurrences
 ---
 
-Sometimes, you might stumble upon a situation where an amount of occurrences is needed, but not the occurrences 
+Sometimes, you might stumble upon a situation where an amount of occurrences is needed, but not the occurrences
 themselves. In that case, use `pattern()->count()`:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 return pattern('[aeiouy]')->count('Computer');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 return preg::match_all('/[aeiouy]/', 'Computer');
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--Result-Value-->
 
 ```php
@@ -24,20 +40,33 @@ return preg::match_all('/[aeiouy]/', 'Computer');
 
 Also, `MatchPattern` is [`\Countable`](https://www.php.net/manual/en/class.countable.php), so you can use PHP build-in methods, like `count()`:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 $match = pattern('[aeiouy]')->match('Computer');
 
 count($match);
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 preg::match_all('/[aeiouy]/', 'Computer', $match);
 
 count($match[0]);
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{return-at(last)}-->
 <!--PHP:{return-at(last)}-->
 <!--Result-Value-->
@@ -50,16 +79,29 @@ count($match[0]);
 
 If your pattern does not match the subject, `count()` simply returns `0`.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 return pattern('[0-9]')->count('Computer');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 return preg::match_all('/[0-9]/', 'Computer');
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--Result-Value-->
 
 ```php
@@ -70,8 +112,15 @@ return preg::match_all('/[0-9]/', 'Computer');
 
 Every use of `pattern()` with invalid pattern will cause `CompileSafeRegexException`.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 try {
     pattern('[aeiouy')->count('Computer');       // malformed pattern
@@ -80,7 +129,10 @@ catch (CompileSafeRegexException $ex) {
     echo $ex->getMessage();
 }
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 try {
     preg::match_all('/[aeiouy/', 'Computer');    // malformed pattern
@@ -89,13 +141,15 @@ catch (CompileSafeRegexException $ex) {
     echo $ex->getMessage();
 }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
 
 ```text
 preg_match_all(): Compilation failed: missing terminating ] for character class at offset 7
- 
-(caused by E_WARNING)
 ```
+
+(caused by E_WARNING)
 
 > In `PHP` snippet, `CompileSafeRegexException` is thrown because safe-regex `preg::match_all()` was used, instead
 > of `preg_match_all()`. Vanilla PHP `preg_*()` method don't throw exceptions.
@@ -105,44 +159,70 @@ preg_match_all(): Compilation failed: missing terminating ] for character class 
 You might be tempted to use `count()` to check whether your subject was matched by the pattern, since `count()` doesn't
 return any matches...
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 $count = pattern('[aeiouy]')->count('Computer');
 return $count > 0;
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 $count = preg::match_all('/[aeiouy]/', 'Computer');
 return $count > 0;
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--Result-Value-->
 
 ```php
 true
 ```
 
-...but that would be wasteful. You're much better off using 
+...but that would be wasteful. You're much better off using
 [`test()`](match.md#test-a-subject)/[`fails()`](match.md#test-a-subject):
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+{ label: 'PHP', value: 'php', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 return pattern('[aeiouy]')->test('Computer');
 ```
-<!--PHP-->
+
+</TabItem>
+<TabItem value="php">
+
 ```php
 return preg::match('/[aeiouy]/', 'Computer') > 0;
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--Result-Value-->
 
 ```php
 true
 ```
 
-This is because `count()` will go through each occurrence of a pattern in a subject, counting it; whereas `test()` 
+This is because `count()` will go through each occurrence of a pattern in a subject, counting it; whereas `test()`
 will return right after it finds the first occurrence.
 
 > Under the hood, `count()` uses `preg::match_all()`, whereas `test()`/`fails()`/ use `preg::match()`.

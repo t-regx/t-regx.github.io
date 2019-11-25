@@ -26,38 +26,68 @@ The code snippets above are equal.
 
 You can check whether a pattern is delimited with `is()->delimited()` method.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('[A-Z][a-z]+')->is()->delimitered();
 pattern('#[A-Z][a-z]+#')->is()->delimitered();
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{multiline-return}-->
 <!--Result-Value-->
+
+<div className="output-block">
 
 ```php
 false
 true
 ```
+
+</div>
+
 <!--Result-Value:{multiline-return}-->
 
 ## Adding delimiters
 
 To change undelimited pattern into a delimited one - use `delimiter()` method;
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--T-Regx-->
+<Tabs
+defaultValue="t-regx"
+values={[
+{ label: 'T-Regx', value: 't-regx', },
+]
+}>
+<TabItem value="t-regx">
+
 ```php
 pattern('Welcome/Or not')->delimiter();
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
+
+</TabItem>
+</Tabs>
+
 <!--T-Regx:{echo-at(0)}-->
 <!--Result-Output-->
+
+<div className="output-block">
 
 ```text
 #Welcome/Or not#
 ```
+
+</div>
 
 ### Ambiguity
 
@@ -65,7 +95,7 @@ How does T-Regx decide whether a pattern is already delimited, or whether it's n
 
 The rule is simple.
 
-If a pattern *can* be thought of as delimited - T-Regx assumes it's delimited.
+If a pattern _can_ be thought of as delimited - T-Regx assumes it's delimited.
 
 ## Flags
 
@@ -85,11 +115,11 @@ pattern('/[A-Z][a-z]+/i')->match($subject)->first();
 
 ## I want to break it
 
-T-Regx has a set of predefined, suitable delimiters (like `/`, `#`, `~`, etc.) and simply uses the first one, 
-that doesn't occur in your pattern. If you exhaust each of them; if you use every possible, predefined, suitable delimiter - 
+T-Regx has a set of predefined, suitable delimiters (like `/`, `#`, `~`, etc.) and simply uses the first one,
+that doesn't occur in your pattern. If you exhaust each of them; if you use every possible, predefined, suitable delimiter -
 T-Regx will throw `ExplicitDelimiterRequiredException`.
 
 In that case, you simply have to use an explicit, regular delimiter and automatic delimiter won't be used.
 
-If you think another automatic delimiter can be used, 
+If you think another automatic delimiter can be used,
 please create [a github issue](https://github.com/T-Regx/T-Regx/issues/new/choose).
