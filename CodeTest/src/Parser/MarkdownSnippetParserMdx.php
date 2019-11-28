@@ -51,7 +51,7 @@ class MarkdownSnippetParserMdx
 
     private function tryParse(string $content): void
     {
-        foreach (preg_split("/[\n\r]{1,2}/", $content) as $line) {
+        foreach (preg_split("/\r?\n/", $content) as $line) {
             if (preg::match('/^\s*<Tabs/', $line)) {
                 if (!$this->builder->isEmpty()) {
                     $this->builder->flush();
