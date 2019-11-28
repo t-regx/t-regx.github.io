@@ -63,8 +63,8 @@ class MarkupResultConsistencyTest extends TestCase
         [$return2, $echo2, $exception2] = $two ? $this->invoke($two, 'PHP') : [null, null, null];
 
         // then
-        $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, 'T-Regx');
-        $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, 'PHP');
+        $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, $one);
+        $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, $two);
 
         if ($one && $two) {
             $this->assertEquals($return1, $return2, 'Return values from T-Regx (expected) and PHP (actual) differ');
@@ -208,7 +208,7 @@ class MarkupResultConsistencyTest extends TestCase
         return substr($haystack, 0, strlen($needle)) === $needle;
     }
 
-    private function assertExceptionInstanceOf(?string $expected, ?Throwable $exception, string $snippet): void
+    private function assertExceptionInstanceOf(?string $expected, ?Throwable $exception, ?string $code): void
     {
         if ($expected === null && $exception === null) {
             $this->assertTrue(true);
@@ -219,7 +219,7 @@ class MarkupResultConsistencyTest extends TestCase
             return;
         }
         if ($exception) {
-            throw $exception;
+            throw new TestException($exception, $code);
         }
     }
 }
