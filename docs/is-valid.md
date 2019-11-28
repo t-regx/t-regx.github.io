@@ -90,6 +90,8 @@ pattern('I am not delimited, but still a usable pattern')->is()->usable();
 </TabItem>
 </Tabs>
 
+<!--T-Regx:{multiline-return}-->
+
 <div className="output-block">
 
 <!--Result-Value-->
