@@ -19,20 +19,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("(?<capital>[A-Z])[a-z]+")->match("Hello there, General Kenobi")->all();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/(?<capital>[A-Z])[a-z]+/", "Hello there, General Kenobi", $matches);
@@ -51,20 +51,20 @@ return $matches[0];
 ...you can retrieve all matched occurrences of a capturing group in a subject:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("(?<capital>[A-Z])[a-z]+")->match("Hello there, General Kenobi")->group('capital')->all();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 // possible invalid group, e.g. "2group" or -2
@@ -92,20 +92,20 @@ if (validateGroupExists('capital', $matches)) {
 What does `match()->group()->all()` for unmatched capturing group?
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("(?<capital>[A-Z])?[a-z]+")->match("Hello there, General Kenobi")->group('capital')->all();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 // possible invalid group, e.g. "2group" or -2

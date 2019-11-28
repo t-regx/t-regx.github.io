@@ -24,13 +24,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $subject = "I'm 19, I have 192cm and I was born in 1999";
@@ -41,7 +41,7 @@ pattern('\d+')->replace($subject)->all()->with('___');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = "I'm 19, I have 192cm and I was born in 1999";

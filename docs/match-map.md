@@ -15,20 +15,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->all();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
@@ -48,13 +48,13 @@ return $matches[0];
 ...you can map them - to any other value, by callback:
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map(function (Match $match) {
@@ -63,7 +63,7 @@ pattern("[\w']+")->match("I'm 19 years old")->map(function (Match $match) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
@@ -88,20 +88,20 @@ You can invoke `map()` with any valid PHP `callable` which accepts one string pa
 like [`first()`](match-first.md).
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map('strtoupper');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
@@ -124,20 +124,20 @@ Again, just like [`first()`](match-first.md), this method can return values of a
 booleans and `null`.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->map('str_split');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
@@ -165,20 +165,20 @@ return array_map('str_split', $matches[0]);
 You can just as easily create a flattened map.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);

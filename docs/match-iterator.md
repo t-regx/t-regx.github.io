@@ -22,13 +22,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $iterator = pattern('\w+')->match('Apples are cool')->iterator();
@@ -37,7 +37,7 @@ return iterator_to_array($iterator);
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/\w+/', 'Apples are cool', $matches);

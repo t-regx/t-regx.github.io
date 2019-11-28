@@ -17,20 +17,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[0-9]+')->test("I'm 19 years old");
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match('/[0-9]+/', "I'm 19 years old") > 0;
@@ -42,20 +42,20 @@ preg::match('/[0-9]+/', "I'm 19 years old") > 0;
 ...or to check whether it doesn't:
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[0-9]{3}')->fails("I'm 19 years old");
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match('/[0-9]{3}/', "I'm 19 years old") === 0;
@@ -76,20 +76,20 @@ Of course `pattern()->match()` throws an exception if the pattern is invalid (or
 You can easily retrieve matched occurrences of a pattern in your subject.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[0-9]+')->match("I'm 19. I was born in 1999, on May 12")->all();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
@@ -107,20 +107,20 @@ return $matches[0];
 You can limit your matches with `only(int)`.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[0-9]+')->match("I'm 19. I was born in 1999, on May 12")->only(2);
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
@@ -141,20 +141,20 @@ return array_slice($matches[0], 0, 2);
 To get the first occurrence of a matched pattern, call [`first()`](match-first.md).
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999")->first();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/[0-9]+/', "I'm 19 years old. I was born in 1999", $match)) {
@@ -180,20 +180,20 @@ Read on the [next page](match-first.md) to learn more about [`first()`](match-fi
 If you call `all()` or `only()` on a subject that doesn't match your pattern, you'll receive an empty array.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\d+')->match('Word')->all();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/\d+/', 'Word', $match);
@@ -213,13 +213,13 @@ return $match[0];
 If, however, subject doesn't match your pattern and you use `first()` - `SubjectNotMatchedException` is thrown.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 try {
@@ -231,7 +231,7 @@ catch (SubjectNotMatchedException $e) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 try {

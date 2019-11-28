@@ -30,12 +30,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
+{ label: 'T-Regx', value: 'T-Regx', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[A-Z][a-z]+')->is()->delimitered();
@@ -64,12 +64,12 @@ true
 To change undelimited pattern into a delimited one - use `delimiter()` method;
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
+{ label: 'T-Regx', value: 'T-Regx', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('Welcome/Or not')->delimiter();

@@ -12,12 +12,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'PHP', value: 'php', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 Pattern::quote("Welcome\How are you?");
@@ -40,12 +40,12 @@ Welcome\\How are you\?
 ...second of which is the direct opposite:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
+{ label: 'T-Regx', value: 'T-Regx', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 Pattern::unquote("Welcome\\How are you\?");

@@ -18,13 +18,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -35,7 +35,7 @@ pattern('[A-Z][a-z]+')->replace($subject)->first()->callback(function (Match $m)
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -65,13 +65,13 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $m) {
 Replacing all matched occurrences is the most common use-case:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -82,7 +82,7 @@ pattern('[A-Z][a-z]+')->replace($subject)->all()->callback(function (Match $m) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -106,13 +106,13 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $m) {
 ### `only()`
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -122,7 +122,7 @@ pattern('[A-Z][a-z]+')->replace($subject)->only(2)->callback('strtoupper');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -182,20 +182,20 @@ You can call `replace()->callback()` for any valid PHP `callable` which accepts 
 and returns `string`.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\w+')->replace('Apples are cool')->first()->callback('strtoupper');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 // This code is actually impossible in Vanilla-PHP.

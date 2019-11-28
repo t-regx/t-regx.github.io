@@ -13,20 +13,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")->first();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
@@ -57,13 +57,13 @@ You can call an anonymous function for the first matched occurrence. In this exa
 standard output.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (string $match) {
@@ -72,7 +72,7 @@ pattern('\w+')->match("Apples are cool")->first(function (string $match) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/\w+/', "Apples are cool", $match)) {
@@ -98,13 +98,13 @@ I matched Apples
 With [`Match`](match-details.md) details, you can gain access to useful information about the matched occurrence. 
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
@@ -114,7 +114,7 @@ pattern('\w+')->match("Apples are cool")->first(function (Match $match) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = "Apples are cool";
@@ -142,13 +142,13 @@ You can learn more about `Match` on [`Match` details](match-details.md) page.
 Retrieving capturing groups from a match is really simple.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(function (Match $match) {
@@ -159,7 +159,7 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
@@ -194,13 +194,13 @@ It's also possible to return your custom value from within `first()` callback. T
 from `first()` function.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $first = pattern('\w+')->match('Apples are cool')->first(function (Match $match) {
@@ -215,7 +215,7 @@ return $first;
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/\w+/', 'Apples are cool', $match)) {
@@ -245,20 +245,20 @@ return $first;
 You can call `first()` for any valid PHP `callable` which accepts one string parameter (or no parameters).
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 return pattern('\w+')->match('Apples are cool')->first('strtoupper');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/\w+/', 'Apples are cool', $match)) {
@@ -287,20 +287,20 @@ In this example, [`Match`](match-details.md) will be cast to string, which is th
 From within `first()` callback, you can return any value:
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 return pattern('\w+')->match('Apples are cool')->first('str_split');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/\w+/', 'Apples are cool', $match)) {
@@ -337,13 +337,13 @@ This method allows you to explicitly specify how to handle an unmatched subject.
 one of the following `orReturn()`, `orElse()` or `orThrow()`.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 echo pattern('\w+')->match('Dog')
@@ -354,7 +354,7 @@ echo pattern('\w+')->match('Dog')
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/\w+/', 'Dog', $match)) {

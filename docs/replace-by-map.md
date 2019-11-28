@@ -14,13 +14,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $message = 'My words: "mp3", "mp4", "gif"';
@@ -33,7 +33,7 @@ pattern('\b\w{3}\b')->replace($message)->all()->by()->map([
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $message = 'My words: "mp3", "mp4", "gif"';
@@ -90,13 +90,13 @@ If you don't need to specify all your possible `[match => replacement]` pairs, y
 With `mapIfExists()` - superfluous occurrences are left unchanged:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";
@@ -108,7 +108,7 @@ pattern('\b\w{3,4}\b')->replace($message)->all()->by()->mapIfExists([
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";
@@ -146,13 +146,13 @@ Resolving a replacement based on a **whole match** however, is both uncommon and
 it based on a specific capturing group, using `by()->group()->map()`:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
@@ -172,7 +172,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';

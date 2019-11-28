@@ -14,13 +14,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\w+')->match('Apples are cool')->forEach(function (string $text) {
@@ -29,7 +29,7 @@ pattern('\w+')->match('Apples are cool')->forEach(function (string $text) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match_all('/\w+/', 'Apples are cool', $matches)) {
@@ -59,13 +59,13 @@ That's why T-Regx also has a method called `iterate()` which works exactly like 
 PHP 7.0 environments:
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[0-9]+')->match("I'm 19 years old")->iterate(function (Match $match) {
@@ -75,7 +75,7 @@ pattern('[0-9]+')->match("I'm 19 years old")->iterate(function (Match $match) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/[0-9]+/', "I'm 19 years old", $matches, PREG_OFFSET_CAPTURE);

@@ -10,20 +10,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 return pattern('[aeiouy]')->count('Computer');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 return preg::match_all('/[aeiouy]/', 'Computer');
@@ -41,13 +41,13 @@ return preg::match_all('/[aeiouy]/', 'Computer');
 Also, `MatchPattern` is [`\Countable`](https://www.php.net/manual/en/class.countable.php), so you can use PHP build-in methods, like `count()`:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $match = pattern('[aeiouy]')->match('Computer');
@@ -56,7 +56,7 @@ count($match);
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/[aeiouy]/', 'Computer', $match);
@@ -80,20 +80,20 @@ count($match[0]);
 If your pattern does not match the subject, `count()` simply returns `0`.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 return pattern('[0-9]')->count('Computer');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 return preg::match_all('/[0-9]/', 'Computer');
@@ -113,13 +113,13 @@ return preg::match_all('/[0-9]/', 'Computer');
 Every use of `pattern()` with invalid pattern will cause `CompileSafeRegexException`.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 try {
@@ -131,7 +131,7 @@ catch (CompileSafeRegexException $ex) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 try {
@@ -160,13 +160,13 @@ You might be tempted to use `count()` to check whether your subject was matched 
 return any matches...
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $count = pattern('[aeiouy]')->count('Computer');
@@ -174,7 +174,7 @@ return $count > 0;
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $count = preg::match_all('/[aeiouy]/', 'Computer');
@@ -194,20 +194,20 @@ true
 [`test()`](match.md#test-a-subject)/[`fails()`](match.md#test-a-subject):
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 return pattern('[aeiouy]')->test('Computer');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 return preg::match('/[aeiouy]/', 'Computer') > 0;

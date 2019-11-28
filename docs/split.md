@@ -19,20 +19,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[ ,]{2}')->split('Cersei, Joffrey, Ilyn Payne, The Hound')->ex();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::split('/[ ,]{2}/', 'Cersei, Joffrey, Ilyn Payne, The Hound');
@@ -52,20 +52,20 @@ preg::split('/[ ,]{2}/', 'Cersei, Joffrey, Ilyn Payne, The Hound');
 Splitting a string, while including a delimiter is done using `inc()` method:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('([ ,]{2})')->split('Cersei, Joffrey, Ilyn Payne, The Hound')->inc();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::split('/([ ,]{2})/', 'Cersei, Joffrey, Ilyn Payne, The Hound', -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -86,20 +86,20 @@ If a delimiter appears twice in a subject without any characters in between - an
 in that place:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern(',')->split('One,Two,,Three')->ex();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::split('/,/', 'One,Two,,Three');
@@ -122,20 +122,20 @@ To avoid that, you can use `filter()->ex()` or `filter()->inc()` which utilize [
 empty strings:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern(',')->split('One,Two,,Three')->filter()->ex();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::split('/,/', 'One,Two,,Three', -1, PREG_SPLIT_NO_EMPTY);

@@ -20,13 +20,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
@@ -37,7 +37,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')->replace($links)
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
@@ -97,13 +97,13 @@ Matched links with matched `'domain'` group are replaced with it. Links without 
 are simply left as they were (ignored):
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
@@ -114,7 +114,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
@@ -162,13 +162,13 @@ Matched links with matched `'domain'` group are replaced with it. Links without 
 are replaced with an empty string:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
@@ -179,7 +179,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
@@ -220,13 +220,13 @@ Matched links with matched `'domain'` group are replaced with it. Links without 
 are replaced with a given parameter string:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
@@ -237,7 +237,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
@@ -283,13 +283,13 @@ Matched links with matched `'domain'` group are replaced with it. Links without 
 are then passed to the producer, which result is then replaced in place of the link:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
@@ -302,7 +302,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';
@@ -355,13 +355,13 @@ Description:
 You can either call this method without parameters, or with your custom exception class name (just like [`forFirst()`](match-for-first.md) parameter):
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';
@@ -372,7 +372,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)?\.(com|io)')->replace($links)
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';

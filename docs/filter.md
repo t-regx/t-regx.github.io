@@ -19,13 +19,13 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[A-Z][a-z]+$')
@@ -40,7 +40,7 @@ pattern('[A-Z][a-z]+$')
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $input = [
@@ -71,13 +71,13 @@ More precisely it returns `[0 => 'Mark', 1 => 'Robert', 2 => 'Jane']`, even thou
 Method `filterAssoc()` works similarly to `filter()`, but it preserves the array keys:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[A-Z][a-z]+$')
@@ -92,7 +92,7 @@ pattern('[A-Z][a-z]+$')
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $input = [
@@ -121,13 +121,13 @@ preg::grep("/[A-Z][a-z]+$/", $input);
 With `filter()` and `filterAssoc()`, only array values are being used to filter the array. With `filterByKeys()`, it's the array keys that are used to filter the array. The corresponding values (which can be of type `mixed`) are returned unchanged:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[A-Z][a-z]+$')
@@ -142,7 +142,7 @@ pattern('[A-Z][a-z]+$')
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $input = [

@@ -13,13 +13,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\w+')->match('I have 19 trains')->flatMap(function (Match $match) {
@@ -30,7 +30,7 @@ pattern('\w+')->match('I have 19 trains')->flatMap(function (Match $match) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/\w+/", 'I have 19 trains', $matches);
@@ -57,12 +57,12 @@ return array_merge(...array_map(function (string $text) {
 array under the hood would break our ["Explicity rule"](whats-the-point.md#t-regx-to-the-rescue).
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
+{ label: 'T-Regx', value: 'T-Regx', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
@@ -76,12 +76,12 @@ pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
 <!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
+{ label: 'T-Regx', value: 'T-Regx', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
@@ -98,20 +98,20 @@ You can invoke `flatMap()` with any valid PHP `callable` which accepts one strin
 like [`first()`](match-first.md) and [`map()`](match-map.md) - and returns `array`.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/[\w']+/", "I'm 19 years old", $matches);
@@ -137,13 +137,13 @@ Because `flatMap()` receives an array from its callback, it's possible to also r
 specified keys:
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
@@ -152,7 +152,7 @@ pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all("/\w+/", "Apples are cool", $matches, PREG_OFFSET_CAPTURE);
@@ -189,13 +189,13 @@ return array_merge(...array_map(function (array $match) {
 Duplicate keys are not allowed in PHP arrays, so they'll only appear once in the results.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
@@ -207,7 +207,7 @@ pattern("\w+")->match("Apples are cool")->flatMap(function (Match $match) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = 'Apples are cool';

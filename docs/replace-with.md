@@ -21,13 +21,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -36,7 +36,7 @@ pattern('[A-Z][a-z]+')->replace($subject)->first()->with('___');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -58,13 +58,13 @@ preg_replace('/[A-Z][a-z]+/', '___', $subject, 1);
 ### All occurrences - `all()`
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -73,7 +73,7 @@ pattern('[A-Z][a-z]+')->replace($subject)->all()->with('___');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -95,13 +95,13 @@ preg::replace('/[A-Z][a-z]+/', '___', $subject);
 ### Limited occurrences - `only()`
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -110,7 +110,7 @@ pattern('[A-Z][a-z]+')->replace($subject)->only(2)->with('___');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 $subject = 'I like scandinavia: Sweden, Norway and Denmark';
@@ -153,20 +153,20 @@ This is done to relieve you from the [**brain strain**](overview.md#brain-strain
 replace a string with a constant value without [cognitive load](overview.md#brain-strain) about possible `\` or `$` hiding somewhere.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->with('<$1>');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::replace('/(\d+)cm/', '<\$1>', 'I have 15cm and 192cm');
@@ -198,20 +198,20 @@ If you, however, would like to intentionally use regular expression references a
 against _an unexpected_ `\` or `$` - feel free to use `withReferences()` which **will** resolve replacement references.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->withReferences('<$1>');
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::replace('/(\d+)cm/', '<$1>', 'I have 15cm and 192cm');

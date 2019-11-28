@@ -11,12 +11,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
+    { label: 'T-Regx', value: 'T-Regx', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('/I am a valid pattern/')->is()->valid();
@@ -38,13 +38,13 @@ true
 Neither `is()->valid()` nor `is()->usable()` throws an exception or issues any warnings. They only return `true`/`false`.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
-    { label: 'PHP', value: 'php', },
+    { label: 'T-Regx', value: 'T-Regx', },
+    { label: 'PHP', value: 'PHP', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('I am an (( invalid }} pattern')->is()->valid();
@@ -75,12 +75,12 @@ A usable pattern is a valid, but not necessarily delimited pattern. In other wor
 The pattern doesn't have to be delimited.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
+    { label: 'T-Regx', value: 'T-Regx', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('/I am a valid and usable pattern/')->is()->usable();
@@ -106,12 +106,12 @@ true
 But it can't be invalid.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
+    { label: 'T-Regx', value: 'T-Regx', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('I am (invalid')->is()->usable();
@@ -135,12 +135,12 @@ false
 Method `is()->delimited()` is used to verify whether a pattern is delimited or not.
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
+    { label: 'T-Regx', value: 'T-Regx', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('#I am delimited#')->is()->delimitered();
@@ -162,12 +162,12 @@ true
 ---
 
 <Tabs
-  defaultValue="t-regx"
+  defaultValue="T-Regx"
   values={[
-    { label: 'T-Regx', value: 't-regx', },
+    { label: 'T-Regx', value: 'T-Regx', },
   ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('I am not delimited')->is()->delimitered();

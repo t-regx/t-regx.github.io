@@ -14,13 +14,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\d+')->match('I was born in 1996')->first(function (Match $match) {
@@ -29,7 +29,7 @@ pattern('\d+')->match('I was born in 1996')->first(function (Match $match) {
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/\d+/', 'I was born in 1996', $match, PREG_OFFSET_CAPTURE);
@@ -60,20 +60,20 @@ Use inline methods to simply return the offsets - when there is no need for usin
 If you only want to get offsets of your matches, use `offsets()->all()`.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 return pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, on May 12")->offsets()->all();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/[0-9]+/', "I'm 19 years old. I was born in 1999, on May 12", $matches, PREG_OFFSET_CAPTURE);
@@ -94,20 +94,20 @@ return array_map(function (array $match) {
 You can also limit your matches.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, on May 12")->offsets()->only(2);
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match_all('/[0-9]+/', "I'm 19 years old. I was born in 1999, on May 12", $matches, PREG_OFFSET_CAPTURE);
@@ -130,20 +130,20 @@ return array_slice(array_map(function (array $match) {
 To only get offset of the first occurrence of a matched pattern, call `offsets()->first()`.
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('\d+')->match("I was born in 1999")->offsets()->first();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 preg::match('/[0-9]+/', "I was born in 1999", $match, PREG_OFFSET_CAPTURE);
@@ -173,13 +173,13 @@ These two snippets below are equal to each other.
 ### Using `Match` details
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('(?<capital>[A-Z])[a-z]+')->match('my name is John Cena')->first(function (Match $match) {
@@ -188,7 +188,7 @@ pattern('(?<capital>[A-Z])[a-z]+')->match('my name is John Cena')->first(functio
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/(?<capital>[A-Z])[a-z]+/', 'my name is John Cena', $match, PREG_OFFSET_CAPTURE)) {
@@ -228,20 +228,20 @@ Can also be written as...
 ### Using inline `offsets()` method
 
 <Tabs
-defaultValue="t-regx"
+defaultValue="T-Regx"
 values={[
-{ label: 'T-Regx', value: 't-regx', },
-{ label: 'PHP', value: 'php', },
+{ label: 'T-Regx', value: 'T-Regx', },
+{ label: 'PHP', value: 'PHP', },
 ]
 }>
-<TabItem value="t-regx">
+<TabItem value="T-Regx">
 
 ```php
 pattern('(?<capital>[A-Z])[a-z]+')->match('my name is John Cena')->group('capital')->offsets()->first();
 ```
 
 </TabItem>
-<TabItem value="php">
+<TabItem value="PHP">
 
 ```php
 if (preg::match('/(?<capital>[A-Z])[a-z]+/', 'my name is John Cena', $match, PREG_OFFSET_CAPTURE)) {
