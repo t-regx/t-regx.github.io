@@ -6,16 +6,11 @@ import CodeBlock from '@theme/CodeBlock';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import {
-  AutomaticSplashLogo,
-  GithubButton,
-  DisqusThread,
-  BadgesSection,
-} from '@site/src/components';
+import {AutomaticSplashLogo, GithubButton, DisqusThread, BadgesSection,} from '@site/src/components';
 import sections from '@site/src/data/index.js';
 import styles from './styles.module.css';
 
-const CustomCodeBlock = ({ children, ...props }) => {
+const CustomCodeBlock = ({children, ...props}) => {
   return <CodeBlock {...children.props} />;
 };
 
@@ -32,9 +27,10 @@ const ProjectTitle = props => (
     {props.title}
     <p className={styles.projectSubtitle}>{props.tagline}</p>
     <ul className={styles.iconList}>
-      <li>Performance</li>
-      <li>Consistency</li>
-      <li>Reliability</li>
+      <li>Lightweight</li>
+      <li>Reliable</li>
+      <li>Easy to use</li>
+      <li>Based on exceptions</li>
     </ul>
   </h2>
 );
@@ -45,20 +41,17 @@ const PromoSection = props => (
   </div>
 );
 
-const HeaderButton = ({ to, children }) => (
-  <Link
-    className={classnames('button button--outline button--primary button--md')}
-    to={useBaseUrl(to)}
-  >
+const HeaderButton = ({to, children}) => (
+  <Link className={classnames('button button--outline button--primary button--md')} to={useBaseUrl(to)}>
     {children}
   </Link>
 );
 
-const HomeSplash = ({ title, tagline, url }) => (
+const HomeSplash = ({title, tagline, url}) => (
   <SplashContainer>
-    <AutomaticSplashLogo />
-    <ProjectTitle title={title} tagline={tagline} />
-    <GithubButton href={url} />
+    <AutomaticSplashLogo/>
+    <ProjectTitle title={title} tagline={tagline}/>
+    <GithubButton href={url}/>
     <PromoSection>
       <HeaderButton to="docs/installation">Installation</HeaderButton>
       <HeaderButton to="docs/match">Matching</HeaderButton>
@@ -66,7 +59,7 @@ const HomeSplash = ({ title, tagline, url }) => (
       <HeaderButton to="docs/handling-user-input">
         Prepared Patterns
       </HeaderButton>
-      <div className={styles.separator} />
+      <div className={styles.separator}/>
       <HeaderButton to="docs/overview">What's T-Regx</HeaderButton>
       <HeaderButton to="docs/whats-the-point">Why use T-Regx?</HeaderButton>
     </PromoSection>
@@ -95,28 +88,13 @@ const GridBlock = props => (
 
             {column.content && (
               <div>
-                <Markdown
-                  options={{
-                    overrides: {
-                      pre: CustomCodeBlock,
-                    },
-                  }}
-                >
+                <Markdown options={{overrides: {pre: CustomCodeBlock,},}}>
                   {column.content}
                 </Markdown>
               </div>
             )}
 
-            {column.video && (
-              <video
-                src={column.video}
-                playsInline
-                autoPlay
-                muted
-                loop
-                style={{ maxWidth: '100%' }}
-              />
-            )}
+            {column.video && (<video src={column.video} playsInline autoPlay muted loop style={{maxWidth: '100%'}}/>)}
           </div>
         ))}
       </div>
@@ -127,26 +105,26 @@ const GridBlock = props => (
 const CommentsSection = props => (
   <div className="comments">
     <div className="container">
-      <DisqusThread />
+      <DisqusThread/>
     </div>
   </div>
 );
 
 const FunctionalProgramming = () => (
-  <GridBlock columns={sections.functionalProgramming}></GridBlock>
+  <GridBlock columns={sections.functionalProgramming}/>
 );
 
 const MatchDetails = () => (
-  <GridBlock columns={sections.matchDetails} lightBackground></GridBlock>
+  <GridBlock columns={sections.matchDetails} lightBackground/>
 );
 
 const Features = () => (
-  <GridBlock columns={sections.features} layout="fourColumn"></GridBlock>
+  <GridBlock columns={sections.features} layout="fourColumn"/>
 );
 
 const Installation = () => (
   <GridBlock columns={sections.installation} center layout="threeColumn">
-    <BadgesSection />
+    <BadgesSection/>
   </GridBlock>
 );
 
@@ -155,7 +133,7 @@ const AutomaticDelimiters = () => (
     columns={sections.automaticDelimiters}
     darkBackground
     scrollableBackground
-  ></GridBlock>
+  />
 );
 
 const WarningsToExceptions = () => (
@@ -163,12 +141,12 @@ const WarningsToExceptions = () => (
     columns={sections.warningsToExceptions}
     darkBackground
     scrollableBackground
-  ></GridBlock>
+  />
 );
 
 function Index() {
   const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
+  const {siteConfig = {}} = context;
 
   return (
     <Layout>
@@ -178,13 +156,13 @@ function Index() {
         url={siteConfig.mainRepoUrl}
       />
       <div className="mainContainer">
-        <AutomaticDelimiters />
-        <Installation />
-        <MatchDetails />
-        <Features />
-        <WarningsToExceptions />
-        <FunctionalProgramming />
-        <CommentsSection />
+        <AutomaticDelimiters/>
+        <Installation/>
+        <MatchDetails/>
+        <Features/>
+        <WarningsToExceptions/>
+        <FunctionalProgramming/>
+        <CommentsSection/>
       </div>
     </Layout>
   );
