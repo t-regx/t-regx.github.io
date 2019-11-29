@@ -41,16 +41,6 @@ const badges = {
   lower: [
     {
       title: 'PHP Version',
-      src: 'https://img.shields.io/badge/PHP-5.3%2B-blue.svg',
-      href: 'https://travis-ci.org/T-Regx/T-Regx',
-    },
-    {
-      title: 'PHP Version',
-      src: 'https://img.shields.io/badge/PHP-5.6%2B-blue.svg',
-      href: 'https://travis-ci.org/T-Regx/T-Regx',
-    },
-    {
-      title: 'PHP Version',
       src: 'https://img.shields.io/badge/PHP-7.1-blue.svg',
       href: 'https://travis-ci.org/T-Regx/T-Regx',
     },
