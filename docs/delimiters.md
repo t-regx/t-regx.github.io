@@ -38,8 +38,8 @@ values={[
 <TabItem value="T-Regx">
 
 ```php
-pattern('[A-Z][a-z]+')->is()->delimitered();
-pattern('#[A-Z][a-z]+#')->is()->delimitered();
+pattern('[A-Z][a-z]+')->is()->delimited();
+pattern('#[A-Z][a-z]+#')->is()->delimited();
 ```
 
 </TabItem>
