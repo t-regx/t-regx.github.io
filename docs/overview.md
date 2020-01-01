@@ -58,7 +58,7 @@ What should be obvious, is now complicated and causes **many** questions and ass
 
 ### What's good
 
-While using T-Regx, some things are **certain**. For example:
+While using T-Regx, some things are **obvious**. For example:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
