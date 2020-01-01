@@ -21,9 +21,9 @@ You are probably a PHP developer. I would like to get `'Robert likes apples'`. C
 for this task?
 
 ```php
-preg_replace('/Bob/', 'Robert', 'Bob likes apples');
+preg_replace('/Bob/', 'Robert', 'Bob likes apples');    // pattern, replacement, subject
 // or
-preg_replace('/Bob/', 'Bob likes apples', 'Robert');
+preg_replace('/Bob/', 'Bob likes apples', 'Robert');    // pattern, subject, replacement
 // ??
 ```
 
@@ -112,7 +112,7 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_OFFSET_CAPTURE` were 
 
   - `(int) x` - a number of matches, if a match is found
   - `(int) 0` - if no matches are found
-  - `(bool) false` - if an error occurred
+  - `(bool) false` - if a runtime error occurred
 
   So if you do just this:
 
@@ -126,6 +126,9 @@ your pattern. You need to **remember** to add an explicit `false` check each tim
 - All `preg_*` functions only return `false`/`null`/`[]` on error. You have to remember to call `preg_last_error()` to get
   some insight in the nature of your error. Of course it only returns `int`! So you have to look up that `4` is
   "invalid utf8 sequence" and `2` is "backtrack limit exceeded".
+- However, `false`-check and `preg_last_error()` can only save you from runtime errors. So called compile errors don't
+  work that way and require either setting a custom error handler (bad idea) or read and clear just one of those errors
+  (good luck with errors in `preg_replace_callback()` for example).
 - `preg_filter()` for arrays returns `[]` if an error occurred; even though `[]` is the perfectly valid result for this
   function. For example, it could have filtered out all values or its input was an empty array right from the beginning.
 
@@ -244,3 +247,22 @@ pattern($pattern)->match($subject)->first(function (Match $match) {
 ```
 
 Read more about [`Match` details](match-details.md).
+
+### T-Regx is really smart with its exceptions
+
+We really did put a lot of thoughts to make T-Regx secure, so for example these code snippets aren't a big deal:
+
+```php
+pattern('\w+')->replace($subject)->all()->callback(function (Match $match) {
+    try {
+        return pattern('intentionally (( invalid {{ pattern ')->match('Foo')->first();
+    }
+    catch (MalformedPatternException $ex) {
+        // it's all good and dandy with the catching of this exception :)
+        return $match;
+    }
+});
+```
+
+In other words, warnings and flags raised and set by the first `pattern()->match()` invalid call will be represented as 
+`MalformedPatternException` and won't interfere with the upper `pattern()->replace()`.
