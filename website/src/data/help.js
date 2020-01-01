@@ -3,7 +3,7 @@ const issueLink = 'https://github.com/T-Regx/T-Regx/issues/new/choose';
 const help = [
   {
     title: 'Browse Docs',
-    content: `Learn more using the [documentation on this site](docs/introduction). Feel free to visit:
+    content: `Learn more using the [documentation on this site](/docs/introduction). Feel free to visit:
 
 * [Matching](/docs/match)
 * [Match details](docs/match-details)
