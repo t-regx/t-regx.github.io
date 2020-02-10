@@ -25,8 +25,10 @@ pattern('[A-Z][a-z]+')->test($subject);
 ## Automatic delimiters
 
 Notice, that these patterns **don't have to** be delimited. Smart T-Regx will conveniently add them for you.
-You can add flags to your regular expression by passing a second argument.```php
+You can add flags to your regular expression by passing a second argument.
+```php
 pattern('[A-Z]+', 'im')->test($subject);
+```
 
 To learn more, go to [Automatic Delimiters](delimiters.md).
 
