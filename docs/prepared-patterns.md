@@ -36,7 +36,7 @@ If you use `Pattern::prepare()` or `Pattern::inject()`, you can explicitly speci
 treated as string literals, and not as regular expression special characters.
 
 Prepared Patterns also understand that strings that are supposed to be treated as string literals are to be quoted with a
-delimiter, that was chosen with [Automatic Delimiters](delimiters.md).
+delimiter, that was chosen with [Automatic Delimiters](delimiters.mdx).
 
 ### With `Pattern::prepare()`
 

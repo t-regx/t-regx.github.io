@@ -9,7 +9,7 @@ Its main features are:
 
 - Being **bulletproof**:
 
-  - [Automatic delimiters](delimiters.md) for your patterns
+  - [Automatic delimiters](delimiters.mdx) for your patterns
   - Each and every unexpected situation ends in an exception
   - UTF-8 support out of the box
   - [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user-input)

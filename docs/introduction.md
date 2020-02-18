@@ -3,7 +3,7 @@ id: introduction
 title: Introduction
 ---
 
-There are two ways of instantiating a pattern for T-Regx. Each of them accepts an [undelimited](delimiters.md) pattern
+There are two ways of instantiating a pattern for T-Regx. Each of them accepts an [undelimited](delimiters.mdx) pattern
 as the first argument and optional flags as the second argument. 
 
 ## Entry points
@@ -30,7 +30,7 @@ You can add flags to your regular expression by passing a second argument.
 pattern('[A-Z]+', 'im')->test($subject);
 ```
 
-To learn more, go to [Automatic Delimiters](delimiters.md).
+To learn more, go to [Automatic Delimiters](delimiters.mdx).
 
 ### Old-school patterns
 

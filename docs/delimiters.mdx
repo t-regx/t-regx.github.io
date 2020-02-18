@@ -1,0 +1,70 @@
+---
+id: delimiters
+title: Automatic delimiters
+---
+
+> This chapter doesn't contain `PHP` code snippets, because PHP PCRE require delimiters. There is no way to omit them
+> in Vanilla PHP.
+
+Thanks to automatic delimiters, one can use regular expressions without [brain strain](overview.md#brain-strain)
+and without coming up with a suitable delimiter.
+
+```php
+pattern('#[A-Z]/[a-z]+')->match($subject)->first();
+```
+
+The code snippets above are equal.
+
+## Adding delimiters
+
+To change undelimited pattern into a delimited one - use `delimiter()` method;
+
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}]}>
+<TabItem value="T-Regx">
+
+```php
+pattern('Welcome/Or not')->delimiter();
+```
+
+</TabItem>
+</Tabs>
+
+<!--T-Regx:{echo-at(0)}-->
+<!--Result-Output-->
+
+<div className="output-block">
+
+```text
+#Welcome/Or not#
+```
+
+</div>
+
+> `delimiter()` returns the pattern unchanged, if it was constructed with `Pattern::pcre()`, instead of `Pattern::of()`.
+
+## Flags
+
+There are two ways of passing flags:
+
+Either pass a second argument to the [`pattern()`](introduction.md#entry-points)/[`Pattern::of()`](introduction.md#entry-points):
+
+```php
+pattern('[A-Z][a-z]+', 'i')->match($subject)->first();
+```
+
+or use old-school pattern:
+
+```php
+Pattern::pcre('/[A-Z][a-z]+/i')->match($subject)->first();
+```
+
+## I want to break it
+
+T-Regx has a set of predefined, suitable delimiters (like `/`, `#`, `~`, `%`, etc.) and simply uses the first one,
+that doesn't occur in your pattern. If you exhaust each of them; if you use every possible, predefined, suitable delimiter -
+T-Regx will throw `ExplicitDelimiterRequiredException`.
+
+In that case, you simply have to use an explicit delimiter with `Pattern::pcre()`.
+
+If you think another automatic delimiter can be used,
+please create [a github issue](https://github.com/T-Regx/T-Regx/issues/new/choose).

@@ -4,7 +4,7 @@ title: Handling user input
 ---
 
 Prepared Patterns allow you to confidently use user-input or unsafe data that might contain regular expression special
-characters. It's also integrated with [Automatic Delimiters](delimiters.md), so they're quoted with regard to the delimiter
+characters. It's also integrated with [Automatic Delimiters](delimiters.mdx), so they're quoted with regard to the delimiter
 that was chosen automatically for you.
 
 There are two entry points for prepared patterns:

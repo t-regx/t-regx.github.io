@@ -45,7 +45,7 @@ Both code snippets are equal (but now `' and '` is also a string literal).
   - Any other values cause `InvalidArgumentException`
 - Values inside the inner array:
   - **don't contribute** to the pattern being automatically delimited. Otherwise, user-input data could influence the pattern being invalid or not
-  - are always quoted (using `preg::quote()`) with regard to the delimiter chosen by [Automatic Delimiters](delimiters.md)
+  - are always quoted (using `preg::quote()`) with regard to the delimiter chosen by [Automatic Delimiters](delimiters.mdx)
 
 ## Details about `Pattern::inject()`
 
@@ -125,7 +125,7 @@ Pattern::inject($input, $values);
   - If not, `InvalidArgumentException` is thrown
 
 - Values in `$values`:
-  - are always quoted (using `preg::quote()`) with regard to the delimiter chosen by [Automatic Delimiters](delimiters.md)
+  - are always quoted (using `preg::quote()`) with regard to the delimiter chosen by [Automatic Delimiters](delimiters.mdx)
   - **don't contribute** to the pattern being automatically delimited. Otherwise, user-input data could influence the pattern being invalid or not
 
 ## Building process
@@ -150,7 +150,7 @@ Process:
 - `["(My|Our)", ' ', "(dog|cat)'s name is ", ' and ', '!']`
 - Pattern is then imploded
 - `"(My|Our) (dog|cat)'s name is and !"`
-- [Automatic Delimiters](delimiters.md) are used to chose the delimiter
+- [Automatic Delimiters](delimiters.mdx) are used to chose the delimiter
 - The pattern is being checked:
   - whether it's already delimiter, and if it is:
     - what delimiter is used exactly
