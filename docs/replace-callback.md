@@ -146,16 +146,15 @@ $subject = 'I like scandinavia: Sweden, Norway and Denmark';
 
 ## Return types
 
-`replace()->callback()` only accepts `string` as it's return type.
+`replace()->callback()` only accepts `string` or `MatchGroup` as its return type.
 
-We believe that returning anything, that's not a string can **be a sign of a bug**! Moreover, converting them silently
+We believe that returning anything, that's not a string or a group can **be a sign of a bug**! Moreover, converting them silently
 would break our ["Explicity rule"](whats-the-point#t-regx-to-the-rescue).
 
 ```php
 pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
     return 2;       // <- throws InvalidReturnValueException
     return true;    // <- throws InvalidReturnValueException
-    return $match;  // <- throws InvalidReturnValueException
     return null;    // <- throws InvalidReturnValueException
 });
 ```
@@ -169,10 +168,14 @@ literals - just return them **explicitly**.
 pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
     return strval(2);                          // ok
     return true ? 'true' : 'false';            // ok
-    return (string) $match;                    // ok
     return null ? '' : $something;             // ok
-    return $match->group('captured');          // ok, if group exists and was matched
+
+    return $match->text();                     // ok
+    return (string) $match;                    // ok
     return $match->group('captured')->text();  // ok, if group exists and was matched
+
+    return $match;                             // ok
+    return $match->group('captured');          // ok, if group exists and was matched
 });
 ```
 
@@ -181,13 +184,7 @@ pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $m
 You can call `replace()->callback()` for any valid PHP `callable` which accepts one string parameter (or no parameters)
 and returns `string`.
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}, {label: 'PHP', value: 'PHP'}]}>
 <TabItem value="T-Regx">
 
 ```php
