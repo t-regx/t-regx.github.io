@@ -19,7 +19,7 @@ object. These methods are:
 Using `Match` details, you gain access to:
 
 - [`text()`](#matched-text)/[`textLength()`](#matched-text) - value of a matched occurrence
-- [`parseInt()`](#integers)/[`isInt()`](#integers) which allow you to handle integers safely
+- [`toInt()`](#integers)/[`isInt()`](#integers) which allow you to handle integers safely
 - [`subject()`](#subject) - subject against which the pattern was matched
 - [`index()`](#ordinal-value-index) - ordinal value of a matched occurrence
 - [`limit()`](#limit) - limit which was put on the matches
@@ -43,6 +43,9 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
     return (string) $match;            // cast it to string
     return (string) $match->group(0);  // cast group #0 to string
     return "$match";                   // enclose it in double quotes
+
+    return $match;                     // return the Match
+    return $match->group(0);           // return group #0
 });
 ```
 
@@ -76,7 +79,7 @@ not PHP numeric:
 | ------- | --------- |
 | `'14'`  | `true`    |
 | `'-14'` | `true`    |
-| `'+14'` | `true`    |
+| `'+14'` | `false`   |
 | `'000'` | `true`    |
 | `' 10'` | `false`   |
 | `'10 '` | `false`   |
@@ -86,12 +89,12 @@ not PHP numeric:
 | `'0.0'` | `false`   |
 | `'0,0'` | `false`   |
 
-_PS: It's implemented with `filter_var()`, but you can think of it as:_ `/^[-+]?\d+$/`
+_PS: It's implemented with `filter_var()`, but you can think of it as:_ `/^-?\d+$/`
 
 ```php
 pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) {
     if ($match->isInt()) {
-        $times = $match->parseInt();
+        $times = $match->toInt();
         for ($i = 0; $i < $times; $i++) {
             // tasks
         }
@@ -99,7 +102,7 @@ pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) 
 });
 ```
 
-So to recap, `$match->isInt()` returns `true`/`false` depending on whether the matched occurrence is numeric; and `parseInt()`
+So to recap, `$match->isInt()` returns `true`/`false` depending on whether the matched occurrence is numeric; and `toInt()`
 returns said numeric occurrence, or throws `IntegerFormatException` instead.
 
 ## Subject
@@ -145,7 +148,7 @@ pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Mat
 ['i', 'LIKE', 'trains', 'BUT', 'i', 'ALSO', 'like', 'BIKES']
 ```
 
-Results of `Match.index()` are always **continuous integer** numbers, going from `0` to `1`, `2`, `3` etc.
+Results of `Match.index()` are always **continuous integer** numbers, going from `0` to `1`, `2`, `3`..., even when filtered.
 
 ## Limit
 
@@ -267,7 +270,7 @@ pattern($p)->match($s)->first(function (Match $match) {
     $text = $match->text();                            // '192mm'
 
     $value = (string) $match->group('value');          // '192'
-    $unit  =          $match->group('unit')->text()    // 'mm'
+    $unit  =          $match->group('unit')->text();   // 'mm'
 });
 ```
 

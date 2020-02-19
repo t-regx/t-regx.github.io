@@ -22,7 +22,7 @@ Using [`Match`](match-details.md) details, you gain access complete information 
  - [`group(int|string)`](#group-details) - capturing group details. If group is matched, below methods are available:
      - `matched()` - whether the group was matched by the subject
      - `text()` - value of the group
-     - `parseInt()`/`isInt()` - allow you to handle integers safely
+     - `toInt()`/`isInt()` - allow you to handle integers safely
      - [offsets of matched values](#offsets) in the subject:
        - character offsets (UTF-8 safe) - `offset()`
        - byte offsets - `byteOffset()`
@@ -48,17 +48,17 @@ $s = '192mm and 168cm or 18mm and 12cm';
 
 pattern($p) ->match($s) ->iterate(function (Match $match) {
     
-    $match->group('value')->text()      // '168' (string)
-    $match->group('value')->isInt()     // true  (boolean)
-    $match->group('value')->parseInt()  // 168   (int)
+    $match->group('value')->text();     // '168' (string)
+    $match->group('value')->isInt();    // true  (boolean)
+    $match->group('value')->toInt();    // 168   (int)
     
-    $match->group('unit')->offset()     // 13
-    $match->group('unit')->text()       // 'cm'
-    $match->group('unit')->isInt()      // false
-    $match->group('unit')->parseInt()   // throws IntegerFormatException
+    $match->group('unit')->offset();    // 13
+    $match->group('unit')->text();      // 'cm'
+    $match->group('unit')->isInt();     // false
+    $match->group('unit')->toInt();     // throws IntegerFormatException
     
-    $match->group('unit')->index()      // 2
-    $match->group(2)->name()            // 'unit'
+    $match->group('unit')->index();     // 2
+    $match->group(2)->name();           // 'unit'
 });
 ```
 
