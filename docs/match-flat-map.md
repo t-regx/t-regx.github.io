@@ -71,7 +71,7 @@ pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
 ```
 
 </TabItem>
-</Tabs> -->
+</Tabs>
 
 <!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->
 
@@ -94,16 +94,10 @@ pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
 
 ## Variable callbacks
 
-You can invoke `flatMap()` with any valid PHP `callable` which accepts one string parameter (or no parameters) - just
-like [`first()`](match-first.md) and [`map()`](match-map.md) - and returns `array`.
+You can invoke `flatMap()` with any valid PHP `callable`, which accepts one or zero string parameters 
+(just like [`first()`](match-first.md) and [`map()`](match-map.md)) and returns `array`.
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}, {label: 'PHP', value: 'PHP'}]}>
 <TabItem value="T-Regx">
 
 ```php
