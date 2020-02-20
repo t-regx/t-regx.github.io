@@ -1,7 +1,18 @@
 ---
-id: quoting
-title: Quoting
+id: quote
+title: Quote regular expression
 ---
+
+## Dedicated builder
+
+Before you engage in this article, please visit "[Handling user input](handling-user-input.md)" first, if you're interested
+in using unsafe data in your patterns :)
+
+```php
+Pattern::prepare(["(My|Our) dog's name is ", [$input], '!']);
+```
+
+## Procedural Quoting
 
 There are two methods `Pattern::quote()` and `Pattern::unquote()`.
 
@@ -68,12 +79,16 @@ Welcome\How are you?
 Please, keep in mind that this **is not** a safe way to create patterns with unsafe characters - for that, consider
 using [Prepared Patterns](prepared-patterns.md).
 
-## Contract
+### Contract
 
 These two methods should be transitive, so:
 
 ```php
+// when
 $output = Pattern::unquote(Pattern::quote($input));
+
+// then
+$this->assertEquals($input, $output); 
 ```
 
-The contract is `$input === $output` for any `$input` value.
+The contract is that `$input` should be identical to `$output` for any `string` value.

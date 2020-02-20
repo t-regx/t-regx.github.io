@@ -38,7 +38,7 @@
     "Misc": [
       "delimiters",
       "count",
-      "quoting",
+      "quote",
       "valid",
       "split",
       "filter"
