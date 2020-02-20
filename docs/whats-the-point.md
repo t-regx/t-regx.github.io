@@ -7,7 +7,6 @@ sidebar_label: Why would I use T-Regx?
 Here is a few reasons why one might consider using T-Regx. Main of which are:
 
 - It's **bulletproof**
-- It's **powerful**
 - It's **reliable**
 - It's **readable**
 
@@ -106,6 +105,8 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_OFFSET_CAPTURE` were 
 
   but `preg_filter()` and `preg_replace()` actually return _completely_ different values for **the same** parameters.
 
+- Found `$matches` received from `preg_match()` have completely difference structure than those from `preg_replace_callback()`.
+
 ### PHP is Deliberately buggy
 
 - `preg_match` and `preg_match_all` return either:
@@ -131,6 +132,7 @@ your pattern. You need to **remember** to add an explicit `false` check each tim
   (good luck with errors in `preg_replace_callback()` for example).
 - `preg_filter()` for arrays returns `[]` if an error occurred; even though `[]` is the perfectly valid result for this
   function. For example, it could have filtered out all values or its input was an empty array right from the beginning.
+- For certain parameter types, some PCRE methods (e.g. `preg_filter()`) raise **fatal errors** terminating the application.
 
 ## T-Regx to the rescue
 
@@ -159,29 +161,9 @@ pattern('Bob')->count('Bob likes applees');
 ### T-Regx is for developers (it's reliable)
 
 If you try to use an invalid regular expression in Java or JavaScript, you would probably get a `SyntaxError` exception
-and you'd be forced to handle it. Such things don't happen in PHP regular expressions. If any `preg_*()` function fails,
-it returns `false` (or sometimes `null` or an empty array). You can always use `if`, if you remember about it, but...
+and you'd be forced to handle it. Such things don't happen in PHP regular expressions.
 
-...unfortunately these functions return values - some of which are `0` - which makes this code completely unreliable!
-
-```php
-if (preg_match('//', $subject)) {
-```
-
-It doesn't matter whether it found nothing (`0`) or failed (`false`) - you would have no idea. You need to add an explicit check:
-
-```php
-if (($count = preg_match('//', $subject)) !== false) {
-    if ($count > 1) {
-
-    }
-}
-else {
-    // handle the error
-}
-```
-
-T-Regx always throws an exception and never issues any warnings, errors or notices.
+T-Regx always throws an exception and never issues any warnings, fatals, errors or notices.
 
 ```php
 try {
@@ -210,15 +192,7 @@ Further, furthermore, if you pass an invalid data type to any of the T-Regx meth
 
 ### T-Regx is explicit
 
-Poor design of PHP `preg_*` functions does not make them really descriptive. Someone who's not familiar with it will probably
-ask themselves:
-
-- `preg_replace('//', $r, $s)` - will this replace all or just one occurrence?
-- `preg_match('//', $subject)` - will _this_ match the first occurrence? Or all?
-
-However,
-
-looking at T-Regx code, everyone can immediately see author's intentions and will be able to recognize what
+Looking at T-Regx code, everyone can immediately see author's intentions and will be able to recognize what
 the code **exactly** does, right away.
 
 ```php
