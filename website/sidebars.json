@@ -39,7 +39,7 @@
       "delimiters",
       "count",
       "quoting",
-      "is-valid",
+      "valid",
       "split",
       "filter"
     ],

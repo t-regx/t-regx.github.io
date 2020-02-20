@@ -10,7 +10,7 @@ const help = [
 * [Replacing](docs/replace)
 * [Prepared patterns](docs/prepared-patterns)
 * [Automatic delimiters](docs/delimiters)
-* [Pattern validator](docs/is-valid)
+* [Validate pattern](docs/valid)
     `,
   },
   {
