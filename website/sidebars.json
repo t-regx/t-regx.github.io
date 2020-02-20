@@ -38,6 +38,7 @@
     "Misc": [
       "delimiters",
       "count",
+      "utils",
       "quote",
       "valid",
       "split",
