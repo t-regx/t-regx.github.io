@@ -1,0 +1,24 @@
+[class^='docMainContainer'] div + pre,
+.output-block {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+[class^='docMainContainer'] div + pre:before,
+.output-block:before {
+  content: url("/img/fas/terminal.svg");
+  width: 20px;
+  height: 20px;
+  display: block;
+  opacity: 0.15;
+  margin: 0 0 3px 7px;
+}
+
+[class^='docMainContainer'] div + pre:hover,
+.output-block:hover {
+  opacity: 1;
+}
+
+.hash-link:hover {
+  text-decoration: none;
+}

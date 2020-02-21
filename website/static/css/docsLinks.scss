@@ -1,0 +1,10 @@
+.menu {
+  > ul.menu__list {
+    > li.menu__list-item {
+      > a.menu__link:hover {
+        background: none;
+        cursor: default;
+      }
+    }
+  }
+}

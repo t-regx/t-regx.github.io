@@ -1,0 +1,23 @@
+:root {
+  --ifm-color-primary: #26768c;
+  --ifm-color-primary-dark: #1e5e70;
+  --ifm-color-primary-darker: #164654;
+  --ifm-color-primary-darkest: #0f2f38;
+  --ifm-color-primary-light: #5191a3;
+  --ifm-color-primary-lighter: #7cacba;
+  --ifm-color-primary-lightest: #a8c8d1;
+  --ifm-background-color: var(--ifm-color-white);
+  --ifm-code-background: rgba(27, 31, 35, 0.05);
+  --ifm-font-size-base: 16px;
+  --ifm-font-weight-bold: 600;
+  --ifm-code-font-size: 90%;
+  --ifm-navbar-shadow: none;
+}
+
+html[data-theme='dark']:root {
+  --ifm-code-background: #313131;
+}
+
+.hero .container {
+  position: relative;
+}

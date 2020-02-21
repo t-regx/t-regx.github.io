@@ -5,137 +5,14 @@
 @import "code_tabs";
 @import "code-block-buttons";
 @import "navLinks";
+@import "old";
+@import "docsLinks";
+@import "docs";
+@import "comparison";
+@import "home";
 
 .discussion-tregx-grid img {
   margin-top: 50px;
-}
-
-img.blog-img.t-regx-santa {
-  float: right;
-  margin-left: 25px;
-}
-
-ul.iconList {
-  list-style: none;
-  text-align: center;
-  color: #26768c;
-  font-size: 14px;
-
-  li {
-    display: inline;
-    margin-right: 8px;
-
-    &:before {
-      content: '✓ ';
-    }
-  }
-}
-
-table.comparison-table {
-  margin-top: 55px;
-  margin-bottom: 75px;
-
-  sup {
-    font-size: 0.8em;
-    opacity: 0.65;
-    display: block;
-  }
-
-  ul {
-    padding-left: 1.2em;
-    margin-bottom: 3px;
-  }
-
-  thead {
-    tr {
-      border-top: none;
-
-      th {
-        text-align: center;
-
-        &:first-of-type {
-          border: none;
-          background-color: white;
-        }
-      }
-
-      &.logo-row {
-        th {
-          padding: 13px;
-          vertical-align: middle;
-
-          img {
-            margin: 0 auto;
-            display: block;
-            max-width: 110px;
-          }
-        }
-      }
-    }
-  }
-
-  tbody {
-    tr {
-      td {
-        vertical-align: middle;
-        padding: 9px 16px;
-
-        p {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-}
-
-.badges-section {
-  margin-top: 5em;
-
-  .upper-badges {
-    margin-bottom: 17px;
-  }
-
-  .upper-badges,
-  .lower-badges {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    a {
-      margin-left: 2px;
-      margin-right: 2px;
-    }
-  }
-}
-
-#scroll-background {
-  background: #1c3c45 url("/img/scroll.background.jpg") fixed;
-  background-size: cover;
-
-  code {
-    background-color: rgba(27, 31, 35, 0.55);
-  }
-}
-
-footer.nav-footer {
-  .sitemap .nav-home {
-    opacity: 0.6;
-  }
-
-  .discussion-section {
-    #disqus_thread {
-      a {
-        color: #288ce4;;
-      }
-
-      iframe {
-        padding: 15px;
-        background-color: white;
-        border-radius: 15px;
-        margin-top: 20px;
-      }
-    }
-  }
 }
 
 pre code.hljs {
