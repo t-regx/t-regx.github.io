@@ -9,7 +9,7 @@ website/build/
 website/yarn.lock
 website/node_modules
 website/package-lock.json
-website/static/css/custom.min.css
+website/static/css/style.min.css
 
 dependencies
 composer.lock

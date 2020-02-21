@@ -23,7 +23,7 @@ module.exports = {
           showLastUpdateTime: true,
         },
         theme: {
-          customCss: require.resolve('./static/css/custom.css'),
+          customCss: require.resolve('./static/css/style.min.css'),
         },
       },
     ],
@@ -49,11 +49,11 @@ module.exports = {
         src: 'img/t.regx.borderless.png',
       },
       links: [
-        { to: 'docs/installation', label: 'Docs' },
-        { to: 'comparison', label: 'Compare' },
-        { to: 'help', label: 'Help' },
-        { to: 'blog', label: 'Blog' },
-        { href: mainRepoUrl, label: 'GitHub' },
+        {to: 'docs/installation', label: 'Docs'},
+        {to: 'comparison', label: 'Compare'},
+        {to: 'help', label: 'Help'},
+        {to: 'blog', label: 'Blog'},
+        {href: mainRepoUrl, label: 'GitHub'},
       ],
     },
     footer: {
@@ -67,9 +67,9 @@ module.exports = {
         {
           title: 'Docs',
           items: [
-            { label: 'Installation', to: 'docs/installation' },
-            { label: 'Getting Started', to: 'docs/introduction' },
-            { label: 'Documentation', to: 'docs/match' },
+            {label: 'Installation', to: 'docs/installation'},
+            {label: 'Getting Started', to: 'docs/introduction'},
+            {label: 'Documentation', to: 'docs/match'},
             {
               label: 'API Reference',
               href: `${mainRepoUrl}/blob/master/ChangeLog.md#api`,
@@ -79,8 +79,8 @@ module.exports = {
         {
           title: 'More',
           items: [
-            { label: 'Blog', to: 'blog' },
-            { label: 'GitHub', href: mainRepoUrl },
+            {label: 'Blog', to: 'blog'},
+            {label: 'GitHub', href: mainRepoUrl},
             {
               html: `<a class="github-button" href="${mainRepoUrl}"
                         title="See this project on GitHub"
