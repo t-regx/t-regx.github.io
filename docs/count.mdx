@@ -9,13 +9,7 @@ themselves. In that case, use `pattern()->count()`:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx', }, {label: 'PHP', value: 'PHP'}]}>
 <TabItem value="T-Regx">
 
 ```php
@@ -40,13 +34,7 @@ return preg::match_all('/[aeiouy]/', 'Computer');
 
 Also, `MatchPattern` is [`\Countable`](https://www.php.net/manual/en/class.countable.php), so you can use PHP build-in methods, like `count()`:
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}, {label: 'PHP', value: 'PHP'}]}>
 <TabItem value="T-Regx">
 
 ```php
@@ -79,13 +67,7 @@ count($match[0]);
 
 If your pattern does not match the subject, `count()` simply returns `0`.
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}, {label: 'PHP', value: 'PHP'}]}>
 <TabItem value="T-Regx">
 
 ```php
@@ -110,22 +92,16 @@ return preg::match_all('/[0-9]/', 'Computer');
 
 ## Invalid
 
-Every use of `pattern()` with invalid pattern will cause `CompileSafeRegexException`.
+Every use of `pattern()` with invalid pattern will cause `MalformedPatternException`.
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}, {label: 'PHP', value: 'PHP'}]}>
 <TabItem value="T-Regx">
 
 ```php
 try {
     pattern('[aeiouy')->count('Computer');       // malformed pattern
 }
-catch (CompileSafeRegexException $ex) {
+catch (MalformedPatternException $ex) {
     echo $ex->getMessage();
 }
 ```
@@ -137,7 +113,7 @@ catch (CompileSafeRegexException $ex) {
 try {
     preg::match_all('/[aeiouy/', 'Computer');    // malformed pattern
 }
-catch (CompileSafeRegexException $ex) {
+catch (MalformedPatternException $ex) {
     echo $ex->getMessage();
 }
 ```
@@ -146,12 +122,10 @@ catch (CompileSafeRegexException $ex) {
 </Tabs>
 
 ```text
-preg_match_all(): Compilation failed: missing terminating ] for character class at offset 7
+Missing terminating ] for character class at offset 7
 ```
 
-(caused by E_WARNING)
-
-> In `PHP` snippet, `CompileSafeRegexException` is thrown because safe-regex `preg::match_all()` was used, instead
+> In `PHP` snippet, `MalformedPatternException` is thrown because safe-regex `preg::match_all()` was used, instead
 > of `preg_match_all()`. Vanilla PHP `preg_*()` method don't throw exceptions.
 
 ## Performance
@@ -159,13 +133,7 @@ preg_match_all(): Compilation failed: missing terminating ] for character class 
 You might be tempted to use `count()` to check whether your subject was matched by the pattern, since `count()` doesn't
 return any matches...
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}, {label: 'PHP', value: 'PHP'}]}>
 <TabItem value="T-Regx">
 
 ```php
@@ -193,13 +161,7 @@ true
 ...but that would be wasteful. You're much better off using
 [`test()`](match.md#test-a-subject)/[`fails()`](match.md#test-a-subject):
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}, {label: 'PHP', value: 'PHP'}]}>
 <TabItem value="T-Regx">
 
 ```php

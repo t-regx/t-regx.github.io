@@ -13,7 +13,8 @@ use TRegx\CleanRegex\Exception\CleanRegex\SubjectNotMatchedException;
 use TRegx\CleanRegex\Match\Details\Match;
 use TRegx\CleanRegex\Match\Details\NotMatched;
 use TRegx\CleanRegex\Pattern;
-use TRegx\SafeRegex\Exception\CompileSafeRegexException;
+use TRegx\SafeRegex\Exception\CompilePregException;
+use TRegx\SafeRegex\Exception\MalformedPatternException;
 use TRegx\SafeRegex\preg;
 
 /**
@@ -92,7 +93,8 @@ class MarkupResultConsistencyTest extends TestCase
             SubjectNotMatchedException::class,
             Match::class,
             NotMatched::class,
-            CompileSafeRegexException::class,
+            CompilePregException::class,
+            MalformedPatternException::class,
             preg::class,
             Pattern::class,
         ]);
