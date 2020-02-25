@@ -12,6 +12,10 @@ in using unsafe data in your patterns :)
 Pattern::prepare(["(My|Our) dog's name is ", [$input], '!']);
 ```
 
+Suggested articles:
+ - [`Pattern::prepare()`](prepared-patterns.md#with-pattern-prepare)
+ - [`Pattern::inject()`](prepared-patterns.md#with-pattern-inject)
+
 ## Procedural Quoting
 
 There are two methods `Pattern::quote()` and `Pattern::unquote()`.
@@ -22,12 +26,7 @@ work (except for the fact that `preg_quote()` is broken before PHP 7.1.3 version
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'PHP', value: 'PHP', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{ label: 'T-Regx', value: 'T-Regx'}]}>
 <TabItem value="T-Regx">
 
 ```php
@@ -50,12 +49,7 @@ Welcome\\How are you\?
 
 ...second of which is the direct opposite:
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-]
-}>
+<Tabs defaultValue="T-Regx" values={[{ label: 'T-Regx', value: 'T-Regx'}]}>
 <TabItem value="T-Regx">
 
 ```php
