@@ -13,8 +13,6 @@ and without coming up with a suitable delimiter.
 pattern('#[A-Z]/[a-z]+')->match($subject)->first();
 ```
 
-The code snippets above are equal.
-
 ## Adding delimiters
 
 To change undelimited pattern into a delimited one - use `delimiter()` method;
@@ -37,10 +35,9 @@ pattern('Welcome/Or not')->delimiter();
 ```text
 #Welcome/Or not#
 ```
-
 </div>
 
-> `delimiter()` returns the pattern unchanged, if it was constructed with `Pattern::pcre()`, instead of `Pattern::of()`.
+> `delimiter()` returns the pattern unchanged, as if it was constructed with `Pattern::pcre()`, instead of `Pattern::of()`.
 
 ## Flags
 
@@ -49,7 +46,11 @@ There are two ways of passing flags:
 Either pass a second argument to the [`pattern()`](introduction.md#entry-points)/[`Pattern::of()`](introduction.md#entry-points):
 
 ```php
+// global function
 pattern('[A-Z][a-z]+', 'i')->match($subject)->first();
+
+// static method
+Pattern::of('[A-Z][a-z]+', 'i')->match($subject)->first();
 ```
 
 or use old-school pattern:
@@ -62,7 +63,7 @@ Pattern::pcre('/[A-Z][a-z]+/i')->match($subject)->first();
 
 T-Regx has a set of predefined, suitable delimiters (like `/`, `#`, `~`, `%`, etc.) and simply uses the first one,
 that doesn't occur in your pattern. If you exhaust each of them; if you use every possible, predefined, suitable delimiter -
-T-Regx will throw `ExplicitDelimiterRequiredException`.
+it will throw `ExplicitDelimiterRequiredException`.
 
 In that case, you simply have to use an explicit delimiter with `Pattern::pcre()`.
 
