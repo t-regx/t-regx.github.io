@@ -13,10 +13,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```php
 pattern('[A-Z][a-z]+')->match($subject)->first();
-pattern('#[A-Z][a-z]+#')->match($subject)->first();
 ```
-
-The code snippets above are equal.
 
 ## Is pattern delimited
 
