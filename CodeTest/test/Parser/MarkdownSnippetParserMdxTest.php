@@ -5,6 +5,7 @@ use CodeTest\Parser\MarkdownSnippetParserMdx;
 use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
 use CodeTest\Parser\Snippet\NonEmptySnippetsStore;
 use PHPUnit\Framework\TestCase;
+use TRegx\CleanRegex\Exception\InvalidReturnValueException;
 
 class MarkdownSnippetParserMdxTest extends TestCase
 {
@@ -56,12 +57,12 @@ class MarkdownSnippetParserMdxTest extends TestCase
 <TabItem value="T-Regx">
 ```php
 ```
-<!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->');
+<!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\InvalidReturnValueException)}-->');
 
         // then
         $snippet = $store->snippets()[0];
         $this->assertArrayHasKey(4, $snippet, 'Failed asserting that resulting snippet has an "exceptions" field');
-        $this->assertEquals('\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException', $snippet[4]['T-Regx']);
+        $this->assertEquals(InvalidReturnValueException::class, $snippet[4]['T-Regx']);
     }
 
     public function fileAndPath(string $filename): array

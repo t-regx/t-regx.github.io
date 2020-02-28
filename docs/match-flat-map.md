@@ -73,7 +73,7 @@ pattern('\w+')->match("I like trains")->flatMap(function (Match $match) {
 </TabItem>
 </Tabs>
 
-<!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\CleanRegex\InvalidReturnValueException)}-->
+<!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\InvalidReturnValueException)}-->
 
 <Tabs
 defaultValue="T-Regx"
