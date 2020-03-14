@@ -8,7 +8,7 @@ A curious user might notice, that some parts of T-Regx API are redundant and can
 ---
 
 ```php
-pattern($p)->match($s)->forFirst($callback)->orThrow();
+pattern($p)->match($s)->findFirst($callback)->orThrow();
 ```
 
 can be simplified to

@@ -49,7 +49,7 @@ method **has** to return a value and go on. No more bothers about empty arrays a
 `null`/`false` hiding somewhere.
 
 > If you would like to control the subject that **isn't matched** with your pattern though; 
-> you can do it **explicitly** with [`forFirst()`](#forfirst) (and `orReturn()`, `orElse()`, `orThrow()`).
+> you can do it **explicitly** with [`findFirst()`](#findFirst) (and `orReturn()`, `orElse()`, `orThrow()`).
 
 ## Use `first()` with callback
 
@@ -331,9 +331,9 @@ pattern($p)->match($s)->first('str_split');      // ['1', '9', '2', 'm', 'm']
 pattern($p)->match($s)->first('strlen')          // 5
 ```
 
-## `forFirst()`
+## `findFirst()`
 
-This method allows you to explicitly specify how to handle an unmatched subject. Just chain `forFirst()` with
+This method allows you to explicitly specify how to handle an unmatched subject. Just chain `findFirst()` with
 one of the following `orReturn()`, `orElse()` or `orThrow()`.
 
 <Tabs
@@ -347,7 +347,7 @@ one of the following `orReturn()`, `orElse()` or `orThrow()`.
 
 ```php
 echo pattern('\w+')->match('Dog')
-         ->forFirst(function (Match $match) {
+         ->findFirst(function (Match $match) {
              return "Yay $match";
          })
          ->orReturn('Aw, man :/');
@@ -375,4 +375,4 @@ Yay Dog
 
 ---
 
-Read on to learn more about [`forFirst()`](match-for-first.md).
+Read on to learn more about [`findFirst()`](match-find-first.md).

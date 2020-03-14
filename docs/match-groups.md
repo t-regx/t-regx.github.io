@@ -6,7 +6,7 @@ title: Capturing groups
 When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts 
 [`Match`](match-details.md) details object. These methods are: 
 [`first()`](match-first.md), 
-[`forFirst()`](match-for-first.md), 
+[`findFirst()`](match-find-first.md), 
 [`forEach()`](match-for-each.md)/[`iterate()`](match-for-each.md), 
 [`map()`](match-map.md), 
 [`flatMap()`](match-flat-map.md), 
@@ -102,7 +102,7 @@ pattern('(?<schema>https?://)?\w+\.\w+')->match('google.com')->first(function (M
 });
 ```
 
-Method `group()->orThrow()` works exactly the same as `forFirst()->orThrow()`, which means it accepts user defined exception
+Method `group()->orThrow()` works exactly the same as [`findFirst()->orThrow()`](match-find-first.md), which means it accepts user defined exception
 to instantiate:
 
 ```php
@@ -116,7 +116,7 @@ pattern('(?<schema>https?://)?\w+\.\w+')->match('google.com')->first(function (M
 > Method `group()->orThrow()` throws `GroupNotMatchedException` by default, so - when called without user defined exception -
 > it's actually identical to `group()->text()`.
 
-> Method `group()->orElse(callable)` callback receives `NotMatched`, just like `forFirst()->orElse()`.
+> Method `group()->orElse(callable)` callback receives `NotMatched`, just like `findFirst()->orElse()`.
 
 ### Index, name and identifier
 

@@ -18,6 +18,6 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^7.5",
-    "rawr/t-regx": "^0.9"
+    "rawr/t-regx": "dev-develop"
   }
 }

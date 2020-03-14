@@ -81,7 +81,7 @@ You can also chose to throw an exception, if the unmatched group is not supposed
 - `orEmpty()` - matched occurrence is replaced with an empty string
 - `orReturn(string)` - match is replaced with the given `string` argument
 - `orElse(callable)` - uses a callback with [`Match`](match-details.md) argument, in order to evaluate a replacement
-- `orThrow()` - throws a default or a custom exception, just like [forFirst()->orThrow()](match-for-first.md)
+- `orThrow()` - throws a default or a custom exception, just like [findFirst()->orThrow()](match-find-first.md)
 
 > `orEmpty()` is the most performance-light method, because it uses `preg_replace()`, whereas `orReturn()`, `orIgnore()`,
 > `orElse()` and `orThrow()` use `preg_replace_callback()`.
@@ -352,7 +352,7 @@ Description:
 
 ### `orThrow()`
 
-You can either call this method without parameters, or with your custom exception class name (just like [`forFirst()`](match-for-first.md) parameter):
+You can either call this method without parameters, or with your custom exception class name (just like [`findFirst()`](match-find-first.md) parameter):
 
 <Tabs
 defaultValue="T-Regx"

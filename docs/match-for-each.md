@@ -8,7 +8,7 @@ It's possible to easily iterate matched occurrences with `forEach()`.
 ## Iterate with `forEach()`
 
 You can call `forEach()` with a callback, that's invoked with [`Match`](match-details.md) details just like 
-[`first()`](match-first.md) and [`forFirst()`](match-for-first.md).
+[`first()`](match-first.md) and [`findFirst()`](match-find-first.md).
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -1,5 +1,5 @@
 ---
-id: match-for-first
+id: match-find-first
 title: Optional matches
 ---
 
@@ -8,10 +8,10 @@ that in the previous chapter.
 
 But what if you **expected** the subject not to be matched? And how do you to react to it? 
 
-## Optional matches with `forFirst()`
+## Optional matches with `findFirst()`
 
-Method `forFirst()` can be called with a callback (that accepts [`Match`](match-details.md) details) just like `first()`. The difference is:
-`forFirst()` never throws `SubjectNotMatchedException`, and allows you to control an unmatched subject by appropriate 
+Method `findFirst()` can be called with a callback (that accepts [`Match`](match-details.md) details) just like `first()`. The difference is:
+`findFirst()` never throws `SubjectNotMatchedException`, and allows you to control an unmatched subject by appropriate 
 control methods: `orThrow()`, `orReturn()` and `orElse()`.
 
 For example:
@@ -30,7 +30,7 @@ import TabItem from '@theme/TabItem';
 
 ```php
 $first = pattern('[0-9]+')->match("I'm 19 years old")
-   ->forFirst(function (Match $match) {
+   ->findFirst(function (Match $match) {
        return "I was born $match years ago";
    })
    ->orReturn('Unmatched :/');
@@ -57,7 +57,7 @@ return 'Unmatched :/';
 'I was born 19 years ago'
 ```
 
-If a match is found, then the result of `forFirst()` callback is returned. If a match is not found, however, then the 
+If a match is found, then the result of `findFirst()` callback is returned. If a match is not found, however, then the 
 handling of an unmatched subject relies in the chained method.
 
 ### `orReturn()`
@@ -75,7 +75,7 @@ If a match is not found, it returns a default value.
 
 ```php
 $first = pattern('[0-9]+')->match("I'm a dog")
-    ->forFirst(function (Match $match) {
+    ->findFirst(function (Match $match) {
         return 'Match is found!';
     })
     ->orReturn('Match is not found');
@@ -119,7 +119,7 @@ If a match is not found, it calls `orElse()` callback and uses *it* to evaluate 
 
 ```php
 $first = pattern('[0-9]+')->match("I'm a dog")
-    ->forFirst(function (Match $match) {
+    ->findFirst(function (Match $match) {
         return 'Match is found!';
     })
     ->orElse(function (NotMatched $notMatched) { 
@@ -167,7 +167,7 @@ If a match is not found, it throws `SubjectNotMatchedException` by default.
 ```php
 try {
     return pattern('[0-9]+')->match("I'm a dog")
-        ->forFirst(function (Match $match) {
+        ->findFirst(function (Match $match) {
             return 'Match is found!';
         })
         ->orThrow();
@@ -216,7 +216,7 @@ class MyException extends \Exception {}
 
 try {
     return pattern('[0-9]+')->match("I'm a dog")
-        ->forFirst(function (Match $match) {
+        ->findFirst(function (Match $match) {
             return 'Match is found!';
         })
         ->orThrow(MyException::class);
@@ -267,7 +267,7 @@ Of course, your custom exception must meet certain requirements:
    - `__construct($message)`, where `$message` can be a string
    - `__construct($message, $subject)`, where `$message` and `$subject` can be strings
 
-> Notice, that using `forFirst()->orThrow()` without your custom exception is **identical** to `first()`.
+> Notice, that using `findFirst()->orThrow()` without your custom exception is **identical** to `first()`.
 
 ## I don't like functional
 

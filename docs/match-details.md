@@ -6,8 +6,8 @@ title: Match details
 When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details
 object. These methods are:
 [`first()`](match-first.md),
-[`forFirst()`](match-for-first.md),
-[`forEach()`](match-for-each.md)/[`iterate()`](match-for-each.md),
+[`findFirst()`](match-find-first.md),
+[`forEach()`](match-for-each.md),
 [`map()`](match-map.md),
 [`flatMap()`](match-flat-map.md),
 [`callback()`](replace-callback.md).
