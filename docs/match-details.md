@@ -89,7 +89,7 @@ not PHP numeric:
 | `'0.0'` | `false`   |
 | `'0,0'` | `false`   |
 
-_PS: It's implemented with `filter_var()`, but you can think of it as:_ `/^-?\d+$/`
+_PS: It's implemented with `filter_var()`, but you can think of it as:_ `/^-?\d+$/` with max/min values check.
 
 ```php
 pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) {
