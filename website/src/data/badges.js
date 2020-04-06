@@ -1,4 +1,4 @@
-const badges = {
+export default {
   upper: [
     {
       title: 'Build Status',
@@ -7,8 +7,7 @@ const badges = {
     },
     {
       title: 'Coverage Status',
-      src:
-        'https://coveralls.io/repos/github/T-Regx/T-Regx/badge.svg?branch=master',
+      src: 'https://coveralls.io/repos/github/T-Regx/T-Regx/badge.svg?branch=master',
       href: 'https://coveralls.io/github/T-Regx/T-Regx?branch=master',
     },
     {
@@ -28,8 +27,7 @@ const badges = {
     },
     {
       title: 'GitHub last commit',
-      src:
-        'https://img.shields.io/github/last-commit/T-Regx/T-Regx/develop.svg',
+      src: 'https://img.shields.io/github/last-commit/T-Regx/T-Regx/develop.svg',
       href: 'https://github.com/T-Regx/T-Regx',
     },
     {
@@ -66,11 +64,8 @@ const badges = {
     },
     {
       title: 'PHP Version',
-      src:
-        'https://img.shields.io/badge/PR-welcome-brightgreen.svg?style=popout',
+      src: 'https://img.shields.io/badge/PR-welcome-brightgreen.svg?style=popout',
       href: 'http://makeapullrequest.com',
     },
   ],
 };
-
-export default badges;

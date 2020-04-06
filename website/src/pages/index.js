@@ -91,8 +91,7 @@ const GridBlock = props => (
                 <Markdown options={{overrides: {pre: CustomCodeBlock,},}}>
                   {column.content}
                 </Markdown>
-              </div>
-            )}
+              </div>)}
 
             {column.video && (<video src={column.video} playsInline autoPlay muted loop style={{maxWidth: '100%'}}/>)}
           </div>
