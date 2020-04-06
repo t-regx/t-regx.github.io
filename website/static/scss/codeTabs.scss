@@ -1,0 +1,37 @@
+.tabs {
+  border-top: none;
+
+  li.tab-item {
+    outline: none;
+    margin-right: 4px;
+  }
+
+  + pre {
+    &:before {
+      content: url("/img/fas/terminal.svg");
+      width: 20px;
+      height: 20px;
+      display: block;
+      opacity: .15;;
+      margin: 0 0 3px 7px;
+    }
+
+    code.hljs {
+      padding: 0.3rem 0.5rem .25rem;
+      opacity: .6;
+      transition: opacity .2s;
+    }
+
+    &:hover code.hljs {
+      opacity: 1.0;
+    }
+  }
+}
+
+blockquote {
+  p {
+    code {
+      white-space: nowrap;
+    }
+  }
+}

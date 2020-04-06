@@ -20,6 +20,7 @@
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.36",
     "@docusaurus/preset-classic": "2.0.0-alpha.36",
+    "docusaurus-plugin-sass": "^0.1.8",
     "classnames": "^2.2.6",
     "markdown-to-jsx": "^6.10.3",
     "react": "^16.10.2",

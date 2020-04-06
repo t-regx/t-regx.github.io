@@ -23,7 +23,7 @@ module.exports = {
           showLastUpdateTime: true,
         },
         theme: {
-          customCss: require.resolve('./static/css/style.min.css'),
+          customCss: require.resolve('./static/scss/style.scss'),
         },
       },
     ],
@@ -95,4 +95,5 @@ module.exports = {
       ],
     },
   },
+  plugins: ['docusaurus-plugin-sass']
 };
