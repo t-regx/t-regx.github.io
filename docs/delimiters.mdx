@@ -3,47 +3,38 @@ id: delimiters
 title: Automatic delimiters
 ---
 
+import {CodeTabs, Result} from './code';
+
 > This chapter doesn't contain `PHP` code snippets, because PHP PCRE require delimiters. There is no way to omit them
 > in Vanilla PHP.
 
-Thanks to automatic delimiters, one can use regular expressions without [brain strain](overview.md#brain-strain)
-and without coming up with a suitable delimiter.
+Thanks to automatic delimiters, one can use regular expressions without [brain strain] and without spending time,
+choosing a suitable delimiter.
 
-```php
-pattern('#[A-Z]/[a-z]+')->match($subject)->first();
-```
+<CodeTabs
+    tregx="pattern('#[A-Z]/[a-z]+')->match($subject)->first();"
+    php="preg_match('%#[A-Z]/[a-z]+%', $subject)"/>
 
-## Adding delimiters
+We can see it for ourselves, using `delimiter` method:
 
-To change undelimited pattern into a delimited one - use `delimiter()` method;
-
-<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}]}>
-<TabItem value="T-Regx">
-
-```php
-pattern('Welcome/Or not')->delimiter();
-```
-
-</TabItem>
-</Tabs>
+<CodeTabs tregx={`echo pattern('Welcome/Or not')->delimiter() . "\\n";
+echo pattern('https://github.com#heading')->delimiter() . "\\n";
+echo pattern('https://github.com#heading?key=hello%20there')->delimiter() . "\\n";`}/>
 
 <!--T-Regx:{echo-at(0)}-->
-<!--Result-Output-->
+<Result text>
+{`#Welcome/Or not#
+%https://github.com#heading%
+~https://github.com#heading?key=hello%20there~`}
+</Result>
 
-<div className="output-block">
-
-```text
-#Welcome/Or not#
-```
-</div>
-
-> `delimiter()` returns the pattern unchanged, as if it was constructed with `Pattern::pcre()`, instead of `Pattern::of()`.
+> If the was constructed with [`Pattern::pcre()`], `delimiter()` returns the pattern unchanged.
 
 ## Flags
 
 There are two ways of passing flags:
 
-Either pass a second argument to the [`pattern()`](introduction.md#entry-points)/[`Pattern::of()`](introduction.md#entry-points):
+Either pass a second argument to [`pattern()`]/[`Pattern::of()`]:
 
 ```php
 // global function
@@ -53,7 +44,7 @@ pattern('[A-Z][a-z]+', 'i')->match($subject)->first();
 Pattern::of('[A-Z][a-z]+', 'i')->match($subject)->first();
 ```
 
-or use old-school pattern:
+or use an old-school pattern:
 
 ```php
 Pattern::pcre('/[A-Z][a-z]+/i')->match($subject)->first();
@@ -61,11 +52,16 @@ Pattern::pcre('/[A-Z][a-z]+/i')->match($subject)->first();
 
 ## I want to break it
 
-T-Regx has a set of predefined, suitable delimiters (like `/`, `#`, `~`, `%`, etc.) and simply uses the first one,
-that doesn't occur in your pattern. If you exhaust each of them; if you use every possible, predefined, suitable delimiter -
-it will throw `ExplicitDelimiterRequiredException`.
+T-Regx has a set of predefined, suitable delimiters (like `/`, `#`, `~`, `%`, etc.) and simply uses the first one, that
+doesn't occur in your pattern. If you exhaust each of them; if you use every possible, predefined,
+suitable delimiter - it will throw `ExplicitDelimiterRequiredException`.
 
-In that case, you simply have to use an explicit delimiter with `Pattern::pcre()`.
+In that case, you simply have to use an explicit delimiter with [`Pattern::pcre()`].
 
-If you think another automatic delimiter can be used,
-please create [a github issue](https://github.com/T-Regx/T-Regx/issues/new/choose).
+If you think another automatic delimiter can be used, please create [a github issue].
+
+[brain strain]: overview.md#brain-strain
+[`pattern()`]: introduction.md#entry-points
+[`Pattern::of()`]: introduction.md#entry-points
+[`Pattern::pcre()`]: introduction.md#entry-points
+[a github issue]: https://github.com/T-Regx/T-Regx/issues/new/choose

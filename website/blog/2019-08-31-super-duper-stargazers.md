@@ -11,7 +11,7 @@ But what's new.
 
 There is [`preg_grep()`][1] function for filtering an array by a pattern,
 unfortunately there's no flag or another method to filter it by keys. There is a T-Regx method 
-[`forArray()->filterByKeys()`](/docs/filter.md#filter-by-keys), but there was no such solution in SafeRegex.
+[`forArray()->filterByKeys()`](/docs/filter.mdx#filter-by-keys), but there was no such solution in SafeRegex.
 
 That's why we added `preg::grep_keys`, which works exactly like [`preg_grep()`][1] but filters an array by keys, 
 instead of values. It's going to be release in 0.9.2. 

@@ -5,7 +5,7 @@ title: T-Regx Utilities
 
 T-Regx provides some little utility methods that aren't present in PHP:
 
- - [`Pattern::unquote()`](quote.md) - unquote a quoted pattern
+ - [`Pattern::unquote()`](quote.mdx) - unquote a quoted pattern
  - [`valid()`](valid.mdx) - safely validate a pattern
  - `preg::last_error_msg()` - return the last error message in human-readable form
  

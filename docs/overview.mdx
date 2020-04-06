@@ -7,7 +7,7 @@ T-Regx (_T-Rex and RegExp_) is a lightweight, high-level Regular Expressions lib
 
 Its main features are:
 
-- Being **bulletproof**:
+- Being **made for developers**:
 
   - [Automatic delimiters](delimiters.mdx) for your patterns
   - Each and every unexpected situation ends in an exception
@@ -20,8 +20,8 @@ Its main features are:
   - Special values like `null`, `false`, `''` aren't used to indicate errors.
   - Unifying differences between matching, replacing, splitting - all operations
   - Results aren't a dull `string[][]` array, but a dedicated [`Match`](match-details.md) details.
-  - Based on exceptions - No warnings, errors or fatal errors or notices.
-  - Relieving developers from [**brain strain**](#brain-strain):
+  - Based on exceptions - Handles every warning, error, fatal error or notice.
+  - Relieving developers from [**brain strain**]:
 
 - Being explicit and descriptive - ([why is explicit interface so important?](#why-is-explicit-interface-so-important)):
   - Each function obeys SRP
@@ -32,7 +32,7 @@ Its main features are:
 
 ## Why is explicit interface so important?
 
-T-Regx' aim is to relieve programmers from [**brain strain**](overview.md#brain-strain) while reading and writing code.
+T-Regx' aim is to relieve programmers from [**brain strain**] while reading and writing code.
 Our mission is to make developers write/read a line and **immediately** go on, without thinking about what it does or
 what side effects it may cause.
 
@@ -60,35 +60,18 @@ What should be obvious, is now complicated and causes **many** questions and ass
 
 While using T-Regx, some things are **obvious**. For example:
 
+import {CodeTabs, Result} from './code';
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
-<TabItem value="T-Regx">
-
-```php
-$result = pattern($pattern)->match($subject)->first();
-```
-
-</TabItem>
-<TabItem value="PHP">
-
-```php
-if (preg::match("/$pattern/", $subject, $match) === 1) {
+<CodeTabs
+    tregx="$result = pattern($pattern)->match($subject)->first();"
+    php={`if (preg::match("/$pattern/", $subject, $match) === 1) {
     $result = $match[0];
 } else {
     throw new SubjectNotMatchedException();
-}
-```
-
-</TabItem>
-</Tabs>
+}`}/>
 
 <!--T-Regx:{mock($subject)}-->
 <!--T-Regx:{mockPattern($pattern)}-->
@@ -107,3 +90,5 @@ a string of length 0".
 It also never raises any warnings or fatal errors.
 
 ## Brain Strain
+
+[**brain strain**]: #brain-strain

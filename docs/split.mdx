@@ -3,59 +3,22 @@ id: split
 title: Split a string
 ---
 
-T-Regx also allows to split a string by regular expression. 
+import {CodeTabs, Result} from './code';
+
+T-Regx also allows to split a string by regular expression.
 
 ## Excluding the delimiter
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<Tabs defaultValue="T-Regx" values={[{ label: 'T-Regx', value: 'T-Regx'}, { label: 'PHP', value: 'PHP'}]}>
-<TabItem value="T-Regx">
-
-```php
-pattern('[ ,]{2}')->split('Joffrey, Cersei, Ilyn Payne, The Hound');
-```
-
-</TabItem>
-<TabItem value="PHP">
-
-```php
-preg::split('/[ ,]{2}/', 'Joffrey, Cersei, Ilyn Payne, The Hound');
-```
-
-</TabItem>
-</Tabs>
-
-<!--Result-Value-->
-
-```php
-['Joffrey', 'Cersei', 'Ilyn Payne', 'The Hound']
-```
+<CodeTabs
+    tregx="pattern('[ ,]{2}')->split('Joffrey, Cersei, Ilyn Payne, The Hound');"
+    php="preg::split('/[ ,]{2}/', 'Joffrey, Cersei, Ilyn Payne, The Hound');"/>
+<Result>['Joffrey', 'Cersei', 'Ilyn Payne', 'The Hound']</Result>
 
 ## Including the delimiter
 
 To include a delimiter in the results, enclose it with a capturing group.
 
-<Tabs defaultValue="T-Regx" values={[{label: 'T-Regx', value: 'T-Regx'}, {label: 'PHP', value: 'PHP'}]}>
-<TabItem value="T-Regx">
-
-```php
-pattern('([ ,]{2})')->split('Joffrey, Cersei, Ilyn Payne, The Hound');
-```
-
-</TabItem>
-<TabItem value="PHP">
-
-```php
-preg::split('/([ ,]{2})/', 'Joffrey, Cersei, Ilyn Payne, The Hound', -1, PREG_SPLIT_DELIM_CAPTURE);
-```
-
-</TabItem>
-</Tabs>
-
-<!--Result-Value-->
-
-```php
-['Joffrey', ', ', 'Cersei', ', ', 'Ilyn Payne', ', ', 'The Hound']
-```
+<CodeTabs
+    tregx="pattern('([ ,]{2})')->split('Joffrey, Cersei, Ilyn Payne, The Hound');"
+    php="preg::split('/([ ,]{2})/', 'Joffrey, Cersei, Ilyn Payne', -1, PREG_SPLIT_DELIM_CAPTURE);"/>
+<Result>['Joffrey', ', ', 'Cersei', ', ', 'Ilyn Payne']</Result>

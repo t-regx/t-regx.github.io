@@ -3,88 +3,23 @@ id: valid
 title: Validate a pattern
 ---
 
+import {CodeTabs, Result} from './code';
+
+> This chapter doesn't contain `PHP` code snippets, because PHP PCRE doesn't provide a way to validate patterns.
+
 You can check whether a pattern is valid with `pattern()->valid()` method.
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<Tabs
-  defaultValue="T-Regx"
-  values={[
-    { label: 'T-Regx', value: 'T-Regx', },
-  ]
-}>
-<TabItem value="T-Regx">
-
-```php
-pattern('I am a valid pattern')->valid();
-```
-
-</TabItem>
-</Tabs>
-
-<div className="output-block">
-
-<!--Result-Value-->
-
-```php
-true
-```
-
-</div>
+<CodeTabs tregx="pattern('I am a valid pattern')->valid();"/>
+<Result>true</Result>
 
 > Remember, `pattern()->valid()` doesn't throw any exception nor issues any warnings. It only returns `true`/`false`.
 
-<Tabs
-  defaultValue="T-Regx"
-  values={[
-    { label: 'T-Regx', value: 'T-Regx'}
-  ]
-}>
-<TabItem value="T-Regx">
-
-```php
-pattern('I am an (( invalid }} pattern')->valid();
-```
-
-</TabItem>
-</Tabs>
-
-<div className="output-block">
-
-<!--Result-Value-->
-
-```php
-false
-```
-
-</div>
+<CodeTabs tregx="pattern('I am an (( invalid }} pattern')->valid();"/>
+<Result>false</Result>
 
 # Old-school patterns
 
 Undelimited patterns can be validated with `pattern()`/`Pattern::of()`. To validate old-school patterns (e.g. `/Hello/i`), use `Pattern::pcre()`:
 
-<Tabs
-  defaultValue="T-Regx"
-  values={[
-    { label: 'T-Regx', value: 'T-Regx'}
-  ]
-}>
-<TabItem value="T-Regx">
-
-```php
-Pattern::pcre('/I am an valid pattern/m')->valid();
-```
-
-</TabItem>
-</Tabs>
-
-<div className="output-block">
-
-<!--Result-Value-->
-
-```php
-true
-```
-
-</div>
+<CodeTabs tregx="Pattern::pcre('/I am an valid pattern/m')->valid();"/>
+<Result>true</Result>
