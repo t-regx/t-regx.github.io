@@ -1,24 +1,34 @@
-[class^='docMainContainer'] div + pre,
-.output-block {
-  opacity: 0.6;
-  transition: opacity 0.2s;
-}
+[class^='docMainContainer'] {
+  font-size: 1.1em;
 
-[class^='docMainContainer'] div + pre:before,
-.output-block:before {
-  content: url("/img/fas/terminal.svg");
-  width: 20px;
-  height: 20px;
-  display: block;
-  opacity: 0.15;
-  margin: 0 0 3px 7px;
-}
+  div + pre,
+  .output-block {
+    opacity: 0.6;
+    transition: opacity 0.2s;
 
-[class^='docMainContainer'] div + pre:hover,
-.output-block:hover {
-  opacity: 1;
-}
+    &:before {
+      content: url("/img/fas/terminal.svg");
+      width: 20px;
+      height: 20px;
+      display: block;
+      opacity: 0.15;
+      margin: 0 0 3px 7px;
+    }
 
-.hash-link:hover {
-  text-decoration: none;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .hash-link {
+    opacity: 0.3;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  a:any-link > code {
+    color: var(--ifm-color-primary);
+  }
 }
