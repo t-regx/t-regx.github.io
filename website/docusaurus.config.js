@@ -29,11 +29,11 @@ module.exports = {
         src: 'img/t.regx.borderless.png',
       },
       links: [
-        {to: 'docs/installation', label: 'Docs'},
-        {to: 'comparison', label: 'Compare'},
-        {to: 'help', label: 'Help'},
-        {to: 'blog', label: 'Blog'},
-        {href: mainRepoUrl, label: 'GitHub'},
+        {position: 'left', label: 'Docs', to: 'docs/installation'},
+        {position: 'left', label: 'Compare', to: 'comparison'},
+        {position: 'left', label: 'Help', to: 'help'},
+        {position: 'left', label: 'Blog', to: 'blog'},
+        {position: 'left', label: 'GitHub', href: mainRepoUrl},
       ],
     },
     footer: {
@@ -50,10 +50,7 @@ module.exports = {
             {label: 'Installation', to: 'docs/installation'},
             {label: 'Getting Started', to: 'docs/introduction'},
             {label: 'Documentation', to: 'docs/match'},
-            {
-              label: 'API Reference',
-              href: `${mainRepoUrl}/blob/master/ChangeLog.md#api`,
-            },
+            {label: 'API Reference', href: `${mainRepoUrl}/blob/master/ChangeLog.md#api`,},
           ],
         },
         {
