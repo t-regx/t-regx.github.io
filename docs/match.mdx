@@ -1,0 +1,116 @@
+---
+id: match
+title: Match a subject
+---
+
+import {CodeTabs, Result} from './code';
+
+Using `pattern()->match()` you can:
+ - Test a subject against a pattern: [`test()`]/[`fails()`]
+ - Retrieve matches from the subject: [`first()`]/[`all()`]/[`only()`]
+ - Get capturing groups from matches: [`group()`]/[`Match.group()`]/[`groups()`]
+ - Invoke callbacks for matches: [`first()`]/[`findFirst()`]/[`forEach()`]/[`map()`]/[`flatMap()`]
+
+## Test a subject
+
+If you only need to check whether a pattern matches a subject, use:
+
+<CodeTabs
+    tregx={`pattern('[0-9]+')->test("I'm 19 years old");`}
+    php={`preg::match('/[0-9]+/', "I'm 19 years old") > 0;`}/>
+
+...or to check whether it doesn't:
+
+<CodeTabs
+    tregx={`pattern('[0-9]{3}')->fails("I'm 19 years old");`}
+    php={`preg::match('/[0-9]{3}/', "I'm 19 years old") === 0;`}/>
+
+Of course `pattern()->match()` throws an exception if the pattern is invalid (or in case of any other error).
+
+> You can also use `pattern()->match()->test()` and `pattern()->match()->fails()`.
+
+## Retrieve matches
+
+### Many
+
+You can easily retrieve matched occurrences of a pattern in your subject.
+
+<CodeTabs
+    tregx={`pattern('[0-9]+')->match("I'm 19. I was born in 1999, on May 12")->all();`}
+    php={`preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
+return $matches[0];`}/>
+<Result>['19', '1999', '12']</Result>
+
+You can limit your matches with `only(int)`.
+
+<CodeTabs
+    tregx={`pattern('[0-9]+')->match("I'm 19. I was born in 1999, on May 12")->only(2);`}
+    php={`preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
+return array_slice($matches[0], 0, 2);`}/>
+<Result>['19', '1999']</Result>
+
+### One
+
+To get the first occurrence of a matched pattern, call [`first()`].
+
+<CodeTabs
+    tregx={`pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999")->first();`}
+    php={`if (preg::match('/[0-9]+/', "I'm 19 years old. I was born in 1999", $match)) {
+    return $match[0];
+}
+throw new SubjectNotMatchedException();`}/>
+<Result>'19'</Result>
+
+Read on the [next page](match-first.md) to learn more about [`first()`].
+
+## Unmatched subject
+
+### `all()`/`only()`
+
+If you call `all()` or `only()` on a subject that doesn't match your pattern, you'll receive an empty array.
+
+<CodeTabs
+    tregx={`pattern('\d+')->match('Word')->all();`}
+    php={`preg::match_all('/\d+/', 'Word', $match);
+return $match[0];`}/>
+<Result>[]</Result>
+
+### `first()`
+
+If, however, subject doesn't match your pattern and you use [`first()`] - `SubjectNotMatchedException` is thrown.
+
+<CodeTabs
+    tregx={`try {
+    return pattern('\d+')->match('Word')->first();
+}
+catch (SubjectNotMatchedException $e) {
+    // handle
+}`}
+    php={`try {
+    if (preg::match('/\d+/', 'Word', $match)) {
+        return $match[0];
+    }
+    throw new SubjectNotMatchedException();
+}
+catch (SubjectNotMatchedException $e) {
+    // handle
+}`}/>
+
+## Protect the developer
+
+Please, keep in mind that T-Regx aims to relieve you (a programmer) from any [**brain strain**](overview.md#brain-strain),
+therefore if you 
+
+[`test()`]: #test-a-subject
+[`fails()`]: #test-a-subject
+[`first()`]: #one
+[`all()`]: #many
+[`only()`]: #many
+[`group()`]: match-details.md
+[`Match.group()`]: match-details.md
+[`groups()`]: match-details.md
+[`first()`]: match-first.md#use-first-with-callback
+[`findFirst()`]: match-find-first.md
+[`forEach()`]: match-for-each.md
+[`map()`]: match-map.md
+[`flatMap()`]: match-flat-map.md
