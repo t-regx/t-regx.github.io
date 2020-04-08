@@ -10,7 +10,7 @@ Hello, back again! :) We've added a "Sponsor" button on [github.com/T-Regx](http
 
 If you like T-Regx going in the right direction, now you have the opportunity to throw us buck or two.
 
----
+## Next release
 
 And a heads up, in the new 0.9.6 release, we'll add a really smart `asInt()` and `fluent()` methods; which are already present,
 but will get an upgrade.
