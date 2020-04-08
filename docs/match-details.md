@@ -38,7 +38,7 @@ Using `Match` details, you gain access to:
 
 There are 6 similar ways to get the value of the matched occurrence.
 
-```php
+```php {3-4,6-8}
 pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
 
     return $match->text();             // using text() method
@@ -96,7 +96,7 @@ There are two methods regarding integers: `isInt()` and `toInt()`.
 `$match->isInt()` returns `true`/`false` depending on whether the matched occurrence is numeric. `toInt()`
 returns said numeric occurrence as an integer, or throws `IntegerFormatException` instead.
 
-```php
+```php {3}
 pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) {
     if ($match->isInt()) {
         for ($i = 0; $i < $match->toInt(); $i++) {
@@ -138,7 +138,7 @@ pattern('[A-Z][a-z]+')->match($subject)->map(function (Match $match) use ($subje
 
 In this example, we'll modify every second word:
 
-```php
+```php {2}
 pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Match $match) {
     if ($match->index() % 2 === 0) {
         return strtolower($match);
@@ -220,7 +220,7 @@ Use:
 
 Even if you use `first()` or `only(int)` methods, `Match.all()` always returns unlimited occurrences.
 
-```php
+```php {4}
 pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
     return [
         'match' => $match->text(),
@@ -243,7 +243,7 @@ To most users this functionality will occur as redundant - it's only use case ar
 when using chained `filter()->map()`. With user data, it's possible to perform an operation in `filter()`, store its 
 value in user data, and then use the value in [`map()`](match-map.md) without reference closure variables.
 
-```php
+```php {4,8}
 pattern('\w{2}')->match('Languages: en, de, xd, sv')
     ->filter(function (Match $match) {
         $languageInfo = HeavyService::fetch($match->text());
@@ -265,7 +265,7 @@ With `Match.group(string|int)`, you can easily retrieve capturing groups.
 
 Just like with `Match`, retrieving matched occurrence value is done with `text()` method or by casting it to `string`.
 
-```php
+```php {5,7-8}
 $pattern = '(?<value>\d+)(?<unit>cm|mm)';
 $subject = '192mm and 168cm or 18mm and 12cm';
 
