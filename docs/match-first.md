@@ -135,7 +135,7 @@ else {
 Match 'Apples' was matched inside 'Apples are cool'.
 ```
 
-You can learn more about `Match` on [`Match` details](match-details.md) page.
+You can read more extensively about `Match` on [`Match` details](match-details.md) page.
 
 ### Groups in match
 
@@ -151,7 +151,7 @@ Retrieving capturing groups from a match is really simple.
 <TabItem value="T-Regx">
 
 ```php
-pattern('(?<capital>[A-Z])[a-z]+')->match('hello there, General Kenobi')->first(function (Match $match) {
+pattern('(?<capital>[A-Z])')->match('hello there, General Kenobi')->first(function (Match $match) {
     $capital = $match->group('capital')->text();
     
     return $capital;

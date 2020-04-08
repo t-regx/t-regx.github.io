@@ -10,7 +10,11 @@ object. These methods are:
 [`forEach()`](match-for-each.md),
 [`map()`](match-map.md),
 [`flatMap()`](match-flat-map.md),
-[`callback()`](replace-callback.md).
+[`callback()`](replace-callback.md). 
+
+The details can be used to get concise information about the matched occurrence, such
+as its value (i.e. "the whole match"), capturing groups and their UTF-8 safe offsets, limits, indexes, other matches
+as well as the used subject (although it could also be pass as a closure parameter).
 
 <!-- Copy the above paragraph to match-groups.md -->
 
@@ -32,7 +36,7 @@ Using `Match` details, you gain access to:
 
 ## Matched text
 
-There are 6 similar ways to get the value of a matched occurrence:
+There are 6 similar ways to get the value of the matched occurrence.
 
 ```php
 pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
@@ -43,9 +47,6 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
     return (string) $match;            // cast it to string
     return (string) $match->group(0);  // cast group #0 to string
     return "$match";                   // enclose it in double quotes
-
-    return $match;                     // return the Match
-    return $match->group(0);           // return group #0
 });
 ```
 
@@ -57,53 +58,55 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (string $match) {
 });
 ```
 
-All of them are equal to each other.
+All of them are redundant and equal to each other. Their redundancy comes from the fact the there are a few ways of 
+casting an object to string in PHP, casting `Match` to string is the same as getting `text()` in T-Regx, and that the 
+whole match is also group `0` in regular expressions.
 
 There's also UTF8-safe method `textLength()` which, you guessed it, returns the length of a matched text.
 
 ```php
 pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
-
     return $match->text();         // 'Trains'
     return $match->textLength();   // 6
-
 });
 ```
 
 ## Integers
 
-Method `isInt()` returns `true` if, and only if matched occurrence is numeric. And by "numeric", we mean "real" numeric,
+Method `isInt()` returns `true` if, and only if, the matched occurrence is numeric. And by "numeric", we mean "real" numeric,
 not PHP numeric:
 
-| Value   | `isInt()` |
-| ------- | --------- |
-| `'14'`  | `true`    |
-| `'-14'` | `true`    |
-| `'+14'` | `false`   |
-| `'000'` | `true`    |
-| `' 10'` | `false`   |
-| `'10 '` | `false`   |
-| `'1e0'` | `false`   |
-| `''`    | `false`   |
-| `' '`   | `false`   |
-| `'0.0'` | `false`   |
-| `'0,0'` | `false`   |
+- String values considered valid integers: 
+  - `'14'`, `'-14'`, `'000'` 
+- Strings that aren't treated as valid integers: 
+  - `'+14'`, `' 10'`, `'10 '`, `''`, `' '`, `'0.0'`, `'0,0'`,
 
-_PS: It's implemented with `filter_var()`, but you can think of it as:_ `/^-?\d+$/` with max/min values check.
+The string is considered a valid integer if:
+  - contains only `0-9` characters, and more than 1 of them (so `00` is also a valid integer, but `''` isn't)
+  - optionally starts with only one `-` sign
+  - its numeric representation is:
+    - higher than `PHP_INT_MIN` (-9223372036854775808)
+    - lower than `PHP_INT_MAX` (9223372036854775807)
+  - doesn't contain any other characters
+
+#### Checking and parsing
+
+There are two methods regarding integers: `isInt()` and `toInt()`.
+
+`$match->isInt()` returns `true`/`false` depending on whether the matched occurrence is numeric. `toInt()`
+returns said numeric occurrence as an integer, or throws `IntegerFormatException` instead.
 
 ```php
 pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) {
     if ($match->isInt()) {
-        $times = $match->toInt();
-        for ($i = 0; $i < $times; $i++) {
+        for ($i = 0; $i < $match->toInt(); $i++) {
             // tasks
         }
     }
 });
 ```
 
-So to recap, `$match->isInt()` returns `true`/`false` depending on whether the matched occurrence is numeric; and `toInt()`
-returns said numeric occurrence, or throws `IntegerFormatException` instead.
+> PS: It's implemented with `filter_var()`, but you can think of it as `/^-?\d+$/` with max/min values check.
 
 ## Subject
 
@@ -119,7 +122,7 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
 'I like Trains'
 ```
 
-or you can store it in a variable and use it in your closure.
+This is equivalent to storing the subject in a variable and using it in your closure.
 
 ```php
 $subject = 'I like Trains';
@@ -175,8 +178,8 @@ pattern('\w+')->replace($string)->only(5)->callback(function (Match $match) {
 
 ## Offsets
 
-`Match.offset()` is multi-byte character safe and returns offset in characters, whereas `Match.byteOffset()` returns
-the offset in bytes.
+`Match.offset()` can be used to get the offset of the matched occurrence in the subject. `Match.offset()` is multi-byte 
+character safe and returns offset in characters, whereas `Match.byteOffset()` returns the offset in bytes.
 
 ```php
 pattern('here')->match('Apples for 0.30€, here')->first(function (Match $match) {
@@ -201,12 +204,12 @@ A  p   p   l   e   s      f   o   r      0  .  3  0  €           ,     h   e  
 ```
 
 In other words, `offset()` treats bytes `[226, 130, 172]` as one multi-byte character (euro sign `€`) and counts them as
-one; whereas `byteOffset()` counts them as three.
+one; whereas `byteOffset()` would count them as three.
 
 Use:
 
-- `offset()` with functions: `mb_substr()`, `mb_strpos()`
-- `byteOffset()` with functions: `substr()`, `strpos()`
+- `offset()` with functions: [`mb_substr()`], [`mb_strpos()`]
+- `byteOffset()` with functions: [`substr()`], [`strpos()`]
 
 ## Other occurrences
 
@@ -237,8 +240,8 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
 ## User data
 
 To most users this functionality will occur as redundant - it's only use case are multiple calls to callbacks, for example
-when using chained `filter()->map()`. You perform an operation in `filter()`, store it's value in user data, and then use
-the value in [`map()`](match-map.md).
+when using chained `filter()->map()`. With user data, it's possible to perform an operation in `filter()`, store its 
+value in user data, and then use the value in [`map()`](match-map.md) without reference closure variables.
 
 ```php
 pattern('\w{2}')->match('Languages: en, de, xd, sv')
@@ -258,15 +261,15 @@ pattern('\w{2}')->match('Languages: en, de, xd, sv')
 
 ## Groups
 
-With `Match.group()`, you can easily retrieve capturing groups.
+With `Match.group(string|int)`, you can easily retrieve capturing groups.
 
 Just like with `Match`, retrieving matched occurrence value is done with `text()` method or by casting it to `string`.
 
 ```php
-$p = '(?<value>\d+)(?<unit>cm|mm)';
-$s = '192mm and 168cm or 18mm and 12cm';
+$pattern = '(?<value>\d+)(?<unit>cm|mm)';
+$subject = '192mm and 168cm or 18mm and 12cm';
 
-pattern($p)->match($s)->first(function (Match $match) {
+pattern($pattern)->match($subject)->first(function (Match $match) {
     $text = $match->text();                            // '192mm'
 
     $value = (string) $match->group('value');          // '192'
@@ -274,6 +277,9 @@ pattern($p)->match($s)->first(function (Match $match) {
 });
 ```
 
----
-
 More about capturing groups can be found in the next section: [Capturing groups](match-groups.md).
+
+[`mb_substr()`]: https://www.php.net/manual/en/function.mb-substr.php
+[`mb_strpos()`]: https://www.php.net/manual/en/function.mb-strpos.php
+[`substr()`]: https://www.php.net/manual/en/function.substr.php
+[`strpos()`]: https://www.php.net/manual/en/function.strpos.php

@@ -3,14 +3,18 @@ id: match-groups
 title: Capturing groups
 ---
 
-When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts 
-[`Match`](match-details.md) details object. These methods are: 
-[`first()`](match-first.md), 
-[`findFirst()`](match-find-first.md), 
-[`forEach()`](match-for-each.md)/[`iterate()`](match-for-each.md), 
-[`map()`](match-map.md), 
-[`flatMap()`](match-flat-map.md), 
-[`callback()`](replace-callback.md).
+When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details
+object. These methods are:
+[`first()`](match-first.md),
+[`findFirst()`](match-find-first.md),
+[`forEach()`](match-for-each.md),
+[`map()`](match-map.md),
+[`flatMap()`](match-flat-map.md),
+[`callback()`](replace-callback.md). 
+
+The details can be used to get concise information about the matched occurrence, such
+as its value (i.e. "the whole match"), capturing groups and their UTF-8 safe offsets, limits, indexes, other matches
+as well as the used subject (although it could also be pass as a closure parameter).
 
 <!-- Copy the above paragraph to match-details.md -->
 
@@ -43,10 +47,10 @@ Using [`Match`](match-details.md) details, you gain access complete information 
 ## Group details
 
 ```php
-$p = '(?<value>\d+)(?<unit>cm|mm)';
-$s = '192mm and 168cm or 18mm and 12cm';
+$pattern = '(?<value>\d+)(?<unit>cm|mm)';
+$subject = '192mm and 168cm or 18mm and 12cm';
 
-pattern($p) ->match($s) ->iterate(function (Match $match) {
+pattern($pattern)->match($subject)->forEach(function (Match $match) {
     
     $match->group('value')->text();     // '168' (string)
     $match->group('value')->isInt();    // true  (boolean)
