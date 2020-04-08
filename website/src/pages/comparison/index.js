@@ -1,9 +1,10 @@
 import React from 'react';
-import Markdown from 'markdown-to-jsx';
 import Layout from '@theme/Layout';
-import { ComparisonTable, DisqusThread } from '@site/src/components';
+import Markdown from 'markdown-to-jsx';
 
-function Comparison() {
+import {ComparisonTable, DisqusThread} from '../../components';
+
+export default function Comparison() {
   return (
     <Layout>
       <div className="container margin-vert--xl">
@@ -14,9 +15,7 @@ function Comparison() {
             behaviour of plain PHP `preg_*()` methods and T-Regx API.
           </Markdown>
         </div>
-
-        <ComparisonTable />
-
+        <ComparisonTable/>
         <DisqusThread
           shortName={'t-regx'}
           identifier={'7eb37bee54d5e7315fd19ebdc4c56cf7'}
@@ -27,5 +26,3 @@ function Comparison() {
     </Layout>
   );
 }
-
-export default Comparison;
