@@ -1,19 +1,17 @@
 import React from 'react';
-import Markdown from 'markdown-to-jsx';
 import Layout from '@theme/Layout';
+import Markdown from 'markdown-to-jsx';
 
-function MatrixPage() {
+export default function MatrixPage() {
   return (
     <Layout>
       <div className="container margin-vert--xl">
         <div className="post">
-          <img src="/img/blue-matrix-wide.jpg" alt="Matrix code" />
+          <img src="/img/blue-matrix-wide.jpg" alt="Matrix code"/>
         </div>
-
-        <br />
-
-        <div className="post" style={{ display: 'flex' }}>
-          <img src="/img/t.regx.matrix.png" alt="T-Regx in the dream world" />
+        <br/>
+        <div className="post" style={{display: 'flex'}}>
+          <img src="/img/t.regx.matrix.png" alt="T-Regx in the dream world"/>
           <Markdown>
             > Have you ever had a dream, that you were so sure was real? What if
             you were unable to wake from that dream? How would you know the
@@ -24,5 +22,3 @@ function MatrixPage() {
     </Layout>
   );
 }
-
-export default MatrixPage;
