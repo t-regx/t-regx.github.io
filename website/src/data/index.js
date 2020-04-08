@@ -1,4 +1,4 @@
-const sections = {
+export default {
   automaticDelimiters: [
     {
       title: 'Automatic delimiters',
@@ -70,5 +70,3 @@ const sections = {
     },
   ],
 };
-
-export default sections;

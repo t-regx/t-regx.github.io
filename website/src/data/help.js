@@ -1,6 +1,6 @@
 const issueLink = 'https://github.com/T-Regx/T-Regx/issues/new/choose';
 
-const help = [
+export default [
   {
     title: 'Browse Docs',
     content: `Learn more using the [documentation on this site](/docs/introduction). Feel free to visit:
@@ -41,4 +41,3 @@ We'll answer as fast as we can :)
   },
 ];
 
-export default help;
