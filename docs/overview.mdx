@@ -62,9 +62,6 @@ While using T-Regx, some things are **obvious**. For example:
 
 import {CodeTabs, Result} from './code';
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 <CodeTabs
     tregx="$result = pattern($pattern)->match($subject)->first();"
     php={`if (preg::match("/$pattern/", $subject, $match) === 1) {
