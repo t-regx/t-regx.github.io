@@ -1,3 +1,6 @@
 .code {
     font-size: var(--ifm-code-font-size);
+    position: relative;
+    border-radius: var(--ifm-global-radius);
+    margin-bottom: var(--ifm-leading);
 }
