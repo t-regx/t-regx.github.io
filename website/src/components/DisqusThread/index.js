@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-export const DisqusThread = (attributes) => {
+export default function DisqusThread(attributes) {
   const {
     shortName = 't-regx',
     identifier = '46dff8e37535ddb3571510672d1af48683bad013',
-    title = 'Questions about T-Regx',
-    path = '',
+    title = 'Questions about T-Regx'
   } = attributes;
 
   const context = useDocusaurusContext();

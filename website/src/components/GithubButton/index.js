@@ -1,7 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-export const GithubButton = () => {
+export default function GithubButton() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
 

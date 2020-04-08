@@ -1,15 +1,16 @@
 import React from 'react';
-import badges from '@site/src/data/badges.js';
+
+import badges from '../../data/badges';
 import styles from './styles.module.css';
 
 const Badge = props => (
   <a href={props.href} title={props.title}>
-    <img src={props.src} alt={props.title} className={styles.badge} />
+    <img src={props.src} alt={props.title}/>
   </a>
 );
 
-export const BadgesSection = () => {
-  const { upper: upperBadges, lower: lowerBadges } = badges;
+export default function BadgesSection() {
+  const {upper: upperBadges, lower: lowerBadges} = badges;
 
   return (
     <div className={styles.badgesSection}>

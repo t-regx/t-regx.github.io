@@ -1,6 +1,8 @@
-export * from './AutomaticSplashLogo';
-export * from './ValentineDino';
-export * from './BadgesSection';
-export * from './ComparisonTable';
-export * from './DisqusThread';
-export * from './GithubButton';
+import AutomaticSplashLogo from './AutomaticSplashLogo';
+import ValentineDino from './ValentineDino';
+import BadgesSection from './BadgesSection';
+import ComparisonTable from './ComparisonTable';
+import DisqusThread from './DisqusThread';
+import GithubButton from './GithubButton';
+
+export {AutomaticSplashLogo, ValentineDino, BadgesSection, ComparisonTable, DisqusThread, GithubButton};

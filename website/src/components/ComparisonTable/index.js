@@ -80,32 +80,25 @@ function mapToMarkdown(rows) {
   });
 }
 
-export const ComparisonTable = () => {
+export default function ComparisonTable() {
   const children = mapToMarkdown(rows);
-
   return (
-    <table
-      className={styles.comparisonTable}
-      width="100%"
-      border="0"
-      cellSpacing="0"
-      cellPadding="0"
-    >
+    <table className={styles.comparisonTable} width="100%" border="0" cellSpacing="0" cellPadding="0">
       <thead>
-        <tr>
-          <th />
-          <th>Plain PHP</th>
-          <th>T-Regx</th>
-        </tr>
-        <tr className={styles.logoRow}>
-          <th />
-          <th>
-            <img src={useBaseUrl('/img/comparison/php.png')} alt="Plain PHP" />
-          </th>
-          <th>
-            <img src={useBaseUrl('/img/t.regx.png')} alt="T-Regx" />
-          </th>
-        </tr>
+      <tr>
+        <th/>
+        <th>Plain PHP</th>
+        <th>T-Regx</th>
+      </tr>
+      <tr className={styles.logoRow}>
+        <th/>
+        <th>
+          <img src={useBaseUrl('/img/comparison/php.png')} alt="Plain PHP"/>
+        </th>
+        <th>
+          <img src={useBaseUrl('/img/t.regx.png')} alt="T-Regx"/>
+        </th>
+      </tr>
       </thead>
       <tbody>{children}</tbody>
     </table>

@@ -1,13 +1,14 @@
 import React from 'react';
-import Markdown from 'markdown-to-jsx';
-import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import CodeBlock from '@theme/CodeBlock';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import {AutomaticSplashLogo, GithubButton, DisqusThread, BadgesSection,} from '@site/src/components';
-import sections from '@site/src/data/index.js';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Markdown from 'markdown-to-jsx';
+import classNames from 'classnames';
+
+import {AutomaticSplashLogo, GithubButton, DisqusThread, BadgesSection} from '../components';
+import sections from '../data/index.js';
 import styles from './styles.module.css';
 
 const CustomCodeBlock = ({children, ...props}) => {
@@ -42,7 +43,7 @@ const PromoSection = props => (
 );
 
 const HeaderButton = ({to, children}) => (
-  <Link className={classnames('button button--outline button--primary button--md')} to={useBaseUrl(to)}>
+  <Link className={classNames('button button--outline button--primary button--md')} to={useBaseUrl(to)}>
     {children}
   </Link>
 );
@@ -68,7 +69,7 @@ const HomeSplash = ({title, tagline, url}) => (
 
 const GridBlock = props => (
   <div
-    className={classnames('padding-vert--xl', {
+    className={classNames('padding-vert--xl', {
       [styles.scrollBackground]: props.scrollableBackground,
       [styles.darkBackground]: props.darkBackground,
       [styles.lightBackground]: props.lightBackground,
@@ -143,7 +144,7 @@ const WarningsToExceptions = () => (
   />
 );
 
-function Index() {
+export default function Index() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
 
@@ -166,5 +167,3 @@ function Index() {
     </Layout>
   );
 }
-
-export default Index;
