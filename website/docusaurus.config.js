@@ -19,7 +19,7 @@ module.exports = {
     },
     disableDarkMode: true,
     prism: {
-      theme: require('prism-react-renderer/themes/github'),
+      theme: require('./theme'),
       defaultLanguage: 'php',
     },
     navbar: {
