@@ -8,6 +8,11 @@ as the first argument and optional flags as the second argument.
 
 ## Entry points
 
+We have 4 entry points to user T-Regx:
+ - Standard functions - `Pattern::of()` or `pattern()` to use undelimited patterns
+ - Compatibility legacy - `Pattern::pcre()` to use vanilla patterns
+ - Prepared patterns - `Pattern::bind()` to safely use user data in patterns
+
 #### Class method style:
 
 ```php
@@ -24,8 +29,8 @@ pattern('/[A-Z]#[a-z]+')->test($subject);
 
 ## Automatic delimiters
 
-Notice, that these patterns **don't need to** be delimited. Smart T-Regx will conveniently add them for you.
-You can add flags to your regular expression by passing a second argument.
+Notice, that these patterns **are not** be delimited. Smart T-Regx will conveniently add them for you, if you 
+use `Pattern::of()` or `pattern()`. You can add flags to your regular expression by passing a second argument.
 
 ```php
 pattern('[A-Z]+', 'im')->test($subject);
