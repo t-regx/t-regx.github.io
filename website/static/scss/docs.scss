@@ -1,9 +1,7 @@
 [class^='docMainContainer'] {
-  font-size: 1.1em;
-
   div + pre,
   .output-block {
-    opacity: 0.6;
+    opacity: 0.9;
     transition: opacity 0.2s;
 
     &:before {
