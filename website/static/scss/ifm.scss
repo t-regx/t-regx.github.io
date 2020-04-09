@@ -18,6 +18,12 @@ html[data-theme='dark']:root {
   --ifm-code-background: #313131;
 }
 
+h2, h3 {
+  > code {
+    font-size: inherit;
+  }
+}
+
 .hero .container {
   position: relative;
 }
