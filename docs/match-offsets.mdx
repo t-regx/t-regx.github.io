@@ -1,0 +1,144 @@
+---
+id: match-offsets
+title: Match offsets
+---
+
+import {CodeTabs, Result} from './code';
+
+There are several ways to read offsets of your matched occurrences and your capturing groups.
+
+## Using [`Match`] details
+
+If you use [`Match`] details object (like the one passed to [`first()`], [`forEach()`] or [`map()`] callback) you can just use
+[`offset()`] method.
+
+<CodeTabs
+    tregx={`pattern('\\d+')->match('I was born in 1996')->first(function (Match $match) {
+    return 'Match was found at ' . $match->offset();
+});`}
+    php={`preg::match_all('/\\d+/', 'I was born in 1996', $match, PREG_OFFSET_CAPTURE);
+return 'Match was found at ' . $match[0][0][1];`}/>
+
+<!--T-Regx:{return-at(0)}-->
+<Result>'Match was found at 14'</Result>
+
+> Remember that [`offset()`] is UTF-8 safe and returns offsets in characters, not bytes.
+> For bytes, consider using [`byteOffset()`] method.
+
+> Use [`offset()`] with methods like [`mb_substr()`], and [`byteOffset()`] with methods like [`substr()`].
+
+## Using inline `offsets()` method
+
+Use inline methods to simply return the offsets - when there is no need for using [`Match`] details or any other operations.
+
+### Many
+
+If you only want to get offsets of your matches, use `offsets()->all()`.
+
+<CodeTabs
+    tregx={`pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, May 12")->offsets()->all();`}
+    php={`preg::match_all('/[0-9]+/', "I'm 19 years old. I was born in 1999, May 12", $matches, PREG_OFFSET_CAPTURE);
+return array_map(function (array $match) {
+    return $match[1];
+}, $matches[0]);`}/>
+<Result>[4, 32, 42]</Result>
+
+You can also limit your matches.
+
+<CodeTabs
+    tregx={`pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999, May 12")->offsets()->only(2);`}
+    php={`preg::match_all('/[0-9]+/', "I'm 19 years old. I was born in 1999, May 12", $matches, PREG_OFFSET_CAPTURE);
+return array_slice(array_map(function (array $match) {
+    return $match[1];
+}, $matches[0]), 0, 2);`}/>
+<Result>[4, 32]</Result>
+
+### One
+
+To only get offset of the first occurrence of a matched pattern, call `offsets()->first()`.
+
+<CodeTabs
+    tregx={`pattern('\\d+')->match("I was born in 1999")->offsets()->first();`}
+    php={`preg::match('/[0-9]+/', "I was born in 1999", $match, PREG_OFFSET_CAPTURE);
+if ($match) {
+    return $match[0][1];
+}
+throw new SubjectNotMatchedException();`}/>
+<Result>14</Result>
+
+As any other [`first()`] method, it throws `SubjectNotMatchedException` if the subject isn't matched by your pattern.
+
+## Group offsets
+
+In a similar manner you can get offsets of your capturing groups, either using [`Match`] details or an inline method.
+
+These two snippets below are equal to each other.
+
+### Using [`Match`] details
+
+<CodeTabs
+    tregx={`pattern('(?<capital>[A-Z])[a-z]+')->match('my name is John Cena')->first(function (Match $match) {
+    return $match->group('capital')->offset();
+});`}
+    php={`if (preg::match('/(?<capital>[A-Z])[a-z]+/', 'my name is John Cena', $match, PREG_OFFSET_CAPTURE)) {\n
+    if (array_key_exists('capital', $match)) {
+        if ($match['capital'][1] === -1) {
+            throw new GroupNotMatchedException('capital');
+        }
+        return $match['capital'][1];
+    }\n
+    // preg_match() trims trailing empty elements, so additional checks are needed
+    // if there's no group key - the group is either un-matched or non-existent
+    if (validateGroupExists('capital', $match)) {
+        throw new GroupNotMatchedException('capital');
+    } else {
+        throw new NonexistentGroupException('capital');
+    }
+}
+throw new SubjectNotMatchedException();`}/>
+
+<!--T-Regx:{return-at(0)}-->
+<Result>11</Result>
+
+<!-- The PHP snippets for both upper and lower T-Regx snippets are identical -->
+
+Can also be written as...
+
+### Using inline `offsets()` method
+
+<CodeTabs
+    tregx={`pattern('(?<capital>[A-Z])[a-z]+')->match('my name is John Cena')->group('capital')->offsets()->first();`}
+    php={`if (preg::match('/(?<capital>[A-Z])[a-z]+/', 'my name is John Cena', $match, PREG_OFFSET_CAPTURE)) {\n
+    if (array_key_exists('capital', $match)) {
+        if ($match['capital'][1] === -1) {
+            throw new GroupNotMatchedException('capital');
+        }
+        return $match['capital'][1];
+    }\n
+    // preg_match() trims trailing empty elements, so additional checks are needed
+    // if there's no group key - the group is either un-matched or non-existent
+    if (validateGroupExists('capital', $match)) {
+        throw new GroupNotMatchedException('capital');
+    } else {
+        throw new NonexistentGroupException('capital');
+    }
+}
+throw new SubjectNotMatchedException();`}/>
+
+<!--T-Regx:{return-at(0)}-->
+<Result>11</Result>
+
+Both `offsets()->first()` and `group()->offsets()->first()` throw `SubjectNotMatchedException` if the subject isn't
+matched by your pattern.
+
+Also, both [`Match.group()`] details and inline `match()->group()->offsets()` throw `GroupNotMatchedException`, when used with an unmatched group.
+
+[`mb_substr()`]: https://www.php.net/manual/en/function.mb-substr.php
+[`substr()`]: https://www.php.net/manual/en/function.substr.php
+[`Match`]: match-details.md
+[`Match.group()`]: match-groups.md#group-details
+[`offset()`]: match-details.md#offsets
+[`byteOffset()`]: match-details.md#offsets
+[`first()`]: match-first.mdx
+[`forEach()`]: match-for-each.mdx
+[`map()`]: match-map.mdx
