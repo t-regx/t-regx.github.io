@@ -1,0 +1,68 @@
+---
+id: match-group
+title: Inline groups
+---
+
+import {CodeTabs, Result} from './code';
+
+Apart from retrieving matched capturing groups, you can also replace by an [inline group].
+
+Method `match()->group()` behaves exactly like [`Match.group(int|string)`]:
+
+- it can accept either group index (where #0 is the whole match) or a group name (when a group is named)
+- it throws `\InvalidArgumentException` for an invalid index or an invalid group name (e.g. `"2group"` or `-2`)
+- and throws `NonexistentGroupException` if `group()` is used with a non-existent group
+
+## Matched occurrences of a group
+
+Similarly to how you can retrieve all matched occurrences of pattern from subject:
+
+<CodeTabs
+    tregx={`pattern("(?<capital>[A-Z])[a-z]+")->match("Hello there, General Kenobi")->all();`}
+    php={`preg::match_all("/(?<capital>[A-Z])[a-z]+/", "Hello there, General Kenobi", $matches);\nreturn $matches[0];`}/>
+<Result>['Hello', 'General', 'Kenobi']</Result>
+
+...you can retrieve all matched occurrences of a capturing group in a subject:
+
+<CodeTabs
+    tregx={`pattern("(?<capital>[A-Z])[a-z]+")->match("Hello there, General Kenobi")->group('capital')->all();`}
+    php={`// possible invalid group, e.g. "2group" or -2
+validateGroupName('capital');\n
+preg::match_all("/(?<capital>[A-Z])[a-z]+/", "Hello there, General Kenobi", $matches);
+if (validateGroupExists('capital', $matches)) {
+    return $matches['capital'];
+} else {
+    throw new NonexistentGroupException('capital');\n}`}/>
+
+<Result>['H', 'G', 'K']</Result>
+
+## Optional groups
+
+Inline groups `match()->group()->all()` also handle optional capturing groups.
+
+<CodeTabs
+    tregx={`pattern("(?<capital>[A-Z])?[a-z]+")->match("Hello there, General kenobi")->group('capital')->all();`}
+    php={`// possible invalid group, e.g. "2group" or -2
+validateGroupName('capital');\n
+preg::match_all("/(?<capital>[A-Z])?[a-z]+/", "Hello there, General Kenobi", $matches);
+if (validateGroupExists('capital', $matches)) {
+    return $matches['capital'];
+} else {
+    throw new NonexistentGroupException('capital');
+}`}/>
+<Result>['H', null, 'G', null]</Result>
+
+## Missing or invalid groups
+
+When `match()->group()` is called with a group that wasn't used in pattern (for example `"asd"` or `1200`), `NonexistentGroupException` is thrown.CodeTabs
+
+If, however, an invalid group is used:
+  - group name starting with a number (e.g. `"2asd"`)
+  - negative group index (e.g. `-12`)
+  - group name containing invalid characters (e.g. `"!@#"`)
+
+... then `\InvalidArgumentException` is thrown.
+
+[inline group]: replace-by-group.md
+[`Match.group(int|string)`]: match-details.md
+
