@@ -14,8 +14,7 @@
       "match-find-first",
       "match-for-each",
       "match-map",
-      "match-flat-map",
-      "match-iterator"
+      "match-flat-map"
     ],
     "Match Details": [
       "match-details",
@@ -43,7 +42,8 @@
       "quote",
       "valid",
       "split",
-      "filter"
+      "filter",
+      "match-iterator"
     ],
     "Advanced": [
       "replace-match-details",
