@@ -3,6 +3,8 @@ id: replace-by-map
 title: Replace by map
 ---
 
+import {CodeTabs, Result} from './code';
+
 There are cases when you have to use more than one replacement, but you also don't need [`Match`](match-details.md) details or
 any replacement logic, really, so both `with()` and `callback()` are a little unfit.
 
@@ -13,32 +15,15 @@ Replacing by map allows T-Regx to save a little performance overhead, by not cre
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
-<TabItem value="T-Regx">
-
-```php
-$message = 'My words: "mp3", "mp4", "gif"';
-
-pattern('\b\w{3}\b')->replace($message)->all()->by()->map([
+<CodeTabs
+    tregx={`$message = 'My words: "mp3", "mp4", "gif"';\n
+pattern('\\b\\w{3}\\b')->replace($message)->all()->by()->map([
     'mp3' => 'Audio file',
     'mp4' => 'Video file',
     'gif' => 'Animation'
-]);
-```
-
-</TabItem>
-<TabItem value="PHP">
-
-```php
-$message = 'My words: "mp3", "mp4", "gif"';
-
-preg::replace_callback('/\b\w{3}\b/', function ($match) {
+]);`}
+    php={`$message = 'My words: "mp3", "mp4", "gif"';\n
+preg::replace_callback('/\\b\\w{3}\\b/', function ($match) {
     $map = [
         'mp3' => 'Audio file',
         'mp4' => 'Video file',
@@ -52,19 +37,11 @@ preg::replace_callback('/\b\w{3}\b/', function ($match) {
         throw new InvalidArgumentException();
     }
     return $result;
-}, $message);
-```
-
-</TabItem>
-</Tabs>
+}, $message);`}/>
 
 <!--T-Regx:{echo-at(2)}-->
 <!--PHP:{echo-at(2)}-->
-<!--Result-Output-->
-
-```text
-My words: "Audio file", "Video file", "Animation"
-```
+<Result>My words: "Audio file", "Video file", "Animation"</Result>
 
 And of course `all()`/`first()`/`only(int)` modifiers are taken into account.
 
@@ -89,31 +66,14 @@ If you don't need to specify all your possible `[match => replacement]` pairs, y
 
 With `mapIfExists()` - superfluous occurrences are left unchanged:
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
-<TabItem value="T-Regx">
-
-```php
-$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";
-
-pattern('\b\w{3,4}\b')->replace($message)->all()->by()->mapIfExists([
+<CodeTabs
+    tregx={`$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";\n
+pattern('\\b\\w{3,4}\\b')->replace($message)->all()->by()->mapIfExists([
    'mp3' => 'Audio',
    'gif' => 'Animation'
-]);
-```
-
-</TabItem>
-<TabItem value="PHP">
-
-```php
-$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";
-
-preg::replace_callback('/\b\w{3}\b/', function ($match) {
+]);`}
+    php={`$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";\n
+preg::replace_callback('/\\b\\w{3}\\b/', function ($match) {
     $map = [
         'mp3' => 'Audio',
         'gif' => 'Animation'
@@ -126,38 +86,20 @@ preg::replace_callback('/\b\w{3}\b/', function ($match) {
         throw new InvalidArgumentException();
     }
     return $result;
-}, $message);
-```
-
-</TabItem>
-</Tabs>
+}, $message);`}/>
 
 <!--T-Regx:{echo-at(2)}-->
 <!--PHP:{echo-at(2)}-->
-<!--Result-Output-->
-
-```text
-Extensions: Audio, mp4, jpg, jpeg, png, Animation
-```
+<Result>Extensions: Audio, mp4, jpg, jpeg, png, Animation</Result>
 
 ## Groups
 
 Resolving a replacement based on a **whole match** however, is both uncommon and unpractical. It's much more elastic to resolve
 it based on a specific capturing group, using `by()->group()->map()`:
 
-<Tabs
-defaultValue="T-Regx"
-values={[
-{ label: 'T-Regx', value: 'T-Regx', },
-{ label: 'PHP', value: 'PHP', },
-]
-}>
-<TabItem value="T-Regx">
-
-```php
-$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
-
-pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
+<CodeTabs
+    tregx={`$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';\n
+pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)\\.(com|io)')
     ->replace($links)
     ->all()
     ->by()
@@ -168,19 +110,11 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')
        'facebook' => 'Social Portal',
        't-regx'   => 'Documentation',
     ])
-    ->orThrow();
-```
-
-</TabItem>
-<TabItem value="PHP">
-
-```php
-$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';
-
-preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', function (array $match) {
+    ->orThrow();`}
+    php={`$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';\n
+preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)\\.(com|io)#', function (array $match) {
     // possible invalid group, e.g. "2group" or -2
-    validateGroupName('domain');
-
+    validateGroupName('domain');\n
     $group = $match['domain'];
     if (!array_key_exists('domain', $match)) {
         // group is either un-matched or non-existent
@@ -197,8 +131,7 @@ preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', func
         } else {
             throw new GroupNotMatchedException();
         }
-    }
-
+    }\n
     $map = [
         'google'   => 'Search Engine',
         'socket'   => 'Documentation',
@@ -213,16 +146,8 @@ preg::replace_callback('#(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)#', func
         throw new InvalidArgumentException();
     }
     return $result;
-}, $links);
-```
-
-</TabItem>
-</Tabs>
+}, $links);`}/>
 
 <!--T-Regx:{echo-at(2)}-->
 <!--PHP:{echo-at(2)}-->
-<!--Result-Output-->
-
-```text
-Links: Search Engine, Documentation, Social Portal, Documentation
-```
+<Result>Links: Search Engine, Documentation, Social Portal, Documentation</Result>
