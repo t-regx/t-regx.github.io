@@ -4,13 +4,7 @@ title: Capturing groups
 ---
 
 When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details
-object. These methods are:
-[`first()`](match-first.md),
-[`findFirst()`](match-find-first.md),
-[`forEach()`](match-for-each.md),
-[`map()`](match-map.md),
-[`flatMap()`](match-flat-map.md),
-[`callback()`](replace-callback.md). 
+object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`]. 
 
 The details can be used to get concise information about the matched occurrence, such
 as its value (i.e. "the whole match"), capturing groups and their UTF-8 safe offsets, limits, indexes, other matches
@@ -20,9 +14,9 @@ as well as the used subject (although it could also be pass as a closure paramet
 
 ## Overview
 
-> This page only concerns **capturing groups** of [`Match`](match-details.md), specifically. See [`Match`](match-details.md) details for more throughout documentation.
+> This page only concerns **capturing groups** of [`Match`], specifically. See [`Match`] details for more throughout documentation.
 
-Using [`Match`](match-details.md) details, you gain access complete information about capturing groups:
+Using [`Match`] details, you gain access complete information about capturing groups:
  - [`group(int|string)`](#group-details) - capturing group details. If group is matched, below methods are available:
      - `matched()` - whether the group was matched by the subject
      - `text()` - value of the group
@@ -74,7 +68,8 @@ Some patterns have required capturing groups, e.g `^(cm|mm)$`. Others, have capt
 e.g. `\d+(cm|mm)?`. As you can see the `(cm|mm)` doesn't have to be matched for the whole subject to be matched - 
 both `14` and `14cm` are subjects that match the pattern.
 
-Optional groups allow you to deal with potentially unmatched groups with elegance. If the group **is matched**, each of the methods:
+Optional groups allow you to deal with potentially unmatched groups with elegance. If the group **is matched**, 
+each of the methods:
  - `text()`
  - `orReturn()`
  - `orElse()`
@@ -106,8 +101,8 @@ pattern('(?<schema>https?://)?\w+\.\w+')->match('google.com')->first(function (M
 });
 ```
 
-Method `group()->orThrow()` works exactly the same as [`findFirst()->orThrow()`](match-find-first.md), which means it accepts user defined exception
-to instantiate:
+Method `group()->orThrow()` works exactly the same as [`findFirst()->orThrow()`], which means it accepts user defined 
+exception to instantiate:
 
 ```php
 class MyException extends Exception {}
@@ -215,7 +210,8 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('')->first(function (Match $match)
 ```
 
 #### Invalid groups and arguments
-- `hasGroup()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any type other than `string` or `int`)*.
+- `hasGroup()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any type 
+other than `string` or `int`)*.
 
 > Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic - they're constant much more often; hence the developer doesn't have to check whether the group exists. The pattern is constant - the collection of groups is also constant.
 
@@ -296,14 +292,15 @@ In plain, old, vanilla PHP there's no difference between:
  - existent, but not matched group
  - matched group, but value is `''` (empty string)
  
-The two first cases always return `null`, the third one returns either `''` or `null` (depending on the **order of groups!**).
-If you used `PREG_OFFSET_CAPTURE`, it'll return `['', -1]` instead. And of course the last one returns `''`, which might the same
-as the third.
+The two first cases always return `null`, the third one returns either `''` or `null` (depending on the **order of 
+groups!**). If you used [`PREG_OFFSET_CAPTURE`], it'll return `['', -1]` instead. And of course the last one returns `''`, 
+which might the same as the third.
 
-Since PHP 7.2, there's `PREG_UNMATCHED_AS_NULL` - it's a little better, it allows to distinguish unmatched from matched empty string,
-but to distinguish invalid and non-existent groups from unmatched - you have to use `array_key_exists()`.
+Since PHP 7.2, there's [`PREG_UNMATCHED_AS_NULL`] - it's a little better, it allows to distinguish unmatched from matched 
+empty string, but to distinguish invalid and non-existent groups from unmatched - you have to use `array_key_exists()`.
 
-For `preg_match()`/`preg_match_all()` we can use `PREG_UNMATCHED_AS_NULL`, for `preg_replace_callback()` we have... nothing. There's no way to verify it.
+For [`preg_match()`]/[`preg_match_all()`] we can use [`PREG_UNMATCHED_AS_NULL`], for [`preg_replace_callback()`] we 
+have... nothing. There's no way to verify it.
 
 ---
 
@@ -311,9 +308,9 @@ And T-Regx **hates** it. We **hate** it.
 
 ---
 
-That's why in T-Regx, [`Match`](match-details.md) details has 3 separate methods to deal with each of these cases separately. 
+That's why in T-Regx, [`Match`] details has 3 separate methods to deal with each of these cases separately. 
 
-Of course, the interface of [`Match`](match-details.md) is the same for matching, replacing and any other operation, 
+Of course, the interface of [`Match`] is the same for matching, replacing and any other operation, 
 so validation of groups in T-Regx works completely alike for `pattern()->match()`, `pattern()->replace()` and any other 
 method. It's bulletproof.
 
@@ -334,3 +331,19 @@ In short:
 > - `InvalidArgument` is `\InvalidArgumentException`
 > - `NonexistentGroup` is `NonexistentGroupException`
 > - `GroupNotMatched` is `GroupNotMatchedException`
+
+[`Match`]: match-details.md
+[`first()`]: match-first.mdx
+[`findFirst()`]: match-find-first.mdx
+[`findFirst()->orThrow()`]: match-find-first.mdx
+[`forEach()`]: match-for-each.mdx
+[`map()`]: match-map.mdx
+[`flatMap()`]: match-flat-map.mdx
+[`callback()`]: replace-callback.mdx
+
+[`array_key_exists()`]: https://www.php.net/manual/en/function.array-key-exists.php
+[`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
+[`preg_match_all()`]: https://www.php.net/manual/en/function.preg-match-all.php
+[`preg_replace_callback()`]: https://www.php.net/manual/en/function.preg-replace-callback.php
+[`PREG_UNMATCHED_AS_NULL`]: https://www.php.net/manual/en/pcre.constants.php
+[`PREG_OFFSET_CAPTURE`]:  https://www.php.net/manual/en/pcre.constants.php

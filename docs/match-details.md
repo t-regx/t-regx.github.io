@@ -4,13 +4,7 @@ title: Match details
 ---
 
 When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details
-object. These methods are:
-[`first()`](match-first.md),
-[`findFirst()`](match-find-first.md),
-[`forEach()`](match-for-each.md),
-[`map()`](match-map.md),
-[`flatMap()`](match-flat-map.md),
-[`callback()`](replace-callback.md). 
+object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`]. 
 
 The details can be used to get concise information about the matched occurrence, such
 as its value (i.e. "the whole match"), capturing groups and their UTF-8 safe offsets, limits, indexes, other matches
@@ -32,7 +26,7 @@ Using `Match` details, you gain access to:
   - byte offsets - [`byteOffset()`](#offsets)
 - [`all()`](#other-occurrences) - other matched occurrences
 - [User data](#other-occurrences) - sharing custom data between callbacks
-- details about capturing groups, in the next chapter: [Capturing groups](match-groups.md)
+- details about capturing groups, in the next chapter: [Capturing groups]
 
 ## Matched text
 
@@ -106,7 +100,7 @@ pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) 
 });
 ```
 
-> PS: It's implemented with `filter_var()`, but you can think of it as `/^-?\d+$/` with max/min values check.
+> PS: It's implemented with [`filter_var()`], but you can think of it as `/^-?\d+$/` with max/min values check.
 
 ## Subject
 
@@ -155,7 +149,7 @@ Results of `Match.index()` are always **continuous integer** numbers, going from
 
 ## Limit
 
-Depending on whether you used `all()`, `first()` or `only(int)` - method `limit()` will return `-1`, `1` or an
+Depending on whether you used [`all()`], [`first()`] or [`only(int)`] - method `limit()` will return `-1`, `1` or an
 argument given to `only()`
 
 ```php
@@ -241,7 +235,7 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
 
 To most users this functionality will occur as redundant - it's only use case are multiple calls to callbacks, for example
 when using chained `filter()->map()`. With user data, it's possible to perform an operation in `filter()`, store its 
-value in user data, and then use the value in [`map()`](match-map.md) without reference closure variables.
+value in user data, and then use the value in [`map()`] without reference closure variables.
 
 ```php {4,8}
 pattern('\w{2}')->match('Languages: en, de, xd, sv')
@@ -277,9 +271,17 @@ pattern($pattern)->match($subject)->first(function (Match $match) {
 });
 ```
 
-More about capturing groups can be found in the next section: [Capturing groups](match-groups.md).
+More about capturing groups can be found in the next section: [Capturing groups].
 
+[`filter_var()`]: https://www.php.net/manual/en/function.filter-var.php
 [`mb_substr()`]: https://www.php.net/manual/en/function.mb-substr.php
 [`mb_strpos()`]: https://www.php.net/manual/en/function.mb-strpos.php
 [`substr()`]: https://www.php.net/manual/en/function.substr.php
 [`strpos()`]: https://www.php.net/manual/en/function.strpos.php
+[`first()`]: match-first.mdx
+[`findFirst()`]: match-find-first.mdx
+[`forEach()`]: match-for-each.mdx
+[`map()`]: match-map.mdx
+[`flatMap()`]: match-flat-map.mdx
+[`callback()`]: replace-callback.mdx
+[Capturing groups]: match-groups.md
