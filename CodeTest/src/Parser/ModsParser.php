@@ -9,16 +9,14 @@ use CodeTest\Parser\Mods\Modification;
 use CodeTest\Parser\Mods\MultipleReturnValues;
 use CodeTest\Parser\Mods\ReturnFirstSemicolonLast;
 use CodeTest\Parser\Mods\ReturnVariable;
-use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
 use Exception;
 use LogicException;
 use TRegx\SafeRegex\preg;
 
-class MarkdownSnippetParserMdx
+class ModsParser
 {
     /** @var string */
     private $path;
-    /** @var CodeTabSnippetBuilder */
     private $builder;
     /** @var Modification[] */
     private $mods;
@@ -52,20 +50,6 @@ class MarkdownSnippetParserMdx
     private function tryParse(string $content): void
     {
         foreach (preg_split("/\r?\n/", $content) as $line) {
-            if (preg::match('/^\s*<Tabs/', $line)) {
-                if (!$this->builder->isEmpty()) {
-                    $this->builder->flush();
-                }
-                continue;
-            }
-            if (in_array($line, ['```', '```php', '```text'])) {
-                $this->builder->controlMark($line);
-                continue;
-            }
-            if (preg::match('/<TabItem\s+value=([\'"])([\w-]+)\1>|<!--(Result-(?:Value|Output))-->/', $line, $match)) {
-                $this->builder->setConsumer($match[3] ?? $match[2]);
-                continue;
-            }
             if (preg::match('/<!--(T-Regx|PHP|Result-(?:Value|Output)):\{([\w-]+)(?:\(([\w\\\\$-]+)\))?\}-->/', $line, $match)) {
                 $forType = $match[1];
                 $mod = $match[2];
@@ -78,8 +62,6 @@ class MarkdownSnippetParserMdx
             $this->validateMalformedSyntax($line);
             $this->builder->feedLine($line);
         }
-
-        $this->builder->flush();
     }
 
     private function modByName(string $mod): Modification
