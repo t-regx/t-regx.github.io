@@ -57,7 +57,7 @@ class MarkdownSnippetParserMdxTest extends TestCase
 <TabItem value="T-Regx">
 ```php
 ```
-<!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\InvalidReturnValueException)}-->');
+<!--T-Regx:{expect-exception(TRegx\CleanRegex\Exception\InvalidReturnValueException)}-->');
 
         // then
         $snippet = $store->snippets()[0];
