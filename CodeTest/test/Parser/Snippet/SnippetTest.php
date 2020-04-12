@@ -38,39 +38,6 @@ class SnippetTest extends TestCase
     /**
      * @test
      */
-    public function shouldAppend()
-    {
-        // given
-        $snippet = new Snippet(['Foo', 'Bar']);
-
-        // when
-        $snippet->append('Foo', 'first');
-        $snippet->append('Bar', 'second');
-        $snippet->append('Foo', 'third');
-        $snippet->append('Bar', 'fourth');
-
-        // then
-        $this->assertEquals([['first', 'third'], ['second', 'fourth']], $snippet->toDataProviderArray());
-    }
-
-    /**
-     * @test
-     */
-    public function shouldAppend_throw_forInvalidConsumer()
-    {
-        // given
-        $snippet = new Snippet(['Foo']);
-
-        // then
-        $this->expectException(LogicException::class);
-
-        // when
-        $snippet->append('Bar', '');
-    }
-
-    /**
-     * @test
-     */
     public function shouldReset()
     {
         // given
@@ -135,7 +102,7 @@ class SnippetTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetThrow_forNotSetConsumer()
+    public function shouldGet_throw_forNotSetConsumer()
     {
         // given
         $snippet = new Snippet(['Foo']);
@@ -145,37 +112,6 @@ class SnippetTest extends TestCase
 
         // when
         $snippet->get('Foo');
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBeEmpty()
-    {
-        // given
-        $snippet = new Snippet(['Foo']);
-
-        // when
-        $isEmpty = $snippet->isEmpty();
-
-        // then
-        $this->assertTrue($isEmpty);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldNotBeEmpty()
-    {
-        // given
-        $snippet = new Snippet(['Foo']);
-        $snippet->append('Foo', 'not empty');
-
-        // when
-        $isEmpty = $snippet->isEmpty();
-
-        // then
-        $this->assertFalse($isEmpty);
     }
 
     /**
@@ -239,21 +175,5 @@ class SnippetTest extends TestCase
 
         // when
         $snippet->isConsumerSet('Bar');
-    }
-
-    /**
-     * @test
-     */
-    public function shouldNotConsiderSnippet_with0Lines_asEmpty()
-    {
-        // given
-        $snippet = new Snippet(['Foo']);
-        $snippet->set('Foo', []);
-
-        // when
-        $isEmpty = $snippet->isEmpty();
-
-        // then
-        $this->assertFalse($isEmpty, 'Failed asserting that snippet with 0 lines is not empty');
     }
 }

@@ -31,12 +31,6 @@ class Snippet
         return array_combine($this->consumers, array_fill(0, count($this->consumers), null));
     }
 
-    public function append(string $consumer, string $line): void
-    {
-        $this->validateType($consumer);
-        $this->snippet[$consumer][] = $line;
-    }
-
     public function set(string $consumer, array $lines): void
     {
         $this->validateType($consumer);
@@ -49,11 +43,6 @@ class Snippet
             throw new LogicException("Tried to retrieve '$consumer', but it was not set");
         }
         return $this->snippet[$consumer];
-    }
-
-    public function isEmpty(): bool
-    {
-        return $this->snippet === $this->emptySnippet();
     }
 
     public function exists(string $consumer): bool
