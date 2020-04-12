@@ -21,7 +21,8 @@
       "match-details",
       "match-groups",
       "match-offsets",
-      "match-group"
+      "match-group",
+      "match-as-int"
     ],
     "Replacing": [
       "replace",
