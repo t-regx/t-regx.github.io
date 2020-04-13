@@ -2,7 +2,7 @@
 namespace CodeTest\Parser;
 
 use InvalidArgumentException;
-use TRegx\CleanRegex\Exception\CleanRegex\IntegerFormatException;
+use TRegx\CleanRegex\Exception\IntegerFormatException;
 
 class LineArg
 {
