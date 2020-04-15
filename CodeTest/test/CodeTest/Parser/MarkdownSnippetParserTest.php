@@ -2,6 +2,11 @@
 namespace Test\CodeTest\Parser;
 
 use CodeTest\Parser\MarkdownSnippetParser;
+use CodeTest\Parser\MdxParser;
+use CodeTest\Parser\Mods;
+use CodeTest\Parser\Snippet\CodeElement;
+use CodeTest\Parser\Snippet\ModElement;
+use CodeTest\Parser\Snippet\ResultElement;
 use PHPUnit\Framework\TestCase;
 use TRegx\CleanRegex\Exception\InvalidReturnValueException;
 
@@ -12,7 +17,10 @@ class MarkdownSnippetParserTest extends TestCase
      */
     public function shouldParseEmptyTags()
     {
-        $this->assertCodeIsParsedAll('<CodeTabs/> <Tabs/> <CodeTabs />', [[], []]);
+        $this->assertCodeIsParsedAll('<CodeTabs/> <Tabs/> <CodeTabs />', [
+            [new CodeElement(null, null)],
+            [new CodeElement(null, null)]
+        ]);
     }
 
     /**
@@ -28,9 +36,32 @@ return $matches[0];`}/>';
 
         // when
         $this->assertCodeIsParsed($code, [
-            'tregx' => "pattern('[0-9]+')->match(\"I'm 19. I was born in 1999, on May 12\")->all();",
-            'php'   => 'preg::match_all(\'/[0-9]+/\', "I\'m 19. I was born in 1999, on May 12", $matches);' . PHP_EOL .
+            new CodeElement(
+                "pattern('[0-9]+')->match(\"I'm 19. I was born in 1999, on May 12\")->all();",
+                'preg::match_all(\'/[0-9]+/\', "I\'m 19. I was born in 1999, on May 12", $matches);' . PHP_EOL .
                 'return $matches[0];'
+            )
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldParseCode_noJsxSyntax()
+    {
+        // when
+        $code = '<CodeTabs
+      tregx="return pattern(\'[aeiouy]\')->count(\'Computer\');"
+      php="return preg::match_all(\'/[aeiouy]/\', \'Computer\');"/>
+<Result>3</Result>';
+
+        // when
+        $this->assertCodeIsParsed($code, [
+            new CodeElement(
+                "return pattern('[aeiouy]')->count('Computer');",
+                "return preg::match_all('/[aeiouy]/', 'Computer');",
+            ),
+            new ResultElement('3', null)
         ]);
     }
 
@@ -45,9 +76,8 @@ return $matches[0];`}/>';
 
         // when + then
         $this->assertCodeIsParsed($code, [
-            'tregx'  => 'yes',
-            'php'    => 'no',
-            'result' => ['value' => 'code', 'type' => null]
+            new CodeElement('yes', 'no'),
+            new ResultElement('code', null)
         ]);
     }
 
@@ -61,7 +91,7 @@ return $matches[0];`}/>';
 <Resulttext>code</Result>';
 
         // when + then
-        $this->assertCodeIsParsed($code, []);
+        $this->assertCodeIsParsed($code, [new CodeElement(null, null)]);
     }
 
     /**
@@ -74,7 +104,10 @@ return $matches[0];`}/>';
 <Result foo>some words</Result>';
 
         // when + then
-        $this->assertCodeIsParsed($code, ['result' => ['value' => 'some words', 'type' => 'foo']]);
+        $this->assertCodeIsParsed($code, [
+            new CodeElement(null, null),
+            new ResultElement('some words', 'foo')
+        ]);
     }
 
     /**
@@ -88,10 +121,40 @@ return $matches[0];`}/>';
 
         // when + then
         $this->assertCodeIsParsed($code, [
-            'mod' => [
-                'name' => 'expect-exception',
-                'for'  => 'T-Regx',
-                'arg'  => InvalidReturnValueException::class
+            new CodeElement(null, null),
+            new ModElement(new Mods(''), 'expect-exception', 'T-Regx', InvalidReturnValueException::class),
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldParseMultipleMods()
+    {
+        // given
+        $code = '<CodeTabs tregx="one" php="first"/>
+<!--T-Regx:{mock($value)}-->
+<!--PHP:{function($value)}-->
+<Result php>foo</Result>
+<CodeTabs tregx="two" php="second"/>
+<!--T-Regx:{cos($a)}-->
+<!--T-Regx:{sin($b)}-->
+<Result>bar</Result>
+';
+
+        // when + then
+        $this->assertCodeIsParsedAll($code, [
+            [
+                new CodeElement("one", "first"),
+                new ModElement(new Mods(''), 'mock', 'T-Regx', '$value'),
+                new ModElement(new Mods(''), 'function', 'PHP', '$value'),
+                new ResultElement("foo", "php"),
+            ],
+            [
+                new CodeElement("two", "second"),
+                new ModElement(new Mods(''), 'cos', 'T-Regx', '$a'),
+                new ModElement(new Mods(''), 'sin', 'T-Regx', '$b'),
+                new ResultElement("bar", null),
             ]
         ]);
     }
@@ -104,10 +167,10 @@ return $matches[0];`}/>';
     private function assertCodeIsParsedAll(string $code, array $expected): void
     {
         // when
-        $snippets = (new MarkdownSnippetParser())->parse($code);
+        $snippets = (new MarkdownSnippetParser(new MdxParser(new Mods(''))))->parse($code);
 
         // then
-        $this->assertCount(count($expected), $snippets);
+        $this->assertCount(count($expected), $snippets, "Failed to assert that code was parsed into a snippet");
         $this->assertEquals($expected, $snippets);
     }
 }

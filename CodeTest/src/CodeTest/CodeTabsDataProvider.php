@@ -2,9 +2,10 @@
 namespace CodeTest;
 
 use ArrayIterator;
-use CodeTest\Parser\MarkdownSnippetParserMdx;
-use CodeTest\Parser\Snippet\CodeTabSnippetBuilder;
-use CodeTest\Parser\Snippet\NonEmptySnippetsStore;
+use CodeTest\Parser\MarkdownSnippetParser;
+use CodeTest\Parser\MdxFacade;
+use CodeTest\Parser\MdxParser;
+use CodeTest\Parser\Mods;
 use Iterator;
 
 class CodeTabsDataProvider
@@ -25,9 +26,8 @@ class CodeTabsDataProvider
     public function getSnippetsIterator(): Iterator
     {
         return new CompositeIterator(new LazyMapperIterator(new FilesIterator($this->basePath), function (string $filename) {
-            $store = new NonEmptySnippetsStore();
-            (new MarkdownSnippetParserMdx($filename, new CodeTabSnippetBuilder($store)))->parse(file_get_contents($filename));
-            return new KeyMapperIterator(new ArrayIterator($store->snippets()), function (int $key) use ($filename) {
+            $parsed = (new MdxFacade(new MarkdownSnippetParser(new MdxParser(new Mods($this->basePath)))))->parse(file_get_contents($filename));
+            return new KeyMapperIterator(new ArrayIterator($parsed), function (int $key) use ($filename) {
                 return basename($filename) . " #$key";
             });
         }), false);
