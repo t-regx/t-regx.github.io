@@ -8,8 +8,8 @@
       "test/"
     ],
     "psr-4": {
-      "CodeTest\\": "CodeTest/src",
-      "Test\\CodeTest\\": "CodeTest/test"
+      "CodeTest\\": "CodeTest/src/CodeTest",
+      "Test\\CodeTest\\": "CodeTest/test/CodeTest"
     }
   },
   "require": {
