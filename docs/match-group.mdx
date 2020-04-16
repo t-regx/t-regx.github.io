@@ -40,13 +40,25 @@ if (validateGroupExists('capital', $matches)) {
 
 Inline groups `match()->group()->all()` also handle optional capturing groups.
 
+In this example, we'll match words, with a pattern that specifies an optional capturing group named `capital`, which
+is supposed to match a capital letter. Not every word in the subject has a capital letter, so not every occurrence will
+have group `capital` matched.
+
 <CodeTabs
     tregx={`pattern("(?<capital>[A-Z])?[a-z]+")->match("Hello there, General kenobi")->group('capital')->all();`}
     php={`// possible invalid group, e.g. "2group" or -2
 validateGroupName('capital');\n
-preg::match_all("/(?<capital>[A-Z])?[a-z]+/", "Hello there, General Kenobi", $matches);
+preg::match_all("/(?<capital>[A-Z])?[a-z]+/", "Hello there, General kenobi", $matches);
 if (validateGroupExists('capital', $matches)) {
-    return $matches['capital'];
+    return array_map(function ($match) {
+        if ($match === '') {
+            if (validateGroupMatched('capital', $match)) {
+                return '';  // group was indeed matched
+            }
+            return null;  // group was not matched, and false'ly represented as an empty string
+        }
+        return $match;
+    }, $matches['capital']);
 } else {
     throw new NonexistentGroupException('capital');
 }`}/>
