@@ -17,9 +17,9 @@ class ResultElement implements Element
     public function populate(Snippet $snippet): void
     {
         if ($this->type === 'text') {
-            $snippet->set('Result-Output', explode("\n", $this->value));
+            $snippet->set('Result-Output', Code::toArray($this->value));
         } else {
-            $snippet->set('Result-Value', explode("\n", $this->value));
+            $snippet->set('Result-Value', Code::codeToArray($this->value));
         }
     }
 }

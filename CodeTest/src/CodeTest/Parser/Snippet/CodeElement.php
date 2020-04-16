@@ -17,10 +17,10 @@ class CodeElement implements Element
     public function populate(Snippet $snippet): void
     {
         if ($this->tRegx !== null) {
-            $snippet->set('T-Regx', explode("\n", $this->tRegx));
+            $snippet->set('T-Regx', Code::codeToArray($this->tRegx));
         }
         if ($this->php !== null) {
-            $snippet->set('PHP', explode("\n", $this->php));
+            $snippet->set('PHP', Code::codeToArray($this->php));
         }
     }
 }

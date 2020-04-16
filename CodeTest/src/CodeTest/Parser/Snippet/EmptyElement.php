@@ -3,7 +3,7 @@ namespace CodeTest\Parser\Snippet;
 
 class EmptyElement implements Element
 {
-    function populate(Snippet $snippet): void
+    public function populate(Snippet $snippet): void
     {
     }
 }
