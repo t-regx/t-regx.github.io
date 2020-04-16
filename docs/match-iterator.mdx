@@ -29,10 +29,25 @@ return iterator_to_array($iterator);`}/>
 It is useful with methods that only accept [`\Iterator`], and when an explicit iterator is needed. Using `match()->getIterator()`
 for methods that accept `array` is redundant :)
 
-Also, please keep in mind that `match()` and other entities (such as `match()->group(string|int)` or `match()->asInt()`)
+Also, please keep in mind that [`match()`] and other entities (such as [`match()->group(string|int)`] or [`match()->asInt()`])
 are also [iterable with `foreach`], making explicit usage of `getIterator()` even less likely.
 
+<CodeTabs
+    tregx={`foreach (pattern('\\w+')->match('Apples are cool') as $match) {
+    $text = $match->text();\n
+}`}
+    php={`preg::match_all('/\\w+/', 'Apples are cool', $matches);
+foreach ($matches[0] as $text) {
+    $text;\n
+}`}/>
+
+<!--T-Regx:{return-at(1)}-->
+<!--PHP:{return-at(2)}-->
+
+[`match()`]: match.mdx
 [`\Iterator`]: https://www.php.net/manual/en/class.iterator.php
 [`iterator_to_array()`]: https://www.php.net/manual/en/function.iterator-to-array.php)
 [`iterator_count()`]: (https://www.php.net/manual/en/function.iterator-count.php)
 [iterable with `foreach`]: match-for-each.mdx#vanilla-php-foreach
+[`match()->group(string|int)`]: match-group.mdx
+[`match()->asInt()`]: match-as-int.mdx
