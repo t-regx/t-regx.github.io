@@ -79,7 +79,7 @@ PATTERN;
 
     private function resultPattern(): string
     {
-        return '(?:<Result(?:\\s+(?<result_type>[a-z]+))?>(?<result_value>.*?)</Result>)';
+        return '(?:<Result(?:\\s+(?<result_type>[a-z]+))?>(\s*\{`)?(?<result_value>.*?)(`}\s*)?</Result>)';
     }
 
     private function map(string $pattern, string $content, callable $mapper): array

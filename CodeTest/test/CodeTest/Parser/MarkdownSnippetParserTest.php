@@ -97,6 +97,22 @@ return $matches[0];`}/>';
     /**
      * @test
      */
+    public function shouldParseResultWithJsxTemplateString()
+    {
+        // given
+        $code = '<CodeTabs/>
+<Result>{`code`}</Result>';
+
+        // when + then
+        $this->assertCodeIsParsed($code, [
+            new CodeElement(null, null),
+            new ResultElement('code', null)
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function shouldParseOutput()
     {
         // when
