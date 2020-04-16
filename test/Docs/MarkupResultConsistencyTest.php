@@ -206,7 +206,7 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function parseExpectedOutput(array $expectedOutput): string
     {
-        return join("\n", array_values(array_filter($expectedOutput, 'trim')));
+        return join("\n", $expectedOutput);
     }
 
     private function startsWith(string $haystack, string $needle): bool
