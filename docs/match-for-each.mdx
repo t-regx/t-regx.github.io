@@ -15,7 +15,7 @@ that's invoked with [`Match`] details just like [`first()`] and [`findFirst()`].
 array_map(function (string $text) {
     echo "I matched $text, ";
 }, $matches[0]);`}/>
-<Result>I matched Apples, I matched are, I matched cool, </Result>
+<Result text>I matched Apples, I matched are, I matched cool, </Result>
 
 Using [`Match`] you can get detailed information such as [`offset()`], [`index()`] etc.
 
@@ -32,7 +32,7 @@ You can also use the result of `pattern()->match()` directly in PHP `foreach` lo
 foreach ($matches[0] as $text) {
     echo "I matched $text, ";
 }`}/>
-<Result>I matched Apples, I matched are, I matched cool, </Result>
+<Result text>I matched Apples, I matched are, I matched cool, </Result>
 
 ### Other iterable entities
 
@@ -41,38 +41,42 @@ but for now, you only need to know that all of those entities are iterable with 
 
 <CodeTabs
     tregx={`foreach (pattern('\\d+')->match('127.0.0.1') as $match) {
-    $match->text(); // '127'\n}`}
+    return $match->text(); // '127'\n}`}
     php={`preg_match_all('/\\d+/', '127.0.0.1', $matches);
 foreach ($matches[0] as $text) {
-    $text; // '127';\n}`}/>
+    return $text; // '127';\n}`}/>
+<Result>'127'</Result>
 
 and also
 
 <CodeTabs
     tregx={`foreach (pattern('\\d+')->match('127.0.0.1')->asInt() as $digit) {
-    $digit; // 127\n}`}
+    return $digit; // 127\n}`}
     php={`preg_match_all('/\\d+/', '127.0.0.1', $matches);
 foreach ($matches[0] as $text) {
     $digit = Integer::parse($text);
-    $digit; // 127;\n}`}/>
+    return $digit; // 127;\n}`}/>
+<Result>127</Result>
 or
 
 <CodeTabs
     tregx={`foreach (pattern('(\\d+)')->match('127.0.0.1')->group(1) as $group) {
-    $group; // '127'\n}`}
-    php={`preg_match_all('/(\d+)/', '127.0.0.1', $matches);
+    return $group->text(); // '127'\n}`}
+    php={`preg_match_all('/(\\d+)/', '127.0.0.1', $matches);
 foreach ($matches[1] as $group) {
-    $group; // 127;\n}`}/>
+    return $group; // '127';\n}`}/>
+<Result>'127'</Result>
 
 Of course, if you call `->all()` on any of the given entities above you will receive an `array`, which is of course
 also iterable by PHP `foreach`.
 
 <CodeTabs
     tregx={`foreach (pattern('\\d+')->match('127.0.0.1')->all() as $text) {
-    $text; // '127'\n}`}
+    return $text; // '127'\n}`}
     php={`preg_match_all('/\\d+/', '127.0.0.1', $matches);
 foreach ($matches[0] as $text) {
-    $text; // '127';\n}`}/>
+    return $text; // '127';\n}`}/>
+<Result>'127'</Result>
 
 Although, instead of `all()` it's possible to chain the entities with one of the more high-level T-Regx methods, such as:
 `forEach()`/[`map()`]/[`flatMap()`] etc.

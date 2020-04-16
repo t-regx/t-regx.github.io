@@ -60,7 +60,7 @@ return any matches...
 
 <CodeTabs
     tregx={`$count = pattern('[aeiouy]')->count('Computer');\nreturn $count > 0;`}
-    php={`$count = preg::match_all('/[aeiouy]/', 'Computer'); {'\n'} return $count > 0;`}/>
+    php={`$count = preg::match_all('/[aeiouy]/', 'Computer');\nreturn $count > 0;`}/>
 <Result>true</Result>
 
 ...but that would be wasteful. You're much better off using

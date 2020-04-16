@@ -41,7 +41,7 @@ preg::replace_callback('/\\b\\w{3}\\b/', function ($match) {
 
 <!--T-Regx:{echo-at(2)}-->
 <!--PHP:{echo-at(2)}-->
-<Result>My words: "Audio file", "Video file", "Animation"</Result>
+<Result text>My words: "Audio file", "Video file", "Animation"</Result>
 
 And of course `all()`/`first()`/`only(int)` modifiers are taken into account.
 
@@ -90,7 +90,7 @@ preg::replace_callback('/\\b\\w{3}\\b/', function ($match) {
 
 <!--T-Regx:{echo-at(2)}-->
 <!--PHP:{echo-at(2)}-->
-<Result>Extensions: Audio, mp4, jpg, jpeg, png, Animation</Result>
+<Result text>Extensions: Audio, mp4, jpg, jpeg, png, Animation</Result>
 
 ## Groups
 
@@ -150,4 +150,4 @@ preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)\\.(com|io)#', f
 
 <!--T-Regx:{echo-at(2)}-->
 <!--PHP:{echo-at(2)}-->
-<Result>Links: Search Engine, Documentation, Social Portal, Documentation</Result>
+<Result text>Links: Search Engine, Documentation, Social Portal, Documentation</Result>

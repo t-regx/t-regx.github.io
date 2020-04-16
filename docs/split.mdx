@@ -19,6 +19,6 @@ T-Regx also allows to split a string by regular expression.
 To include a delimiter in the results, enclose it with a capturing group.
 
 <CodeTabs
-    tregx="pattern('([ ,]{2})')->split('Joffrey, Cersei, Ilyn Payne, The Hound');"
+    tregx="pattern('([ ,]{2})')->split('Joffrey, Cersei, Ilyn Payne');"
     php="preg::split('/([ ,]{2})/', 'Joffrey, Cersei, Ilyn Payne', -1, PREG_SPLIT_DELIM_CAPTURE);"/>
 <Result>['Joffrey', ', ', 'Cersei', ', ', 'Ilyn Payne']</Result>

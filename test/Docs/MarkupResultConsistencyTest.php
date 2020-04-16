@@ -7,6 +7,7 @@ use Error;
 use ParseError;
 use PHPUnit\Framework\TestCase;
 use Throwable;
+use TRegx\CleanRegex\Exception\InvalidReturnValueException;
 use TRegx\CleanRegex\Exception\MissingReplacementKeyException;
 use TRegx\CleanRegex\Exception\NonexistentGroupException;
 use TRegx\CleanRegex\Exception\SubjectNotMatchedException;
@@ -68,15 +69,15 @@ class MarkupResultConsistencyTest extends TestCase
         $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, $two);
 
         if ($one && $two) {
-            $this->assertEquals($return1, $return2, 'Return values from T-Regx (expected) and PHP (actual) differ');
-            $this->assertEquals($echo1, $echo2, 'Printed texts from T-Regx (expected) and PHP (actual) differ');
+            $this->assertSame($return1, $return2, 'Return values from T-Regx (expected) and PHP (actual) differ');
+            $this->assertSame($echo1, $echo2, 'Printed texts from T-Regx (expected) and PHP (actual) differ');
         }
 
         if ($expectedResult) {
-            $this->assertEquals($this->parseExpectedResult($expectedResult), $return1, 'Failed asserting that T-Regx snippet returned expected result');
+            $this->assertSame($this->parseExpectedResult($expectedResult), $return1, 'Failed asserting that T-Regx snippet returned expected result');
         }
         if ($expectedOutput) {
-            $this->assertEquals($this->parseExpectedOutput($expectedOutput), $echo1, 'Failed asserting that T-Regx snippet printed expected output');
+            $this->assertSame($this->parseExpectedOutput($expectedOutput), $echo1, 'Failed asserting that T-Regx snippet printed expected output');
         }
     }
 
@@ -89,14 +90,16 @@ class MarkupResultConsistencyTest extends TestCase
     {
         $namespaces = $this->declareNamespaces([
             MissingReplacementKeyException::class,
-            NonExistentGroupException::class,
+            InvalidReturnValueException::class,
             SubjectNotMatchedException::class,
-            Match::class,
-            NotMatched::class,
-            CompilePregException::class,
+            NonExistentGroupException::class,
             MalformedPatternException::class,
-            preg::class,
+            CompilePregException::class,
+            NotMatched::class,
+            Integer::class,
             Pattern::class,
+            Match::class,
+            preg::class,
         ]);
         $functions = $this->polyfillGlobalFunctions([
             'validateGroupExists'  => true,
@@ -108,7 +111,8 @@ class MarkupResultConsistencyTest extends TestCase
         ];
         $lines = $this->addSingleLineReturn($lines);
         $lines = $this->replaceCodeFragments($lines, [
-            'new SubjectNotMatchedException()' => 'new SubjectNotMatchedException("","")'
+            'new SubjectNotMatchedException()'  => 'new SubjectNotMatchedException("","")',
+            'new InvalidReturnValueException()' => 'new InvalidReturnValueException("","",null)'
         ]);
         $lines = $this->protectAgainstClassRedeclaration($lines);
         return array_merge($namespaces, $functions, $classes, $lines);
@@ -188,7 +192,7 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function parseExpectedResult(array $input)
     {
-        $expectedResult = array_values(array_filter($input));
+        $expectedResult = array_values($input);
         if (count($expectedResult) === 1) {
             $expectedResult[0] = 'return ' . $expectedResult[0] . ';';
         }

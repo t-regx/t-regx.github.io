@@ -53,16 +53,19 @@ return array_merge(...array_map(function (string $text) {
 }, $matches[0]));`}/>
 
 <!--T-Regx:{expect-exception(\TRegx\CleanRegex\Exception\InvalidReturnValueException)}-->
+<!--PHP:{expect-exception(\TRegx\CleanRegex\Exception\InvalidReturnValueException)}-->
 
 So always remember to return an array.
 
 <CodeTabs
     tregx={`pattern('\\w+')->match("I like trains")->flatMap(function (Match $match) {
-    return [$match];  // ok\n});`}
+    return [$match->text()];  // ok\n});`}
     php={`preg::match_all("/\\w+/", 'I like trains', $matches);
 return array_merge(...array_map(function (string $text) {
     return [$text];   // ok
 }, $matches[0]));`}/>
+
+<!--T-Regx:{return-semi}-->
 
 ## Variable callbacks
 

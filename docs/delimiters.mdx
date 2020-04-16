@@ -12,9 +12,11 @@ Thanks to automatic delimiters, one can use regular expressions without [brain s
 choosing a suitable delimiter.
 
 <CodeTabs
-    tregx="pattern('#[A-Z]/[a-z]+')->match($subject)->first();"
-    php="preg_match('%#[A-Z]/[a-z]+%', $subject)"/>
+    tregx="pattern('#[A-Z]/[a-z]+')->match($subject)->all();"
+    php="preg_match_all('%#[A-Z]/[a-z]+%', $subject);"/>
 
+<!--T-Regx:{mock($subject)}-->
+<!--PHP:{mock($subject)}-->
 We can see it for ourselves, using `delimiter` method:
 
 <CodeTabs tregx={`echo pattern('Welcome/Or not')->delimiter() . "\\n";

@@ -37,7 +37,7 @@ standard output.
     echo 'I matched ' . $match[0];\n}\nelse {
     throw new SubjectNotMatchedException();
 }`}/>
-<Result>I matched Apples</Result>
+<Result text>I matched Apples</Result>
 
 > Casting [`Match`] to a string is the same as calling a `text()` method.
 
@@ -58,7 +58,7 @@ if (preg::match('/\\w+/', $subject, $match)) {
 else {
     throw new SubjectNotMatchedException();
 }`}/>
-<Result>Match 'Apples' was matched inside 'Apples are cool'.</Result>
+<Result text>Match 'Apples' was matched inside 'Apples are cool'.</Result>
 
 You can read more extensively about [`Match`] on [`Match` details] page.
 
@@ -163,7 +163,7 @@ one of the following [`orReturn()`], [`orElse()`] or [`orThrow()`].
     php={`if (preg::match('/\w+/', 'Dog', $match)) {
     echo "Yay {$match[0]}";\n}\nelse {
     echo 'Aw, man :/';\n}`}/>
-<Result>Yay Dog</Result>
+<Result text>Yay Dog</Result>
 
 ---
 
