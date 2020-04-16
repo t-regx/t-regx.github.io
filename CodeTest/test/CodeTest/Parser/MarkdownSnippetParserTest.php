@@ -38,7 +38,7 @@ return $matches[0];`}/>';
         $this->assertCodeIsParsed($code, [
             new CodeElement(
                 "pattern('[0-9]+')->match(\"I'm 19. I was born in 1999, on May 12\")->all();",
-                'preg::match_all(\'/[0-9]+/\', "I\'m 19. I was born in 1999, on May 12", $matches);' . PHP_EOL .
+                "preg::match_all('/[0-9]+/', \"I'm 19. I was born in 1999, on May 12\", \$matches);\n" .
                 'return $matches[0];'
             )
         ]);
@@ -102,7 +102,9 @@ return $matches[0];`}/>';
         // given
         $code = <<<'CODE'
 <CodeTabs/>
-<Result>{`code\n foo\\bar`}</Result>
+<Result>
+{`code\n foo\\bar`}
+</Result>
 CODE;
 
         // when + then
@@ -175,8 +177,7 @@ CODE;
 <CodeTabs tregx="two" php="second"/>
 <!--Result-Value:{cos($a)}-->
 <!--Result-Output:{sin($b)}-->
-<Result>bar</Result>
-';
+<Result>bar</Result>';
 
         // when + then
         $this->assertCodeIsParsedAll($code, [

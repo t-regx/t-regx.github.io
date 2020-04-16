@@ -20,6 +20,11 @@ class MdxParser
 
     public function parse(string $content): array
     {
+        return $this->parseMdx(str_replace("\r", "", $content));
+    }
+
+    private function parseMdx(string $content): array
+    {
         $merged = $this->code($content) + $this->mod($content) + $this->result($content);
         ksort($merged);
         return $merged;
@@ -55,11 +60,33 @@ class MdxParser
         return $this->map($this->resultPattern(), $content, function (Match $match) {
             if ($match->matched('result_value')) {
                 return new ResultElement(
-                    $this->parseEscapedJsx($match->get('result_value')),
+                    $this->unquoteJsx($match, $match->get('result_value')),
                     $match->group('result_type')->orReturn(null));
             }
             return new EmptyElement();
         });
+    }
+
+    private function unquoteJsx(Match $match, string $value): string
+    {
+        if ($this->isResultJsx($match)) {
+            return $this->parseEscapedJsx($value);
+        }
+        return $value;
+    }
+
+    private function isResultJsx(Match $match): bool
+    {
+        return trim($match->group('start')->orReturn(null)) == '{`'
+            && trim($match->group('end')->orReturn(null)) == '`}';
+    }
+
+    private function parseEscapedJsx(string $jsx): string
+    {
+        return Pattern::of('\\\\.')->replace($jsx)->all()->by()->map([
+            '\n'   => "\n",
+            '\\\\' => '\\',
+        ]);
     }
 
     private function codePattern(): string
@@ -79,7 +106,7 @@ PATTERN;
 
     private function resultPattern(): string
     {
-        return '(?:<Result(?:\\s+(?<result_type>[a-z]+))?>(\s*\{`)?(?<result_value>.*?)(`}\s*)?</Result>)';
+        return '(?:<Result(?:\\s+(?<result_type>[a-z]+))?>(?<start>\s*\{`)?(?<result_value>.*?)(?<end>`}\s*)?</Result>)';
     }
 
     private function map(string $pattern, string $content, callable $mapper): array
@@ -94,13 +121,5 @@ PATTERN;
                 return $mapper($matches[0]);
             })
             ->all();
-    }
-
-    private function parseEscapedJsx(string $jsx): string
-    {
-        return Pattern::of('\\\\.')->replace($jsx)->all()->by()->map([
-            '\n'   => "\n",
-            '\\\\' => '\\',
-        ]);
     }
 }
