@@ -83,7 +83,7 @@ replace a string with a constant value without [cognitive load] about possible `
 
 <!--T-Regx:{echo-at(first)}-->
 <!--PHP:{echo-at(first)}-->
-<Result>{`I have $1> and <$1>`}</Result>
+<Result text>{`I have <$1> and <$1>`}</Result>
 
 You can be sure, what's put into `with()` will certainly be present unchanged in your final result.
 
@@ -105,7 +105,7 @@ against _an unexpected_ `\` or `$` - feel free to use `withReferences()` which *
 
 <!--T-Regx:{echo-at(first)}-->
 <!--PHP:{echo-at(first)}-->
-<Result>{`I have <15> and <192>`}</Result>
+<Result text>{`I have <15> and <192>`}</Result>
 
 [**brain strain**]: overview.md#brain-strain
 [`preg_replace()`]: https://www.php.net/manual/en/function.preg-replace.php
