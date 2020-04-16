@@ -74,7 +74,7 @@ PATTERN;
 
     private function modPattern(): string
     {
-        return '(?:<!--(?<mod_for>T-Regx|PHP):\\{(?<mod>[\\w-]+)(?:\\((?<mod_arg>[\\w\\\\$-]+)\\))?\\}-->)';
+        return '(?:<!--(?<mod_for>T-Regx|PHP|Result-(?:Value|Output)):\\{(?<mod>[\\w-]+)(?:\\((?<mod_arg>[\\w\\\\$-]+)\\))?\\}-->)';
     }
 
     private function resultPattern(): string

@@ -59,7 +59,7 @@ return $matches[0];`}/>';
         $this->assertCodeIsParsed($code, [
             new CodeElement(
                 "return pattern('[aeiouy]')->count('Computer');",
-                "return preg::match_all('/[aeiouy]/', 'Computer');",
+                "return preg::match_all('/[aeiouy]/', 'Computer');"
             ),
             new ResultElement('3', null)
         ]);
@@ -137,8 +137,8 @@ return $matches[0];`}/>';
 <!--PHP:{function($value)}-->
 <Result php>foo</Result>
 <CodeTabs tregx="two" php="second"/>
-<!--T-Regx:{cos($a)}-->
-<!--T-Regx:{sin($b)}-->
+<!--Result-Value:{cos($a)}-->
+<!--Result-Output:{sin($b)}-->
 <Result>bar</Result>
 ';
 
@@ -152,8 +152,8 @@ return $matches[0];`}/>';
             ],
             [
                 new CodeElement("two", "second"),
-                new ModElement(new Mods(''), 'cos', 'T-Regx', '$a'),
-                new ModElement(new Mods(''), 'sin', 'T-Regx', '$b'),
+                new ModElement(new Mods(''), 'cos', 'Result-Value', '$a'),
+                new ModElement(new Mods(''), 'sin', 'Result-Output', '$b'),
                 new ResultElement("bar", null),
             ]
         ]);
