@@ -55,7 +55,7 @@ class MdxParser
         return $this->map($this->resultPattern(), $content, function (Match $match) {
             if ($match->matched('result_value')) {
                 return new ResultElement(
-                    $match->get('result_value'),
+                    $this->parseEscapedJsx($match->get('result_value')),
                     $match->group('result_type')->orReturn(null));
             }
             return new EmptyElement();
@@ -94,5 +94,13 @@ PATTERN;
                 return $mapper($matches[0]);
             })
             ->all();
+    }
+
+    private function parseEscapedJsx(string $jsx): string
+    {
+        return Pattern::of('\\\\.')->replace($jsx)->all()->by()->map([
+            '\n'   => "\n",
+            '\\\\' => '\\',
+        ]);
     }
 }

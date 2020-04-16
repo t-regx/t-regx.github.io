@@ -26,7 +26,7 @@ class MarkdownSnippetParserTest extends TestCase
     /**
      * @test
      */
-    public function shouldParseCode()
+    public function shouldParseCodeJsxAttribute()
     {
         // when
         $code = '<CodeTabs
@@ -47,7 +47,7 @@ return $matches[0];`}/>';
     /**
      * @test
      */
-    public function shouldParseCode_noJsxSyntax()
+    public function shouldParseCodeHtmlAttribute()
     {
         // when
         $code = '<CodeTabs
@@ -100,13 +100,33 @@ return $matches[0];`}/>';
     public function shouldParseResultWithJsxTemplateString()
     {
         // given
-        $code = '<CodeTabs/>
-<Result>{`code`}</Result>';
+        $code = <<<'CODE'
+<CodeTabs/>
+<Result>{`code\n foo\\bar`}</Result>
+CODE;
 
         // when + then
         $this->assertCodeIsParsed($code, [
             new CodeElement(null, null),
-            new ResultElement('code', null)
+            new ResultElement("code\n foo\\bar", null)
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldNotDecodeHtmlBackslash()
+    {
+        // given
+        $code = <<<'CODE'
+<CodeTabs/>
+<Result>code\n foo\\bar</Result>
+CODE;
+
+        // when + then
+        $this->assertCodeIsParsed($code, [
+            new CodeElement(null, null),
+            new ResultElement("code\\n foo\\\\bar", null)
         ]);
     }
 
