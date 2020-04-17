@@ -13,18 +13,17 @@ But what if you **expected** the subject not to be matched? And how do you to re
 ## Optional matches with `findFirst()`
 
 Method `findFirst()` can be called with a callback (that accepts [`Match`] details) just
-like `first()`. The difference is: `findFirst()` never throws `SubjectNotMatchedException`, and allows you to control
+like [`first()`]. The difference is: `findFirst()` never throws `SubjectNotMatchedException`, and allows you to control
 an unmatched subject by appropriate control methods: `orThrow()`, `orReturn()` and `orElse()`.
 
 For example:
 
 <CodeTabs
-    tregx={`$first = pattern('[0-9]+')->match("I'm 19 years old")
+    tregx={`return pattern('[0-9]+')->match("I'm 19 years old")
    ->findFirst(function (Match $match) {
        return "I was born $match years ago";
    })
-   ->orReturn('Unmatched :/');\n
-return $first;`}
+   ->orReturn('Unmatched :/');`}
     php={`if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
     $text = $match[0];
     return "I was born $text years ago";
@@ -40,18 +39,16 @@ handling of an unmatched subject relies in the chained method.
 If a match is not found, it returns a default value.
 
 <CodeTabs
-    tregx={`$first = pattern('[0-9]+')->match("I'm a dog")
+    tregx={`return pattern('[0-9]+')->match("I'm a dog")
     ->findFirst(function (Match $match) {
-        return "Match is found!";
+       return "I was born $match years ago";
     })
-    ->orReturn("Match is not found");\n
-return $first;`}
-    php={`if (preg::match('/[0-9]+/', "I'm a dog")) {
-    $first = "Match is found!";
-} else {
-    $first = "Match is not found";
-}\n
-return $first;`}/>
+    ->orReturn("Match is not found");`}
+    php={`if (preg::match('/[0-9]+/', "I'm a dog", $match)) {
+    $text = $match[0];
+    return "I was born $text years ago";
+}
+return "Match is not found";`}/>
 <Result>'Match is not found'</Result>
 
 ### `orElse()`
@@ -59,21 +56,19 @@ return $first;`}/>
 If a match is not found, it calls `orElse()` callback and uses *it* to evaluate a return value.
 
 <CodeTabs
-    tregx={`$first = pattern('[0-9]+')->match("I'm a dog")
+    tregx={`return pattern('[0-9]+')->match("I'm a dog")
     ->findFirst(function (Match $match) {
-        return "Match is found!";
+       return "I was born $match years ago";
     })
     ->orElse(function (NotMatched $notMatched) { 
         return "I couldn't match subject: " . $notMatched->subject();
-    });\n
-return $first;`}
+    });`}
     php={`$subject = "I'm a dog";
-if (preg::match('/[0-9]+/', $subject)) {
-    $first = "Match is found!";
-} else {
-    $first = "I couldn't match subject: $subject";
-}\n
-return $first;`}/>
+if (preg::match('/[0-9]+/', $subject, $match)) {
+    $text = $match[0];
+    return "I was born $text years ago";
+}
+return "I couldn't match subject: $subject";`}/>
 <Result>"I couldn't match subject: I'm a dog"</Result>
 
 ### `orThrow()`
@@ -90,17 +85,19 @@ If a match is not found, it throws `SubjectNotMatchedException` by default.
 }
 catch (SubjectNotMatchedException $e) {
     // React to an unmatched subject
-    echo "Not matched";
+    echo "Not matched: " . $e->getMessage();
 }`}
      php={`try {
     if (preg::match('/[0-9]+/', "I'm a dog")) {
         return "Match is found!";
-    } 
-    throw new SubjectNotMatchedException();
+    }
+    throw new SubjectNotMatchedException(
+        'Expected to get the first match, but subject was not matched',
+        "I'm a dog");
 }
 catch (SubjectNotMatchedException $e) {
     // React to an unmatched subject
-    echo "Not matched";
+    echo "Not matched: " . $e->getMessage();
 }`}/>
 
 ### Custom exceptions for `orThrow()`
@@ -118,18 +115,18 @@ try {
 }
 catch (MyException $e) {
     // React to an unmatched subject
-    echo "Not matched";
+    echo "Not matched: " . $e->getMessage();
 }`}
      php={`class MyException extends \\Exception {}\n
 try {
     if (preg::match('/[0-9]+/', "I'm a dog")) {
         return "Match is found!";
     } 
-    throw new MyException();
+    throw new MyException('Expected to get the first match, but subject was not matched');
 }
 catch (MyException $e) {
     // React to an unmatched subject
-    echo "Not matched";
+    echo "Not matched: " . $e->getMessage();
 }`}/>
 
 Of course, your custom exception must meet certain requirements:
