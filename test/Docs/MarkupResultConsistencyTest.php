@@ -65,8 +65,10 @@ class MarkupResultConsistencyTest extends TestCase
         [$return2, $echo2, $exception2] = $two ? $this->invoke($two, 'PHP') : [null, null, null];
 
         // then
-        $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, $one);
-        $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, $two);
+        if ($exceptions) {
+            $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, $one);
+            $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, $two);
+        }
 
         if ($one && $two) {
             $this->assertSame($return1, $return2, 'Return values from T-Regx (expected) and PHP (actual) differ');
