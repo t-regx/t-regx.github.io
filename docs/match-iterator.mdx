@@ -20,11 +20,11 @@ methods or within your own code, for example PHP methods [`iterator_to_array()`]
 
 <CodeTabs
     tregx={`$iterator = pattern('\\w+')->match('Apples are cool')->getIterator();\n
-return iterator_to_array($iterator);`}
+return $iterator->current()->text(); // Iterator contains "Match" details`}
     php={`preg::match_all('/\\w+/', 'Apples are cool', $matches);
 $iterator = new ArrayIterator($matches[0]);\n
-return iterator_to_array($iterator);`}/>
-<Result>['Apples', 'are', 'cool']</Result>
+return $iterator->current();  // Iterator contains "string"`}/>
+<Result>'Apples'</Result>
 
 It is useful with methods that only accept [`\Iterator`], and when an explicit iterator is needed. Using `match()->getIterator()`
 for methods that accept `array` is redundant :)
