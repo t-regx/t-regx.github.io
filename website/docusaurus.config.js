@@ -30,9 +30,9 @@ module.exports = {
       },
       links: [
         {position: 'left', label: 'Docs', to: 'docs/installation'},
+        {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
-        {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'GitHub', href: mainRepoUrl},
       ],
     },
