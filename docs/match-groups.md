@@ -3,7 +3,7 @@ id: match-groups
 title: Capturing groups
 ---
 
-When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details
+When using [`pattern()->match()`] and [`->replace->callback()`], some methods receive a callback that accepts [`Match`] details
 object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`]. 
 
 The details can be used to get concise information about the matched occurrence, such
@@ -65,7 +65,7 @@ pattern($pattern)->match($subject)->forEach(function (Match $match) {
 ### Optional groups
 
 Some patterns have required capturing groups, e.g `^(cm|mm)$`. Others, have capturing groups that are optional, 
-e.g. `\d+(cm|mm)?`. As you can see the `(cm|mm)` doesn't have to be matched for the whole subject to be matched - 
+e.g. `\d+(cm|mm)?`. As you can see, `(cm|mm)` doesn't have to be matched for the whole subject to be matched - 
 both `14` and `14cm` are subjects that match the pattern.
 
 Optional groups allow you to deal with potentially unmatched groups with elegance. If the group **is matched**, 
@@ -75,7 +75,7 @@ each of the methods:
  - `orElse()`
  - `orThrow()`
 
-work exactly the same.
+work exactly the same - returns the matched capturing group.
 
 ```php
 pattern('(?<schema>http://)?\w+\.\w+')->match('http://google.com')->first(function (Match $match) {
@@ -88,7 +88,7 @@ pattern('(?<schema>http://)?\w+\.\w+')->match('http://google.com')->first(functi
 });
 ```
 
-The difference is - how they work when then group is not matched:
+The difference is - how they work when the group is not matched:
 
 ```php
 pattern('(?<schema>https?://)?\w+\.\w+')->match('google.com')->first(function (Match $match) {
@@ -311,7 +311,7 @@ And T-Regx **hates** it. We **hate** it.
 That's why in T-Regx, [`Match`] details has 3 separate methods to deal with each of these cases separately. 
 
 Of course, the interface of [`Match`] is the same for matching, replacing and any other operation, 
-so validation of groups in T-Regx works completely alike for `pattern()->match()`, `pattern()->replace()` and any other 
+so validation of groups in T-Regx works completely alike for [`pattern()->match()`], [`pattern()->replace()`] and any other 
 method. It's bulletproof.
 
 Here's how they work:
@@ -340,6 +340,9 @@ In short:
 [`map()`]: match-map.mdx
 [`flatMap()`]: match-flat-map.mdx
 [`callback()`]: replace-callback.mdx
+[`pattern()->match()`]: match.mdx
+[`pattern()->replace()`]: replace.mdx
+[`->replace->callback()`]: replace-callback.mdx
 
 [`array_key_exists()`]: https://www.php.net/manual/en/function.array-key-exists.php
 [`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
