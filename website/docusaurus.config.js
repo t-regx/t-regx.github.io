@@ -2,7 +2,7 @@ const mainRepoUrl = 'https://github.com/T-Regx/T-Regx';
 
 module.exports = {
   title: 'T-Regx',
-  tagline: 'Bulletproof and powerful Regular Expressions for PHP',
+  tagline: 'Programmer-oriented Regular\nExpressions library for PHP',
   url: 'https://t-regx.com',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
