@@ -74,13 +74,10 @@ const WarningsToExceptions = () => (
 );
 
 const CommentsSection = () => (
-  <div className="comments">
-    <div className="container">
-      <DisqusThread/>
-    </div>
+  <div className="container">
+    <DisqusThread/>
   </div>
 );
-
 
 const CustomCodeBlock = ({children, ...props}) => {
   return <CodeBlock {...children.props} />;
@@ -131,9 +128,7 @@ const GridBlock = props => (
       <div className="row">
         {props.columns.map((column, index) => (
           <div key={index} className="col">
-            {column.title && <h2>
-              <Markdown>{column.title}</Markdown>
-            </h2>}
+            {column.title && <h2>{column.title}</h2>}
 
             {column.content && <div>
               <Markdown options={{overrides: {pre: CustomCodeBlock}}}>
