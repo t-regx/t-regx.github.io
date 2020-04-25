@@ -7,7 +7,6 @@ export default {
         " delimiters for you, if they're not already present.",
     },
     {
-      video: 'mp4/delimiters.mp4',
     },
   ],
   installation: [
@@ -33,7 +32,6 @@ export default {
         "With [`pattern()->match()`](docs/match) and [`pattern()->replace()`](docs/replace), it's trivial to retrieve, iterate, map and filter matches with callbacks and a detailed [`Match` object](docs/match-details).",
     },
     {
-      video: 'mp4/match-details.mp4',
     },
   ],
   features: [
@@ -50,7 +48,6 @@ export default {
   ],
   warningsToExceptions: [
     {
-      video: 'mp4/safe.regex.mp4',
     },
     {
       title: 'SafeRegex | Converts warnings to exceptions',
@@ -60,7 +57,6 @@ export default {
   ],
   functionalProgramming: [
     {
-      video: 'mp4/functional.mp4',
     },
     {
       title: 'Functional programming',
