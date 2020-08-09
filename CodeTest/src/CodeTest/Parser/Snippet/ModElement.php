@@ -5,12 +5,9 @@ use CodeTest\Parser\Mods;
 
 class ModElement implements Element
 {
-    /** @var Mods */
-    private $mods;
-    /** @var string */
-    private $name;
-    /** @var string */
-    private $for;
+    private Mods $mods;
+    private string $name;
+    private string $for;
     /** @var string|int */
     private $arg;
 

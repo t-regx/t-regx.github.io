@@ -3,10 +3,8 @@ namespace CodeTest\Parser\Snippet;
 
 class CodeElement implements Element, \JsonSerializable
 {
-    /** @var string|null */
-    private $tRegx;
-    /** @var string|null */
-    private $php;
+    private ?string $tRegx;
+    private ?string $php;
 
     public function __construct(?string $tRegx, ?string $php)
     {

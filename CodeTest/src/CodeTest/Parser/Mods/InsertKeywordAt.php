@@ -5,8 +5,7 @@ use CodeTest\Parser\LineArg;
 
 class InsertKeywordAt extends PureModification
 {
-    /** @var string */
-    private $keyword;
+    private string $keyword;
 
     public function __construct(string $keyword)
     {

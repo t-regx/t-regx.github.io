@@ -13,8 +13,7 @@ use Exception;
 
 class Mods
 {
-    /** @var string */
-    private $path;
+    private string $path;
     /** @var Modification[] */
     private $mods;
 

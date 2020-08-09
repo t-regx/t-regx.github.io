@@ -10,8 +10,7 @@ use TRegx\CleanRegex\Pattern;
 
 class MdxParser
 {
-    /** @var Mods */
-    private $mods;
+    private Mods $mods;
 
     public function __construct(Mods $mods)
     {

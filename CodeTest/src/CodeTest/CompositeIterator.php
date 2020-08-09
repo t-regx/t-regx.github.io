@@ -6,14 +6,10 @@ use Iterator;
 
 class CompositeIterator implements Iterator
 {
-    /** @var Iterator */
-    private $iterator;
-    /** @var Iterator|null */
-    private $nestedIterator;
-    /** @var int */
-    private $key = 0;
-    /** @var bool */
-    private $reindex;
+    private Iterator $iterator;
+    private ?Iterator $nestedIterator;
+    private int $key = 0;
+    private bool $reindex;
 
     public function __construct(Iterator $iterator, bool $reindexKeys = true)
     {

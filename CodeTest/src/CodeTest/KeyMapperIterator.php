@@ -5,8 +5,7 @@ use Iterator;
 
 class KeyMapperIterator implements Iterator
 {
-    /** @var Iterator */
-    private $iterator;
+    private Iterator $iterator;
     /** @var callable */
     private $keyMapper;
 

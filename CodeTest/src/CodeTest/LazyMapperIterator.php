@@ -5,8 +5,7 @@ use Iterator;
 
 class LazyMapperIterator implements Iterator
 {
-    /** @var Iterator */
-    private $source;
+    private Iterator $source;
     /** @var callable */
     private $mapper;
 

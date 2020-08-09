@@ -13,9 +13,7 @@ class KeyMapperIteratorTest extends TestCase
     public function shouldMapKeys()
     {
         // given
-        $iterator = new KeyMapperIterator(new ArrayIterator([1, 2, 3]), function (int $key) {
-            return "key: $key";
-        });
+        $iterator = new KeyMapperIterator(new ArrayIterator([1, 2, 3]), fn(int $key) => "key: $key");
 
         // when
         $result = iterator_to_array($iterator);

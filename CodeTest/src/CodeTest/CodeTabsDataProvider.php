@@ -10,8 +10,7 @@ use Iterator;
 
 class CodeTabsDataProvider
 {
-    /** @var string */
-    private $basePath;
+    private string $basePath;
 
     public function __construct(string $basePath)
     {

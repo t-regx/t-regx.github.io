@@ -5,8 +5,7 @@ use Throwable;
 
 class TestException extends \Exception
 {
-    /** @var string */
-    private $snippet;
+    private ?string $snippet;
 
     public function __construct(Throwable $cause, ?string $snippet)
     {

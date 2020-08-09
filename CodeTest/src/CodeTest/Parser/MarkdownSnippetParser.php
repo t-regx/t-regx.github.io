@@ -5,8 +5,7 @@ use CodeTest\Parser\Snippet\CodeElement;
 
 class MarkdownSnippetParser
 {
-    /** @var MdxParser */
-    private $parser;
+    private MdxParser $parser;
 
     public function __construct(MdxParser $parser)
     {

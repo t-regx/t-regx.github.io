@@ -5,8 +5,7 @@ use InvalidArgumentException;
 
 class MockVariable extends PureModification
 {
-    /** @var bool */
-    private $isPattern;
+    private bool $isPattern;
 
     public function __construct(bool $isPattern)
     {

@@ -191,9 +191,7 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function declareNamespaces(array $classes): array
     {
-        return array_map(function (string $className) {
-            return "use $className;";
-        }, $classes);
+        return array_map(fn(string $className) => "use $className;", $classes);
     }
 
     private function parseExpectedResult(array $input)

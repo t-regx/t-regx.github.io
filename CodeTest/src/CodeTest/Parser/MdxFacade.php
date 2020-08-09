@@ -5,8 +5,7 @@ use CodeTest\Parser\Snippet\Snippet;
 
 class MdxFacade
 {
-    /** @var MarkdownSnippetParser */
-    private $parser;
+    private MarkdownSnippetParser $parser;
 
     public function __construct(MarkdownSnippetParser $parser)
     {
