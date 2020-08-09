@@ -68,6 +68,10 @@ class MarkupResultConsistencyTest extends TestCase
         if ($exceptions) {
             $this->assertExceptionInstanceOf($exceptions['T-Regx'], $exception1, $one);
             $this->assertExceptionInstanceOf($exceptions['PHP'], $exception2, $two);
+        } else if ($exception1) {
+            throw $exception1;
+        } else if ($exception2) {
+            throw $exception2;
         }
 
         if ($one && $two) {
