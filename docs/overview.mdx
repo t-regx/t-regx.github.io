@@ -7,23 +7,27 @@ T-Regx (_T-Rex and RegExp_) is a lightweight, high-level Regular Expressions lib
 
 Its main features are:
 
-- Being **made for developers**:
-
-  - [Automatic delimiters](delimiters.mdx) for your patterns
-  - Each and every unexpected situation ends in an exception
+- Removing headaches of PHP:
+  - `if()`ing around `preg_` methods, to unify PHP cases with exceptions (see ["Comparison"](/comparison))
   - UTF-8 support out of the box
   - [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user-input)
 
 - Cleaning the [mess after PHP regular expressions API](whats-the-point.md):
 
   - All false positives and false negatives are eliminated
-  - Special values like `null`, `false`, `''` aren't used to indicate errors.
   - Unifying differences between matching, replacing, splitting - all operations
-  - Results aren't a dull `string[][]` array, but a dedicated [`Match`](match-details.md) details.
-  - Based on exceptions - Handles every warning, error, fatal error or notice.
-  - Relieving developers from [**brain strain**]:
+  - Special values like `null`, `false`, `''` aren't used to indicate errors (exceptions instead)
+  - Handles every warning, error, fatal error or notice aren't thrown (exceptions instead)
+  - `preg_last_error()` isn't required to handle errors (exceptions instead)
+  - Errors/traps aren't silently ignored (exceptions instead)
 
-- Being explicit and descriptive - ([why is explicit interface so important?](#why-is-explicit-interface-so-important)):
+- API:
+  - [Automatic delimiters](delimiters.mdx) for your patterns
+  - Results aren't a dull `string[][]` array, but a dedicated [`Match`](match-details.md) details
+
+Additionally:
+
+- Being explicit and descriptive - (see [why is explicit interface so important?](#why-is-explicit-interface-so-important)):
   - Each function obeys SRP
   - Functionalities are represented with methods (and not flags or default arguments)
   - No default parameters
