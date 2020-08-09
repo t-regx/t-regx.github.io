@@ -22,8 +22,8 @@ Suggested articles:
 
 There are two methods `Pattern::quote()` and `Pattern::unquote()`.
 
-First of which works as `preg_quote()` is supposed to
-work (except for the fact that `preg_quote()` is broken before PHP 7.1.3 version, and `Pattern::quote()` fixes it)...
+First of which works as [`preg_quote()`] is supposed to work (except for the fact that [`preg_quote()`] is broken
+before PHP 7.1.3).
 
 <CodeTabs tregx="Pattern::quote('Welcome\How are you?');"/>
 
@@ -53,3 +53,5 @@ $this->assertEquals($input, $output);
 ```
 
 The contract is that `$input` should be identical to `$output` for any `string` value.
+
+[`preg_quote()`]: https://www.php.net/manual/en/function.preg-quote.php

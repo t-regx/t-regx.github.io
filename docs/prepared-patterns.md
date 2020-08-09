@@ -73,19 +73,21 @@ preg_match('/(Pattern|pattern) with ' . preg_quote('quoted parts...', '/') . ' i
 
 Prepared Patterns address some of this approach flaws. They:
 
-- automatically delimiter your input, so there's no need for specifying `/` delimiter again in `preg_quote()`.
+- automatically delimiter your input, so there's no need for specifying `/` delimiter again in [`preg_quote()`].
 - are declarative. Meaning, you only need to _declare_ that you want those values to be treated as string literals.
-- fix inconsistency with `preg_quote()` returning different values since PHP 7.3
+- fix inconsistency with [`preg_quote()`] returning different values since PHP 7.3
 
 They also add additional functionality, that currently is utterly missing in PHP:
 
 - un-quoting values inside `\Q` and `\E`, which indicate quote in PHP regular expressions.
-- flag `x` ignores whitespaces, so large expressions can be split to multiple lines. `preg_quote()` doesn't quote spaces,
+- flag `x` ignores whitespaces, so large expressions can be split to multiple lines. [`preg_quote()`] doesn't quote spaces,
   so user-input spaces are also going to be ignored - Prepared Patterns will however preserve them.
 
 This is done to relieve you from the [**brain strain**](overview.mdx#brain-strain).
 
 Basically,
 
-- `preg_quote()` is procedural - you take care of everything by yourself
+- [`preg_quote()`] is procedural - you take care of everything by yourself
 - Prepared Patterns are declarative - we take care of everything **for** you
+
+[`preg_quote()`]: https://www.php.net/manual/en/function.preg-quote.php

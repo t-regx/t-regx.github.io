@@ -304,7 +304,7 @@ The two first cases always return `null`, the third one returns either `''` or `
 groups!**). If you used [`PREG_OFFSET_CAPTURE`], it'll return `['', -1]` instead (so you need to compare the offset to `-1`). 
 Matched empty string, of course, returns `''` (which might the same as the third).
 
-Also, [`PREG_OFFSET_CAPTURE`] for `preg_match_all()` works fine, but for `preg_match()`, if it's the last entry, it will
+Also, [`PREG_OFFSET_CAPTURE`] for [`preg_match_all()`] works fine, but for [`preg_match()`], if it's the last entry, it will
 not be an `array`, but an empty string instead ;|
 
 Since PHP 7.2, there's [`PREG_UNMATCHED_AS_NULL`] - it's a little better, it allows distinguishing an unmatched subject 

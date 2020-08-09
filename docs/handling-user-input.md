@@ -44,7 +44,9 @@ The same reason why good programmers use Prepared SQL Statements, instead of `my
 They allow you to separate regular expression from unsafe data, which helps with making the pattern safer:
 
 - delimiters become an implementation detail, about which programmer doesn't have to care
-- some flags (e.g. `x`) require spaces and whitespaces to also be quoted, which `preg_quote()` doesn't quote
-- inside comments (`\Q` and `\E`), values shouldn't be quoted! This would cause double quotation, which `preg_quote()` does
+- some flags (e.g. `x`) require spaces and whitespaces to also be quoted, which [`preg_quote()`] doesn't quote
+- inside comments (`\Q` and `\E`), values shouldn't be quoted! This would cause double quotation, which [`preg_quote()`] does
   _(kinda how `>` becomes `&amp;gt;` when double quoted)_.
-- `preg_quote()` doesn't quote comments before PHP 7.1.3
+- [`preg_quote()`] doesn't quote comments before PHP 7.1.3
+
+[`preg_quote()`]: https://www.php.net/manual/en/function.preg-quote.php
