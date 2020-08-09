@@ -12,6 +12,11 @@
       "Test\\CodeTest\\": "CodeTest/test/CodeTest"
     }
   },
+  "scripts": {
+    "test": [
+      "phpunit --no-coverage test"
+    ]
+  },
   "require": {
     "php": ">=7.1.0",
     "ext-mbstring": "*"
