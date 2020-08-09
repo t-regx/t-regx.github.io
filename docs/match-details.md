@@ -3,12 +3,12 @@ id: match-details
 title: Match details
 ---
 
-When using `pattern()->match()` and `->replace->callback()`, some methods receive a callback that accepts `Match` details
-object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`]. 
+When using [`pattern()->match()`] and [`->replace->callback()`], some methods receive a callback that accepts [`Match`] 
+details object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`]. 
 
-The details can be used to get concise information about the matched occurrence, such
-as its value (i.e. "the whole match"), capturing groups and their UTF-8 safe offsets, limits, indexes, other matches
-as well as the used subject (although it could also be pass as a closure parameter).
+The details can be used to get concise information about the matched occurrence, such as its value 
+(i.e. `"the whole match"`), capturing groups and their UTF-8/raw offsets, limits, indexes, other matches as well as the 
+used subject (although it could also be pass as a closure parameter).
 
 <!-- Copy the above paragraph to match-groups.md -->
 
@@ -285,3 +285,6 @@ More about capturing groups can be found in the next section: [Capturing groups]
 [`flatMap()`]: match-flat-map.mdx
 [`callback()`]: replace-callback.mdx
 [Capturing groups]: match-groups.md
+[`Match`]: match-details.md
+[`pattern()->match()`]: match.mdx
+[`->replace->callback()`]: replace-callback.mdx

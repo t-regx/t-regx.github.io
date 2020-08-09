@@ -3,24 +3,26 @@ id: match-groups
 title: Capturing groups
 ---
 
-When using [`pattern()->match()`] and [`->replace->callback()`], some methods receive a callback that accepts [`Match`] details
-object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`]. 
+When using [`pattern()->match()`] and [`->replace->callback()`], some methods receive a callback that accepts [`Match`] 
+details object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`]. 
 
-The details can be used to get concise information about the matched occurrence, such
-as its value (i.e. "the whole match"), capturing groups and their UTF-8 safe offsets, limits, indexes, other matches
-as well as the used subject (although it could also be pass as a closure parameter).
+The details can be used to get concise information about the matched occurrence, such as its value 
+(i.e. `"the whole match"`), capturing groups and their UTF-8/raw offsets, limits, indexes, other matches as well as the 
+used subject (although it could also be pass as a closure parameter).
 
 <!-- Copy the above paragraph to match-details.md -->
 
 ## Overview
 
-> This page only concerns **capturing groups** of [`Match`], specifically. See [`Match`] details for more throughout documentation.
+> This page only concerns **capturing groups** of [`Match`], specifically. See "[`Match` details]" for a more throughout 
+> documentation.
 
 Using [`Match`] details, you gain access complete information about capturing groups:
- - [`group(int|string)`](#group-details) - capturing group details. If group is matched, below methods are available:
+ - [`group(int|string)`](#group-details) - capturing group details. If a group is matched, below methods are available:
      - `matched()` - whether the group was matched by the subject
-     - `text()` - value of the group
-     - `toInt()`/`isInt()` - allow you to handle integers safely
+     - `text()` - value of the group, as `string`
+     - `toInt()` - value of the group, cast to `int`
+     - `isInt()` - whether the group is a valid integer (e.g. `true` for group `(\d+)`)
      - [offsets of matched values](#offsets) in the subject:
        - character offsets (UTF-8 safe) - `offset()`
        - byte offsets - `byteOffset()`
@@ -64,7 +66,7 @@ pattern($pattern)->match($subject)->forEach(function (Match $match) {
 
 ### Optional groups
 
-Some patterns have required capturing groups, e.g `^(cm|mm)$`. Others, have capturing groups that are optional, 
+Some patterns contain required capturing groups, e.g `^(cm|mm)$`. Others, have capturing groups that are optional, 
 e.g. `\d+(cm|mm)?`. As you can see, `(cm|mm)` doesn't have to be matched for the whole subject to be matched - 
 both `14` and `14cm` are subjects that match the pattern.
 
@@ -75,7 +77,7 @@ each of the methods:
  - `orElse()`
  - `orThrow()`
 
-work exactly the same - returns the matched capturing group.
+work exactly the same - returns the value of the matched capturing group.
 
 ```php
 pattern('(?<schema>http://)?\w+\.\w+')->match('http://google.com')->first(function (Match $match) {
@@ -119,8 +121,8 @@ pattern('(?<schema>https?://)?\w+\.\w+')->match('google.com')->first(function (M
 
 ### Index, name and identifier
 
-Groups can be referred to either by index or by name, if the group in a pattern is named. What was the group referred
-with is called an identifier. If group was referred by index, then the index is the identifier.
+Groups can be referred to either by an index or by name, if the group in a pattern is named. What was the group referred
+with is called an identifier. If group was referred to by an index, then the index is the identifier.
 
 T-Regx has 3 separate methods for each of the group reference method:
  - `index()` - returns the ordinal number of a group
@@ -140,7 +142,7 @@ pattern('(?<schema>https?://)?\w+\.\w+')->match($subject)->first(function (Match
 });
 ```
 
-## Group is matched
+## Optional Groups
 
 Method `matched(int|string)` allows you to verify whether a given group was matched by the subject:
 
@@ -181,9 +183,10 @@ pattern('(?<schema>https?://)?\w+\.\w+')->match($subject)->first(function (Match
 
 #### Invalid groups and arguments
 - `matched()` will throw `NonexistentGroupException`, when used with a non-existent group *(i.e. `asdf`)*.
-- `matched()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any type other than `string` or `int`)*.
+- `matched()` will throw [`\InvalidArgumentException`], when used with an invalid group *(i.e. `2group`, `-1` or any 
+   type other than `string` or `int`)*.
 
-## Group exists
+## Missing Groups
 
 Method `hasGroup(int|string)` allows you to verify whether the group was used in a pattern:
 
@@ -210,10 +213,12 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('')->first(function (Match $match)
 ```
 
 #### Invalid groups and arguments
-- `hasGroup()` will throw `\InvalidArgumentException`, when used with an invalid group *(i.e. `2group`, `-1` or any type 
-other than `string` or `int`)*.
+- `hasGroup()` will throw [`\InvalidArgumentException`], when used with an invalid group *(i.e. `2group`, `-1` or any 
+   type other than `string` or `int`)*.
 
-> Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic - they're constant much more often; hence the developer doesn't have to check whether the group exists. The pattern is constant - the collection of groups is also constant.
+> Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic - they're constant much more often; 
+> hence the developer doesn't have to check whether the group exists. The pattern is constant - the collection of groups 
+> is also constant (optional or not).
 
 ## Composite groups
 
@@ -237,17 +242,17 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('14cm')->first(function (Match $ma
 });
 ```
 
-If there are no named groups, it simply returns an empty array:
+If a group isn't named, it's represented by a `null`:
 
 ```php
-pattern('(\d+)(cm|mm)')->match('14cm')->first(function (Match $match) {
-    $match->groupNames();    // []
+pattern('(?<value>\d+)(cm|mm)')->match('14cm')->first(function (Match $match) {
+    $match->groupNames();    // ['value', null]
 });
 ```
 
 ### Groups count
 
-Method `groupsCount()` returns a number of the capturing groups (without duplicates of named and regular groups)
+Method `groupsCount()` returns the number of capturing groups (without duplicates of named and regular groups)
 
 ```php
 pattern('(?<value>\d+)(?<unit>cm|mm)')->match('14cm')->first(function (Match $match) {
@@ -283,9 +288,8 @@ pattern($pattern)->match($subject)->first(function (Match $match) {
 
 ## Groups In-Depth
 
-Groups In-Depth is a rather advanced matter, and not necessary for everyday use.
-If you don't seek "in-depth" understanding of capturing groups, feel free to skip
-this chapter.
+> Groups In-Depth is a rather advanced matter, and not necessary for everyday use.
+> If you don't seek "in-depth" understanding of capturing groups, feel free to skip this chapter.
 
 ### Invalid group identifiers
 
@@ -297,46 +301,50 @@ In plain, old, vanilla PHP there's no difference between:
  - matched group, but value is `''` (empty string)
  
 The two first cases always return `null`, the third one returns either `''` or `null` (depending on the **order of 
-groups!**). If you used [`PREG_OFFSET_CAPTURE`], it'll return `['', -1]` instead. And of course the last one returns `''`, 
-which might the same as the third.
+groups!**). If you used [`PREG_OFFSET_CAPTURE`], it'll return `['', -1]` instead (so you need to compare the offset to `-1`). 
+Matched empty string, of course, returns `''` (which might the same as the third).
 
-Since PHP 7.2, there's [`PREG_UNMATCHED_AS_NULL`] - it's a little better, it allows to distinguish unmatched from matched 
-empty string, but to distinguish invalid and non-existent groups from unmatched - you have to use `array_key_exists()`.
+Also, `PREG_OFFSET_CAPTURE` for `preg_match_all()` works fine, but for `preg_match()`, if it's the last entry, it will
+not be an `array`, but an empty string instead ;|
+
+Since PHP 7.2, there's [`PREG_UNMATCHED_AS_NULL`] - it's a little better, it allows distinguishing an unmatched subject 
+from a matched empty string, but to distinguish invalid and non-existent groups from unmatched - you have to use `array_key_exists()`.
 
 For [`preg_match()`]/[`preg_match_all()`] we can use [`PREG_UNMATCHED_AS_NULL`], for [`preg_replace_callback()`] we 
-have... nothing. There's no way to verify it.
+have... nothing. There's no way to verify it in vanilla-PHP.
 
 ---
 
-And T-Regx **hates** it. We **hate** it.
+And T-Regx **hates** it. So we fixed it all.
 
 ---
 
 That's why in T-Regx, [`Match`] details has 3 separate methods to deal with each of these cases separately. 
 
-Of course, the interface of [`Match`] is the same for matching, replacing and any other operation, 
+Of course, the interface of [`Match`] is the same for matching, replacing and any other operation (unlike vanilla-PHP), 
 so validation of groups in T-Regx works completely alike for [`pattern()->match()`], [`pattern()->replace()`] and any other 
-method. It's bulletproof.
+method. [`Match`] always has the same interface and works exactly alike, no matter where it was used.
 
 Here's how they work:
 
 | Group              | `hasGroup()`      | `matched()`        | `text()`           |
 |--------------------|-------------------|--------------------|--------------------|
 | Invalid group      | `InvalidArgument` | `InvalidArgument`  | `InvalidArgument`  |
-| Non-existent group | `false`           | `NonexistentGroup` | `NonexistentGroup` |
+| Nonexistent group  | `false`           | `NonexistentGroup` | `NonexistentGroup` |
 | Not matched group  | `true`            | `false`            | `GroupNotMatched`  |
 | Matched group      | `true`            | `true`             | Value of the group |
 
 In short:
- - You can't use an invalid group (`2startingWithDigit` or negative `-1`)
- - You can't use a non-existent method (except with `hasGroup()`)
- - You can't use a non-matched group (except with `hasGroup()` and with `matched()`)
+ - You're protected from using an invalid group (`2startingWithDigit` or negative `-1`)
+ - You're protected from using a non-existent method (except with `hasGroup()`)
+ - You're protected from using a non-matched group (except with `hasGroup()` and with `matched()`)
 
-> - `InvalidArgument` is `\InvalidArgumentException`
+> - `InvalidArgument` is PHP [`\InvalidArgumentException`]
 > - `NonexistentGroup` is `NonexistentGroupException`
 > - `GroupNotMatched` is `GroupNotMatchedException`
 
 [`Match`]: match-details.md
+[`Match` details]: match-details.md
 [`first()`]: match-first.mdx
 [`findFirst()`]: match-find-first.mdx
 [`findFirst()->orThrow()`]: match-find-first.mdx
@@ -353,4 +361,5 @@ In short:
 [`preg_match_all()`]: https://www.php.net/manual/en/function.preg-match-all.php
 [`preg_replace_callback()`]: https://www.php.net/manual/en/function.preg-replace-callback.php
 [`PREG_UNMATCHED_AS_NULL`]: https://www.php.net/manual/en/pcre.constants.php
-[`PREG_OFFSET_CAPTURE`]:  https://www.php.net/manual/en/pcre.constants.php
+[`PREG_OFFSET_CAPTURE`]: https://www.php.net/manual/en/pcre.constants.php
+[`\InvalidArgumentException`]: https://www.php.net/manual/en/class.invalidargumentexception.php
