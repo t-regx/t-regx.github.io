@@ -63,8 +63,8 @@ Someone who doesn't know PHP regular expressions, can probably ask themselves:
 
 ### PHP is Messy
 
-- `PREG_OFFSET_CAPTURE` is a nightmare! It changes return type from "an array of arrays" to "an array of arrays of arrays".
-- `PREG_SET_ORDER` / `PREG_PATTERN_ORDER` change return values. It's either "groups of matches" or "matches of groups",
+- [`PREG_OFFSET_CAPTURE`] is a nightmare! It changes return type from "an array of arrays" to "an array of arrays of arrays".
+- [`PREG_SET_ORDER`] / [`PREG_PATTERN_ORDER`] change return values. It's either "groups of matches" or "matches of groups",
   depending on the flag.
 
 The worst part? You find yourself looking at this code
@@ -74,7 +74,7 @@ return $match[1][0];
 ```
 
 having no idea what. it. does. You have to see whether you're using `preg_match()` or `preg_match_all()` and
-whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_OFFSET_CAPTURE` were used.
+whether any of [`PREG_SET_ORDER`]/[`PREG_PATTERN_ORDER`]/[`PREG_OFFSET_CAPTURE`] were used.
 
 ### PHP is Inconsistent
 
@@ -90,7 +90,7 @@ whether any of `PREG_SET_ORDER`/`PREG_PATTERN_ORDER`/`PREG_OFFSET_CAPTURE` were 
   $count    = preg_match($p, $s, $matched);
   ```
 
-- If you use `PREG_OFFSET_CAPTURE` and your subject isn't matched with the pattern; these are the results:
+- If you use [`PREG_OFFSET_CAPTURE`] and your subject isn't matched with the pattern; these are the results:
 
   | Success | `preg_match()` | `preg_match_all()` |
   | ------- | -------------- | ------------------ |
@@ -240,3 +240,7 @@ pattern('\w+')->replace($subject)->all()->callback(function (Match $match) {
 
 In other words, warnings and flags raised and set by the first `pattern()->match()` invalid call will be represented as 
 `MalformedPatternException` and won't interfere with the upper `pattern()->replace()`.
+
+[`PREG_OFFSET_CAPTURE`]: https://www.php.net/manual/en/pcre.constants.php
+[`PREG_SET_ORDER`]: https://www.php.net/manual/en/pcre.constants.php
+[`PREG_PATTERN_ORDER`]: https://www.php.net/manual/en/pcre.constants.php

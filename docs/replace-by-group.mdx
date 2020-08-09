@@ -216,7 +216,7 @@ Description:
   with a result of that function.
 
 > Even this simple T-Regx snippet is represented as a massive PHP code. Using [`Match.index()`] or [`Match.offset()`] when
-> replacing would make PHP code even more complex, introducing counting variables and `PREG_OFFSET_CAPTURE`..
+> replacing would make PHP code even more complex, introducing counting variables and [`PREG_OFFSET_CAPTURE`].
 
 ### `orThrow()`
 
@@ -283,3 +283,4 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')->replace($links)
 [`findFirst()`]: match-find-first.mdx
 [findFirst()->orThrow()]: match-find-first.mdx
 [inline groups]: match-group.mdx
+[`PREG_OFFSET_CAPTURE`]: https://www.php.net/manual/en/pcre.constants.php
