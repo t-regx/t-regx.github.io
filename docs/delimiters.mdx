@@ -19,9 +19,9 @@ choosing a suitable delimiter.
 <!--PHP:{mock($subject)}-->
 We can see it for ourselves, using `delimiter` method:
 
-<CodeTabs tregx={`echo pattern('Welcome/Or not')->delimiter() . "\\n";
-echo pattern('https://github.com#heading')->delimiter() . "\\n";
-echo pattern('https://github.com#heading?key=hello%20there')->delimiter() . "\\n";`}/>
+<CodeTabs tregx={`echo pattern('Welcome/Or not')->delimited() . "\\n";
+echo pattern('https://github.com#heading')->delimited() . "\\n";
+echo pattern('https://github.com#heading?key=hello%20there')->delimited() . "\\n";`}/>
 
 <Result text>
 {`#Welcome/Or not#
