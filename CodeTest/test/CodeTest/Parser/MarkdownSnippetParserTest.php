@@ -68,6 +68,30 @@ return $matches[0];`}/>';
     /**
      * @test
      */
+    public function shouldParseTRegxAttribute()
+    {
+        // when
+        $code = '<CodeTabs tregx="Foo"/>';
+
+        // when
+        $this->assertCodeIsParsed($code, [new CodeElement("Foo", null)]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldParsePhpAttribute()
+    {
+        // when
+        $code = '<CodeTabs php="Foo"/>';
+
+        // when
+        $this->assertCodeIsParsed($code, [new CodeElement(null, "Foo")]);
+    }
+
+    /**
+     * @test
+     */
     public function shouldParseResult()
     {
         // given
@@ -208,6 +232,12 @@ CODE;
 
         // then
         $this->assertCount(count($expected), $snippets, "Failed to assert that code was parsed into a snippet");
+
+        // First filter, if the values are completely different, then detailed message of assertEquals()
+        // will allow for easier debug of the invalid values (with classnames, etc).
         $this->assertEquals($expected, $snippets);
+
+        // Second filter, capable of finding differences like `null` != `""`, and `""` != `0`, because php sucks.
+        $this->assertJsonStringEqualsJsonString(json_encode($expected), json_encode($snippets));
     }
 }

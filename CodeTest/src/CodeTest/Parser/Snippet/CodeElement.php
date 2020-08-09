@@ -1,7 +1,7 @@
 <?php
 namespace CodeTest\Parser\Snippet;
 
-class CodeElement implements Element
+class CodeElement implements Element, \JsonSerializable
 {
     /** @var string|null */
     private $tRegx;
@@ -22,5 +22,13 @@ class CodeElement implements Element
         if ($this->php !== null) {
             $snippet->set('PHP', Code::codeToArray($this->php));
         }
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'tRegx' => $this->tRegx,
+            'php'   => $this->php,
+        ];
     }
 }

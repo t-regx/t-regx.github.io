@@ -19,9 +19,11 @@
   },
   "require": {
     "php": ">=7.1.0",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "ext-json": "*"
   },
   "require-dev": {
+    "ext-json": "*",
     "phpunit/phpunit": "^7.5",
     "rawr/t-regx": "dev-develop"
   }
