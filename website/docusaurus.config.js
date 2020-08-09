@@ -17,7 +17,9 @@ module.exports = {
       algoliaOptions: {},
       //   placeholder: 'Search the website',
     },
-    disableDarkMode: true,
+    colorMode: {
+      disableSwitch: true
+    },
     prism: {
       theme: require('./theme'),
       defaultLanguage: 'php',
@@ -28,7 +30,7 @@ module.exports = {
         alt: 'T-Regx',
         src: 'img/t.regx.borderless.png',
       },
-      links: [
+      items: [
         {position: 'left', label: 'Docs', to: 'docs/installation'},
         {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},

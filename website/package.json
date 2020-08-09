@@ -6,8 +6,8 @@
     "test": "mocha 'test/**/*.spec.js' --require @babel/register"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.50",
-    "@docusaurus/preset-classic": "2.0.0-alpha.50",
+    "@docusaurus/core": "2.0.0-alpha.61",
+    "@docusaurus/preset-classic": "2.0.0-alpha.61",
     "classnames": "^2.2.6",
     "docusaurus-plugin-sass": "^0.1.8",
     "markdown-to-jsx": "^6.11.1",
