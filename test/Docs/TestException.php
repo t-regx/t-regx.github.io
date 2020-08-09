@@ -9,7 +9,7 @@ class TestException extends \Exception
 
     public function __construct(Throwable $cause, ?string $snippet)
     {
-        parent::__construct($snippet,0,  $cause);
+        parent::__construct($snippet, 0, $cause);
         $this->snippet = $snippet;
     }
 }

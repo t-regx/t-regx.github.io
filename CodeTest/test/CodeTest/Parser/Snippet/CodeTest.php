@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 
 class CodeTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -24,9 +23,7 @@ class CodeTest extends TestCase
     public function shouldCodeToArray()
     {
         // when
-        $array = Code::codeToArray(
-            'One\nTwo\\\\n'
-        );
+        $array = Code::codeToArray('One\nTwo\\\\n');
 
         // then
         $this->assertSame(['One', 'Two\\n'], $array);
