@@ -283,6 +283,10 @@ pattern($pattern)->match($subject)->first(function (Match $match) {
 
 ## Groups In-Depth
 
+Groups In-Depth is a rather advanced matter, and not necessary for everyday use.
+If you don't seek "in-depth" understanding of capturing groups, feel free to skip
+this chapter.
+
 ### Invalid group identifiers
 
 In plain, old, vanilla PHP there's no difference between:
