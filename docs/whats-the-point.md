@@ -188,7 +188,7 @@ Furthermore, T-Regx throws different exceptions for different errors:
 
 They all extend `CleanRegexException` though.
 
-Further, furthermore, if you pass an invalid data type to any of the T-Regx methods, `\InvalidArgumentException` is thrown.
+Further, furthermore, if you pass an invalid data type to any of the T-Regx methods, [`\InvalidArgumentException`] is thrown.
 
 ### T-Regx is explicit
 
@@ -244,3 +244,4 @@ In other words, warnings and flags raised and set by the first `pattern()->match
 [`PREG_OFFSET_CAPTURE`]: https://www.php.net/manual/en/pcre.constants.php
 [`PREG_SET_ORDER`]: https://www.php.net/manual/en/pcre.constants.php
 [`PREG_PATTERN_ORDER`]: https://www.php.net/manual/en/pcre.constants.php
+[`\InvalidArgumentException`]: https://www.php.net/manual/en/class.invalidargumentexception.php

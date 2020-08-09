@@ -10,7 +10,7 @@ Apart from retrieving matched capturing groups, you can also replace by an [inli
 Method `match()->group()` behaves exactly like [`Match.group(int|string)`]:
 
 - it can accept either group index (where #0 is the whole match) or a group name (when a group is named)
-- it throws `\InvalidArgumentException` for an invalid index or an invalid group name (e.g. `"2group"` or `-2`)
+- it throws [`\InvalidArgumentException`] for an invalid index or an invalid group name (e.g. `"2group"` or `-2`)
 - and throws `NonexistentGroupException` if `group()` is used with a non-existent group
 
 ## Matched occurrences of a group
@@ -55,7 +55,7 @@ if (validateGroupExists('capital', $matches)) {
             if (validateGroupMatched('capital', $match)) {
                 return '';  // group was indeed matched
             }
-            return null;  // group was not matched, and false'ly represented as an empty string
+            return null;  // group was not matched and falsely represented as an empty string
         }
         return $match;
     }, $matches['capital']);
@@ -73,8 +73,8 @@ If, however, an invalid group is used:
   - negative group index (e.g. `-12`)
   - group name containing invalid characters (e.g. `"!@#"`)
 
-... then `\InvalidArgumentException` is thrown.
+... then [`\InvalidArgumentException`] is thrown.
 
 [inline group]: replace-by-group.mdx
 [`Match.group(int|string)`]: match-details.md
-
+[`\InvalidArgumentException`]: https://www.php.net/manual/en/class.invalidargumentexception.php
