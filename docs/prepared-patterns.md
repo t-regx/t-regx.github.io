@@ -83,7 +83,7 @@ They also add additional functionality, that currently is utterly missing in PHP
 - flag `x` ignores whitespaces, so large expressions can be split to multiple lines. `preg_quote()` doesn't quote spaces,
   so user-input spaces are also going to be ignored - Prepared Patterns will however preserve them.
 
-This is done to relieve you from the [**brain strain**](overview.md#brain-strain).
+This is done to relieve you from the [**brain strain**](overview.mdx#brain-strain).
 
 Basically,
 

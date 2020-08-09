@@ -5,24 +5,24 @@ title: Advanced replace details
 
 ## Introduction
 
-When using `pattern()->match()` all [callbacks](match-for-each.md) receive one parameter when called -
-[`Match`](match-details.md). You can learn more about it on [`Match` details](match-details.md) page.
+When using `pattern()->match()` all [callbacks](match-for-each.mdx) receive one parameter when called -
+[`Match`]. You can learn more about it on [`Match` details](match-details.md) page.
 
-The callback's signature can accept either [`Match`](match-details.md) details or `string`.
+The callback's signature can accept either [`Match`] details or `string`.
 
 - `function (Match $match) {}`
 - `function (string $match) {}`
 
-However, when using `pattern()->replace()` the callback receives `ReplaceMatch` details object. It extends [`Match`](match-details.md) object,
-so they have exactly alike interfaces.
+However, when using `pattern()->replace()` the callback receives `ReplaceMatch` details object. It extends 
+[`Match`] object, so they have exactly alike interfaces.
 
 Additionally, `ReplaceMatch` has two separate methods:
 
 - `ReplaceMatch.modifiedOffset(): int`
 - `ReplaceMatch.modifiedSubject(): string`
 
-They work similarly to [`offset()`](match-offsets.md) and [`subject()`](match-details.md#subject) methods, but they
-take into account **results of previous callbacks**.
+They work similarly to [`offset()`] and [`subject()`](match-details.md#subject) methods, 
+but they take into account **results of previous callbacks**.
 
 - `modifiedOffset()` returns occurrence's offset, but according to a newly replaced subject.
 - `modifiedSubject()` returns current state of a newly replaced subject.
@@ -41,9 +41,8 @@ $result = pattern("[A-Z][a-z]+")->replace($subject)->all()->callback(function ()
 });
 ```
 
-having iterated the subject looking for `[A-Z][a-z]+` - for each [`Match`](match-offsets.md) the result of
-`Match.subject()` method would always be the same. There are 4 occurrences matched by the pattern, so callback is
-invoked 4 times.
+having iterated the subject looking for `[A-Z][a-z]+` - for each [`Match`] the result of `Match.subject()` 
+method would always be the same. There are 4 occurrences matched by the pattern, so callback is invoked 4 times.
 
 ```text
 Me, Rihanna and my Mom really like Sweden
@@ -155,4 +154,8 @@ ____, ____ and my ____ really like Sweden
 
 ## Performance
 
-But be sure, each of those examples only uses one call to `preg_replace_callback()`. :)
+But be sure, each of those examples only uses one call to [`preg_replace_callback()`]. :)
+
+[`Match`]: match-details.md
+[`offset()`]: match-offsets.mdx
+[`preg_replace_callback()`]: https://www.php.net/manual/en/function.preg-replace-callback.php
