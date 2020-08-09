@@ -17,12 +17,11 @@ export default {
     {
       title: 'Installation',
       content: `\`\`\`bash
-      composer require rawr/t-regx
-      \`\`\`
+composer require rawr/t-regx
+\`\`\`
       `,
     },
     {
-      title: '',
     },
   ],
   matchDetails: [
