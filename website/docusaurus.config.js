@@ -69,6 +69,10 @@ module.exports = {
                         data-count-aria-label="# stargazers on GitHub"
                         aria-label="Star this project on GitHub">T-Regx</a>`,
             },
+            {
+              label: 'Sponsor',
+              href: 'https://github.com/sponsors/Danon'
+            }
           ],
         },
       ],
