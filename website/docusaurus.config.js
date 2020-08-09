@@ -35,7 +35,8 @@ module.exports = {
         {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
-        {position: 'left', label: 'GitHub', href: mainRepoUrl},
+        {position: 'left', label: 'Try it online!', href: 'https://repl.it/github/T-Regx/playground'},
+        {position: 'right', label: 'GitHub', href: mainRepoUrl},
       ],
     },
     footer: {
