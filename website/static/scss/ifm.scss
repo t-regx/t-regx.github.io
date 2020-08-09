@@ -19,7 +19,7 @@ html[data-theme='dark']:root {
 }
 
 h2, h3 {
-  > code {
+  > code, a > code {
     font-size: inherit;
   }
 }

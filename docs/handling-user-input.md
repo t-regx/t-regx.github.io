@@ -36,7 +36,7 @@ They need to be escaped!
 
 Read on, to learn about proper handling of user input.
 
-## Why not just `preg_quote()`
+## Why not just [`preg_quote()`]
 
 Good question.
 
