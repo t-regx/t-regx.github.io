@@ -29,4 +29,8 @@
   a:any-link > code {
     color: var(--ifm-color-primary);
   }
+
+  .markdown p > code {
+    white-space: nowrap;
+  }
 }
