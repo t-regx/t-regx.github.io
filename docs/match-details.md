@@ -280,6 +280,8 @@ More about capturing groups can be found in the next section: [Capturing groups]
 [`strpos()`]: https://www.php.net/manual/en/function.strpos.php
 [`first()`]: match-first.mdx
 [`findFirst()`]: match-find-first.mdx
+[`all()`]: match.mdx#many
+[`only(int)`]: match.mdx#many
 [`forEach()`]: match-for-each.mdx
 [`map()`]: match-map.mdx
 [`flatMap()`]: match-flat-map.mdx
