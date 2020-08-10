@@ -53,7 +53,7 @@ module.exports = {
             {label: 'Installation', to: 'docs/installation'},
             {label: 'Getting Started', to: 'docs/introduction'},
             {label: 'Documentation', to: 'docs/match'},
-            {label: 'API Reference', href: `${mainRepoUrl}/blob/master/ChangeLog.md#api`,},
+            {label: 'API Reference', href: `${mainRepoUrl}/blob/develop/ChangeLog.md#t-regx-changelog`},
           ],
         },
         {
