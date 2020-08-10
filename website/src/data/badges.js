@@ -17,7 +17,7 @@ export default {
     },
     {
       title: 'Repository Size',
-      src: 'https://github-size-badge.herokuapp.com/T-Regx/T-Regx.svg',
+      src: 'https://github-size-badge.herokuapp.com/T-Regx/playground.svg',
       href: 'https://github.com/T-Regx/T-Regx',
     },
     {
