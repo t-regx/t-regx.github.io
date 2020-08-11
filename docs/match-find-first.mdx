@@ -21,11 +21,13 @@ For example:
 <CodeTabs
     tregx={`return pattern('[0-9]+')->match("I'm 19 years old")
    ->findFirst(function (Match $match) {
+       // highlight-next-line
        return "I was born $match years ago";
    })
    ->orReturn('Unmatched :/');`}
     php={`if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
     $text = $match[0];
+    // highlight-next-line
     return "I was born $text years ago";
 }
 return 'Unmatched :/';`}/>
@@ -43,11 +45,13 @@ If a match is not found, it returns a default value.
     ->findFirst(function (Match $match) {
        return "I was born $match years ago";
     })
+    // highlight-next-line
     ->orReturn("Match is not found");`}
     php={`if (preg::match('/[0-9]+/', "I'm a dog", $match)) {
     $text = $match[0];
     return "I was born $text years ago";
 }
+// highlight-next-line
 return "Match is not found";`}/>
 <Result>'Match is not found'</Result>
 
@@ -61,6 +65,7 @@ If a match is not found, it calls `orElse()` callback and uses *it* to evaluate 
        return "I was born $match years ago";
     })
     ->orElse(function (NotMatched $notMatched) { 
+        // highlight-next-line
         return "I couldn't match subject: " . $notMatched->subject();
     });`}
     php={`$subject = "I'm a dog";
@@ -68,6 +73,7 @@ if (preg::match('/[0-9]+/', $subject, $match)) {
     $text = $match[0];
     return "I was born $text years ago";
 }
+// highlight-next-line
 return "I couldn't match subject: $subject";`}/>
 <Result>"I couldn't match subject: I'm a dog"</Result>
 
@@ -81,6 +87,7 @@ If a match is not found, it throws `SubjectNotMatchedException` by default.
         ->findFirst(function (Match $match) {
             return "Match is found!";
         })
+        // highlight-next-line
         ->orThrow();
 }
 catch (SubjectNotMatchedException $e) {
@@ -91,8 +98,11 @@ catch (SubjectNotMatchedException $e) {
     if (preg::match('/[0-9]+/', "I'm a dog")) {
         return "Match is found!";
     }
+    // highlight-next-line
     throw new SubjectNotMatchedException(
+        // highlight-next-line
         'Expected to get the first match, but subject was not matched',
+        // highlight-next-line
         "I'm a dog");
 }
 catch (SubjectNotMatchedException $e) {
@@ -111,6 +121,7 @@ try {
         ->findFirst(function (Match $match) {
             return "Match is found!";
         })
+        // highlight-next-line
         ->orThrow(MyException::class);
 }
 catch (MyException $e) {
@@ -122,6 +133,7 @@ try {
     if (preg::match('/[0-9]+/', "I'm a dog")) {
         return "Match is found!";
     } 
+    // highlight-next-line
     throw new MyException('Expected to get the first match, but subject was not matched');
 }
 catch (MyException $e) {
@@ -157,6 +169,7 @@ If you don't like functional programming style, you are free to use [`first()`]
 
 <CodeTabs
     tregx={`try {
+    // highlight-next-line
     return pattern('[0-9]+')->match("I'm a dog")->first();
 }
 catch (SubjectNotMatchedException $e) {
@@ -166,6 +179,7 @@ catch (SubjectNotMatchedException $e) {
     if (preg::match('/[0-9]+/', "I'm a dog", $match)) {
         return $match[0];
     }
+    // highlight-next-line
     throw new SubjectNotMatchedException();
 }
 catch (SubjectNotMatchedException $e) {
