@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import {AutomaticSplashLogo, GithubButton, DisqusThread, BadgesSection} from '../components';
 import sections from '../data/index.js';
 import styles from './styles.module.css';
+import {playgroundUrl} from "../../consts";
 
 export default function Index() {
   const context = useDocusaurusContext();
@@ -41,12 +42,10 @@ const HomeSplash = ({title, tagline, url}) => (
     <GithubButton href={url}/>
     <PromoSection>
       <HeaderButton to="docs/installation">Installation</HeaderButton>
-      <HeaderButton to="docs/match">Matching</HeaderButton>
-      <HeaderButton to="docs/replace-with">Replacing</HeaderButton>
+      <HeaderButton to="docs/introduction">See Docs</HeaderButton>
       <HeaderButton to="docs/handling-user-input">Prepared Patterns</HeaderButton>
       <div className={styles.separator}/>
-      <HeaderButton to="docs/overview">What's T-Regx</HeaderButton>
-      <HeaderButton to="docs/whats-the-point">Why use T-Regx?</HeaderButton>
+      <HeaderButton href={playgroundUrl}>Try online!</HeaderButton>
     </PromoSection>
   </SplashContainer>
 );
@@ -98,7 +97,7 @@ const ProjectTitle = props => (
     <ul className={styles.iconList}>
       <li>Lightweight</li>
       <li>Reliable</li>
-      <li>Easy to use</li>
+      <li>Secure</li>
       <li>Based on exceptions</li>
     </ul>
   </h2>
@@ -110,8 +109,8 @@ const PromoSection = props => (
   </div>
 );
 
-const HeaderButton = ({to, children}) => (
-  <Link className={classNames('button button--outline button--primary button--md')} to={useBaseUrl(to)}>
+const HeaderButton = ({to, href, children}) => (
+  <Link className={classNames('button button--outline button--primary button--md')} to={href || useBaseUrl(to)}>
     {children}
   </Link>
 );

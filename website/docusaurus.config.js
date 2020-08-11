@@ -1,4 +1,4 @@
-const mainRepoUrl = 'https://github.com/T-Regx/T-Regx';
+const {mainRepoUrl, playgroundUrl} = require("./consts");
 
 module.exports = {
   title: 'T-Regx',
@@ -35,7 +35,7 @@ module.exports = {
         {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
-        {position: 'left', label: 'Try it online!', href: 'https://repl.it/github/T-Regx/playground'},
+        {position: 'left', label: 'Try it online!', href: playgroundUrl},
         {position: 'right', label: 'GitHub', href: mainRepoUrl},
       ],
     },
