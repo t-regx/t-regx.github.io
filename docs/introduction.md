@@ -11,7 +11,7 @@ as the first argument and optional flags as the second argument.
 We have 4 entry points to user T-Regx:
  - Standard functions - `Pattern::of()` or `pattern()` to use undelimited patterns
  - Compatibility legacy - `Pattern::pcre()` to use vanilla patterns
- - Prepared patterns - `Pattern::bind()` to safely use user data in patterns
+ - Prepared patterns - to safely use user data in patterns (see [Prepared Patterns](handling-user-input.md))
 
 #### Class method style:
 

@@ -51,8 +51,13 @@ const rows = [
   {
     title: `Offsets in UTF-8<sup>(eg. 18€)</sup>`,
     php: 'In bytes<sup>5 bytes</sup>',
-    tRegx: ` - Method \`offset()\` - 3 characters
- - Method \`byteOffset()\` - 5 bytes`,
+    tRegx: ` - Method \`offset()\`<sup>3 characters</sup>
+ - Method \`byteOffset()\`<sup>5 bytes</sup>`,
+  },
+  {
+    title: 'Offset while replacing',
+    php: 'No',
+    tRegx: 'Yes',
   },
   {
     title: `Worst case complexity`,
@@ -60,6 +65,14 @@ const rows = [
       '`(string|int|null)[][][]`<sup>array of arrays of arrays of string/null and integer - `preg_match_all()` with `PREG_OFFSET_CAPTURE`</sup>',
     tRegx: '`string[]`<sup>array of strings</sup>',
   },
+  {
+    title: 'Testing subject',
+    php: ` - \`1\`/\`0\` \\- matches/differs
+ - \`false\` \\- some errors<sup>Don't use with \`==\`, only \`===\`</sup>
+ - Issues a warning \\- other some errors`,
+    tRegx: ` - \`true\`/\`false\` \\- matches/differs
+ - \`MalformedPatternException\` \\- invalid pattern`
+  }
 ];
 
 function mapToMarkdown(rows) {

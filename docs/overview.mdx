@@ -7,89 +7,39 @@ T-Regx (_T-Rex and RegExp_) is a lightweight, high-level Regular Expressions lib
 
 Its main features are:
 
-- Removing headaches of PHP:
-  - `if()`ing around `preg_` methods, to unify PHP cases with exceptions (see ["Comparison"](/comparison))
-  - UTF-8 support out of the box
-  - [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user-input)
-
-- Cleaning the [mess after PHP regular expressions API](whats-the-point.md):
-
-  - All false positives and false negatives are eliminated
-  - Unifying differences between matching, replacing, splitting - all operations
-  - Special values like `null`, `false`, `''` aren't used to indicate errors (exceptions instead)
-  - Handles every warning, error, fatal error or notice aren't thrown (exceptions instead)
-  - `preg_last_error()` isn't required to handle errors (exceptions instead)
-  - Errors/traps aren't silently ignored (exceptions instead)
-
 - API:
   - [Automatic delimiters](delimiters.mdx) for your patterns
-  - Results aren't a dull `string[][]` array, but a dedicated [`Match`](match-details.md) details
+  - UTF-8 support out of the box
+  - Unifying differences between matching, replacing, splitting... (with [`Match`], instead of `string[][]`)
+  - [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user-input)
+
+- Removing headaches of PHP:
+  - `if()`ing around `preg_` methods, to unify PHP corner-cases with exceptions (see ["Comparison"](/comparison))
+  - All **false positives** and **false negatives** are eliminated
+
+- Exceptions:
+  - Magic values (like `null`, `false`, `''`, `[]`, `-1`) are removed as error indicators -> Exceptions
+  - Handles every `warning`/`error`/`fatal error`/`notice` -> Exception
+  - `preg_last_error()` isn't required to verify errors -> Exception
+  - `errors`/bugs/`gotcha's` aren't silently ignored -> Exception
+  - supplied invalid arguments aren't silently ignored -> Exception
 
 Additionally:
 
-- Being explicit and descriptive - (see [why is explicit interface so important?](#why-is-explicit-interface-so-important)):
   - Each function obeys SRP
-  - Functionalities are represented with methods (and not flags or default arguments)
-  - No default parameters
-  - No flags
-  - No var-args
+  - Functionalities are represented with `methods()` (not `FLAGS` or arguments)
+  - No default `parameters=null`
+  - No `PREG_FLAGS, 1`
+  - No `varargs...`
 
-## Why is explicit interface so important?
+## PHP's magic values
 
-T-Regx' aim is to relieve programmers from [**brain strain**] while reading and writing code.
-Our mission is to make developers write/read a line and **immediately** go on, without thinking about what it does or
-what side effects it may cause.
+In vanilla PHP, different methods (`preg_match()`, `preg_replace()`, `preg_split()`, etc.) return different types and
+values, that are supposed to mean something. For some it's `null`, for other `[]` or `false` or `-1`.
 
-### What's bad
-
-While reading this code...
-
-```php
-preg_match($pattern, $subject, $match);
-```
-
-...developers must stop for a moment and think:
-
-- Will this match the first occurrence? Or all of them?
-- Will the `$subject` match the pattern `$pattern`?
-- Will this trigger a warning, if I mess up my regexp?
-- Will this return `null`/`false` or raise a warning, on error?
-- Will this return `null`/`''`, if the `$subject` doesn't match?
-- Is `$match` a `string[]` or a `string[][]`?
-- Will this return **my value**? Or **my value** nested in arrays?
-
-What should be obvious, is now complicated and causes **many** questions and assumptions for the reader.
-
-### What's good
-
-While using T-Regx, some things are **obvious**. For example:
-
-import {CodeTabs, Result} from './code';
-
-<CodeTabs
-    tregx="$result = pattern($pattern)->match($subject)->first();"
-    php={`if (preg::match("/$pattern/", $subject, $match) === 1) {
-    $result = $match[0];
-} else {
-    throw new SubjectNotMatchedException();
-}`}/>
-
-<!--T-Regx:{mock($subject)}-->
-<!--T-Regx:{mockPattern($pattern)}-->
-<!--T-Regx:{return($result)}-->
-<!--PHP:{mock($subject)}-->
-<!--PHP:{mockPattern($pattern)}-->
-<!--PHP:{return($result)}-->
-
-Here, `$result` **must** contain the first occurrence. It must contain _your value_.
-
-It will **never** contain `null`, `false` or an empty array. `MalformedPatternException` would be thrown, if `$pattern`
-is malformed. It would also throw `SubjectNotMatchedException` if the `$pattern` doesn't match the `$subject`.
+T-Regx results will **never** contain `null`, `false` or an empty array. `MalformedPatternException` would be thrown,
+if `$pattern` is malformed. It would also throw `SubjectNotMatchedException` if the `$pattern` doesn't match the `$subject`.
 Even if `first()` does return `''`, it's only because it supposed to do that; that is "when a pattern matched
-a string of length 0".
+a string of length 0". It also never raises any warnings or fatal errors, like vanilla-PHP would.
 
-It also never raises any warnings or fatal errors.
-
-## Brain Strain
-
-[**brain strain**]: #brain-strain
+[`Match`]: match.mdx
