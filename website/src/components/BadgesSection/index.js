@@ -2,6 +2,7 @@ import React from 'react';
 
 import badges from '../../data/badges';
 import styles from './styles.module.css';
+import {GithubButton} from "../index";
 
 const Badge = props => (
   <a href={props.href} title={props.title}>
@@ -23,6 +24,7 @@ export default function BadgesSection() {
         {lowerBadges.map((badge, index) => (
           <Badge key={index} {...badge} />
         ))}
+        <GithubButton/>
       </div>
     </div>
   );

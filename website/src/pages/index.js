@@ -7,7 +7,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Markdown from 'markdown-to-jsx';
 import classNames from 'classnames';
 
-import {AutomaticSplashLogo, GithubButton, DisqusThread, BadgesSection} from '../components';
+import {AutomaticSplashLogo, BadgesSection, DisqusThread} from '../components';
+import GithubButton from "../components/GithubButton";
 import sections from '../data/index.js';
 import styles from './styles.module.css';
 import {playgroundUrl} from "../../consts";
@@ -16,30 +17,27 @@ export default function Index() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
 
-  return (
-    <Layout>
-      <HomeSplash
-        title={siteConfig.title}
-        tagline={siteConfig.tagline}
-        url={siteConfig.mainRepoUrl}/>
-      <div className="mainContainer">
-        <AutomaticDelimiters/>
-        <Installation/>
-        <MatchDetails/>
-        <Features/>
-        <WarningsToExceptions/>
-        <FunctionalProgramming/>
-        <CommentsSection/>
-      </div>
-    </Layout>
-  );
+  return <Layout>
+    <HomeSplash
+      title={siteConfig.title}
+      tagline={siteConfig.tagline}/>
+    <div className="mainContainer">
+      <AutomaticDelimiters/>
+      <Installation/>
+      <MatchDetails/>
+      <Features/>
+      <WarningsToExceptions/>
+      <FunctionalProgramming/>
+      <CommentsSection/>
+    </div>
+  </Layout>;
 }
 
-const HomeSplash = ({title, tagline, url}) => (
+const HomeSplash = ({title, tagline}) => (
   <SplashContainer>
     <AutomaticSplashLogo/>
     <ProjectTitle title={title} tagline={tagline}/>
-    <GithubButton href={url}/>
+    <GithubButton/>
     <PromoSection>
       <HeaderButton to="docs/installation">Installation</HeaderButton>
       <HeaderButton to="docs/introduction">See Docs</HeaderButton>
@@ -71,11 +69,9 @@ const WarningsToExceptions = () => (
   />
 );
 
-const CommentsSection = () => (
-  <div className="container">
-    <DisqusThread/>
-  </div>
-);
+const CommentsSection = () => <div className="container">
+  <DisqusThread/>
+</div>;
 
 const CustomCodeBlock = ({children, ...props}) => {
   return <CodeBlock {...children.props} />;
