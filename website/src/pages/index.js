@@ -43,7 +43,6 @@ const HomeSplash = ({title, tagline, url}) => (
     <PromoSection>
       <HeaderButton to="docs/installation">Installation</HeaderButton>
       <HeaderButton to="docs/introduction">See Docs</HeaderButton>
-      <HeaderButton to="docs/handling-user-input">Prepared Patterns</HeaderButton>
       <div className={styles.separator}/>
       <HeaderButton href={playgroundUrl}>Try online!</HeaderButton>
     </PromoSection>

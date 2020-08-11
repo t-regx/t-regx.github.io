@@ -14,7 +14,7 @@
 .iconList {
   list-style: none;
   text-align: center;
-  color: #26768c;
+  color: var(--ifm-color-primary-dark);
   font-size: 14px;
 }
 
@@ -45,11 +45,11 @@
 
 .headerButtons a {
   margin: 2px 3px;
-  background: var(--ifm-color-white);
+  background: white;
 }
 
 .headerButtons a:hover {
-  color: var(--ifm-color-white);
+  color: white;
   background: var(--ifm-color-primary);
 }
 
