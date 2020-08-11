@@ -1,4 +1,8 @@
-@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+@media only screen and (max-width: 736px) {
+  .container {
+    padding-left: var(--ifm-spacing-horizontal-sm);
+    padding-right: var(--ifm-spacing-horizontal-sm);
+  }
 }
 
 @media only screen and (max-width: 1023px) {

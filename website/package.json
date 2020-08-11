@@ -2,8 +2,7 @@
   "scripts": {
     "build": "docusaurus build",
     "start": "docusaurus start",
-    "deploy": "docusaurus deploy",
-    "test": "mocha 'test/**/*.spec.js' --require @babel/register"
+    "deploy": "docusaurus deploy"
   },
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.61",
@@ -11,6 +10,8 @@
     "classnames": "^2.2.6",
     "docusaurus-plugin-sass": "^0.1.8",
     "markdown-to-jsx": "^6.11.1",
+    "nuka-carousel": "^4.7.0",
+    "raw-loader": "^4.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },

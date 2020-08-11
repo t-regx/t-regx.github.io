@@ -1,0 +1,119 @@
+ul.answers {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.9rem;
+
+  li {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 7px;
+    padding: 0.3rem 0.5rem;
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock- {
+      padding: 0.3rem 0.5rem;
+    }
+
+    > div {
+      flex: 0 0 100%;
+      order: 4;
+      max-width: 100%;
+    }
+
+    > span, > code {
+      margin-right: auto;
+    }
+
+    .help {
+      margin-top: 2px;
+
+      p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    &:not(.inactive) {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      &:active {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  li.selected {
+    &.correct {
+      background-color: rgba(35, 191, 0, 0.40);
+
+      &:not(.inactive).hasHelp {
+        &:hover {
+          background-color: rgba(60, 222, 24, 0.45);
+        }
+
+        &:active {
+          background-color: rgba(60, 222, 24, 0.50);
+        }
+      }
+    }
+
+    &.incorrect {
+      background-color: rgba(255, 45, 45, 0.62);
+
+      &:not(.inactive).hasHelp {
+        &:hover {
+          background-color: rgba(251, 64, 64, 0.72);
+        }
+
+        &:active {
+          background-color: rgba(251, 64, 64, 0.80);
+        }
+      }
+    }
+  }
+
+  li.inactive {
+    cursor: default;
+  }
+
+  li.hasHelp {
+    &.alreadyAnswered:not(.inactive) {
+      cursor: help;
+    }
+
+    &:after {
+      content: 'ⓘ You can see an explanation, after you answer';
+      font-size: 0.75em;
+      padding-top: 2px;
+      margin-bottom: 3px;
+      opacity: 0.15;
+      order: 3;
+    }
+
+    &.alreadyAnswered:after {
+      content: 'ⓘ Click the answer, to see an explanation';
+      opacity: 1;
+    }
+
+    &.inactive {
+      & > * {
+        opacity: 0.2;
+      }
+
+      &:after {
+        display: none;
+      }
+
+      & > .help {
+        opacity: 1;
+      }
+    }
+  }
+}

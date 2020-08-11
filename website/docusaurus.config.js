@@ -1,3 +1,4 @@
+const path = require('path');
 const {mainRepoUrl, playgroundUrl} = require("./consts");
 
 module.exports = {
@@ -95,7 +96,10 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    [path.resolve(__dirname, 'src', 'plugins', 'docusaurus-plugin-php-loader'), {}]
+  ],
   customFields: {
     repoUrl: 'https://github.com/T-Regx/t-regx.github.io',
     mainRepoUrl,

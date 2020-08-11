@@ -1,0 +1,12 @@
+.slider, .slider-list, .slider-frame, .slider-slide {
+  cursor: default;
+  transition: max-height 0.4s, height 0.4s;
+}
+
+.slider, .slider * {
+  outline: none !important;
+}
+
+.slider:active, .slider *:active {
+  outline: none !important;
+}

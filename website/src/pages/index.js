@@ -1,17 +1,19 @@
 import React from 'react';
-import Layout from '@theme/Layout';
-import CodeBlock from '@theme/CodeBlock';
-import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Markdown from 'markdown-to-jsx';
 import classNames from 'classnames';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
 
 import {AutomaticSplashLogo, BadgesSection, DisqusThread} from '../components';
+import phpQuestions from "../components/QuizPhp/questions";
 import GithubButton from "../components/GithubButton";
+import {playgroundUrl} from "../../consts";
+import {Markdown} from "../components/Utils/code";
+import Quiz from "../components/Quiz/components/Quiz";
+
 import sections from '../data/index.js';
 import styles from './styles.module.css';
-import {playgroundUrl} from "../../consts";
 
 export default function Index() {
   const context = useDocusaurusContext();
@@ -21,13 +23,15 @@ export default function Index() {
     <HomeSplash
       title={siteConfig.title}
       tagline={siteConfig.tagline}/>
-    <div className="mainContainer">
-      <AutomaticDelimiters/>
+    <div className="mainContainer" style={{overflow: 'hidden'}}>
+      <GridBlock darkBackground scrollableBackground>
+        <QuizOpeningSlide/>
+      </GridBlock>
       <Installation/>
       <MatchDetails/>
       <Features/>
-      <WarningsToExceptions/>
       <FunctionalProgramming/>
+      <Empty/>
       <CommentsSection/>
     </div>
   </Layout>;
@@ -41,15 +45,59 @@ const HomeSplash = ({title, tagline}) => (
     <PromoSection>
       <HeaderButton to="docs/installation">Installation</HeaderButton>
       <HeaderButton to="docs/introduction">See Docs</HeaderButton>
-      <div className={styles.separator}/>
       <HeaderButton href={playgroundUrl}>Try online!</HeaderButton>
     </PromoSection>
   </SplashContainer>
 );
 
-const AutomaticDelimiters = () => <GridBlock
-  columns={sections.automaticDelimiters}
-  darkBackground scrollableBackground/>;
+const QuizOpeningSlide = () => {
+  return <Quiz
+    questions={phpQuestions}
+    openingSlide={startQuiz =>
+      <ColumnGrid>
+        <OpeningQuizSplash onStartQuiz={startQuiz}/>
+        <SafeRegexSplash/>
+      </ColumnGrid>
+    }
+    finishSlide={() =>
+      <ColumnGrid>
+        <ClosingQuizSplash/>
+        <SafeRegexSplash/>
+      </ColumnGrid>
+    }
+  />;
+};
+
+const OpeningQuizSplash = ({onStartQuiz}) =>
+  <div>
+    <h1>Quiz about Vanilla-PHP regular expressions</h1>
+    <p>
+      Super easy, see for yourself how well you know Vanilla-PHP regular expressions.
+      Maybe it turns out you don't need T-Regx, after all :)
+    </p>
+    {onStartQuiz && <Button onClick={onStartQuiz}>Start quiz</Button>}
+  </div>;
+
+const ClosingQuizSplash = () =>
+  <div>
+    <h1>Congratulations! Quiz completed!</h1>
+    <p>
+      You've finished the quiz! Feel free to see your result,
+      or see the explanations of the answers. You can go back to
+      previous answers and verify them.
+    </p>
+  </div>;
+
+const SafeRegexSplash = () =>
+  <div>
+    <h1>SafeRegex converts warnings to exceptions</h1>
+    <p>
+      <Markdown>
+        SafeRegex watches for warnings, analyzes `preg_()` methods return values and looks up
+        `preg_last_error()` to validate a call. If it fails, an exception is thrown.
+      </Markdown>
+    </p>
+  </div>;
 
 const Installation = () => (
   <GridBlock columns={sections.installation} center layout="threeColumn">
@@ -59,23 +107,14 @@ const Installation = () => (
 
 const MatchDetails = () => <GridBlock columns={sections.matchDetails} lightBackground/>;
 const Features = () => <GridBlock columns={sections.features} layout="fourColumn"/>;
-const FunctionalProgramming = () => <GridBlock columns={sections.functionalProgramming}/>;
+const Empty = () => <GridBlock columns={sections.empty}/>;
 
-const WarningsToExceptions = () => (
-  <GridBlock
-    columns={sections.warningsToExceptions}
-    darkBackground
-    scrollableBackground
-  />
-);
+const FunctionalProgramming = () =>
+  <GridBlock darkBackground scrollableBackground columns={sections.functionalProgramming}/>;
 
 const CommentsSection = () => <div className="container">
   <DisqusThread/>
 </div>;
-
-const CustomCodeBlock = ({children, ...props}) => {
-  return <CodeBlock {...children.props} />;
-};
 
 const SplashContainer = props => (
   <div className="hero">
@@ -110,6 +149,12 @@ const HeaderButton = ({to, href, children}) => (
   </Link>
 );
 
+const Button = ({children, onClick}) => (
+  <Link className={classNames('button button--outline button--primary button--md')} onClick={onClick}>
+    {children}
+  </Link>
+);
+
 const GridBlock = props => (
   <div className={classNames('padding-vert--xl', {
     [styles.scrollBackground]: props.scrollableBackground,
@@ -119,19 +164,23 @@ const GridBlock = props => (
   })}>
     <div className="container">
       {props.children}
-      <div className="row">
+      {props.columns && <div className="row">
         {props.columns.map((column, index) => (
           <div key={index} className="col">
             {column.title && <h2>{column.title}</h2>}
 
             {column.content && <div>
-              <Markdown options={{overrides: {pre: CustomCodeBlock}}}>
-                {column.content}
-              </Markdown>
+              <Markdown>{column.content}</Markdown>
             </div>}
           </div>
         ))}
-      </div>
+      </div>}
     </div>
   </div>
 );
+
+const ColumnGrid = props => <div className="container">
+  <div className="row">
+    {props.children.map((child, index) => <div key={index} className="col">{child}</div>)}
+  </div>
+</div>;

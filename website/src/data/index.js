@@ -45,23 +45,17 @@ composer require rawr/t-regx
         'If any error occurs while using regexp (invalid pattern, malformed UTF8, backtrack limit, nonexistent group, anything!) T-Regx throws an exception.',
     },
   ],
-  warningsToExceptions: [
-    {
-    },
-    {
-      title: 'SafeRegex | Converts warnings to exceptions',
-      content:
-        'SafeRegex watches for warnings, analyzes `preg_()` methods return values and looks up `preg_last_error()` to validate a call. If it fails, an exception is thrown.',
-    },
-  ],
   functionalProgramming: [
-    {
-    },
+    {},
     {
       title: 'Functional programming',
       content:
         'T-Regx utilizes chainable, functional programming with methods like `filter()`, [`map()`](docs/match-map), ' +
         '[`flatMap()`](docs/match-map#flatmap), [`first()`](docs/match-first)/[`forFirst()`](docs/match-for-first), etc.',
     },
+  ],
+  empty: [
+    {},
+    {},
   ],
 };

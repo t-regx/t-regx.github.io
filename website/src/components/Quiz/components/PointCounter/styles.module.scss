@@ -1,0 +1,47 @@
+.container {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: -15px;
+  font-size: 2em;
+
+  > span {
+    transition: opacity .7s;
+
+    &.dimmed {
+      opacity: 0.3;
+    }
+  }
+
+  > small {
+    display: block;
+    font-size: 0.35em;
+    opacity: 0.4;
+  }
+}
+
+.openAnimation {
+  text-align: center;
+  animation: fade-in 1.2s linear;
+  display: inline-block;
+  width: 38px;
+
+  span, b {
+    cursor: pointer;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    width: 0;
+  }
+  15% {
+    opacity: 0;
+  }
+  35% {
+    width: 38px;
+  }
+  to {
+    opacity: 1;
+  }
+}
