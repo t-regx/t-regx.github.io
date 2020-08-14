@@ -15,6 +15,9 @@
   --ifm-font-weight-bold: 600;
   --ifm-code-font-size: 13px;
   --ifm-navbar-shadow: none;
+
+  --ifm-paragraph-margin-top: 1rem;
+  --ifm-paragraph-margin-bottom: 1rem;
 }
 
 html[data-theme='dark']:root {
@@ -29,4 +32,9 @@ h2, h3 {
 
 .hero .container {
   position: relative;
+}
+
+p {
+  margin-top: var(--ifm-paragraph-margin-top);
+  margin-bottom: var(--ifm-paragraph-margin-bottom);
 }
