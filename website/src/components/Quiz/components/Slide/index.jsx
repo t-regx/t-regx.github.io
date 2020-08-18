@@ -48,20 +48,20 @@ const AnswerListItem = props => {
   const {children, selected, correct, answered, inactive, hasHelp, help, markdownHelp} = props;
   const {onClick, onMouseEnter, onMouseLeave} = props;
 
-  return <li
-    className={classNames({
-      [styles.selected]: selected,
-      [styles.correct]: selected && correct,
-      [styles.incorrect]: selected && !correct,
-      [styles.alreadyAnswered]: answered,
-      [styles.inactive]: inactive,
-      [styles.hasHelp]: hasHelp,
-    })}
-    onClick={onClick}
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}>
-    {children}
-    {help && <Help help={help} markdown={markdownHelp}/>}
+  return <li onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <div
+      onClick={onClick}
+      className={classNames(styles.listItem, {
+        [styles.selected]: selected,
+        [styles.correct]: selected && correct,
+        [styles.incorrect]: selected && !correct,
+        [styles.alreadyAnswered]: answered,
+        [styles.inactive]: inactive,
+        [styles.hasHelp]: hasHelp,
+      })}>
+      {children}
+      {help && <Help help={help} markdown={markdownHelp}/>}
+    </div>
   </li>
 };
 
