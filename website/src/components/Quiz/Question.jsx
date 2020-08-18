@@ -6,6 +6,6 @@ import React from "react";
  unless you want to set "child.type.name" to "Answer" again.
  Because "export default" makes it an empty string for me.
  */
-export const Question = ({markdown, body, question, code, php, selfExplanatory, children}) => {
+export const Question = ({markdown, body, question, code, php, selfExplanatory, children, hoverExample}) => {
   return <></>;
 }

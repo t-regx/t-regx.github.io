@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import {Markdown} from "../../Utils/code";
 
@@ -11,9 +11,11 @@ export default ({questions, slide, onSlideChange, firstSlide, lastSlide}) =>
   <Slider value={slide}>
     <div>{firstSlide}</div>
 
-    {mapQuestions(questions, ({body, question, code, markdown, php, selfExplanatory, children}, index) => {
+    {mapQuestions(questions, ({body, question, code, markdown, php, selfExplanatory, children, hoverExample}, index) => {
+      let [hoverCode, setHoverCode] = useState(code);
+
       const text = question && (markdown ? <Markdown>{question}</Markdown> : question);
-      const snippet = code && (php ? <PhpCode>{code}</PhpCode> : <Code>{code}</Code>);
+      const snippet = code && (php ? <PhpCode>{hoverCode || code}</PhpCode> : <Code>{hoverCode || code}</Code>);
 
       return <div key={index}>
         <Slide
@@ -21,6 +23,7 @@ export default ({questions, slide, onSlideChange, firstSlide, lastSlide}) =>
           body={body || <><p>{text}</p>{snippet}</>}
           children={children}
           selfExplanatory={selfExplanatory}
+          onHover={code => setHoverCode(code)}
           onClick={answer => onSlideChange(index, answer, questions.length - 1 === index)}/>
       </div>;
     })}

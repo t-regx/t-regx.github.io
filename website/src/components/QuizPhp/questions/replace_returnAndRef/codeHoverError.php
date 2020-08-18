@@ -2,7 +2,7 @@
 $string = 'Welcome to my website';
 
 // highlight-next-line
-/* here */ = preg_replace('/\s+/', '', $string, /* insert code here */);
+$success   = preg_replace('/\s+/', '', $string, $replaced, $count);
 
 if ($count > 0) {
     echo "Replaced $count, result: $replaced";

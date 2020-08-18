@@ -2,7 +2,7 @@
 $string = 'Welcome to my website';
 
 // highlight-next-line
-/* here */ = preg_match('/\w+/', $string, /* insert here */);
+$success   = preg_match('/\w+/', $string, $match, $count);
 
 if ($count > 0) {
     echo "Matched $count, first is: " . $match[0];

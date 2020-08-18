@@ -1,2 +1,2 @@
 <?php
-$success = preg_match(/* ... */ , $matchResult, $count);
+$success = preg_match(/* ... */ , $match, $count);

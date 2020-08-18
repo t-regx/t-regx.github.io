@@ -7,8 +7,8 @@ import {letter, PhpCode} from "../cosmethics";
 
 import styles from "./styles.module.scss";
 
-export default ({index, body, children, selfExplanatory, onClick}) => {
-  const [selected, setSelected] = React.useState(null);
+export default ({index, body, children, selfExplanatory, onClick, onHover}) => {
+  const [selected, setSelected] = useState(null);
   const [helpVisible, setHelpVisible] = useState(false);
 
   const handleAnswer = (index, correct) => {
@@ -24,7 +24,7 @@ export default ({index, body, children, selfExplanatory, onClick}) => {
     <h3>Question #{index + 1}</h3>
     {body}
     <ul className={styles.answers}>
-      {mapAnswers(children, ({correct, markdown, code, children, help, markdownHelp = true}, index) =>
+      {mapAnswers(children, ({correct, markdown, code, children, help, markdownHelp = true, hoverCode}, index) =>
         <AnswerListItem
           key={index}
           selected={index === selected}
@@ -34,7 +34,9 @@ export default ({index, body, children, selfExplanatory, onClick}) => {
           hasHelp={!selfExplanatory}
           inactive={selfExplanatory ? selected !== null : helpVisible && help}
           markdownHelp={markdownHelp}
-          onClick={() => handleAnswer(index, correct)}>
+          onClick={() => handleAnswer(index, correct)}
+          onMouseEnter={() => onHover(hoverCode)}
+          onMouseLeave={() => onHover(null)}>
           <Answer index={index} markdown={markdown} code={code} children={children}/>
         </AnswerListItem>
       )}
@@ -42,7 +44,10 @@ export default ({index, body, children, selfExplanatory, onClick}) => {
   </>;
 }
 
-const AnswerListItem = ({children, selected, correct, answered, onClick, inactive, hasHelp, help, markdownHelp}) => {
+const AnswerListItem = props => {
+  const {children, selected, correct, answered, inactive, hasHelp, help, markdownHelp} = props;
+  const {onClick, onMouseEnter, onMouseLeave} = props;
+
   return <li
     className={classNames({
       [styles.selected]: selected,
@@ -52,7 +57,9 @@ const AnswerListItem = ({children, selected, correct, answered, onClick, inactiv
       [styles.inactive]: inactive,
       [styles.hasHelp]: hasHelp,
     })}
-    onClick={onClick}>
+    onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}>
     {children}
     {help && <Help help={help} markdown={markdownHelp}/>}
   </li>

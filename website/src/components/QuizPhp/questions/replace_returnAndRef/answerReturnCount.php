@@ -1,2 +1,2 @@
 <?php
-$count = preg_replace(/* ... */ , $replaceResult);
+$count = preg_replace(/* ... */ , $replaced);
