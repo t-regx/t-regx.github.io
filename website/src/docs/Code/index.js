@@ -17,7 +17,7 @@ export default class Code extends React.Component {
   }
 
   get code() {
-    let children = this.props.children;
+    const children = this.props.children;
     if (typeof children === 'string') {
       return children;
     }

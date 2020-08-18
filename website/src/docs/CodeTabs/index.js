@@ -4,22 +4,14 @@ import TabItem from '@theme/TabItem';
 
 import Code from '../Code';
 
-export default class CodeTabs extends React.Component {
-  render() {
-    return <Tabs defaultValue="t-regx" values={this.values} groupId="language">
-      {this.props.tregx && <TabItem value="t-regx">
-        <Code>{this.props.tregx}</Code>
-      </TabItem>}
-      {this.props.php && <TabItem value="php">
-        <Code>{this.props.php}</Code>
-      </TabItem>}
-    </Tabs>;
-  }
+export default ({tregx, php}) => {
+  const values = [
+    tregx ? {label: 'T-Regx', value: 't-regx'} : {},
+    php ? {label: 'PHP', value: 'php'} : {},
+  ].filter(obj => obj.value)
 
-  get values() {
-    return [
-      this.props.tregx ? {label: 'T-Regx', value: 't-regx'} : {},
-      this.props.php ? {label: 'PHP', value: 'php'} : {},
-    ].filter(obj => obj.value);
-  }
+  return <Tabs defaultValue="t-regx" values={values} groupId="language">
+    {tregx && <TabItem value="t-regx"><Code>{tregx}</Code></TabItem>}
+    {php && <TabItem value="php"><Code>{php}</Code></TabItem>}
+  </Tabs>;
 }
