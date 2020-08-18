@@ -12,7 +12,7 @@ import {playgroundUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
 import Quiz from "../components/Quiz/components/Quiz";
 
-import sections from '../data/index.js';
+import sections from '../data';
 import styles from './styles.module.css';
 
 export default function Index() {
@@ -169,7 +169,7 @@ const GridBlock = props => (
           <div key={index} className="col">
             {column.title && <h2>{column.title}</h2>}
 
-            {column.content && <div>
+            {column.body || column.content && <div>
               <Markdown>{column.content}</Markdown>
             </div>}
           </div>
