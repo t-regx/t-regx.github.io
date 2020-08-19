@@ -3,7 +3,15 @@ import classNames from "classnames";
 
 import styles from "./styles.module.scss";
 
-export default ({answers, current, onPointClick}) => {
+export type AnswerType = "correct" | "incorrect" | "pending" | "last";
+
+interface PointCounterProps {
+  answers: AnswerType[],
+  current: number,
+  onPointClick: (number) => void
+}
+
+export default ({answers, current, onPointClick}: PointCounterProps) => {
   const [navigated, setNavigated] = useState(false);
 
   return <div className={styles.container}>
@@ -23,7 +31,11 @@ export default ({answers, current, onPointClick}) => {
   </div>;
 };
 
-const BulletPoint = ({value}) => {
+interface BulletPointProps {
+  value: AnswerType
+}
+
+const BulletPoint = ({value}: BulletPointProps) => {
   if (value === "correct") {
     return <b>✓</b>;
   }
@@ -36,5 +48,4 @@ const BulletPoint = ({value}) => {
   if (value === "last") {
     return <span>★</span>
   }
-  return null;
 };

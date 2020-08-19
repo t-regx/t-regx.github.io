@@ -1,5 +1,5 @@
-import {Answer} from "./Answer";
-import {Question} from "./Question";
 import Quiz from "./components/Quiz";
+import {Answer, AnswerInt} from "./Answer";
+import {Question, QuestionInt} from "./Question";
 
-export {Answer, Question, Quiz};
+export {Quiz, Answer, Question, AnswerInt, QuestionInt};

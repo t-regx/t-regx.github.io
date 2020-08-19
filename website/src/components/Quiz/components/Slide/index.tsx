@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {FunctionComponent, ReactNode, useState} from "react";
 import classNames from 'classnames';
 
 import {Markdown} from "../../../Utils/code";
@@ -6,12 +6,22 @@ import {mapAnswers} from "../mapper";
 import {letter, PhpCode} from "../cosmethics";
 
 import styles from "./styles.module.scss";
+import {AnswerInt} from "../../Answer";
 
-export default ({index, body, children, selfExplanatory, onClick, onHover}) => {
+interface SlideProps {
+  index: number,
+  body: ReactNode,
+  children: AnswerInt[],
+  selfExplanatory: boolean,
+  onClick: (correct: boolean) => void,
+  onHover: (code: string | null) => void
+}
+
+export default ({index, body, children, selfExplanatory, onClick, onHover}: SlideProps) => {
   const [selected, setSelected] = useState(null);
   const [helpVisible, setHelpVisible] = useState(false);
 
-  const handleAnswer = (index, correct) => {
+  const handleAnswer = (index: number, correct: boolean) => {
     if (selected === null) {
       onClick && onClick(correct);
       setSelected(index);
@@ -44,7 +54,21 @@ export default ({index, body, children, selfExplanatory, onClick, onHover}) => {
   </>;
 }
 
-const AnswerListItem = props => {
+interface AnswerListItemInterface {
+  children: React.ReactNode,
+  selected: boolean,
+  correct: boolean,
+  answered: boolean,
+  inactive: boolean,
+  hasHelp: boolean,
+  help: string | string[],
+  markdownHelp: boolean,
+  onClick: () => void,
+  onMouseEnter: () => void,
+  onMouseLeave: () => void,
+}
+
+const AnswerListItem = (props: AnswerListItemInterface) => {
   const {children, selected, correct, answered, inactive, hasHelp, help, markdownHelp} = props;
   const {onClick, onMouseEnter, onMouseLeave} = props;
 
@@ -65,7 +89,12 @@ const AnswerListItem = props => {
   </li>
 };
 
-const Help = ({help, markdown}) => {
+interface HelpProps {
+  help: string | string[],
+  markdown: boolean
+}
+
+const Help: FunctionComponent<HelpProps> = ({help, markdown}) => {
   const elements = Array.isArray(help) ? help : [help];
 
   const md = element => {
@@ -80,7 +109,14 @@ const Help = ({help, markdown}) => {
   </div>;
 }
 
-const Answer = ({index, markdown, children, code}) => {
+interface AnswerProps {
+  index: number,
+  markdown: boolean,
+  children: React.ElementType[],
+  code: string
+}
+
+const Answer: FunctionComponent<AnswerProps> = ({index, markdown, children, code}) => {
   const answers = markdown ? <Markdown>{children}</Markdown> : children;
 
   return <>
@@ -91,4 +127,4 @@ const Answer = ({index, markdown, children, code}) => {
       <PhpCode>{code}</PhpCode>
     </div>}
   </>;
-}
+};

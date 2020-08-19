@@ -6,12 +6,23 @@ import Slide from "./Slide";
 import Slider from "./Slider";
 import {Code, PhpCode} from "./cosmethics";
 import {mapQuestions} from "./mapper";
+import {QuestionInt} from "../index";
+import {QuestionProps} from "../Question";
 
-export default ({questions, slide, onSlideChange, firstSlide, lastSlide}) =>
+interface Props {
+  questions: QuestionInt[],
+  slide: number,
+  onSlideChange: (question: number, correct: boolean, isLast: boolean) => void,
+  firstSlide: React.ElementType,
+  lastSlide: React.ElementType,
+}
+
+export default ({questions, slide, onSlideChange, firstSlide, lastSlide}: Props) =>
   <Slider value={slide}>
     <div>{firstSlide}</div>
 
-    {mapQuestions(questions, ({body, question, code, markdown, php, selfExplanatory, children, hoverExample}, index) => {
+    {mapQuestions(questions, (props: QuestionProps, index: number) => {
+      const {body, question, code, markdown, php, selfExplanatory, children, hoverExample} = props;
       let [hoverCode, setHoverCode] = useState(code);
 
       const text = question && (markdown ? <Markdown>{question}</Markdown> : question);

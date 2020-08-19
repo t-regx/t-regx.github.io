@@ -1,7 +1,12 @@
 import React from "react";
 import Carousel from "nuka-carousel";
 
-export default ({value, children}) => <Carousel
+interface SliderProps {
+  value: number,
+  children: React.ReactNode
+}
+
+export default ({value, children}: SliderProps) => <Carousel
   withoutControls disableEdgeSwiping
 
   slideIndex={value}
