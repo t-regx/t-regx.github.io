@@ -7,7 +7,7 @@ import Link from '@docusaurus/Link';
 
 import {AutomaticSplashLogo, BadgesSection, DisqusThread} from '../components';
 import phpQuestions from "../components/QuizPhp/questions";
-import GithubButton from "../components/GithubButton";
+import {SponsorButton, StarButton} from "../components/GithubButton";
 import {playgroundUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
 import MountingQuiz from "./index/MountingQuiz";
@@ -42,11 +42,14 @@ const HomeSplash = ({title, tagline}) => (
   <SplashContainer>
     <AutomaticSplashLogo/>
     <ProjectTitle title={title} tagline={tagline}/>
-    <GithubButton/>
+    <StarButton/>
     <PromoSection>
       <HeaderButton to="docs/installation">Installation</HeaderButton>
       <HeaderButton to="docs/introduction">See Docs</HeaderButton>
       <HeaderButton href={playgroundUrl}>Try online!</HeaderButton>
+      <div style={{marginTop: '2px'}}>
+        <SponsorButton/>
+      </div>
     </PromoSection>
   </SplashContainer>
 );
@@ -145,7 +148,10 @@ const PromoSection = props => (
 );
 
 const HeaderButton = ({to, href, children}) => (
-  <Link className={classNames('button button--outline button--primary button--md')} to={href || useBaseUrl(to)}>
+  <Link
+    className={classNames('button button--outline button--primary button--md')} to={href || useBaseUrl(to)}
+    style={{paddingTop: '4px', paddingBottom: '5px'}} /** this is just to match the height of Sponsor button */
+  >
     {children}
   </Link>
 );
