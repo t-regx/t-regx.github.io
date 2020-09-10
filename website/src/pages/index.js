@@ -10,7 +10,7 @@ import phpQuestions from "../components/QuizPhp/questions";
 import GithubButton from "../components/GithubButton";
 import {playgroundUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
-import Quiz from "../components/Quiz/components/Quiz";
+import MountingQuiz from "./index/MountingQuiz";
 import GridBlock from "./index/GridBlock";
 
 import sections from '../data';
@@ -52,7 +52,7 @@ const HomeSplash = ({title, tagline}) => (
 );
 
 const QuizOpeningSlide = () => {
-  return <Quiz
+  return <MountingQuiz
     questions={phpQuestions}
     openingSlide={startQuiz =>
       <ColumnGrid>
