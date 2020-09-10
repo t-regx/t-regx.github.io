@@ -62,7 +62,7 @@
 }
 
 .scrollBackground {
-  background: #1c3c45 url('/img/scroll.background.jpg') fixed;
+  background: #0d467d url('/img/scroll.background.jpg') fixed;
   background-size: cover;
 }
 
