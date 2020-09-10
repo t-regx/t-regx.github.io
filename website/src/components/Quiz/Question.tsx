@@ -4,13 +4,12 @@ import {AnswerInt} from "./Answer";
 
 export interface QuestionProps {
   markdown?: string,
-  body?: React.ReactNode,
+  body?: (code: string) => React.ReactNode,
   question?: string,
   code?: string,
   php?: boolean,
   selfExplanatory?: boolean,
   children: AnswerInt[],
-  hoverExample?: string
 }
 
 export interface QuestionInt extends QuizElement<QuestionProps> {

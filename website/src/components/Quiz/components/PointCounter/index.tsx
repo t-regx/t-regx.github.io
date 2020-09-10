@@ -27,7 +27,7 @@ export default ({answers, current, onPointClick}: PointCounterProps) => {
         <BulletPoint value={answer}/>
       </span>
     )}
-    {answers.length > 1 && !navigated && <small>Navigate back to see the explanations</small>}
+    {answers.length > 1 && !navigated && <small>Click ✓ or ✘ to see the explanation</small>}
   </div>;
 };
 

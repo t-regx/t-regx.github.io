@@ -4,7 +4,7 @@ import {Markdown} from "../../Utils/code";
 
 import Slide from "./Slide";
 import Slider from "./Slider";
-import {Code, PhpCode} from "./cosmethics";
+import {Code as RawCode, PhpCode} from "./cosmethics";
 import {mapQuestions} from "./mapper";
 import {QuestionInt} from "../index";
 import {QuestionProps} from "../Question";
@@ -22,16 +22,16 @@ export default ({questions, slide, onSlideChange, firstSlide, lastSlide}: Props)
     <div>{firstSlide}</div>
 
     {mapQuestions(questions, (props: QuestionProps, index: number) => {
-      const {body, question, code, markdown, php, selfExplanatory, children, hoverExample} = props;
+      const {body, question, code, markdown, php, selfExplanatory, children} = props;
       let [hoverCode, setHoverCode] = useState(code);
 
       const text = question && (markdown ? <Markdown>{question}</Markdown> : question);
-      const snippet = code && (php ? <PhpCode>{hoverCode || code}</PhpCode> : <Code>{hoverCode || code}</Code>);
+      const snippet = <><p>{text}</p>{code && <Code php={php} code={hoverCode || code}/>}</>; // don't show hoverCode, when code is missing
 
       return <div key={index}>
         <Slide
           index={index}
-          body={body || <><p>{text}</p>{snippet}</>}
+          body={body ? body(hoverCode) : snippet}
           children={children}
           selfExplanatory={selfExplanatory}
           onHover={code => setHoverCode(code)}
@@ -41,3 +41,5 @@ export default ({questions, slide, onSlideChange, firstSlide, lastSlide}: Props)
 
     <div>{lastSlide}</div>
   </Slider>;
+
+const Code = ({code, php}) => php ? <PhpCode>{code}</PhpCode> : <RawCode>{code}</RawCode>;

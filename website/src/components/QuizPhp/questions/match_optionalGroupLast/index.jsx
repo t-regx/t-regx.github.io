@@ -1,11 +1,14 @@
 import React from "react";
 
 import {Answer, Question} from "../../../Quiz";
-
-import code from './code.php';
 import answerNull from "./answerNull.php";
 import answerEmpty from "./answerEmpty.php";
 import answerMissing from "./answerMissing.php";
+
+import codeHoverNull from "./codeHoverNull.php";
+import codeHoverEmpty from "./codeHoverEmpty.php";
+import codeHoverMissing from "./codeHoverMissing.php";
+import codeHoverNone from "./codeHoverNone.txt";
 
 import {helpNull, optionalGroupBody} from "../match_optionalGroup";
 
@@ -23,15 +26,16 @@ const help = [
   </>,
 ];
 
-export default <Question
-  body={optionalGroupBody("How is an *optional*, unmatched group `#2` (last) represented in `preg_match()`, when currency is missing?", code)}>
-  <Answer code={answerMissing} help={help} correct>
+export default <Question php body={hoverCode => optionalGroupBody(
+  "How is an *optional*, unmatched group `#2` (last) represented in `preg_match()`, when currency is missing?",
+  hoverCode || codeHoverNone)}>
+  <Answer code={answerMissing} hoverCode={codeHoverMissing} help={help} correct>
     Isn't present in the result
   </Answer>
-  <Answer code={answerEmpty} help={help}>
+  <Answer code={answerEmpty} hoverCode={codeHoverEmpty} help={help}>
     As an empty string
   </Answer>
-  <Answer code={answerNull} help={helpNull} markdown>
+  <Answer code={answerNull} hoverCode={codeHoverNull} help={helpNull} markdown>
     As `null`
   </Answer>
 </Question>;
