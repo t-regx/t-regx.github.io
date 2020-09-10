@@ -11,6 +11,7 @@ import GithubButton from "../components/GithubButton";
 import {playgroundUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
 import Quiz from "../components/Quiz/components/Quiz";
+import GridBlock from "./index/GridBlock";
 
 import sections from '../data';
 import styles from './styles.module.css';
@@ -153,30 +154,6 @@ const Button = ({children, onClick}) => (
   <Link className={classNames('button button--outline button--primary button--md')} onClick={onClick}>
     {children}
   </Link>
-);
-
-const GridBlock = props => (
-  <div className={classNames('padding-vert--xl', {
-    [styles.scrollBackground]: props.scrollableBackground,
-    [styles.darkBackground]: props.darkBackground,
-    [styles.lightBackground]: props.lightBackground,
-    'text--center': props.center,
-  })}>
-    <div className="container">
-      {props.children}
-      {props.columns && <div className="row">
-        {props.columns.map((column, index) => (
-          <div key={index} className="col">
-            {column.title && <h2>{column.title}</h2>}
-
-            {column.body || column.content && <div>
-              <Markdown>{column.content}</Markdown>
-            </div>}
-          </div>
-        ))}
-      </div>}
-    </div>
-  </div>
 );
 
 const ColumnGrid = props => <div className="container">
