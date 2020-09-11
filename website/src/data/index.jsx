@@ -4,7 +4,7 @@ import matchDetails from "./matchDetails.php";
 import functionalProgramming from "./functionalProgramming.php";
 import {Markdown} from "../components/Utils/code";
 
-const tryItOnline = "https://repl.it/github/T-Regx/playground";
+const tryItOnline = "https://repl.it/github/T-Regx/fiddle";
 
 export default {
   automaticDelimiters: [

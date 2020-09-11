@@ -8,7 +8,7 @@ import Link from '@docusaurus/Link';
 import {AutomaticSplashLogo, BadgesSection, DisqusThread} from '../components';
 import phpQuestions from "../components/QuizPhp/questions";
 import {SponsorButton, StarButton} from "../components/GithubButton";
-import {playgroundUrl} from "../../consts";
+import {fiddleUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
 import MountingQuiz from "./index/MountingQuiz";
 import GridBlock from "./index/GridBlock";
@@ -46,7 +46,7 @@ const HomeSplash = ({title, tagline}) => (
     <PromoSection>
       <HeaderButton to="docs/installation">Installation</HeaderButton>
       <HeaderButton to="docs/introduction">See Docs</HeaderButton>
-      <HeaderButton href={playgroundUrl}>Try online!</HeaderButton>
+      <HeaderButton href={fiddleUrl}>T-Regx fiddle - Try in your browser!</HeaderButton>
       <div style={{marginTop: '2px'}}>
         <SponsorButton/>
       </div>

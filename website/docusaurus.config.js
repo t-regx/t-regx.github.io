@@ -1,5 +1,5 @@
 const path = require('path');
-const {mainRepoUrl, playgroundUrl} = require("./consts");
+const {mainRepoUrl, fiddleUrl} = require("./consts");
 
 module.exports = {
   title: 'T-Regx',
@@ -36,7 +36,7 @@ module.exports = {
         {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
-        {position: 'left', label: 'Try it online!', href: playgroundUrl},
+        {position: 'left', label: 'T-Regx fiddle', href: fiddleUrl},
         {position: 'right', label: 'GitHub', href: mainRepoUrl},
       ],
     },
