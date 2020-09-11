@@ -1,10 +1,14 @@
 ---
 id: whats-the-point
 title: What's the point?
-sidebar_label: Why would I use T-Regx?
+sidebar_label: Why PHP sucks?
 ---
 
-Here, are the examples of compare and contrast of PHP regular expressions and T-Regx.
+This chapter highlights the differences, reasons and contrasts between T-Regx and PHP regular expressions.
+To learn more about T-Regx, feel free to skip to [Match a subject](match.mdx).
+
+If you'd like to learn the reasons behind certain T-Regx feature, and know how it manages to supercede PHP 
+regular expressions, read on.
 
 ## What's wrong with PHP Regular Expressions:
 

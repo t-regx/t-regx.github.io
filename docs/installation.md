@@ -37,3 +37,14 @@ php composer.phar require rawr/t-regx
 ```
 
 [https://getcomposer.org/download/]: https://getcomposer.org/download
+
+## T-Regx fiddle
+
+Before you install, you can try T-Regx online, right in your browser. 
+
+Just visit [T-Regx fiddle], and when it boots up (after about 3 seconds), just click "Run" at the top.
+
+There are two default files in the fiddle: `EDIT_HERE.php` and `EXAMPLES.php`. You can edit them both as you please.
+Additionally, `EXAMPLES.php` contains many basic and complicated examples of T-Regx.
+
+[T-Regx fiddle]: https://repl.it/github/T-Regx/fiddle

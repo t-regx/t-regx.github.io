@@ -7,22 +7,31 @@ T-Regx (_T-Rex and RegExp_) is a lightweight, high-level Regular Expressions lib
 
 Its main features are:
 
+- Standard **and** new functions:
+  - You can stay with known `preg_match()`, `preg_replace()` functions
+  - You can use new `pattern()` function
+  - You can use either; you can use both; you can interchange them
+
 - API:
   - [Automatic delimiters](delimiters.mdx) for your patterns
   - UTF-8 support out of the box
-  - Unifying differences between matching, replacing, splitting... (with [`Match`], instead of `string[][]`)
-  - [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user-input)
+  - Unifying differences between matching, replacing, splitting into one interface: [`Match`]
+  - [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user input)
 
 - Removing headaches of PHP:
-  - `if()`ing around `preg_` methods, to unify PHP corner-cases with exceptions (see ["Comparison"](/comparison))
+  - You only use `try`/`catch`.
+
+    T-Regx is doing all the `if`ology around `preg` under the hood, to unify all PHP corner-cases and map them to
+    exceptions (see ["Comparison"](/comparison)).
   - All **false positives** and **false negatives** are eliminated
 
-- Exceptions:
-  - Magic values (like `null`, `false`, `''`, `[]`, `-1`) are removed as error indicators -> Exceptions
+- If anything - Exceptions!:
+  - Magic values (like `null`, `false`, `''`, `[]`, `-1`) aren't used -> Exceptions
   - Handles every `warning`/`error`/`fatal error`/`notice` -> Exception
   - `preg_last_error()` isn't required to verify errors -> Exception
   - `errors`/bugs/`gotcha's` aren't silently ignored -> Exception
   - supplied invalid arguments aren't silently ignored -> Exception
+  - returned invalid values aren't silently ignored -> Exception
 
 Additionally:
 
@@ -35,11 +44,13 @@ Additionally:
 ## PHP's magic values
 
 In vanilla PHP, different methods (`preg_match()`, `preg_replace()`, `preg_split()`, etc.) return different types and
-values, that are supposed to mean something. For some it's `null`, for other `[]` or `false` or `-1`.
+values, that are *symbolic*. For some it's `null`, for other `[]` or `false` or `-1` - they're all supposed to mean "error".
+Of course you have to remember which is `=== false` and which `=== null`.
 
-T-Regx results will **never** contain `null`, `false` or an empty array. `MalformedPatternException` would be thrown,
-if `$pattern` is malformed. It would also throw `SubjectNotMatchedException` if the `$pattern` doesn't match the `$subject`.
-Even if `first()` does return `''`, it's only because it supposed to do that; that is "when a pattern matched
-a string of length 0". It also never raises any warnings or fatal errors, like vanilla-PHP would.
+T-Regx will **never** return `null`, `false` an empty array or other magic value. `MalformedPatternException` is thrown if `$pattern` is malformed.
+
+And it's not just the return values, `$match` results also contain magic values like `""` which can either mean
+the group wasn't matched, or it matched an empty string in PHP. In CleanRegex this is handled, so you don't have to worry
+about it - `""` always means an empty string in T-Regx.
 
 [`Match`]: match.mdx

@@ -1,12 +1,15 @@
 {
   "docs": {
     "About": [
-      "overview",
-      "whats-the-point"
+      "overview"
     ],
     "Kick Start": [
-      "installation",
-      "introduction"
+      "installation"
+    ],
+    "Introduction": [
+      "introduction-safe",
+      "introduction-clean",
+      "whats-the-point"
     ],
     "Matching": [
       "match",
