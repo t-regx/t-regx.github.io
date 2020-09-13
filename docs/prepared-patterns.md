@@ -3,65 +3,76 @@ id: prepared-patterns
 title: Prepared Patterns - User input
 ---
 
-## Using prepared patterns
+If you use `Pattern::bind()` or `Pattern::inject()`, you can explicitly specify which parts of your pattern 
+should be treated as string literals, and not as regular expression special characters.
 
-If you use `Pattern::prepare()` or `Pattern::inject()`, you can explicitly specify which parts of your pattern should be
-treated as string literals, and not as regular expression special characters.
+Prepared Patterns also understand that strings, that are supposed to be treated as string literals, are to be 
+quoted with a delimiter, that was chosen with [Automatic Delimiters](delimiters.mdx).
 
-Prepared Patterns also understand that strings that are supposed to be treated as string literals are to be quoted with a
-delimiter, that was chosen with [Automatic Delimiters](delimiters.mdx).
+## Use-case
 
-### With `Pattern::prepare()`
-
-`Pattern::prepare()` accepts your pattern as an array. Said array can contain either:
-
-- `string` - that will be interpreted as a regular expression
-- `array` - that values of which will be treated as string literals
+When you need to use unsafe data in your patterns, it might be tempting to do something like this:
 
 ```php
-$input = $_GET['input'];
+// build the pattern
+$pattern = Pattern::of('^https://' . $_GET['domain'] . '\.(com|net)');
 
-Pattern::prepare(["(My|Our) dog's name is ", [$input], '!']);
+// use the pattern
+$pattern->test($string);
 ```
 
-The code above means:
+But you, dear reader, know that it's a terrible, terrible idea. `$_GET['domain']` may contain 
+unexpected/malicious regular expression characters.
 
-- Treat `"(My|Our) dog's name is "` as a regular expression
-- Treat `$input` as a string literal
-- Treat `'!'` as a regular expression
+Because:
+ - `^https://` must be treated **as a regular expression** 
+
+    > Character `^` must mean "start of the string"
+ - `$_GET['domain']` must be treated **as a string** 
+
+    > If there's `.` in the string, it **must not** mean "any character" (like regex would).
+    > Any special meaning of regex symbols (like `.`, `?`) must be revoked.
+ - `\.(com|net)` must be treated **as a regular expression** 
+
+    > Expression `(com|net)` must bean alteration.
+
+That's a use-case for prepared patterns.
 
 ### With `Pattern::inject()`
 
-For a bit cleaner pattern, consider using `Pattern::inject()`.
-
-It replaces a **placeholder** in the pattern with values treated as string literals.
+`Pattern::inject()` allows you to specify `@` placeholder in your pattern, which
+will later be populated with **safe** version of your parameter.
 
 ```php
-$input = $_GET['input'];
+$pattern = Pattern::inject("https?://@/index\.php", [$_GET['domain']]);
 
-Pattern::inject("(My|Our) dog's name is @name!", [
-    'name' => $input
-]);
+$pattern->test($string);
 ```
 
 The code above means:
 
-- Treat `$input` as a string literal
-- Replace `@name` with `$input`, but handling all regexp special characters.
+- Treat `https?://` and `/index\.php` as regexp
+- Treat `@` as a string literal
+- Replace `@` with `$_GET['domain']`, but handling all regexp special characters.
 
-### Usage
+### With `Pattern::bind()`
 
-And that's it! Prepared patterns are exactly alike to regular `pattern()`/`Pattern::of()`. Below snippets are identical:
-
-```php
-Pattern::prepare(["(My|Our) dog's name is ", [$input], '!'])->match($subject)->first();
-```
+`Pattern::bind()` is a bit more verbose version of `Pattern::inject()`.
 
 ```php
-Pattern::of("(My|Our) dog's name is Barky!")->match($subject)->first();
+$pattern = Pattern::bind("(My|Our) dog's name is @name! @name is great!", [
+    'name' => $_GET['input']
+]);
+
+$pattern->test($string);
 ```
 
-except for the fact that `$input` can be user-input, guaranteed to be safe.
+For example, it allows you to reuse your parameters, when they're used more than once in the pattern.
+
+The code above means:
+
+- Treat `$_GET['input']` as a string literal
+- Replace `@name` with `$_GET['input']`, but handling all regexp special characters.
 
 ## Old-school pattern quoting
 
@@ -81,12 +92,5 @@ They also add additional functionality, that currently is utterly missing in PHP
 
 - flag `x` ignores whitespaces, so large expressions can be split to multiple lines. [`preg_quote()`] doesn't quote spaces,
   so user-input spaces are also going to be ignored - Prepared Patterns will however preserve them.
-
-This is done to relieve you from the [**brain strain**](overview.mdx#brain-strain).
-
-Basically,
-
-- [`preg_quote()`] is procedural - you take care of everything by yourself
-- Prepared Patterns are declarative - we take care of everything **for** you
 
 [`preg_quote()`]: https://www.php.net/manual/en/function.preg-quote.php
