@@ -31,7 +31,7 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $match) {
 
 > Of course, the callback is only invoked **if** your subject is matched with the pattern.
 
-## Replace more
+## Replace multiple
 
 ### `all()`
 
@@ -51,6 +51,8 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $m) {
 
 ### `only()`
 
+You can also limit the amount of replacements done with `only()`.
+
 <CodeTabs
     tregx={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
 // In T-Regx, Match details can be cast to string, returning the whole match
@@ -68,16 +70,26 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $match) {
 
 ## Return types
 
-`replace()->callback()` only accepts `string` or [`MatchGroup`] as its return type.
+`replace()->callback()` only accepts `string`, [`Match`] or [`MatchGroup`] as its return type.
 
-We believe that returning anything, that's not a string or a group can **be a sign of a bug**! Moreover, converting them
-silently would break our ["Explicity rule"].
+We believe that returning anything, that's not a string, match or a group can **be a sign of a bug**!
+Moreover, converting them silently would break our ["Explicity rule"].
 
 ```php
 pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
     return 2;       // <- throws InvalidReturnValueException
     return true;    // <- throws InvalidReturnValueException
     return null;    // <- throws InvalidReturnValueException
+});
+```
+
+Only `string`, [`Match`] or [`MatchGroup`] are allowed.
+
+```php
+pattern('([A-Z])\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
+    return 'orange';         // string
+    return $match;           // match
+    return $match->group(1); // group
 });
 ```
 
@@ -122,6 +134,6 @@ preg::replace_callback('/\\w+/', function (array $match) {
 > In this example, [`Match`] will be cast to string, which is the same as calling `Match.text()` method.
 
 [`MatchGroup`]: match-groups.md
-["Explicity rule"](whats-the-point#t-regx-to-the-rescue)
+["Explicity rule"]: whats-the-point#t-regx-to-the-rescue)
 [`Match`]: match-details.md
 [`callable`]: https://www.php.net/manual/en/language.types.callable.php
