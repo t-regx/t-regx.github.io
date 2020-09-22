@@ -13,7 +13,7 @@ When you add T-Regx to your project, you can actually choose the API, with which
 and `CleanRegex` - the higher-level API, build on top of `SafeRegex`. 
 You can work with either or both them in your project - they're both part of T-Regx.
 
-We suggest, after installing T-Regx, to use SafeRegex everywhere you can (to protect yourself again obvious errors), 
+We suggest, after installing T-Regx, to use SafeRegex everywhere you can (to protect yourself against obvious errors), 
 and then gradually migrate from `preg::` (SafeRegex) to `pattern()` (CleanRegex).
 
 ## About SafeRegex
