@@ -50,7 +50,7 @@ catch (MalformedPatternException $ex) {
 }`}/>
 <Result text>Missing terminating ] for character class at offset 7</Result>
 
-> In `PHP` snippet, `MalformedPatternException` is thrown because safe-regex `preg::match_all()` was used, instead
+> In `PHP` snippet, `MalformedPatternException` is thrown because SafeRegex `preg::match_all()` was used, instead
 > of [`preg_match_all()`]. Vanilla PHP `preg_*()` method don't throw exceptions.
 
 ## Performance
