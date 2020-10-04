@@ -5,62 +5,48 @@ title: Advanced replace details
 
 ## Introduction
 
-When using `pattern()->match()` all [callbacks](match-for-each.mdx) receive one parameter when called -
-[`Match`]. You can learn more about it on [`Match` details](match-details.md) page.
+When using `pattern()->match()` all [callbacks](match-for-each.mdx) receive one parameter when 
+called - [`Match`]. You can learn more about it on [`Match` details](match-details.md) page.
 
-The callback's signature can accept either [`Match`] details or `string`.
-
-- `function (Match $match) {}`
-- `function (string $match) {}`
-
-However, when using `pattern()->replace()` the callback receives `ReplaceMatch` details object. It extends 
-[`Match`] object, so they have exactly alike interfaces.
+However, when using `pattern()->replace()` the callback receives `ReplaceMatch` details object.
+It extends [`Match`] object, so they have exactly alike interfaces.
 
 Additionally, `ReplaceMatch` has two separate methods:
 
-- `ReplaceMatch.modifiedOffset(): int`
 - `ReplaceMatch.modifiedSubject(): string`
+- `ReplaceMatch.modifiedOffset(): int`
 
 They work similarly to [`offset()`] and [`subject()`](match-details.md#subject) methods, 
-but they take into account **results of previous callbacks**.
+but they take into account **results of previous callbacks**. Basically, you can see into
+the process of the new string being built.
 
-- `modifiedOffset()` returns occurrence's offset, but according to a newly replaced subject.
-- `modifiedSubject()` returns current state of a newly replaced subject.
+- `modifiedSubject()` - current state of a subject being built.
+- `modifiedOffset()` - occurrence's offset, but according to a current the `modifiedSubject()`
 
 ## Examples
 
 ### `modifiedSubject()` example
 
-Given a pattern that matches capitalized words:
+Given a pattern, that matches capitalized words:
 
 ```php
 $subject = 'Me, Rihanna and my Mom really like Sweden';
 
-$result = pattern("[A-Z][a-z]+")->replace($subject)->all()->callback(function () {
+$result = pattern("[A-Z][a-z]+")->replace($subject)->all()->callback(function ($match) {
+    // highlight-next-line
+    $match->subject(); // Me, Rihanna and my Mom really like Sweden
+
     return '____';
 });
 ```
 
 having iterated the subject looking for `[A-Z][a-z]+` - for each [`Match`] the result of `Match.subject()` 
-method would always be the same. There are 4 occurrences matched by the pattern, so callback is invoked 4 times.
+method would always be the same. There are 4 occurrences matched by the pattern, so callback is invoked 4 times, 
+and each time `$match->subject()` is equal to:
 
 ```text
 Me, Rihanna and my Mom really like Sweden
 ```
-
-```text
-Me, Rihanna and my Mom really like Sweden
-```
-
-```text
-Me, Rihanna and my Mom really like Sweden
-```
-
-```text
-Me, Rihanna and my Mom really like Sweden
-```
-
-Results of `ReplaceMatch.subject()` would be identical.
 
 ---
 
@@ -115,8 +101,6 @@ Me, Rihanna and my Mom really like Sweden
                                    ↑
                                    offset() // 35
 ```
-
-Results of `ReplaceMatch.offset()` would be identical.
 
 ---
 
