@@ -1,6 +1,8 @@
 <?php
-namespace CodeTest\Parser\Snippet;
 
+namespace Test\CodeTest\Parser\Snippet;
+
+use CodeTest\Parser\Snippet\Code;
 use PHPUnit\Framework\TestCase;
 
 class CodeTest extends TestCase

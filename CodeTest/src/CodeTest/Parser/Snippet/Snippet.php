@@ -7,14 +7,9 @@ use Throwable;
 
 class Snippet
 {
-    /** @var array */
-    private $consumers;
-
-    /** @var array */
-    private $snippet;
-
-    /** @var array */
-    private $exception;
+    private array $consumers;
+    private array $snippet;
+    private array $exception;
 
     public function __construct(array $consumers)
     {

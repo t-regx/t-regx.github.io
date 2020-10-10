@@ -1,4 +1,5 @@
 <?php
+
 namespace CodeTest\Parser\Mods;
 
 use InvalidArgumentException;
@@ -21,7 +22,7 @@ class MockVariable extends PureModification
 
     private function validateArgument(string $argument): void
     {
-        if (preg_match('/^\$(?!\d)\w+$/', $argument) === 0) {
+        if (pattern('^\$(?!\d)\w+$')->fails($argument)) {
             throw new InvalidArgumentException("MockVariable: Invalid argument '$argument' for mod 'mock'");
         }
     }

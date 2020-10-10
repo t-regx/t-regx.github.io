@@ -1,4 +1,5 @@
 <?php
+
 namespace CodeTest;
 
 use ArrayIterator;
@@ -26,9 +27,7 @@ class CodeTabsDataProvider
     {
         return new CompositeIterator(new LazyMapperIterator(new FilesIterator($this->basePath), function (string $filename) {
             $parsed = (new MdxFacade(new MarkdownSnippetParser(new MdxParser(new Mods($this->basePath)))))->parse(file_get_contents($filename));
-            return new KeyMapperIterator(new ArrayIterator($parsed), function (int $key) use ($filename) {
-                return basename($filename) . " #$key";
-            });
+            return new KeyMapperIterator(new ArrayIterator($parsed), fn(int $key) => basename($filename) . " #$key");
         }), false);
     }
 }

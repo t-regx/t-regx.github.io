@@ -1,12 +1,11 @@
 <?php
+
 namespace CodeTest\Parser\Snippet;
 
 class ResultElement implements Element
 {
-    /** @var string */
-    private $value;
-    /** @var string|null */
-    private $type;
+    private string $value;
+    private ?string $type;
 
     public function __construct(string $value, ?string $type)
     {

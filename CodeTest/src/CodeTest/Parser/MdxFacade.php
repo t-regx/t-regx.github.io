@@ -14,9 +14,7 @@ class MdxFacade
 
     public function parse(string $content): array
     {
-        return array_map(function (Snippet $snippet) {
-            return $snippet->toDataProviderArray();
-        }, array_map([$this, 'postprocess'], $this->parser->parse($content)));
+        return array_map(fn(Snippet $snippet) => $snippet->toDataProviderArray(), array_map([$this, 'postprocess'], $this->parser->parse($content)));
     }
 
     private function postprocess(array $values): Snippet

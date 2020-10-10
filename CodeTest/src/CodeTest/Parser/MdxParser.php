@@ -31,12 +31,10 @@ class MdxParser
 
     public function code(string $content): array
     {
-        return $this->map($this->codePattern(), $content, function (Match $match) {
-            return new CodeElement(
-                $match->group('tregx')->orReturn(null),
-                $match->group('php')->orReturn(null)
-            );
-        });
+        return $this->map($this->codePattern(), $content, fn(Match $match) => new CodeElement(
+            $match->group('tregx')->orReturn(null),
+            $match->group('php')->orReturn(null)
+        ));
     }
 
     private function mod(string $content): array
@@ -113,12 +111,8 @@ PATTERN;
         return Pattern::of($pattern, 'sx')
             ->match($content)
             ->fluent()
-            ->groupByCallback(function (Match $match) {
-                return $match->byteOffset();
-            })
-            ->map(function (array $matches) use ($mapper) {
-                return $mapper($matches[0]);
-            })
+            ->groupByCallback(fn(Match $match) => $match->byteOffset())
+            ->map(fn(array $matches) => $mapper($matches[0]))
             ->all();
     }
 }
