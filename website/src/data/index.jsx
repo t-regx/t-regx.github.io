@@ -77,7 +77,7 @@ composer require rawr/t-regx
         <p>
           <Markdown>
             T-Regx utilizes chainable, functional programming with methods like `filter()`, [`map()`](docs/match-map),
-            [`flatMap()`](docs/match-map#flatmap), [`first()`](docs/match-first)/[`forFirst()`](docs/match-for-first),
+            [`flatMap()`](docs/match-map#flatmap), [`first()`](docs/match-first)/[`findFirst()`](docs/match-find-first),
             etc.
           </Markdown>
         </p>
