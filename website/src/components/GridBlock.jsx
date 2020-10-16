@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import styles from "../styles.module.css";
-import {Markdown} from "../../components/Utils/code";
+import styles from "../pages/styles.module.css";
+import {Markdown} from "./Utils/code";
 import React from "react";
 
 export default props => <div className={classNames('padding-vert--xl', {

@@ -10,8 +10,8 @@ import phpQuestions from "../components/QuizPhp/questions";
 import {SponsorButton, StarButton} from "../components/GithubButton";
 import {fiddleUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
-import MountingQuiz from "./index/MountingQuiz";
-import GridBlock from "./index/GridBlock";
+import MountingQuiz from "../components/MountingQuiz";
+import GridBlock from "../components/GridBlock";
 
 import sections from '../data';
 import styles from './styles.module.css';

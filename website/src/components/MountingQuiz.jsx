@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Quiz from "../../components/Quiz/components/Quiz";
+import Quiz from "./Quiz/components/Quiz";
 
 /**
  * There is some wired bug with "nuka-carousel", where the slides have
