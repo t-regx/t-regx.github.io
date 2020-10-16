@@ -16,8 +16,8 @@ export default {
       href: 'https://github.com/T-Regx/T-Regx',
     },
     {
-      title: 'Repository Size',
-      src: 'https://github-size-badge.herokuapp.com/T-Regx/playground.svg',
+      title: 'Install size',
+      src: 'https://github-size-badge.herokuapp.com/T-Regx/fiddle.svg',
       href: 'https://github.com/T-Regx/T-Regx',
     },
     {
