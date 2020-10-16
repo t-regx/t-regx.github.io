@@ -6,11 +6,11 @@ export default [
     content: `Learn more using the [documentation on this site](/docs/introduction-safe). Feel free to visit:
 
 * [Matching](/docs/match)
-* [Match details](docs/match-details)
-* [Replacing](docs/replace)
-* [Prepared patterns](docs/prepared-patterns)
-* [Automatic delimiters](docs/delimiters)
-* [Validate pattern](docs/valid)
+* [Match details](/docs/match-details)
+* [Replacing](/docs/replace)
+* [Prepared patterns](/docs/prepared-patterns)
+* [Automatic delimiters](/docs/delimiters)
+* [Validate pattern](/docs/valid)
     `,
   },
   {
@@ -37,7 +37,6 @@ We'll answer as fast as we can :)
   },
   {
     title: 'Join the discussion below!',
-    content: `Ask as many questions about the documentation and the project as you need We'll try to answer them as fast as we can! <br><br><br> ![style](img/t.regx.discussion.png)`,
+    content: `Ask as many questions about the documentation and the project as you need We'll try to answer them as fast as we can! <br><br><br> ![style](/img/t.regx.discussion.png)`,
   },
 ];
-
