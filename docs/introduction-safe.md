@@ -146,6 +146,21 @@ Basically, SafeRegex can isolate the preg call to one method.
 
 But don't worry! T-Regx doesn't touch `set_error_handler()` nor `set_exception_handler()`, you can be sure of that! :)
 
+## Word about exceptions
+
+When using `preg::...()` methods, any error-prone situation is handled with an exception. Not only will it
+give you insight about the nature of the error (`MalformedPattern`, `MalformedPatternException`, utf8 exceptions),
+it will allow you to get even more details with the methods on the exception:
+
+```
+try {
+    preg::match('/(foo/', 'foo');
+} catch (PregException $exception) {
+    $exception->getInvokingMethod();  // 'preg_match'
+    $exception->getPregPattern();     // '/(foo/' 
+}
+```
+
 ## Final words
 
 That's it about SafeRegex! Really!
