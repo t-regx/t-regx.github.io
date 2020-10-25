@@ -121,6 +121,56 @@ Pattern::bind($input, $values);
   - are always quoted (using `preg::quote()`) with regard to the delimiter chosen by [Automatic Delimiters](delimiters.mdx)
   - **don't contribute** to the pattern being automatically delimited. Otherwise, user-input data could influence the pattern being invalid or not
 
+### Reusing values
+
+Beucase placeholders in `Pattern::bind()` are named, there's a possibility to reuse some of the values multiple times.
+
+```php
+Pattern::bind("(My|Our) (dog|cat) names are @dog and @dog!", [ // @dog used twice
+    'dog' => $dog,
+]);
+```
+
+## Details about `Pattern::inject()`
+
+`Pattern::inject()` replaces a **placeholder** in the pattern, similarly to `Pattern::bind()`, but the placeholders
+aren't named. They're shorter, but because they're not named, there isn't a possibility to reuse values.
+
+```php
+Pattern::inject("(My|Our) (dog|cat) names are @ and @!", [$dog, $cat]);
+```
+
+The said code snippet with `Pattern::inject()` is exactly the same as the one with `Pattern::bind()` above.
+
+### Additional information
+
+```php
+$input = 'Regular expression @';
+$values = ['value'];
+Pattern::inject($input, $values);
+```
+
+- Data:
+
+  - Value of `$input` is treated as a regular expression
+  - Values in `$values` are treated as a string literal
+
+- Data structure
+
+  - The `$values` must not be an associative array - that is, its keys must be continuous integer keys
+    starting from `0`.
+  - The `$values` array must have exactly that many items, are there are placeholders `@` in the pattern.
+  - If not, `InvalidArgumentException` is thrown
+
+- Data types:
+
+  - Values in `$values` can only be of type `string`
+  - If not, `InvalidArgumentException` is thrown
+
+- Values in `$values`:
+  - are always quoted (using `preg::quote()`) with regard to the delimiter chosen by [Automatic Delimiters](delimiters.mdx)
+  - **don't contribute** to the pattern being automatically delimited. Otherwise, user-input data could influence the pattern being invalid or not
+
 ## Building process
 
 Here's how a given pattern is constructed:
