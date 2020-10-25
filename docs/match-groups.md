@@ -286,6 +286,89 @@ pattern($pattern)->match($subject)->first(function (Match $match) {
 });
 ```
 
+## Complication with `J` modifier
+
+### Overview
+
+PCRE in PHP offers `J` modifier. It can be used either as a flag: `/foo/J` (since PHP 7.2), 
+or as an in-pattern modifier: `/foo(?J)/`.
+
+Normally, duplicated pattern names aren't allowed, and such code
+```
+pattern('(?<group>)(?<group>)')  // MalformedPatternException
+```
+
+would throw `MalformedPatternException`, with message `Two named subpatterns have the same name`.
+
+However, `J` modifier removes that restriction, and it becomes possible to use duplicated group names
+in one pattern:
+```
+pattern('(?<group>)(?<group>)', 'J')  // works fine
+```
+
+It doesn't make much sense for two completely separate groups; it rather may have *some* sense to be
+used with optional, mutually exclusive groups, like:
+
+```
+pattern('((?<scheme>http)|(?<scheme>ftp))', 'J')  // either one or the other
+```
+
+maybe. T-Regx doesn't encourage such patterns, we'd recommend using one enclosing group for that purpose.
+
+```
+pattern('(?<scheme>http|ftp)', 'J')
+```
+
+### The complication
+
+PCRE PHP API returns groups as an `array`, and PHP arrays can't have duplicate keys. That means, when
+`J` option is used and two same groups are matched; only one will be present in the match `array` anyway.
+
+That means, T-Regx **isn't able** to reliably:
+ - assign index to a named group
+ - assign name to an indexed group
+ - determine whether the doubley-named group is matched or not.
+
+### The current solution
+
+The solution is far from perfect, but as long as `J` option exists in PHP, T-Regx must handle it. And we can't do anything, 
+about the lack of necessary information to handle it properly. 
+
+DN - doubly-named
+
+The good part:
+ - Missing groups are handled reliably in every case
+ - Invalid groups are handled reliably in every case
+ - Indexed, matched groups are handled reliably in every case
+ - Indexed, unmatched groups are handled reliably in every case
+
+The worse part:
+ - We can't reliably assign a duplicated name to an index, and an index to a name:
+   - `group('group')->index()` returns the index of the **left-most** DN group.
+   - `group(2)->name()` returns the name, only if `2` is the index of the **left-most** DN group.
+   
+   So we assume the **left-most** indexed group has the name.
+   
+ - We can't reliably handle optional DN groups.
+   - So, the whole DN is considered unmatched if, and only if the **right-most** DN group is not matched.
+   - The `text()` and `offset()` od the whole DN value, is the text and offset of the **right-most** DN group.
+
+Basically:
+ - Index/name relation, is taken from the **left-most group**
+   
+   And in consequence: `groupNames()`, `namedGroups()`, etc.
+ - Text/offset/matched is taken from the **right-most group**.
+ 
+   And in consequence: `byteOffset()`, `orReturn()`/`orElse()`, `tail()`, etc.
+
+We're aware about the messiness of that solution, but the solution we chose offers **predictability**
+(that is, works the same for matched and unmatched groups). Other solutions we considered for the handling of `J`
+modifier changed behaviour when groups weren't matched, so we choose left/right confusion, instead of runtime
+randomness.
+
+To be safe, we discourage you from ever using `J` option with T-Regx. Without duplicate names, T-Regx
+is able to handle each and every case of groups reliably, 100% of the time.
+
 ## Groups In-Depth
 
 > Groups In-Depth is a rather advanced matter, and not necessary for everyday use.
