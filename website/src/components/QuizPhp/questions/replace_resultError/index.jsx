@@ -8,8 +8,9 @@ export default <Question
   markdown
   question="This code will issue a warning, because the pattern is invalid. Afterwards, what will remain in `$result`?"
   code="$result = preg_replace('/invalid pattern{1,/', $subject, '');">
-  <Answer markdown help={help} hoverCode={"preg_replace('/invalid pattern{1,/', $subject, '') === false;"} correct>
-    `$result === false`</Answer>
+  <Answer markdown help={help} hoverCode={"preg_replace('/invalid pattern{1,/', $subject, '') === false;"}>
+    `$result === false`
+  </Answer>
   <Answer markdown help={help} hoverCode={"preg_replace('/invalid pattern{1,/', $subject, '') === 0;"}>
     `$result === 0`
   </Answer>
@@ -19,7 +20,7 @@ export default <Question
   <Answer markdown help={help} hoverCode={"preg_replace('/invalid pattern{1,/', $subject, '') === [];"}>
     `$result === []`
   </Answer>
-  <Answer markdown help={help} hoverCode={"preg_replace('/invalid pattern{1,/', $subject, '') === null;"}>
+  <Answer markdown help={help} hoverCode={"preg_replace('/invalid pattern{1,/', $subject, '') === null;"} correct>
     `$result === null`
   </Answer>
 </Question>;
