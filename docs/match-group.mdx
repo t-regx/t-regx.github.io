@@ -9,9 +9,9 @@ Apart from retrieving matched capturing groups, you can also replace by an [inli
 
 Method `match()->group()` behaves exactly like [`Match.group(int|string)`]:
 
-- it can accept either group index (where #0 is the whole match) or a group name (when a group is named)
-- it throws [`\InvalidArgumentException`] for an invalid index or an invalid group name (e.g. `"2group"` or `-2`)
-- and throws `NonexistentGroupException` if `group()` is used with a non-existent group
+- accepts either a group index (where #0 is the whole match) or a group name (when a group is named)
+- throws `NonexistentGroupException` if `group()` is used with a non-existent group
+- throws [`\InvalidArgumentException`] for an invalid index or an invalid group name (e.g. `"2group"` or `-2`)
 
 ## Matched occurrences of a group
 
