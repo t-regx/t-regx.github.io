@@ -220,6 +220,26 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('')->first(function (Match $match)
 > hence the developer doesn't have to check whether the group exists. The pattern is constant - the collection of groups 
 > is also constant (optional or not).
 
+## Group names
+
+When any group method is called with an invalid group name, for example:
+```php
+$match->hasGroup('**');
+$match->matched('**');
+$match->group('**')->text();
+$match->get('**');
+```
+
+then `\InvalidArgumentException` is thrown.
+
+To validate a group name before using it, you can use `GroupName` helper:
+
+```php
+use TRegx\CleanRegex\Helper\GroupName;
+
+GroupName::isValid('**'); // false
+```
+
 ## Composite groups
 
 ```php
