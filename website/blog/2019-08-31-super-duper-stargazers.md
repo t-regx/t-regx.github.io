@@ -19,4 +19,4 @@ instead of values. It's going to be released in 0.9.2.
 replacements and more.
 
 [`preg_grep()`]: https://www.php.net/manual/en/function.preg-grep.php
-[2]: https://github.com/T-Regx/T-Regx/blob/master/ChangeLog.md#incoming-in-092
+[2]: https://github.com/T-Regx/T-Regx/blob/develop/ChangeLog.md#incoming-in-092
