@@ -321,13 +321,14 @@ pattern('(?<scheme>http|ftp)', 'J')
 
 ### The complication
 
-PCRE PHP API returns groups as an `array`, and PHP arrays can't have duplicate keys. That means, when
-`J` option is used and two same groups are matched; only one will be present in the match `array` anyway.
+PCRE PHP API returns groups as an `array`, and PHP arrays can't have duplicate keys. That means, despite
+multiple groups with the same name being matched, only one will be present in the resulting `array`. 
+There are some constants, allowing us to handle the duplicate groups in *some* way, but it's not perfect.
 
 That means, T-Regx **isn't able** to reliably:
- - assign index to a named group
- - assign name to an indexed group
- - determine whether the doubley-named group is matched or not.
+ - assign an index to a named group
+ - assign a name to an indexed group
+ - determine which of groups are matched or not.
 
 ### The current solution
 
