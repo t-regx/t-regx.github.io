@@ -24,15 +24,16 @@ $input = $_GET['name'];
 Pattern::of("(My|Our) dog's name is " . $input . '!');
 ```
 
-Immediately though, you can see that `$input` can contain regexp special characters and mess with your pattern.
+Immediately though, you can see that `$input` may contain special characters (like `.`, `?`) that might interfere with your pattern.
+It also poses a threat to ReDOS attack, if the unsafe values aren't handled properly.
 
-If, by accident, `$input` had a value of `B(arky` - you would receive an exception `missing ) at offset 31`
+For example, given this code:
 
 ```php
 Pattern::of("(My|Our) dog's name is (Barky!");
 ```
 
-They need to be escaped!
+If, by accident, `$input` had a value of `B(arky` - you would receive an exception `missing ) at offset 31`
 
 Read on, to learn about proper handling of user input.
 
@@ -47,6 +48,6 @@ They allow you to separate regular expression from unsafe data, which helps with
 - some flags (e.g. `x`) require spaces and whitespaces to also be quoted, which [`preg_quote()`] doesn't quote
 - inside comments (`\Q` and `\E`), values shouldn't be quoted! This would cause double quotation, which [`preg_quote()`] does
   _(kinda how `>` becomes `&amp;gt;` when double quoted)_.
-- [`preg_quote()`] doesn't quote comments before PHP 7.1.3
+- [`preg_quote()`] doesn't quote comments before PHP 7.1.3, in T-Regx this is handled.
 
 [`preg_quote()`]: https://www.php.net/manual/en/function.preg-quote.php

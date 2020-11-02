@@ -34,7 +34,7 @@ Because:
     > Any special meaning of regex symbols (like `.`, `?`) must be revoked.
  - `\.(com|net)` must be treated **as a regular expression** 
 
-    > Expression `(com|net)` must bean alteration.
+    > Expression `(com|net)` must be an alteration.
 
 That's a use-case for prepared patterns.
 
