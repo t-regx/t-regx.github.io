@@ -5,7 +5,7 @@ export interface AnswerProps {
   correct?: boolean,
   markdown?: boolean,
   code?: string,
-  help: string | string[],
+  help?: string | string[],
   markdownHelp?: boolean,
   hoverCode?: string
 }
