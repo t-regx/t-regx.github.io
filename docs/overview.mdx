@@ -51,6 +51,6 @@ T-Regx will **never** return `null`, `false` an empty array or other magic value
 
 And it's not just the return values, `$match` results also contain magic values like `""` which can either mean
 the group wasn't matched, or it matched an empty string in PHP. In CleanRegex this is handled, so you don't have to worry
-about it - `""` always means an empty string in T-Regx.
+about it - In T-Regx, `""` always means an empty string.
 
 [`Match`]: match.mdx
