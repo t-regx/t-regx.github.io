@@ -31,17 +31,14 @@ You can see, the outer layer array combined with the `[$domain]` array and array
 becomes quite hard to read. Additionally, because of alteration, it becomes even more unreadable! 
 It was very easy to misread the parameter array with alteration array, or even regular regex with text.
 
-So we decided to remove it from the library.
+### The solution
 
-The remaining prepared patterns methods are `Pattern::inject()` and `Pattern:bind()`. Use them like so:
-```php
-// inject
-Pattern::inject('^http://@/index\.php', [$domain])->test($link);
+So at first, we decided to remove it from the library, but then, because of one of the users
+comment in GitHub issues, we decided that perhaps it would be better not to remove the method, 
+but fix it.
 
-// bind
-Pattern::bind('^@scheme://@dom/index\.php', [
-      'scheme' => ['http', 'https'],
-      'dom' => $domain,
-   ])
-   ->test($link);
-```
+In this case, fixing it would be disallowing such confusing constructs as alteration in prepared patterns. 
+So we decided to bring back `Pattern::prepare()`, but remove alteration so the messy queries won't appear
+in the source code.
+
+Alteration is still available for `Pattern:inject()` and `Pattern::bind()`.
