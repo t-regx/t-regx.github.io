@@ -25,8 +25,9 @@ error:
  - preg compile errors, preg syntax errors, warnings/notices with `error_get_last()`.
  - invalid input arguments, invalid callback return values.
  - Additionally, sometimes certain arguments  (like `false`, `null`) or other unexpected parameters cause `preg_` to misbehave in strange ways. In those cases, SafeRegex also throws exceptions. 
- - Rare exotic arguments sometimes cause `preg_` methods to throw fatal errors. SafeRegex handles them as well.
-   
+ - Some arguments cause `preg_` methods to throw fatal errors. SafeRegex handles them as well with a proper exception,
+   preventing fatal errors.
+
 Anything! If something's not right with `preg_` - SafeRegex will throw a proper exception, you can be sure of that). 
 
 You should replace this code in your project:
@@ -128,11 +129,14 @@ There are other safety features added by SafeRegex, like PHP bug fixes.
 
 ## Mix and match
 
-If you mix and match multiple calls to `preg` methods, like maybe calling `preg_match()`, `preg_replace()`, and `preg_split()`
-right after each other, it may be really difficult to figure out which method was prone to error. SafeRegex can always narrow
-down the error to the exact method to one particular call (even nested ones, like malformed preg call inside `preg_replace_callback()`):
+In Vanilla-PHP, if you mix and match multiple calls to `preg` methods, like maybe calling `preg_match()`, 
+`preg_replace()`, and `preg_split()` right after each other, it may be really difficult to figure out 
+which method was prone to error. 
 
-```
+SafeRegex can always narrow down the error to the exact method to one particular call (even nested ones, 
+like malformed preg call inside `preg_replace_callback()`):
+
+```php
 preg::replace_callback('pattern', function ($match) {  // this method won't throw exception
     try {
         return preg::replace_callback('({%invalid', 'strlen', '');  // this will throw exception
@@ -149,7 +153,7 @@ But don't worry! T-Regx doesn't touch `set_error_handler()` nor `set_exception_h
 ## Word about exceptions
 
 When using `preg::...()` methods, any error-prone situation is handled with an exception. Not only will it
-give you insight about the nature of the error (`MalformedPattern`, `MalformedPatternException`, utf8 exceptions),
+give you insight about the nature of the error (`MalformedPattern`, `CatastrophicBacktracking`, utf8 exceptions),
 it will allow you to get even more details with the methods on the exception:
 
 ```
@@ -165,9 +169,10 @@ try {
 
 That's it about SafeRegex! Really!
 
-SafeRegex API is exactly the same as vanilla PHP `preg_` methods, so you only need to change `preg_` to `preg::` and
-you're already protected against every compile-time or runtime warning/error/notice, magic value and other code-smells
-present in PCRE. Every callback, flag, argument is copied 1:1. In terms of programming usage - they're identical.
+SafeRegex method names, arguments, return types are exactly the same as vanilla PHP `preg_` methods, so you only 
+need to change `preg_` to `preg::` and you're already protected against every compile-time or runtime warning/error/notice, magic value and other code-smells
+present in PCRE. Every callback, flag, argument is copied 1:1. In terms of programming usage - they're identical. The
+only difference is `preg::` instead of `preg_`.
 
 In the next chapters, we'll talk about CleanRegex - the higher level API solving more complicated problems of 
 PHP regular expressions, other than the complete lack of exceptions.
