@@ -168,8 +168,9 @@ Furthermore, T-Regx throws different exceptions for different errors:
 - NonexistentGroupException
 - InvalidReplacementException
 - InvalidReturnValueException
-- MissingSplitDelimiterGroupException
-- InternalCleanRegexException
+- CatastrophicBacktrackingPregException
+- RecursionLimitPregException
+- Utf8OffsetPregException
 
 They all extend `PatternException` though.
 
@@ -177,7 +178,7 @@ Further, furthermore, if you pass an invalid data type to any of the T-Regx meth
 
 ### T-Regx is clean and simple
 
-You will not find arrays of arrays of arrays in T-Regx API. Each functionality has a dedicated set of methods.
+You will not find arrays, of arrays, of arrays in T-Regx API. Each functionality has a dedicated set of methods.
 
 ```php
 pattern($pattern)->match($subject)->first(function (Match $match) {
