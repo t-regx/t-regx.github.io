@@ -9,9 +9,12 @@ Use `forEach()` to easily iterate matched occurrences with your callback. You ca
 that's invoked with [`Match`] details just like [`first()`] and [`findFirst()`].
 
 <CodeTabs
-    tregx={`pattern('\\w+')->match('Apples are cool')->forEach(function (Match $match) {
+    tregx={`// highlight-next-line
+pattern('\\w+')->match('Apples are cool')->forEach(function (Match $match) {
     echo "I matched $match, ";\n});`}
-    php={`preg::match_all('/\\w+/', 'Apples are cool', $matches);
+    php={`// highlight-next-line
+preg::match_all('/\\w+/', 'Apples are cool', $matches);
+// highlight-next-line
 array_map(function (string $text) {
     echo "I matched $text, ";
 }, $matches[0]);`}/>
@@ -26,9 +29,12 @@ Using [`Match`] you can get detailed information such as [`offset()`], [`index()
 You can also use the result of `pattern()->match()` directly in PHP `foreach` loop.
 
 <CodeTabs
-    tregx={`foreach (pattern('\\w+')->match('Apples are cool') as $match) {
+    tregx={`// highlight-next-line
+foreach (pattern('\\w+')->match('Apples are cool') as $match) {
     echo "I matched " . $match->text() . ", ";\n};`}
-    php={`preg::match_all('/\\w+/', 'Apples are cool', $matches);
+    php={`// highlight-next-line
+preg::match_all('/\\w+/', 'Apples are cool', $matches);
+// highlight-next-line
 foreach ($matches[0] as $text) {
     echo "I matched $text, ";
 }`}/>
@@ -40,29 +46,26 @@ In the further chapters you will learn about inline [`offsets()`], [`group(strin
 but for now, you only need to know that all of those entities are iterable with PHP `foreach`.
 
 <CodeTabs
-    tregx={`foreach (pattern('\\d+')->match('127.0.0.1') as $match) {
-    return $match->text(); // '127'\n}`}
-    php={`preg_match_all('/\\d+/', '127.0.0.1', $matches);
-foreach ($matches[0] as $text) {
-    return $text; // '127';\n}`}/>
-<Result>'127'</Result>
-
-and also
-
-<CodeTabs
-    tregx={`foreach (pattern('\\d+')->match('127.0.0.1')->asInt() as $digit) {
+    tregx={`// highlight-next-line
+foreach (pattern('\\d+')->match('127.0.0.1')->asInt() as $digit) {
     return $digit; // 127\n}`}
-    php={`preg_match_all('/\\d+/', '127.0.0.1', $matches);
+    php={`// highlight-next-line
+preg_match_all('/\\d+/', '127.0.0.1', $matches);
+// highlight-next-line
 foreach ($matches[0] as $text) {
     $digit = Integer::parse($text);
     return $digit; // 127;\n}`}/>
 <Result>127</Result>
+
 or
 
 <CodeTabs
-    tregx={`foreach (pattern('(\\d+)')->match('127.0.0.1')->group(1) as $group) {
+    tregx={`// highlight-next-line
+foreach (pattern('(\\d+)')->match('127.0.0.1')->group(1) as $group) {
     return $group->text(); // '127'\n}`}
-    php={`preg_match_all('/(\\d+)/', '127.0.0.1', $matches);
+    php={`// highlight-next-line
+preg_match_all('/(\\d+)/', '127.0.0.1', $matches);
+// highlight-next-line
 foreach ($matches[1] as $group) {
     return $group; // '127';\n}`}/>
 <Result>'127'</Result>
@@ -71,9 +74,12 @@ Of course, if you call `->all()` on any of the given entities above you will rec
 also iterable by PHP `foreach`.
 
 <CodeTabs
-    tregx={`foreach (pattern('\\d+')->match('127.0.0.1')->all() as $text) {
+    tregx={`// highlight-next-line
+foreach (pattern('\\d+')->match('127.0.0.1')->all() as $text) {
     return $text; // '127'\n}`}
-    php={`preg_match_all('/\\d+/', '127.0.0.1', $matches);
+    php={`// highlight-next-line
+preg_match_all('/\\d+/', '127.0.0.1', $matches);
+// highlight-next-line
 foreach ($matches[0] as $text) {
     return $text; // '127';\n}`}/>
 <Result>'127'</Result>
@@ -91,4 +97,3 @@ Although, instead of `all()` it's possible to chain the entities with one of the
 [`offsets()`]: match-offsets.mdx#using-inline-offsets-method
 [`group(string|int)`]: match-group.mdx
 [`asInt()`]: match-as-int.mdx
-
