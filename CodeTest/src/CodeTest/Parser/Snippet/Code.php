@@ -1,8 +1,6 @@
 <?php
 namespace CodeTest\Parser\Snippet;
 
-use TRegx\CleanRegex\Match\Details\Match;
-
 class Code
 {
     public static function toArray(string $code): array
@@ -17,11 +15,6 @@ class Code
 
     private static function parseCode(string $code): string
     {
-        return pattern('\\\\[\\\\n]')->replace($code)->all()->callback(function (Match $match) {
-            if ($match->text() === '\n') {
-                return "\n";
-            }
-            return "\\";
-        });
+        return pattern('\\\\[\\\\n]')->replace($code)->all()->callback(fn(string $newLine) => $newLine === '\n' ? "\n" : "\\");
     }
 }

@@ -14,7 +14,7 @@ class ReturnVariable extends PureModification
 
     private function validateArgument(string $argument): void
     {
-        if (preg_match('/^\$(?!\d)\w+$/', $argument) === 0) {
+        if (pattern('^\$(?!\d)\w+$')->fails($argument)) {
             throw new InvalidArgumentException("ReturnVariable: Invalid argument '$argument' for mod 'mock'");
         }
     }

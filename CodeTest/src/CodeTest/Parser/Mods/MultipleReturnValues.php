@@ -36,8 +36,6 @@ class MultipleReturnValues extends PureModification
 
     private function addCommas(array $toPack): array
     {
-        return array_map(function (string $line) {
-            return rtrim($line, ';') . ',';
-        }, $toPack);
+        return array_map(fn(string $line) => rtrim($line, ';') . ',', $toPack);
     }
 }
