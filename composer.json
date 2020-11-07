@@ -1,7 +1,4 @@
 {
-  "config": {
-    "vendor-dir": "dependencies"
-  },
   "type": "project",
   "autoload-dev": {
     "classmap": [

@@ -9,5 +9,5 @@ website/build/
 website/yarn.lock
 website/node_modules
 
-dependencies/
+vendor/
 composer.phar
