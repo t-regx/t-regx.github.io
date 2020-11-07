@@ -3,17 +3,21 @@ id: replace-by-map
 title: Replace by map
 ---
 
+
 import {CodeTabs, Result} from './code';
 
-There are cases when you have to use more than one replacement, but you also don't need [`Match`](match-details.md) details or
-any replacement logic, really, so both `with()` and `callback()` are a little unfit.
+There are cases when you have to use more than one replacement (so `with()` won't work),
+but you also don't need [`Match`](match-details.md) details or
+any replacement logic, really (so `callback()` is a little too much).
 
-Replacing by map allows T-Regx to save a little performance overhead, by not creating [`Match`](match-details.md) object.
+Replacing by a map is an acceptable compromise, which allows T-Regx to save a little performance
+overhead, by not creating [`Match`](match-details.md) object, as well as making your code a
+little more concise.
 
 ## Standard map
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+You can use `replace()->all()->by()->map()` to replace a matched, predefined value (`"mp3"`, `"mp4"` or `"gif"`)
+by its direct counter-part (`'Audio file'`, `'Video file'`, `'Animation'`):
 
 <CodeTabs
     tregx={`$message = 'My words: "mp3", "mp4", "gif"';\n
@@ -43,28 +47,33 @@ preg::replace_callback('/\\b\\w{3}\\b/', function ($match) {
 <!--PHP:{echo-at(2)}-->
 <Result text>My words: "Audio file", "Video file", "Animation"</Result>
 
-And of course `all()`/`first()`/`only(int)` modifiers are taken into account.
+Here, we used `replace()->all()` as an example, but of course `replace()->first()` and
+`replace()->only(int)` could be used and would replace only the first, or the first few matches.
 
 ### Superfluous matches
 
-Normally, had you found a match that's not present in your map - `MissingReplacementKeyException` would be thrown
-(as long as `gif` is matched by your pattern, of course):
+Normally, had you matched a string that's not present in your map, a `MissingReplacementKeyException` would be thrown:
 
 ```php
-$message = 'My words: "mp3", "mp4", "gif"';
+$message = 'My words: "mp3", "mp4", "xxx"';
 
 pattern('\w{3}')->replace($message)->all()->by()->map([
-   'mp3'   => 'Audio file',
-   'mp4'   => 'Video file'
-  // 'gif'  => 'Animation'
+   'mp3'  => 'Audio file',
+   'mp4'  => 'Video file',
+   'gif'  => 'Animation',
+   'xxx'  => 'Unknown'
 ]);
 ```
 
-If you don't need to specify all your possible `[match => replacement]` pairs, you should use one of the below `mapIfExists()`.
+`MissingReplacementKeyException` is a safe-guard, since `map()` is supposed to be only used with a predefined
+set of expected matches, and if a different string is matched (like `"xxx"`), that's a heads up
+that perhaps something went wrong. Either the map was incomplete, or the pattern allowed some unexpected values.
 
 ### Ignored replacements
 
-With `mapIfExists()` - superfluous occurrences are left unchanged:
+On the other hand, if you want to ignore unexpected values - use `mapIfExists()`.
+
+With `mapIfExists()`, superfluous occurrences are left unchanged:
 
 <CodeTabs
     tregx={`$message = "Extensions: mp3, mp4, jpg, jpeg, png, gif";\n
@@ -95,7 +104,11 @@ preg::replace_callback('/\\b\\w{3}\\b/', function ($match) {
 ## Groups
 
 Resolving a replacement based on a **whole match** however, is both uncommon and unpractical. It's much more elastic to resolve
-it based on a specific capturing group, using `by()->group()->map()`:
+it based on a specific capturing group, using `by()->group()->map()`.
+
+Remember, that groups can be matched or not matched, so we need to specify how to
+handle an unmatched group. In this case, we'll use `orElseThrow()`, since we don't
+expect the group to ever be unmatched.
 
 <CodeTabs
     tregx={`$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';\n
@@ -110,7 +123,7 @@ pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)\\.(com|io)')
        'facebook' => 'Social Portal',
        't-regx'   => 'Documentation',
     ])
-    ->orThrow();`}
+    ->orElseThrow();`}
     php={`$links = 'Links: www.google.com, http://socket.io, facebook.com, https://t-regx.com';\n
 preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)\\.(com|io)#', function (array $match) {
     // possible invalid group, e.g. "2group" or -2
