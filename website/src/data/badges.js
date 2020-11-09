@@ -28,7 +28,7 @@ export default {
     {
       title: 'GitHub last commit',
       src: 'https://img.shields.io/github/last-commit/T-Regx/T-Regx/develop.svg',
-      href: 'https://github.com/T-Regx/T-Regx',
+      href: 'https://github.com/T-Regx/T-Regx/commits/develop',
     },
     {
       title: 'GitHub commit activity"',
