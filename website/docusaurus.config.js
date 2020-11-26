@@ -1,5 +1,6 @@
 const path = require('path');
 const {mainRepoUrl, fiddleUrl} = require("./consts");
+const changeLogUrl = `${mainRepoUrl}/blob/develop/ChangeLog.md`;
 
 module.exports = {
   title: 'T-Regx',
@@ -37,6 +38,7 @@ module.exports = {
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
         {position: 'left', label: 'T-Regx fiddle', href: fiddleUrl},
+        {position: 'right', label: 'ChangeLog', href: changeLogUrl},
         {position: 'right', label: 'GitHub', href: mainRepoUrl},
       ],
     },
@@ -54,7 +56,7 @@ module.exports = {
             {label: 'Installation', to: 'docs/installation'},
             {label: 'Getting Started', to: 'docs/introduction-safe'},
             {label: 'Documentation', to: 'docs/match'},
-            {label: 'API Reference', href: `${mainRepoUrl}/blob/develop/ChangeLog.md`},
+            {label: 'API Reference', href: changeLogUrl},
           ],
         },
         {
