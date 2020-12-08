@@ -41,4 +41,12 @@ In this case, fixing it would be disallowing such confusing constructs as altera
 So we decided to bring back `Pattern::prepare()`, but remove alteration so the messy queries won't appear
 in the source code.
 
-Alteration is still available for `Pattern:inject()` and `Pattern::bind()`.
+Alteration is still available for `Pattern:inject()` and `Pattern::bind()`:
+
+```php
+Pattern::inject('@://@', [[$http, $https], $domain])->test($link);
+```
+
+```php
+Pattern::bind('@scheme://@domain', ['scheme' => [$http, $https], 'domain' => $domain])->test($link);
+```
