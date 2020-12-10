@@ -24,6 +24,7 @@ const SplashImage = ({name}) => {
   const images = {
     regular: {src: 't.regx.png', title: 'T-Regx'},
     corona: {src: 't.regx.surgical.png', title: 'Responsible T-Regx'},
+    coronaXmas: {src: 't.regx.surgical.xmas.png', title: 'Responsible T-Regx'},
     carnival: {src: 't.regx.carnival.png', title: 'Carnival T-Regx'},
     easter: {src: 't.regx.easter.png', title: 'Easter T-Regx'},
     holiday: {src: 't.regx.summer.png', title: 'Holiday T-Regx'},
@@ -62,7 +63,7 @@ export default function AutomaticSplashLogo() {
   const splashName = () => {
     const now = new Date();
 //    return splashNameByDate(now.getDate(), now.getMonth() + 1);
-    return 'corona';
+    return 'coronaXmas';
   };
 
   return <SplashImage name={splashName()}/>;
