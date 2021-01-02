@@ -63,7 +63,7 @@ export default function AutomaticSplashLogo() {
   const splashName = () => {
     const now = new Date();
 //    return splashNameByDate(now.getDate(), now.getMonth() + 1);
-    return 'coronaXmas';
+    return 'corona';
   };
 
   return <SplashImage name={splashName()}/>;
