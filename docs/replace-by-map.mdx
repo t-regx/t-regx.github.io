@@ -50,7 +50,7 @@ preg::replace_callback('/\\b\\w{3}\\b/', function ($match) {
 Here, we used `replace()->all()` as an example, but of course `replace()->first()` and
 `replace()->only(int)` could be used and would replace only the first, or the first few matches.
 
-### Superfluous matches
+### Undefined mapping
 
 Normally, had you matched a string that's not present in your map, a `MissingReplacementKeyException` would be thrown:
 
@@ -60,8 +60,7 @@ $message = 'My words: "mp3", "mp4", "xxx"';
 pattern('\w{3}')->replace($message)->all()->by()->map([
    'mp3'  => 'Audio file',
    'mp4'  => 'Video file',
-   'gif'  => 'Animation',
-   'xxx'  => 'Unknown'
+   'gif'  => 'Animation'
 ]);
 ```
 

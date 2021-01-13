@@ -9,7 +9,7 @@ Method `replace()->by()->group()` can be used when you would just like to replac
 optionally handling what should happen when a group is not matched.
 
 This is, in fact, a shorthand for a rather common usage of `callback()` with a function replacing by a capturing
-group - [Scroll down to see an example](replace-by-group.mdx#identity).
+group - [scroll down to see an example](replace-by-group.mdx#identity).
 
 Apart from replacing by an inline group, you can also retrieve matched capturing groups with [inline groups].
 
@@ -22,9 +22,25 @@ capturing the URL domain, you can easily leave off only the domain in the matche
     tregx={`$links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';\n
 pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)\\.(com|io)')->replace($links)
     ->all()
-    ->by()->group('domain')->orElseThrow();`}
+    ->by()
+    ->group('domain')
+    ->orElseThrow();`}
     php={`$links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';\n
-return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)\\.(com|io)#', function ($match) {
+return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)#', function ($match) {
+    validateGroupName('domain');
+    if (!array_key_exists('domain', $match)) {
+        // group is either un-matched or non-existent
+        if (validateGroupExists('domain', $match)) {
+            throw new GroupNotMatchedException(); // orElseThrow() throws
+        }
+        throw new NonexistentGroupException('domain');
+    }
+    if ($match['domain'] === '') {
+        // group is either un-matched or matched an empty string
+        if (!validateGroupMatched('domain', $match)) {
+            return new GroupNotMatchedException(); // orElseThrow() throws
+        }
+    }
     return $match['domain'];
 }, $links);`}/>
 
@@ -49,7 +65,7 @@ replace with a default or an empty string, or call a producer to return what sho
 You can also chose to throw an exception, if the unmatched group is not supposed to be optional, to ensure integrity.
 
 - `orElseIgnore()` - leaves the match unchanged - doesn't replace the match, if the group itself is not matched
-- `orElseEmpty()` - matched occurrence is replaced with an empty string
+- `orElseEmpty()` - matched occurrence is replaced with an empty string (default for PHP regexp)
 - `orElseWith(string)` - match is replaced with the given `string` argument
 - `orElseCalling(callable)` - uses a callback with [`Match`] argument, in order to evaluate a replacement
 - `orElseThrow()` - throws a default or a custom exception, just like [findFirst()->orThrow()]
@@ -69,7 +85,9 @@ are simply left as they were (ignored):
     tregx={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)')->replace($links)
     ->all()
-    ->by()->group('domain')->orElseIgnore();`}
+    ->by()
+    ->group('domain')
+    ->orElseIgnore();`}
     php={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)#', function ($match) {
     validateGroupName('domain');
@@ -109,7 +127,9 @@ are replaced with an empty string:
     tregx={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)')->replace($links)
     ->all()
-    ->by()->group('domain')->orElseEmpty();`}
+    ->by()
+    ->group('domain')
+    ->orElseEmpty();`}
     php={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)#', function ($match) {
     validateGroupName('domain');
@@ -121,7 +141,8 @@ return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|
             throw new NonexistentGroupException('domain');
         }
     }
-    // Check between unmatched and matched-empty is unnecessary
+    // Check between unmatched and matched-empty is
+    // unnecessary for orElseEmpty()
     return $match['domain'];
 }, $links);`}/>
 
@@ -142,7 +163,9 @@ are replaced with a given parameter string:
     tregx={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)')->replace($links)
     ->all()
-    ->by()->group('domain')->orElseWith('UNKNOWN');`}
+    ->by()
+    ->group('domain')
+    ->orElseWith('UNKNOWN');`}
     php={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)#', function ($match) {
     validateGroupName('domain');
@@ -180,9 +203,9 @@ are then passed to the producer, which result is then replaced in place of the l
     tregx={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)')->replace($links)
     ->all()
-    ->by()->group('domain')->orElseCalling(function (Match $match) {
-        return "Not found **$match**";
-    });`}
+    ->by()
+    ->group('domain')
+    ->orElseCalling(fn(Match $match) => "Not found **$match**");`}
     php={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 $producer = function (array $match) {
     return "Not found **{$match[0]}**";
@@ -226,7 +249,9 @@ You can either call this method without parameters, or with your custom exceptio
     tregx={`$links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';\n
 pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)')->replace($links)
     ->all()
-    ->by()->group('domain')->orElseThrow(MyCustomException::class);`}
+    ->by()
+    ->group('domain')
+    ->orElseThrow(MyCustomException::class);`}
     php={`$links = 'My links are: www.google.com, http://socket.io, facebook.com, https://t-regx.com :)';\n
 return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)#', function ($match) {
     validateGroupName('domain');
@@ -261,7 +286,9 @@ The below `by()->group()` code:
 ```php
 pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')->replace($links)
     ->all()
-    ->by()->group('domain')->orXXX();
+    ->by()
+    ->group('domain')
+    ->orXXX();
 ```
 
 is identical to:
@@ -274,7 +301,7 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')->replace($links)
     });
 ```
 
-> `by()->group()` is the most performance-light method, because it doesn't require creating `Match` details, for the sake
+> Keep in mind that `by()->group()` is the more performance-light method, because it doesn't require creating `Match` details, for the sake
 > of `callback()`.
 
 [`Match.index()`]: match-details.md#ordinal-value-index
