@@ -7,9 +7,9 @@ T-Regx (_T-Rex and RegExp_) is a lightweight, high-level Regular Expressions lib
 
 Its main features are:
 
-- Standard **and** new functions:
-  - You can stay with known `preg_match()`, `preg_replace()` functions
-  - You can use new `pattern()` function
+- **Standard** or **new** functions:
+  - You can stay with known [`preg_match()`], [`preg_replace()`] functions (but safe)
+  - You can use the new [`pattern()`] function
   - You can use either; you can use both; you can interchange them
 
 - API:
@@ -21,9 +21,9 @@ Its main features are:
 - Removing headaches of PHP:
   - You only use `try`/`catch`.
 
-    T-Regx is doing all the `if`ology around `preg` under the hood, to unify all PHP corner-cases and map them to
+    T-Regx is doing all the complex `if`ology around `preg` under the hood, to unify all PHP corner-cases and map them to
     exceptions (see ["Comparison"](/comparison)).
-  - All **false positives** and **false negatives** are eliminated
+  - All **false positives** and **false negatives** are handled
 
 - If anything - Exceptions!:
   - Magic values (like `null`, `false`, `''`, `[]`, `-1`) aren't used -> Exceptions
@@ -43,14 +43,22 @@ Additionally:
 
 ## PHP's magic values
 
-In vanilla PHP, different methods (`preg_match()`, `preg_replace()`, `preg_split()`, etc.) return different types and
-values, that are *symbolic*. For some it's `null`, for other `[]` or `false` or `-1` - they're all supposed to mean "error".
-Of course you have to remember which is `=== false` and which `=== null`.
+In vanilla PHP, different methods ([`preg_match()`], [`preg_replace()`], [`preg_split()`], etc.) return different types and
+values, that are *symbolic*. For some it's `null` or `""`, for other `[]` or `false`, `0` for others it's `-1` - they're all
+supposed to mean "error". For example, [`preg_match()`] returns `false` on error, but [`preg_replace()`] returns `null` on error.
 
-T-Regx will **never** return `null`, `false` an empty array or other magic value. `MalformedPatternException` is thrown if `$pattern` is malformed.
+Of course, you have to remember which is `=== false` and which `=== null`.
+
+T-Regx will **never** return `null`, `false` an empty array or other *magic* value. `MalformedPatternException` is thrown if `$pattern` is malformed.
 
 And it's not just the return values, `$match` results also contain magic values like `""` which can either mean
-the group wasn't matched, or it matched an empty string in PHP. In CleanRegex this is handled, so you don't have to worry
-about it - In T-Regx, `""` always means an empty string.
+the group wasn't matched, or it matched an empty string in PHP. In SafeRegex the false negative is left as it is, we don't change
+the API to allow simple migration of `preg_match()` to `preg::match()`.
+
+In CleanRegex this is handled, so you don't have to worry about it - `""` always means an empty string.
 
 [`Match`]: match.mdx
+[`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
+[`preg_replace()`]: https://www.php.net/manual/en/function.preg-replace.php
+[`preg_split()`]: https://www.php.net/manual/en/function.preg-split.php
+[`pattern()`]: /docs/introduction-clean#entry-points
