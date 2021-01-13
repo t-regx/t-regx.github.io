@@ -5,20 +5,22 @@ title: Quote regular expression
 
 import {CodeTabs, Result} from './code';
 
-## Dedicated builder
-
-Before you engage in this article, please visit "[Handling user input](handling-user-input.md)" first, if you're interested
-in using unsafe data in your patterns :)
+Before you engage in this article, please visit [Handling user input](handling-user-input.md) first,
+if you're interested in using unsafe data in your patterns :)
 
 ```php
 Pattern::prepare(["(My|Our) dog's name is ", [$input], '!']);
 ```
 
 Suggested articles:
- - [`Pattern::prepare()`](prepared-patterns.md#with-pattern-prepare)
- - [`Pattern::inject()`](prepared-patterns.md#with-pattern-inject)
+ - [`Pattern::prepare()`]
+ - [`Pattern::inject()`]
+ - [`Pattern::bind()`]
 
-## Procedural Quoting
+Building your own patterns can be dangerous and lead to security errors. T-Regx offers a rich variety of
+dedicated builders including [`Pattern::prepare()`], [`Pattern::inject()`] and [`Pattern::bind()`].
+
+## Procedural quoting - be careful
 
 There are two methods `Pattern::quote()` and `Pattern::unquote()`.
 
@@ -55,3 +57,6 @@ $this->assertEquals($input, $output);
 The contract is that `$input` should be identical to `$output` for any `string` value.
 
 [`preg_quote()`]: https://www.php.net/manual/en/function.preg-quote.php
+[`Pattern::prepare()`]: prepared-patterns.md#with-pattern-prepare
+[`Pattern::inject()`]: prepared-patterns.md#with-pattern-inject
+[`Pattern::bind()`]: prepared-patterns.md#with-pattern-bind
