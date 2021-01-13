@@ -107,6 +107,21 @@ against _an unexpected_ `\` or `$` - feel free to use `withReferences()` which *
 <!--PHP:{echo-at(first)}-->
 <Result text>{`I have <15> and <192>`}</Result>
 
+## Remove occurrence
+
+There are times when you'd like to simply remove the occurrence of a pattern from your subject. To do that,
+use `pattern()->remove()` instead of `pattern()->replace()`:
+
+<CodeTabs
+  tregx={`pattern('[cm]m')->remove('I have 15cm and 192cm')->all();`}
+  php={`preg::replace('/[cm]m/', '', 'I have 15cm and 192cm');`}/>
+
+<!--T-Regx:{echo-at(first)}-->
+<!--PHP:{echo-at(first)}-->
+<Result text>{`I have 15 and 192`}</Result>
+
+It's actually identical to calling `replace()->with('')` under the hood, but it's a bit shorter and more expressive.
+
 [**brain strain**]: overview.mdx#brain-strain
 [`preg_replace()`]: https://www.php.net/manual/en/function.preg-replace.php
 [`preg_replace_callback()`]: https://www.php.net/manual/en/function.preg-replace-callback.php
