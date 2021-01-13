@@ -1,0 +1,14 @@
+div.matrixBackground {
+  background-image: url("/img/blue-matrix-wide.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  div.post {
+    display: flex;
+    padding: 2vh 0 15vh;
+  }
+
+  div.commentsBackground {
+    background-color: white;
+  }
+}
