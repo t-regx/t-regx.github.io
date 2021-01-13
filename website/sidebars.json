@@ -49,6 +49,8 @@
       "match-iterator"
     ],
     "Advanced": [
+      "match-groups-in-depth",
+      "match-groups-j-modifier",
       "replace-match-details",
       "prepared-patterns-in-details"
     ]
