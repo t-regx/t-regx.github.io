@@ -1,5 +1,5 @@
 const path = require('path');
-const {mainRepoUrl, fiddleUrl} = require("./consts");
+const {mainRepoUrl} = require("./consts");
 const changeLogUrl = `${mainRepoUrl}/blob/develop/ChangeLog.md`;
 
 module.exports = {
@@ -37,7 +37,7 @@ module.exports = {
         {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
-        {position: 'left', label: 'T-Regx repl.it', href: fiddleUrl},
+        {position: 'left', label: 'T-Regx on repl.it (Try online)', to: 'replit'},
         {position: 'right', label: 'ChangeLog', href: changeLogUrl},
         {position: 'right', label: 'GitHub', href: mainRepoUrl},
       ],
