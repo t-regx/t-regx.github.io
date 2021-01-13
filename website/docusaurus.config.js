@@ -37,7 +37,7 @@ module.exports = {
         {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
-        {position: 'left', label: 'T-Regx fiddle', href: fiddleUrl},
+        {position: 'left', label: 'T-Regx repl.it', href: fiddleUrl},
         {position: 'right', label: 'ChangeLog', href: changeLogUrl},
         {position: 'right', label: 'GitHub', href: mainRepoUrl},
       ],

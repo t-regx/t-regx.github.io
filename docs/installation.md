@@ -12,12 +12,26 @@ The installation of T-Regx is really simple - just add a composer dependency:
 composer require rawr/t-regx
 ```
 
-If your composer is not a global `composer` command, but is present in your current working directory,
-then simply invoke it by `php`.
+[Scroll to "How to install Composer"](#install-composer)
 
-```bash
-php composer.phar require rawr/t-regx
-```
+## Try T-Regx online (repl.it)
+
+Before you install, you can try T-Regx online, right in your browser. 
+
+Just visit [T-Regx on repl.it], and when it boots up (after about 4 seconds), just click "Run" at the top.
+
+[![repl.it example](../website/static/img/docs/replit.example.png)](https://repl.it/github/T-Regx/fiddle)
+
+You can log in to [repl.it] with Github account, Google account, Facebook account or regular credentials.
+
+[![repl.it login](../website/static/img/docs/replit.login.png)](https://repl.it/github/T-Regx/fiddle)
+
+There are two files in the fiddle: You can edit `EDIT_HERE.php` as you please; 
+`EXAMPLES.php` contains many basic and complicated examples of T-Regx.
+
+Go to [repl.it] and run the `EXAMPLES.php` or your file in `EDIT_HERE.php`:
+
+[![repl.it login](../website/static/img/docs/replit.run.png)](https://repl.it/github/T-Regx/fiddle)
 
 ## Install composer
 
@@ -36,15 +50,8 @@ Once downloaded, install T-Regx.
 php composer.phar require rawr/t-regx
 ```
 
-[https://getcomposer.org/download/]: https://getcomposer.org/download
-
-## T-Regx fiddle
-
-Before you install, you can try T-Regx online, right in your browser. 
-
-Just visit [T-Regx fiddle], and when it boots up (after about 3 seconds), just click "Run" at the top.
-
-There are two default files in the fiddle: `EDIT_HERE.php` and `EXAMPLES.php`. You can edit them both as you please.
-Additionally, `EXAMPLES.php` contains many basic and complicated examples of T-Regx.
-
+[https://getcomposer.org/download/]: https://getcomposer.org/download/
+[T-Regx on repl.it]: https://repl.it/github/T-Regx/fiddle
 [T-Regx fiddle]: https://repl.it/github/T-Regx/fiddle
+[repl.it]: https://repl.it/github/T-Regx/fiddle
+[repl.it]: https://repl.it/github/T-Regx/fiddle
