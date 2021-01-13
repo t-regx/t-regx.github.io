@@ -77,6 +77,9 @@ if (preg::match('/[0-9]+/', $subject, $match)) {
 return "I couldn't match subject: $subject";`}/>
 <Result>"I couldn't match subject: I'm a dog"</Result>
 
+Callback of `orElse()` is called with `NotMatched`, which contains only a handful of methods
+present in [`Match`]: `subject()`, `groupNames()`, `groupsCount()` and `hasGroup($nameOrIndex)`.
+
 ### `orThrow()`
 
 If a match is not found, it throws `SubjectNotMatchedException` by default.
