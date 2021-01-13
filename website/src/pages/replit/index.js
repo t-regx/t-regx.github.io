@@ -3,7 +3,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 
 import {fiddleUrl} from "../../../consts";
-import DisqusThread from '../../components/DisqusThread';
+import DisqusThread from '../../components/DisqusThread/DisqusThread';
 import example from "../../../static/img/docs/replit.example.png";
 import login from "../../../static/img/docs/replit.login.png";
 

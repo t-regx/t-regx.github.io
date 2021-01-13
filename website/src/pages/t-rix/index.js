@@ -5,7 +5,7 @@ import Markdown from 'markdown-to-jsx';
 import tRegxMatrix from "../../../static/img/t.regx.matrix.png";
 
 import styles from "./index.module.scss";
-import DisqusThread from "../../components/DisqusThread";
+import DisqusThread from "../../components/DisqusThread/DisqusThread";
 
 export default function MatrixPage() {
   return <div className={styles.matrixBackground}>

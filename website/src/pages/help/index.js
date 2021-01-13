@@ -3,7 +3,7 @@ import Layout from '@theme/Layout';
 import Markdown from 'markdown-to-jsx';
 import classNames from 'classnames';
 
-import DisqusThread from '../../components/DisqusThread';
+import DisqusThread from '../../components/DisqusThread/DisqusThread';
 import supportLinks from '../../data/help.js';
 
 export default function () {
