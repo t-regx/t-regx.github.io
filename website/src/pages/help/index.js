@@ -6,25 +6,26 @@ import classNames from 'classnames';
 import DisqusThread from '../../components/DisqusThread';
 import supportLinks from '../../data/help.js';
 
-export default function Help() {
-  return (
-    <Layout>
-      <div className="container margin-vert--xl">
-        <div>
-          <h1>Need help?</h1>
-          <p>
-            This project is maintained by a dedicated group of people. If you have experienced any bugs or problems,
-            you're welcome to submit an <IssueLink>issue on github!</IssueLink> :) It never takes us more than
-            24h to respond!
-          </p>
-          <div className="row">
-            <SupportLinks/>
-          </div>
-          <DisqusThread/>
+export default function () {
+  return <Layout>
+    <div className="container margin-vert--xl">
+      <div>
+        <h1>Need help?</h1>
+        <p>
+          This project is maintained by a dedicated group of people. If you have experienced any bugs or problems,
+          you're welcome to submit an <IssueLink>issue on github!</IssueLink> :) It never takes us more than
+          24h to respond!
+        </p>
+        <div className="row">
+          <SupportLinks/>
         </div>
+
+        <DisqusThread
+          title={'T-Regx Help'}
+          identifier={'5afe7e280900a14e5a8edaae9a618a74'}/>
       </div>
-    </Layout>
-  );
+    </div>
+  </Layout>;
 }
 
 const IssueLink = ({children}) => {

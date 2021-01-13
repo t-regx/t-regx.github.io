@@ -5,9 +5,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 
-import {AutomaticSplashLogo, BadgesSection, DisqusThread} from '../components';
+import {AutomaticSplashLogo, BadgesSection, DisqusThread, SponsorButton, StarButton} from '../components';
 import phpQuestions from "../components/QuizPhp/questions";
-import {SponsorButton, StarButton} from "../components/GithubButton";
 import {fiddleUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
 import MountingQuiz from "../components/MountingQuiz";
@@ -117,7 +116,9 @@ const FunctionalProgramming = () =>
   <GridBlock darkBackground scrollableBackground columns={sections.functionalProgramming}/>;
 
 const CommentsSection = () => <div className="container">
-  <DisqusThread/>
+  <DisqusThread
+    title={'Questions about T-Regx'}
+    identifier={'46dff8e37535ddb3571510672d1af48683bad013'}/>
 </div>;
 
 const SplashContainer = props => (
