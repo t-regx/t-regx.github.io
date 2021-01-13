@@ -24,9 +24,14 @@ Using `Match` details, you gain access to:
 - [offsets of matched values](#offsets) in the subject:
   - character offsets (UTF-8 safe) - [`offset()`](#offsets)
   - byte offsets - [`byteOffset()`](#offsets)
+  - tail (offset of the end of the string) - [`tail()`](#tail)  
 - [`all()`](#other-occurrences) - other matched occurrences
 - [User data](#other-occurrences) - sharing custom data between callbacks
 - details about capturing groups, in the next chapter: [Capturing groups]
+- byte versions of the methods (as opposed to character (utf-8) versions):
+    - `byteTextLength()`
+    - `byteOffset()`
+    - `byteTail()`
 
 ## Matched text
 
@@ -204,6 +209,19 @@ Use:
 
 - `offset()` with functions: [`mb_substr()`], [`mb_strpos()`]
 - `byteOffset()` with functions: [`substr()`], [`strpos()`]
+
+## Tail
+
+Method `Match.tail()` simply returns the position of the last character in a matched occurrence.
+
+```php
+pattern('ipsum')->match('Lorem ipsum')->first(function (Match $match) {
+    $start = $match->offset();   // 6
+    $end = $match->tail();       // 11
+});
+```
+
+There's also `Match.byteTail()` which returns the tail in bytes, instead of characters.
 
 ## Other occurrences
 
