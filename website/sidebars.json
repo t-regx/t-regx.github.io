@@ -8,8 +8,7 @@
     ],
     "Introduction": [
       "introduction-safe",
-      "introduction-clean",
-      "whats-the-point"
+      "introduction-clean"
     ],
     "Matching": [
       "match",
@@ -53,6 +52,9 @@
       "match-groups-j-modifier",
       "replace-match-details",
       "prepared-patterns-in-details"
+    ],
+    "PHP Hate": [
+      "why-php-sucks"
     ]
   }
 }

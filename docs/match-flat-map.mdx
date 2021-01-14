@@ -42,7 +42,7 @@ return array_merge(...array_map(function (string $text) {
 ## Return types
 
 `flatMap()` only accepts an `array` as its return type. Returning a single element and implicitly creating a one-element
-array under the hood would break our ["Explicity rule"].
+array under the hood would break our "Explicity rule".
 
 <CodeTabs
     tregx={`pattern('\\w+')->match("I like trains")->flatMap(function (Match $match) {
@@ -148,4 +148,3 @@ return array_merge(...array_map(function (array $match) use ($subject) {
 [`callable`]: https://www.php.net/manual/en/language.types.callable.php
 [`map()`]: match-map.mdx
 [`first()`]: match-first.mdx
-["Explicity rule"]: whats-the-point.md#t-regx-to-the-rescue

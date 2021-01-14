@@ -14,7 +14,7 @@ recognize author's intentions.
 ## Limits
 
 Using [`first()`]/[`all()`]/[`only(int)`] is semantically identical to passing `$limit` argument to
-[`preg::replace()`]/[`preg::replace_callback()`].
+[`preg_replace()`]/[`preg_replace_callback()`].
 
 Neither of methods [`first()`]/[`all()`]/[`only(int)`] modify the subject if it wasn't matched by a pattern.
 
@@ -70,7 +70,7 @@ preg::replace('/(\d+)cm/', '<$1>', 'I have 15cm and 192cm');
 I have <15> and <192>
 ```
 
-Resolving such references won't happen with T-Regx.
+Resolving such references won't happen using `with()`.
 
 This is done to relieve you from the [**brain strain**]. A programmer should be able to merely
 replace a string with a constant value without [cognitive load] about possible `\` or `$` hiding somewhere.
@@ -92,7 +92,7 @@ might interfere with logic and cause bugs that are very hard to find.
 
 > Neither of types of references are resolved: `$12`, `\12` nor `${12}`.
 
-## Intentional references
+## PHP-style intentional references
 
 If you, however, would like to intentionally use regular expression references and have validated your input
 against _an unexpected_ `\` or `$` - feel free to use `withReferences()` which **will** resolve replacement references.
@@ -106,6 +106,12 @@ against _an unexpected_ `\` or `$` - feel free to use `withReferences()` which *
 <!--T-Regx:{echo-at(first)}-->
 <!--PHP:{echo-at(first)}-->
 <Result text>{`I have <15> and <192>`}</Result>
+
+However, this is not recommended. For that, try using [`replace()->by()->group()`] or [`replace()->callback()`].
+
+The only valid use-cases for `withReferences()` is:
+ - Performance (since `withReferences()` uses [`preg_replace()`], and not [`preg_replace_callback()`])
+ - Migration from `preg_replace()` used in legacy codebase
 
 ## Remove occurrence
 
@@ -123,8 +129,11 @@ use `pattern()->remove()` instead of `pattern()->replace()`:
 It's actually identical to calling `replace()->with('')` under the hood, but it's a bit shorter and more expressive.
 
 [**brain strain**]: overview.mdx#brain-strain
+[cognitive load]: overview.mdx#brain-strain
 [`preg_replace()`]: https://www.php.net/manual/en/function.preg-replace.php
 [`preg_replace_callback()`]: https://www.php.net/manual/en/function.preg-replace-callback.php
 [`first()`]: match-first.mdx
 [`all()`]: match.mdx#many
 [`only(int)`]: match.mdx#many
+[`replace()->callback()`]: replace-callback.mdx
+[`replace()->by()->group()`]: replace-by-group.mdx
