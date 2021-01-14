@@ -72,8 +72,8 @@ Retrieving capturing groups from a match is really simple.
 <CodeTabs
     tregx={`pattern('(?<capital>[A-Z])')->match('hello there, General Kenobi')->first(function (Match $match) {
     // highlight-next-line
-    $capital = $match->group('capital')->text();\n
-    return $capital;\n});`}
+    return $match->get('capital');
+});`}
     php={`if (preg::match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
     // highlight-next-line
     $capital = $match['capital'][0];\n
@@ -81,10 +81,7 @@ Retrieving capturing groups from a match is really simple.
     throw new SubjectNotMatchedException();\n}`}/>
 
 <!--T-Regx:{return-at(0)}-->
-<!--Result-Value-->
-```php
-'G'
-```
+<Result>'G'</Result>
 
 Of course, `first()` callback will only be invoked if your pattern matches the subject.
 
