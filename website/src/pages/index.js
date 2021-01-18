@@ -13,7 +13,7 @@ import MountingQuiz from "../components/MountingQuiz";
 import GridBlock from "../components/GridBlock";
 
 import sections from '../data';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 export default function Index() {
   const context = useDocusaurusContext();

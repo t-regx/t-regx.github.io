@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import styles from "../pages/styles.module.css";
+import styles from "../pages/styles.module.scss";
 import {Markdown} from "./Utils/code";
 import React from "react";
 

@@ -19,9 +19,6 @@ module.exports = {
       algoliaOptions: {},
       //   placeholder: 'Search the website',
     },
-    colorMode: {
-      disableSwitch: true
-    },
     prism: {
       theme: require('./theme'),
       defaultLanguage: 'php',

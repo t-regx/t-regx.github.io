@@ -11,6 +11,7 @@
 @import "comparison";
 @import "home";
 @import "mobileNavMenu";
+@import "darkTheme";
 
 .discussion-tregx-grid img {
   margin-top: 50px;
@@ -34,4 +35,10 @@ pre code.hljs {
    when search box was open.
    */
   overflow-y: scroll !important;
+}
+
+#disqus_thread {
+  background-color: white;
+  padding: 20px 25px 30px;
+  border-radius: 10px;
 }

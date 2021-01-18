@@ -1,0 +1,17 @@
+html[data-theme="dark"] {
+  --ifm-color-primary-dark: #5d5df9;
+
+  .admonition {
+    background-color: #252525;
+    color: white;
+
+    svg {
+      fill: white;
+      stroke: white;
+    }
+  }
+
+  div#disqus_thread {
+    background-color: #d2d2d2;
+  }
+}
