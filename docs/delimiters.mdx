@@ -5,8 +5,12 @@ title: Automatic delimiters
 
 import {CodeTabs, Result} from './code';
 
-> This chapter doesn't contain `PHP` code snippets, because PHP PCRE require delimiters. There is no way to omit them
-> in Vanilla PHP.
+:::note
+This chapter doesn't contain `PHP` code snippets, because PHP PCRE require delimiters. There is no way to omit them
+in Vanilla PHP.
+:::
+
+## Overview
 
 Thanks to automatic delimiters, one can use regular expressions without [brain strain] and without spending time,
 choosing a suitable delimiter.
@@ -17,7 +21,11 @@ choosing a suitable delimiter.
 
 <!--T-Regx:{mock($subject)}-->
 <!--PHP:{mock($subject)}-->
-We can see it for ourselves, using `delimiter` method:
+
+## Delimited pattern
+
+Calling method `delimited()` on any instance of T-Regx `PatternInterface` returns
+a pattern, as it will be used with [PHP PCRE methods].
 
 <CodeTabs tregx={`echo pattern('Welcome/Or not')->delimited() . "\\n";
 echo pattern('https://github.com#heading')->delimited() . "\\n";
@@ -29,27 +37,37 @@ echo pattern('https://github.com#heading?key=hello%20there')->delimited() . "\\n
 ~https://github.com#heading?key=hello%20there~\n`}
 </Result>
 
-> If the was constructed with [`Pattern::pcre()`], `delimiter()` returns the pattern unchanged.
+## PCRE-style patterns
+
+If the was constructed with [`Pattern::pcre()`], method `delimited()` returns the pattern unchanged.
+
+<CodeTabs tregx={`Pattern::pcre('#Welcome/Or not#')->delimited();`}/>
+
+<!--T-Regx:{echo-at(0)}-->
+<Result text>#Welcome/Or not#</Result>
 
 ## Flags
 
-There are two ways of passing flags:
+There are two ways of using patterns with PCRE modifiers:
 
-Either pass a second argument to [`pattern()`]/[`Pattern::of()`]:
+* Either pass a second argument to [`pattern()`]/[`Pattern::of()`]:
 
-```php
-// global function
-pattern('[A-Z][a-z]+', 'i')->match($subject)->first();
+  ```php
+  // global function
+  pattern('[A-Z][a-z]+', 'i')->match($subject)->first();
 
-// static method
-Pattern::of('[A-Z][a-z]+', 'i')->match($subject)->first();
-```
+  // static method
+  Pattern::of('[A-Z][a-z]+', 'i')->match($subject)->first();
 
-or use an old-school pattern:
+  // prepared patterns
+  Pattern::inject('[A-Z]@', [$_GET['name']], 'i')->match($subject)->first();
+  ```
 
-```php
-Pattern::pcre('/[A-Z][a-z]+/i')->match($subject)->first();
-```
+* or use an old-school pattern:
+
+  ```php
+  Pattern::pcre('/[A-Z][a-z]+/i')->match($subject)->first();
+  ```
 
 ## I want to break it
 
@@ -66,3 +84,4 @@ If you think another automatic delimiter can be used, please create [a github is
 [`Pattern::of()`]: introduction-safe.md#entry-points
 [`Pattern::pcre()`]: introduction-safe.md#entry-points
 [a github issue]: https://github.com/T-Regx/T-Regx/issues/new/choose
+[PHP PCRE methods]: https://www.php.net/manual/en/ref.pcre.php
