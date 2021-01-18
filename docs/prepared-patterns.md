@@ -98,6 +98,21 @@ Pattern::inject("https?://@/index\.php", [$_GET["domain"]], 'mS');
 Pattern::bind("(My|Our) dog's name is @name!", ["name" => $_GET["input"]], 'mS');
 ```
 
+## PCRE-styled patterns
+
+Should there be a need for your own delimiters, or you just want to use PCRE style, simply use
+`PatternBuilder::builder()->pcre()->` method, instead of `Pattern::` facade:
+
+```php
+PatternBuilder::builder()->pcre()->prepare(["/(My|Our) dog's name is ", [$input], "!/m"], 'S');
+```
+```php
+PatternBuilder::builder()->pcre()->inject("/https?://@/index\.php/m", [$_GET["domain"]], 'S');
+```
+```php
+PatternBuilder::builder()->pcre()->bind("/(My|Our) dog's name is @name!/m", ["name" => $name], 'S');
+```
+
 ## Old-school pattern quoting
 
 Have you chosen to work with regular PCRE functions, your code might look similar to this:
