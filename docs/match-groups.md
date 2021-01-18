@@ -12,10 +12,12 @@ used subject (although it could also be pass as a closure parameter) and more.
 
 <!-- Copy the above paragraph to match-details.md -->
 
-## Overview
+:::note
+This page only concerns **capturing groups** of [`Match`], specifically. See "[`Match` details]" for a more throughout 
+documentation.
+:::
 
-> This page only concerns **capturing groups** of [`Match`], specifically. See "[`Match` details]" for a more throughout 
-> documentation.
+## Overview
 
 Using [`Match`] details, you gain access complete information about capturing groups:
  - [`get(int|string)`](#group-text) - capturing group text value
@@ -38,8 +40,10 @@ Using [`Match`] details, you gain access complete information about capturing gr
  - [`groupNames()`](#group-names) - string list of named groups used in a pattern
  - [`groupsCount()`](#groups-count) - counts number of capturing groups (without duplicates of named and regular groups)
 
-> With PHP, all groups' syntax: `(?<name>)`, `(?'name')` and `(?P<name>)` are considered "named". Regular, indexed groups 
-> are use with syntax `()`. Group `(?:)` is considered a non-capturing group.
+:::note
+All types of group syntax: `(?<name>)`, `(?'name')` and `(?P<name>)` are considered "named". Regular, indexed groups 
+are use with syntax `()`. Group `(?:)` is considered a non-capturing group.
+:::
 
 ## Group text
 
@@ -125,10 +129,13 @@ pattern('(?<schema>https?://)?\w+\.\w+')->match('google.com')->first(function (M
 });
 ```
 
-> Method `group()->orThrow()` throws `GroupNotMatchedException` by default, so - when called without user defined exception -
-> it's actually identical to `group()->text()`.
-
-> Method `group()->orElse(callable)` callback receives `NotMatched`, just like `findFirst()->orElse()`.
+:::note
+Method `group()->orThrow()` throws `GroupNotMatchedException` by default, so - when called without user defined exception -
+it's actually identical to `group()->text()`.
+:::
+:::note
+Method `group()->orElse(callable)` callback receives `NotMatched`, just like `findFirst()->orElse()`.
+:::
 
 ### Index, name and identifier
 
@@ -224,12 +231,14 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('')->first(function (Match $match)
 });
 ```
 
-#### Invalid groups and arguments
+### Invalid groups and arguments
 - `hasGroup()` will throw [`\InvalidArgumentException`], when used with an invalid group *(i.e. `2group`, `-1` or any 
    type other than `string` or `int`)*.
 
-> Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic - they're constant much more often; 
-> hence the developer doesn't have to check whether the group exists.
+:::note
+Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic - they're constant much more often; 
+hence the developer doesn't have to check whether the group exists.
+:::
 
 ## Invalid group names
 
@@ -328,16 +337,20 @@ In other words `Match.group($x).all()` is a collection of occurrences of group `
 
 ## Complication with `J` modifier
 
-> Complication with `J` modifier is a rather advanced matter, and not necessary for everyday use.
-> If you don't seek "in-depth" understanding of capturing groups, feel free to skip this chapter.
+:::note
+Complication with `J` modifier is a rather advanced matter, and not necessary for everyday use.
+If you don't seek "in-depth" understanding of capturing groups, feel free to skip this chapter.
+:::
  
 To learn more, go to [Capturing groups - J modifier](match-groups-j-modifier.md).
 
 ## Groups In-Depth
 
-> Groups In-Depth is a rather advanced matter, and not necessary for everyday use.
-> If you don't seek "in-depth" understanding of capturing groups, feel free to skip this chapter.
- 
+:::note
+Groups In-Depth is a rather advanced matter, and not necessary for everyday use.
+If you don't seek "in-depth" understanding of capturing groups, feel free to skip this chapter.
+:::
+
 To learn more, go to [Capturing groups - in depth](match-groups-in-depth.md).
 
 [`Match`]: match-details.md

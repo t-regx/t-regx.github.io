@@ -22,8 +22,10 @@ If a match is **not found** in a subject, `SubjectNotMatchedException` is thrown
 method **has** to return a value and go on. No more bothers about empty arrays and empty strings, or a possible
 `null`/`false` hiding somewhere.
 
-> If you would like to control the subject that **isn't matched** with your pattern though; 
-> you can do it **explicitly** with [`findFirst()`](#findfirst) (and [`orReturn()`], [`orElse()`], [`orThrow()`]).
+:::note
+If you would like to control the subject that **isn't matched** with your pattern though;
+you can do it **explicitly** with [`findFirst()`](#findfirst) (and [`orReturn()`], [`orElse()`], [`orThrow()`]).
+:::
 
 ## Use `first()` with callback
 
@@ -41,7 +43,9 @@ standard output.
 }`}/>
 <Result text>I matched Apples</Result>
 
-> Casting [`Match`] to a string is the same as calling a `text()` method.
+:::note
+Casting [`Match`] to a string is the same as calling a `text()` method.
+:::
 
 ### Match details
 
@@ -85,10 +89,14 @@ Retrieving capturing groups from a match is really simple.
 
 Of course, `first()` callback will only be invoked if your pattern matches the subject.
 
-> You can learn more about groups on [Capturing Group](match-groups.md) page. 
+:::note
+You can learn more about groups on [Capturing Group](match-groups.md) page.
+:::
 
-> Even more, you can visit [Inline groups](match-group.mdx) and use familiar `all()`, `first()`, `only()` and `offsets()`
-> methods on groups. 
+:::note
+Even more, you can visit [Inline groups](match-group.mdx) and use `all()`, `first()`, `only()` and `offsets()`
+methods on groups.
+:::
 
 ### Return value
 
@@ -128,7 +136,9 @@ You can call `first()` for any valid PHP [`callable`] which accepts one string p
 
 In this example, [`Match`] will be cast to string, which is the same as calling `Match.text()` method.
 
-> Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
+:::note
+Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
+:::
 
 ### Arbitrary return types
 
@@ -169,8 +179,6 @@ one of the following [`orReturn()`], [`orElse()`] or [`orThrow()`].
     echo "Yay {$match[0]}";\n}\nelse {
     echo 'Aw, man :/';\n}`}/>
 <Result text>Yay Dog</Result>
-
----
 
 Read on to learn more about [`findFirst()`].
 

@@ -5,14 +5,18 @@ title: Validate a pattern
 
 import {CodeTabs, Result} from './code';
 
-> This chapter doesn't contain `PHP` code snippets, because PHP PCRE doesn't provide a way to validate patterns.
+:::note
+This chapter doesn't contain `PHP` code snippets, because PHP PCRE doesn't provide a way to validate patterns.
+:::
 
 You can check whether a pattern is valid with `pattern()->valid()` method.
 
 <CodeTabs tregx="pattern('I am a valid pattern')->valid();"/>
 <Result>true</Result>
 
-> Remember, `pattern()->valid()` doesn't throw any exception nor issues any warnings. It only returns `true`/`false`.
+:::note
+`pattern()->valid()` doesn't throw any exception nor issues any warnings. It only returns `true`/`false`.
+:::
 
 <CodeTabs tregx="pattern('I am an (( invalid }} pattern')->valid();"/>
 <Result>false</Result>

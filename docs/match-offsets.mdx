@@ -22,10 +22,13 @@ return 'Match was found at ' . $match[0][0][1];`}/>
 <!--T-Regx:{return-at(0)}-->
 <Result>'Match was found at 14'</Result>
 
-> Remember that [`offset()`] is UTF-8 safe and returns offsets in characters, not bytes.
-> For bytes, consider using [`byteOffset()`] method.
-
-> Use [`offset()`] with methods like [`mb_substr()`], and [`byteOffset()`] with methods like [`substr()`].
+:::note
+Method [`offset()`] is UTF-8 safe and returns offsets in characters, not bytes.
+For bytes, consider using [`byteOffset()`] method.
+:::
+:::note
+Use [`offset()`] with multibyte-safe methods like [`mb_substr()`], and [`byteOffset()`] with methods like [`substr()`].
+:::
 
 ## Using inline `offsets()` method
 

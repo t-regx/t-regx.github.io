@@ -5,13 +5,15 @@ title: Inline groups
 
 import {CodeTabs, Result} from './code';
 
-Apart from retrieving matched capturing groups, you can also replace by an [inline group].
-
 Method `match()->group()` behaves exactly like [`Match.group(int|string)`]:
 
 - accepts either a group index (where #0 is the whole match) or a group name (when a group is named)
 - throws `NonexistentGroupException` if `group()` is used with a non-existent group
 - throws [`\InvalidArgumentException`] for an invalid index or an invalid group name (e.g. `"2group"` or `-2`)
+
+:::note
+[Inline groups] can be used with [replacements] as well.
+:::
 
 ## Matched occurrences of a group
 
@@ -75,6 +77,7 @@ If, however, an invalid group is used:
 
 ... then [`\InvalidArgumentException`] is thrown.
 
-[inline group]: replace-by-group.mdx
+[Inline groups]: replace-by-group.mdx
+[replacements]: replace-by-group.mdx
 [`Match.group(int|string)`]: match-details.md
 [`\InvalidArgumentException`]: https://www.php.net/manual/en/class.invalidargumentexception.php

@@ -163,7 +163,9 @@ Of course, your custom exception must meet certain requirements:
    - `__construct($message)`, where `$message` can be a string
    - `__construct($message, $subject)`, where `$message` and `$subject` can be strings
 
-> Notice, that using `findFirst()->orThrow()` without your custom exception is **identical** to `first()`.
+:::note Notice!
+Using `findFirst()->orThrow()` without your custom exception is **identical** to `first()`.
+:::
 
 ## I don't like functional
 

@@ -37,21 +37,23 @@ If your pattern does not match the subject, `count()` simply returns `0`.
 Every use of `pattern()` with an invalid pattern will cause `MalformedPatternException`.
 <CodeTabs
     tregx={`try {
-    pattern('[aeiouy')->count('Computer');       // malformed pattern
+    pattern('[aeiouy')->count('Computer');  // malformed pattern
 }
 catch (MalformedPatternException $ex) {
     echo $ex->getMessage();
 }`}
     php={`try {
-    preg::match_all('/[aeiouy/', 'Computer');    // malformed pattern
+    preg::match_all('/[aeiouy/', 'Computer');  // malformed pattern
 }
 catch (MalformedPatternException $ex) {
     echo $ex->getMessage();
 }`}/>
 <Result text>Missing terminating ] for character class at offset 7</Result>
 
-> In `PHP` snippet, `MalformedPatternException` is thrown because SafeRegex `preg::match_all()` was used, instead
-> of [`preg_match_all()`]. Vanilla PHP `preg_*()` method don't throw exceptions.
+:::note
+In `PHP` snippet, `MalformedPatternException` is thrown because SafeRegex `preg::match_all()` was used, instead
+of [`preg_match_all()`]. Vanilla [PHP `preg` methods] don't throw exceptions.
+:::
 
 ## Performance
 
@@ -74,7 +76,13 @@ return any matches...
 This is because `count()` will go through each occurrence of a pattern in a subject, counting it; whereas `test()`
 will return right after it finds the first occurrence.
 
-> Under the hood, `count()` uses `preg::match_all()`, whereas `test()`/`fails()`/ use `preg::match()`.
+:::note
+Under the hood, `count()` uses [`preg_match_all()`], whereas [`test()`]/[`fails()`] use [`preg_match()`].
+:::
 
 [`\Countable`]: https://www.php.net/manual/en/class.countable.php
+[`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
 [`preg_match_all()`]: https://www.php.net/manual/en/function.preg-match-all.php
+[`test()`]: match.mdx#test-a-subject
+[`fails()`]: match.mdx#test-a-subject
+[PHP `preg` methods]: https://www.php.net/manual/en/ref.pcre.php

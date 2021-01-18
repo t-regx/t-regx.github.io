@@ -29,8 +29,6 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $match) {
 <!--PHP:{return-at(2)}-->
 <Result>'I like scandinavia: SWEDEN, Norway and Denmark'</Result>
 
-> Of course, the callback is only invoked **if** your subject is matched with the pattern.
-
 ## Replace multiple
 
 ### `all()`
@@ -131,7 +129,7 @@ preg::replace_callback('/\\w+/', function (array $match) {
 <!--PHP:{return-at(-3)}-->
 <Result>'APPLES are cool'</Result>
 
-> In this example, [`Match`] will be cast to string, which is the same as calling `Match.text()` method.
+In this example, [`Match`] will be cast to string, which is the same as calling `Match.text()` method.
 
 [`MatchGroup`]: match-groups.md
 [`Match`]: match-details.md

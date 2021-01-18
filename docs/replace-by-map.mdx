@@ -10,10 +10,6 @@ There are cases when you have to use more than one replacement (so `with()` won'
 but you also don't need [`Match`](match-details.md) details or
 any replacement logic, really (so `callback()` is a little too much).
 
-Replacing by a map is an acceptable compromise, which allows T-Regx to save a little performance
-overhead, by not creating [`Match`](match-details.md) object, as well as making your code a
-little more concise.
-
 ## Standard map
 
 You can use `replace()->all()->by()->map()` to replace a matched, predefined value (`"mp3"`, `"mp4"` or `"gif"`)

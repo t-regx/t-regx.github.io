@@ -105,7 +105,9 @@ pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) 
 });
 ```
 
-> PS: It's implemented with [`filter_var()`], but you can think of it as `/^-?\d+$/` with max/min values check.
+:::note
+It's implemented with [`filter_var()`], but you can think of it as `/^-?\d+$/` with max/min values check.
+:::
 
 ## Subject
 
@@ -267,9 +269,6 @@ pattern('\w{2}')->match('Languages: en, de, xd, sv')
         return $languageInfo->languages():
     });
 ```
-
-> There were ideas of adding structures for user data, like `setUserData('key', $value)`/`getUserData('key')`,
-> but we decided to give more control to the user about it's structure. That's why user data is `mixed`.
 
 ## Groups
 

@@ -14,8 +14,10 @@ When you add T-Regx to your project, you can actually choose the API, with which
 
 You can work with either or both them in your project - they're both part of T-Regx.
 
+:::note
 We suggest, after installing T-Regx, to use SafeRegex everywhere you can (to protect yourself against obvious errors), 
 and then gradually migrate from `preg::` (SafeRegex) to `pattern()` (CleanRegex).
+:::
 
 ## About SafeRegex
 
@@ -148,7 +150,10 @@ preg::replace_callback('pattern', function ($match) {  // this method won't thro
 
 Basically, SafeRegex can isolate the preg call to one method. 
 
-But don't worry! T-Regx doesn't touch `set_error_handler()` nor `set_exception_handler()`, you can be sure of that! :)
+:::note
+Don't worry! T-Regx doesn't touch global `set_error_handler()` nor `set_exception_handler()`! We don't want to
+mess with your project. :)
+:::
 
 ## Word about exceptions
 

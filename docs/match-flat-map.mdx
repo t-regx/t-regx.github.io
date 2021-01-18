@@ -106,12 +106,16 @@ return array_merge(...array_map(function (array $match) {
 
 <!--Result-Value:{return-semi}-->
 
-> Keep in mind that `flatMap()` uses `array_merge()` to flatten the results! So If you use `int` as a key, or even
-> a `string` with numeric values (like `'19'`) they will be **reindexed** by `array_merge()`.
+:::note
+Keep in mind, that `flatMap()` uses [`array_merge()`] to flatten the results! So If you use `int` as a key, or even
+a `string` with numeric values (like `'19'`) they will be **reindexed** by [`array_merge()`].
+:::
 
-> `Match.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all`
-> counts them as [bytes](match-details.md#offsets). To return bytes number with T-Regx as well,
-> use [`byteOffset()`](match-details.md#offsets).
+:::note
+`Match.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all`
+counts them as [bytes](match-details.md#offsets). To return bytes number with T-Regx as well,
+use [`byteOffset()`](match-details.md#offsets).
+:::
 
 ## Duplicate keys
 
@@ -148,3 +152,4 @@ return array_merge(...array_map(function (array $match) use ($subject) {
 [`callable`]: https://www.php.net/manual/en/language.types.callable.php
 [`map()`]: match-map.mdx
 [`first()`]: match-first.mdx
+[`array_merge()`]: https://www.php.net/manual/en/function.array-merge.php
