@@ -34,3 +34,9 @@
     white-space: nowrap;
   }
 }
+
+.admonition {
+  &.alert a {
+    text-decoration: none;
+  }
+}
