@@ -18,7 +18,7 @@ used subject (although it could also be pass as a closure parameter) and more.
 > documentation.
 
 Using [`Match`] details, you gain access complete information about capturing groups:
- - [`get(int|string)`](#get-a-group) - capturing group text value
+ - [`get(int|string)`](#group-text) - capturing group text value
  - [`group(int|string)`](#group-details) - capturing group details, with:
      - `text()` - value of the group, as `string`
      - `toInt()` - value of the group, cast to `int`
@@ -31,8 +31,9 @@ Using [`Match`] details, you gain access complete information about capturing gr
  - [`name()`](#index-name-and-identifier) - name of the capturing group, or `null` of group is not named
  - [`usedIdentifier()`](#index-name-and-identifier) - either `index()` or `name()`, depending on the argument of `group(int|string)`
  - [`all()`](#other-occurrences) - other matched occurrences of the group
- - [`matched(int|string)`](#group-is-matched) - whether the group was matched by the subject
- - [`hasGroup(int|string)`](#group-exists) - whether group was used in a pattern
+ - [`matched(int|string)`](#optional-groups) - whether the group was matched by the subject
+ - [`hasGroup(int|string)`](#nonexistent-groups) - whether group was used in a pattern
+ - [`GroupName::isValid(string)`](#invalid-group-names) - whether group name has proper format
  - [`groups()`](#composite-groups)/[`namedGroups()`](#composite-groups) - interface for composite operations for all groups
  - [`groupNames()`](#group-names) - string list of named groups used in a pattern
  - [`groupsCount()`](#groups-count) - counts number of capturing groups (without duplicates of named and regular groups)
@@ -230,7 +231,7 @@ pattern('(?<value>\d+)(?<unit>cm|mm)')->match('')->first(function (Match $match)
 > Usages of `hasGroup()` are rather infrequent, because rarely patterns are dynamic - they're constant much more often; 
 > hence the developer doesn't have to check whether the group exists.
 
-## Group names
+## Invalid group names
 
 When any group method is called with an invalid group name, for example:
 ```php
