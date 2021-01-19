@@ -37,7 +37,6 @@ be able to look at the code and tell what it does.
 - Matching returns an array of arrays, which contain either a `string`, `null`, or an array of `null`s,
   `strings` and `int`s. What type exactly is returned depends on the runtime subject and the order of the values.
 - Functions with 4, 5, 6 parameters (3-4 of which are optional).
-- [`preg_replace()`] on error returns `null`, but [`preg_filter()`] (which is supposed to be identical) returns `[]` on error.
 
 ### PHP is Messy
 
