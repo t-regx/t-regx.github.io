@@ -45,10 +45,29 @@ Notice, that these patterns **are not** delimited. Smart T-Regx will convenientl
 use `Pattern::of()` or `pattern()`. You can add flags to your regular expression by passing a second argument.
 
 ```php
-pattern('[A-Z]+', 'im')->test($subject);
+pattern('[A-Z]+', 'im')->test('Hello');
 ```
 
 To learn more, go to [Automatic Delimiters](delimiters.mdx).
+
+## Automatic vs. deliberate delimiters
+
+If you use `pattern()` or `Pattern::of()` with a delimited pattern, like so:
+
+```php
+pattern('/[A-Z]/')->test('/A/');
+```
+
+...then `/` characters will simply be treated literally:
+
+import {CodeTabs, Result} from './code';
+
+<CodeTabs
+  tregx={`pattern('/[A-Z]/')->match('/A/')->first();`}
+  php={`preg_match('#/[A-Z]/#', '/A/', $match);
+return $match[0];`}/>
+
+<Result>'/A/'</Result>
 
 ### Old-school patterns
 
