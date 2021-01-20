@@ -136,10 +136,65 @@ ____, ____ and my ____ really like Sweden
                                    offset()          // 35
 ```
 
+### Capturing groups
+
+Method `modifiedOffset()` as well as `modifiedSubject()` are available for groups (which when replacing are of type
+`ReplaceDetailGroup extends DetailGroup`.
+
+```php
+$subject = 'Me, Rihanna and my Mom really like Sweden';
+
+$result = pattern("[A-Z]([a-z]+)")->replace($subject)->all()->callback(function ($match) {
+    // highlight-next-line
+    $group = $match->group(1);
+
+    // highlight-next-line
+    $group->modifiedSubject();
+    // highlight-next-line
+    $group->modifiedOffset();
+
+    return '____';
+});
+```
+
+When used on group, the `modifiedOffset()` returns the offset at which the captured group is present in the
+modified subject, not the offset at which the whole match was captured.
+
+`modifiedSubject()` for groups returns exactly the same value as `modifiedSubject()` for `ReplaceDetail`.
+
 ## Performance
 
-But be sure, each of those examples only uses one call to [`preg_replace_callback()`]. :)
+But be sure, each and every of those examples only uses one call to [`preg_replace_callback()`]. T-Regx
+simply remembers the length of the replacement returned from `callback()`, and adds it to `modifiedOffset()`,
+when called.
+
+## Bytes vs. characters
+
+When used on `ReplaceDetail` (whole match) or `ReplaceDetailGroup` (capturing group), method `modifiedOffset()` 
+returns **character** position.
+
+To read **byte** position, use `byteModifiedOffset()`:
+
+
+```php
+$subject = 'Fóó, Lęę, Śćć';
+
+$result = pattern("(\w+)", 'u')->replace($subject)->all()->callback(function ($match) {
+    // highlight-next-line
+    $matchOffset = $match->byteModifiedOffset();
+    // highlight-next-line
+    $groupOffset = $match->group(1)->byteModifiedOffset();
+
+    return 'ę';
+});
+```
+:::note
+Use `modifiedOffset()` with multibyte-safe methods like [`mb_substr()`], and `byteModifiedOffset()` with methods 
+like [`substr()`].
+:::
 
 [`Match`]: match-details.md
 [`offset()`]: match-offsets.mdx
 [`preg_replace_callback()`]: https://www.php.net/manual/en/function.preg-replace-callback.php
+[`mb_substr()`]: https://www.php.net/manual/en/function.mb-substr.php
+[`substr()`]: https://www.php.net/manual/en/function.substr.php
