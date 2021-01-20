@@ -151,19 +151,16 @@ Pattern::inject($input, $values);
 ```
 
 - Data:
-
   - Value of `$input` is treated as a regular expression
   - Values in `$values` are treated as a string literal
 
-- Data structure
-
+- Data structure:
   - The `$values` must not be an associative array - that is, its keys must be continuous integer keys
     starting from `0`.
-  - The `$values` array must have exactly that many items, are there are placeholders `@` in the pattern.
+  - The `$values` array must have exactly that many items, as there are `@` placeholders in the pattern.
   - If not, `InvalidArgumentException` is thrown
 
 - Data types:
-
   - Values in `$values` can only be of type `string`
   - If not, `InvalidArgumentException` is thrown
 
@@ -193,12 +190,9 @@ Process:
 - `["(My|Our) (dog|cat) names are ", ' and ', '!']`
 - Pattern is then imploded
 - `"(My|Our) (dog|cat) names are and !"`
-- [Automatic Delimiters](delimiters.mdx) are used to chose the delimiter
-- The pattern is being checked:
-  - whether it's already delimiter, and if it is:
-    - what delimiter is used exactly
-    - whether it's used with flags
-  - and if it's not, a suitable delimiter is chosen automatically
+- [Automatic Delimiters](delimiters.mdx) are used to choose the delimiter:
+  - for standard pattern, a suitable delimiter is chosen automatically
+  - for `pcre()`, this step is ignored
 - In this case, `/` is chosen
 - Values supposed to be treated as string literals are quoted using the delimiter
 - ```
@@ -208,3 +202,19 @@ Process:
   ```regexp
   /(My|Our) (dog|cat) names are 192\.168\.0\.1 and \(\?name!/i
   ```
+
+Technically, these patterns are identical:
+
+```php
+Pattern::of("My (dog|cat) names are " . preg::quote($dog, '/') . ' and ' .preg::quote($cat, '/') . '!');
+```
+```php
+Pattern::prepare(["My (dog|cat) names are ", [$dog], ' and ', [$cat] , '!']);
+```
+```php
+Pattern::inject("My (dog|cat) names are @ and @!", [$dog, $cat]);
+```
+
+(except there's some additional handling of [`PCRE_EXTENDED`] mode, to ensure integrity).
+
+[`PCRE_EXTENDED`]: https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php

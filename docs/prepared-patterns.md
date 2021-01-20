@@ -125,7 +125,7 @@ Prepared Patterns address some of this approach flaws. They:
 
 - automatically delimiter your input, so there's no need for specifying the delimiter again in [`preg_quote()`].
 - are declarative. Meaning, you only need to _declare_ that you want those values to be treated as string literals.
-- fix inconsistency with [`preg_quote()`] returning different values since PHP 7.3
+- fix inconsistency with [`preg_quote()`] quoting different values since PHP 7.3
 
 They also add additional functionality, that currently is utterly missing in PHP:
 
