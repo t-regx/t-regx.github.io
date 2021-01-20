@@ -12,26 +12,32 @@ used subject (although it could also be pass as a closure parameter) and more.
 
 <!-- Copy the above paragraph to match-groups.md -->
 
+For example, to read the offset at which the occurrence was matched, use `Match.offset()`:
+
+```php {4}
+pattern('[A-Z][a-z]+')->match('I like Trains')->first(fn(Match $match) => $match->offset());
+```
+
 ## Overview
 
 Using `Match` details, you gain access to:
 
-- [`text()`](#matched-text)/[`textLength()`](#matched-text) - value of a matched occurrence
+- [`text()`](#matched-text) - value of a matched occurrence
 - [`toInt()`](#integers)/[`isInt()`](#integers) which allow you to handle integers safely
 - [`subject()`](#subject) - subject against which the pattern was matched
 - [`index()`](#ordinal-value-index) - ordinal value of a matched occurrence
 - [`limit()`](#limit) - limit which was put on the matches
-- [offsets of matched values](#offsets) in the subject:
-  - character offsets (UTF-8 safe) - [`offset()`](#offsets)
-  - byte offsets - [`byteOffset()`](#offsets)
-  - tail (offset of the end of the string) - [`tail()`](#tail)  
+- [offsets of matched values](#offsets) in the subject (UTF-8 safe):
+  - [`offset()`](#offsets) - character offset
+  - [`tail()`](#tail) - tail (offset of the end of the string) 
+  - [`textLength()`](#matched-text) - length of the matched occurrence 
+- byte versions of the methods:
+  - `byteTextLength()`
+  - `byteOffset()`
+  - `byteTail()`
 - [`all()`](#other-occurrences) - other matched occurrences
-- [User data](#other-occurrences) - sharing custom data between callbacks
 - details about capturing groups, in the next chapter: [Capturing groups]
-- byte versions of the methods (as opposed to character (utf-8) versions):
-    - `byteTextLength()`
-    - `byteOffset()`
-    - `byteTail()`
+- [User data](#other-occurrences) - sharing custom data between callbacks
 
 ## Matched text
 
@@ -152,8 +158,6 @@ pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Mat
 ['i', 'LIKE', 'trains', 'BUT', 'i', 'ALSO', 'like', 'BIKES']
 ```
 
-Results of `Match.index()` are always **continuous integer** numbers, going from `0` to `1`, `2`, `3`..., even when filtered.
-
 ## Limit
 
 Depending on whether you used [`all()`], [`first()`] or [`only(int)`] - method `limit()` will return `-1`, `1` or an
@@ -251,25 +255,6 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
 ]
 ```
 
-## User data
-
-To most users this functionality will occur as redundant - it's only use case are multiple calls to callbacks, for example
-when using chained `filter()->map()`. With user data, it's possible to perform an operation in `filter()`, store its 
-value in user data, and then use the value in [`map()`] without reference closure variables.
-
-```php {4,8}
-pattern('\w{2}')->match('Languages: en, de, xd, sv')
-    ->filter(function (Match $match) {
-        $languageInfo = HeavyService::fetch($match->text());
-        $match->setUserData($languageInfo);
-        return $languageInfo->isValid();
-    })
-    ->map(function (Match $match) {
-        $languageInfo = $match->getUserData();
-        return $languageInfo->languages():
-    });
-```
-
 ## Groups
 
 With `Match.group(string|int)`, you can easily retrieve capturing groups.
@@ -289,6 +274,25 @@ pattern($pattern)->match($subject)->first(function (Match $match) {
 ```
 
 More about capturing groups can be found in the next section: [Capturing groups].
+
+## User data
+
+To most users this functionality will occur as redundant - it's only use case are multiple calls to callbacks, for example
+when using chained `filter()->map()`. With user data, it's possible to perform an operation in `filter()`, store its
+value in user data, and then use the value in [`map()`] without reference closure variables.
+
+```php {4,8}
+pattern('\w{2}')->match('Languages: en, de, xd, sv')
+    ->filter(function (Match $match) {
+        $languageInfo = HeavyService::fetch($match->text());
+        $match->setUserData($languageInfo);
+        return $languageInfo->isValid();
+    })
+    ->map(function (Match $match) {
+        $languageInfo = $match->getUserData();
+        return $languageInfo->languages():
+    });
+```
 
 [`filter_var()`]: https://www.php.net/manual/en/function.filter-var.php
 [`mb_substr()`]: https://www.php.net/manual/en/function.mb-substr.php
