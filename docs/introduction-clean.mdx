@@ -3,16 +3,17 @@ id: introduction-clean
 title: Migrate to T-Regx
 ---
 
-Because CleanRegex is built on top of SafeRegex, we get protection against warnings/compile-errors/notices/magic-values 
-for free! 
+Because CleanRegex is built on top of SafeRegex, we get protection against warnings, compile errors, notices,
+fatal errors and magic values for free!
 
 Additionally, CleanRegex provides clean API for regular expressions, as well as solving more complicated
 issues with PHP regex (like eliminating false positives, validating groups) and including features utterly missing
-in PHP: Prepared patterns, offsets while replacing, in-place replacement, composite patterns, built-alteration and more.
+in PHP: Prepared patterns, offsets while replacing, in-place replacement, composite patterns, built-alteration and more,
+as well as removing uncertainty with false negatives and false positives.
 
 ## Entry points
 
-We have multiple entry points, each with its own usecase:
+We have multiple entry points, each with its own use case:
  - Standard functions - `Pattern::of('\d+')` or `pattern('\d+')`
  - Compatibility legacy - `Pattern::pcre('/\d+/')` to use vanilla patterns
  - Prepared patterns - to safely use user data in patterns (see [Prepared Patterns](handling-user-input.md))
