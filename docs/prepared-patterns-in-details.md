@@ -185,17 +185,22 @@ $cat = '(?name';
 
 Process:
 
-- `["(My|Our) (dog|cat) names are ", [$dog], ' and ', [$cat], '!'], 'i'`
+- Starting from the input:
+  
+  `["(My|Our) (dog|cat) names are ", [$dog], ' and ', [$cat], '!'], 'i'`
 - Values supposed to be treated as string literals are cut out
-- `["(My|Our) (dog|cat) names are ", ' and ', '!']`
+  
+  `["(My|Our) (dog|cat) names are ", ' and ', '!']`
 - Pattern is then imploded
-- `"(My|Our) (dog|cat) names are and !"`
+  
+  `"(My|Our) (dog|cat) names are and !"`
 - [Automatic Delimiters](delimiters.mdx) are used to choose the delimiter:
   - for standard pattern, a suitable delimiter is chosen automatically
   - for `pcre()`, this step is ignored
 - In this case, `/` is chosen
 - Values supposed to be treated as string literals are quoted using the delimiter
-- ```
+  
+  ```
   ["(My|Our) (dog|cat) names are ", preg::quote($dog, '/'), ' and ', preg::quote($cat, '/'), '!']
   ```
 - The final pattern is joined, flags are appended, and the pattern is returned
@@ -215,6 +220,8 @@ Pattern::prepare(["My (dog|cat) names are ", [$dog], ' and ', [$cat] , '!']);
 Pattern::inject("My (dog|cat) names are @ and @!", [$dog, $cat]);
 ```
 
-(except there's some additional handling of [`PCRE_EXTENDED`] mode, to ensure integrity).
+...except there's some additional handling of [`PCRE_EXTENDED`] mode, to ensure integrity, and the fact that should
+there be `/` character in the pattern, `Pattern::prepare()` and `Pattern::inject()` would choose another one
+automatically, yet with `preg::quote()` you need to remember about it and update it yourself.
 
 [`PCRE_EXTENDED`]: https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php

@@ -1,6 +1,7 @@
 ---
 id: prepared-patterns
-title: Prepared Patterns - User input
+title: Prepared Patterns
+sidebar_label: Prepared Patterns - User input
 ---
 
 If you use [`Pattern::prepare()`], [`Pattern::inject()`] or [`Pattern::bind()`], you can explicitly specify which parts of your pattern 
