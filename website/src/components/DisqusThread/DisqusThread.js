@@ -6,10 +6,11 @@ export default function ({title, identifier}) {
 
   const config = function () {
     this.page.identifier = identifier;
+    this.page.disqus_identifiers = identifier;
     if (title) {
       this.page.title = title;
     }
-    this.page.url = location.href;
+    this.page.url = 'https://t-regx.com' + location.pathname;
   };
 
   useEffect(() => {
