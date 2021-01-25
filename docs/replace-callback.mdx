@@ -18,8 +18,8 @@ Callback passed to `replace()->callback()` will only be invoked:
 
 <CodeTabs
     tregx={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
-pattern('[A-Z][a-z]+')->replace($subject)->first()->callback(function (Match $match) {
-    return strtoupper($match->text());\n});`}
+pattern('[A-Z][a-z]+')->replace($subject)->first()->callback(function (Detail $detail) {
+    return strtoupper($detail->text());\n});`}
     php={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
 preg::replace_callback('/[A-Z][a-z]+/', function (array $match) {
     return strtoupper($match[0]);
@@ -37,7 +37,7 @@ Replacing all matched occurrences is the most common use-case:
 
 <CodeTabs
     tregx={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
-pattern('[A-Z][a-z]+')->replace($subject)->all()->callback(function (Match $m) {
+pattern('[A-Z][a-z]+')->replace($subject)->all()->callback(function (Detail $m) {
     return strtoupper($m->text());\n});`}
     php={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
 preg::replace_callback('/[A-Z][a-z]+/', function (array $m) {
@@ -53,7 +53,7 @@ You can also limit the amount of replacements done with `only()`.
 
 <CodeTabs
     tregx={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
-// In T-Regx, Match details can be cast to string, returning the whole match
+// In T-Regx, Detail can be cast to string, returning the whole match
 pattern('[A-Z][a-z]+')->replace($subject)->only(2)->callback('strtoupper');`}
     php={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
 // In Vanilla, $match is an array, and arrays won't cast to string that easily
@@ -68,26 +68,26 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $match) {
 
 ## Return types
 
-`replace()->callback()` only accepts `string`, [`Match`] or [`MatchGroup`] as its return type.
+`replace()->callback()` only accepts `string`, [`Detail`] or [`MatchGroup`] as its return type.
 
-We believe that returning anything, that's not a string, match or a group can **be a sign of a bug**!
+We believe that returning anything, that's not a string, [`Detail`] or a group can **be a sign of a bug**!
 Moreover, converting them silently would break our "Explicity rule".
 
 ```php
-pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
+pattern('\w+')->replace("Apples are cool")->first()->callback(function (Detail $detail) {
     return 2;       // <- throws InvalidReturnValueException
     return true;    // <- throws InvalidReturnValueException
     return null;    // <- throws InvalidReturnValueException
 });
 ```
 
-Only `string`, [`Match`] or [`MatchGroup`] are allowed.
+Only `string`, [`Detail`] or [`MatchGroup`] are allowed.
 
 ```php
-pattern('([A-Z])\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
+pattern('([A-Z])\w+')->replace("Apples are cool")->first()->callback(function (Detail $detail) {
     return 'orange';         // string
-    return $match;           // match
-    return $match->group(1); // group
+    return $detail;           // match
+    return $detail->group(1); // group
 });
 ```
 
@@ -97,17 +97,17 @@ If you'd like to replace an occurrence with a numeric value (for example `'12'`)
 literals - just return them as `string` **explicitly**.
 
 ```php
-pattern('\w+')->replace("Apples are cool")->first()->callback(function (Match $match) {
+pattern('\w+')->replace("Apples are cool")->first()->callback(function (Detail $detail) {
     return strval(2);                          // ok
     return true ? 'true' : 'false';            // ok
     return null ? '' : $something;             // ok
 
-    return $match->text();                     // ok
-    return (string) $match;                    // ok
-    return $match->group('captured')->text();  // ok, if group exists and was matched
+    return $detail->text();                     // ok
+    return (string) $detail;                    // ok
+    return $detail->group('captured')->text();  // ok, if group exists and was matched
 
-    return $match;                             // ok
-    return $match->group('captured');          // ok, if group exists and was matched
+    return $detail;                             // ok
+    return $detail->group('captured');          // ok, if group exists and was matched
 });
 ```
 
@@ -119,7 +119,7 @@ and returns `string`.
 <CodeTabs
     tregx={`pattern('\\w+')->replace('Apples are cool')->first()->callback('strtoupper');`}
     php={`// This code is actually impossible in Vanilla-PHP.
-// In T-Regx, Match details can be cast to string - that's the matched text
+// In T-Regx, Detail can be cast to string - that's the matched text
 // In Vanilla, $match is an array, and arrays won't cast to string that easily\n
 // preg::replace_callback('/\\w+/', 'strtoupper', $subject, 1);\n
 preg::replace_callback('/\\w+/', function (array $match) {
@@ -129,8 +129,8 @@ preg::replace_callback('/\\w+/', function (array $match) {
 <!--PHP:{return-at(-3)}-->
 <Result>'APPLES are cool'</Result>
 
-In this example, [`Match`] will be cast to string, which is the same as calling `Match.text()` method.
+In this example, [`Detail`] will be cast to string, which is the same as calling `Detail.text()` method.
 
 [`MatchGroup`]: match-groups.md
-[`Match`]: match-details.md
+[`Detail`]: match-details.md
 [`callable`]: https://www.php.net/manual/en/language.types.callable.php

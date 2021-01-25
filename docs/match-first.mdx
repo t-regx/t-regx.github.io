@@ -44,18 +44,18 @@ standard output.
 <Result text>I matched Apples</Result>
 
 :::note
-Casting [`Match`] to a string is the same as calling a `text()` method.
+Casting [`Detail`] to `string` is the same as calling `text()` method.
 :::
 
 ### Match details
 
-With [`Match`] details, you can gain access to useful information about the matched occurrence.
+With [`Detail`], you can gain access to useful information about the matched occurrence.
 
 <CodeTabs
-    tregx={`pattern('\\w+')->match("Apples are cool")->first(function (Match $match) {
+    tregx={`pattern('\\w+')->match("Apples are cool")->first(function (Detail $detail) {
     // highlight-next-line
-    $subject = $match->subject();
-    echo "Match '$match' was matched inside '$subject'.";
+    $subject = $detail->subject();
+    echo "Match '$detail' was matched inside '$subject'.";
 });`}
     php={`$subject = "Apples are cool";
 if (preg::match('/\\w+/', $subject, $match)) {
@@ -67,16 +67,16 @@ else {
 }`}/>
 <Result text>Match 'Apples' was matched inside 'Apples are cool'.</Result>
 
-You can read more extensively about [`Match`] on [`Match` details] page.
+You can read more extensively about it on [`Detail`] page.
 
 ### Groups in match
 
 Retrieving capturing groups from a match is really simple.
 
 <CodeTabs
-    tregx={`pattern('(?<capital>[A-Z])')->match('hello there, General Kenobi')->first(function (Match $match) {
+    tregx={`pattern('(?<capital>[A-Z])')->match('hello there, General Kenobi')->first(function (Detail $detail) {
     // highlight-next-line
-    return $match->get('capital');
+    return $detail->get('capital');
 });`}
     php={`if (preg::match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
     // highlight-next-line
@@ -104,11 +104,11 @@ It's also possible to return your custom value from within `first()` callback. T
 from `first()` function.
 
 <CodeTabs
-    tregx={`$first = pattern('\\w+')->match('Apples are cool')->first(function (Match $match) {
+    tregx={`$first = pattern('\\w+')->match('Apples are cool')->first(function (Detail $detail) {
     return [
-        $match->text(), 
-        strtoupper($match->text()),
-        lcfirst($match->text())
+        $detail->text(),
+        strtoupper($detail->text()),
+        lcfirst($detail->text())
     ];\n});\n
 return $first;`}
     php={`if (preg::match('/\\w+/', 'Apples are cool', $match)) {
@@ -134,7 +134,7 @@ You can call `first()` for any valid PHP [`callable`] which accepts one string p
     throw new SubjectNotMatchedException();\n}`}/>
 <Result>'APPLES'</Result>
 
-In this example, [`Match`] will be cast to string, which is the same as calling `Match.text()` method.
+In this example, [`Detail`] will be cast to string, which is the same as calling `Detail.text()` method.
 
 :::note
 Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
@@ -169,7 +169,7 @@ one of the following [`orReturn()`], [`orElse()`] or [`orThrow()`].
 
 <CodeTabs
     tregx={`echo pattern('\w+')->match('Dog')
-    ->findFirst(function (Match $match) {
+    ->findFirst(function (Detail $match) {
         // highlight-next-line
         return "Yay $match";
     })
@@ -183,8 +183,7 @@ one of the following [`orReturn()`], [`orElse()`] or [`orThrow()`].
 Read on to learn more about [`findFirst()`].
 
 [`callable`]: https://www.php.net/manual/en/language.types.callable.php
-[`Match`]: match-details.md
-[`Match` details]: match-details.md
+[`Detail`]: match-details.md
 [**brain strain**]: overview.mdx#brain-strain
 [`findFirst()`]: match-find-first.mdx
 [`orReturn()`]: match-find-first.mdx#orreturn

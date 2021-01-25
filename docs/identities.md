@@ -22,31 +22,31 @@ for `orThrow()`.
 
 ---
 
-Getting the matched text from [`Match`](match-details.md).
+Getting the matched text from [`Detail`](match-details.md).
 
 ```php
-pattern($p)->match($subject)->map(function (Match $match) {
+pattern($p)->match($subject)->map(function (Detail $detail) {
 
-    return $match->text();      // using text() method
-    return $match->group(0);    // group #0 is the whole match in all regexp engines
-    return (string) $match;     // cast it to string
-    return "$match";            // enclose it in double quotes
+    return $detail->text();      // using text() method
+    return $detail->group(0);    // group #0 is the whole match in all regexp engines
+    return (string) $detail;     // cast it to string
+    return "$detail";            // enclose it in double quotes
 });
 ```
 
 ---
 
-Mapping `Match.text()` or returning `Match.all()` from `first()`:
+Mapping `Detail.text()` or returning `Detail.all()` from `first()`:
 
 ```php
-pattern($p)->match($s)->first(function (Match $match) {
-    return $match->all();
+pattern($p)->match($s)->first(function (Detail $detail) {
+    return $detail->all();
 });
 
 // and
 
-pattern($p)->match($s)->map(function (Match $match) {
-    return $match->text();
+pattern($p)->match($s)->map(function (Detail $detail) {
+    return $detail->text();
 });
 ```
 
@@ -58,11 +58,11 @@ pattern($p)->match($s)->all();
 
 ---
 
-Similarly, mapping `Match.group()`
+Similarly, mapping `Detail.group()`
 
 ```php
-pattern($p)->match($s)->map(function (Match $match) {
-    return $match->group("capital")->text();
+pattern($p)->match($s)->map(function (Detail $detail) {
+    return $detail->group("capital")->text();
 });
 ```
 
@@ -75,8 +75,8 @@ pattern($p)->match($s)->group("capital")->all();
 Also with offsets
 
 ```php
-pattern($p)->match($s)->map(function (Match $match) {
-    return $match->group("capital")->offset();
+pattern($p)->match($s)->map(function (Detail $detail) {
+    return $detail->group("capital")->offset();
 });
 ```
 

@@ -25,11 +25,11 @@ have... nothing. There's no way to verify it in vanilla-PHP.
 
 And T-Regx **hates** it. So we fixed it all.
 
-That's why in T-Regx, [`Match`] details has 3 separate methods to deal with each of these cases separately.
+That's why in T-Regx, [`Detail`] has 3 separate methods to deal with each of these cases separately.
 
-Of course, the interface of [`Match`] is the same for matching, replacing and any other operation (unlike vanilla-PHP),
+Of course, the interface of [`Detail`] is the same for matching, replacing and any other operation (unlike vanilla-PHP),
 so validation of groups in T-Regx works completely alike for [`pattern()->match()`], [`pattern()->replace()`] and any other
-method. [`Match`] always has the same interface and works exactly alike, no matter where it was used.
+method. [`Detail`] always has the same interface and works exactly alike, no matter where it was used.
 
 Here's how they work:
 
@@ -47,7 +47,7 @@ In short:
 
 [`pattern()->match()`]: match.mdx
 [`pattern()->replace()`]: replace.mdx
-[`Match`]: match-details.md
+[`Detail`]: match-details.md
 [`array_key_exists()`]: https://www.php.net/manual/en/function.array-key-exists.php
 [`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
 [`preg_match_all()`]: https://www.php.net/manual/en/function.preg-match-all.php

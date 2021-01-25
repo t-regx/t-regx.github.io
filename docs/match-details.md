@@ -3,7 +3,7 @@ id: match-details
 title: Match details
 ---
 
-When using [`pattern()->match()`] and [`pattern()->replace->callback()`], some methods receive a callback that accepts [`Match`]
+When using [`pattern()->match()`] and [`pattern()->replace->callback()`], some methods receive a callback that accepts [`Detail`]
 details object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`].
 
 The details can be used to get concise information about the matched occurrence, such as its value
@@ -12,15 +12,15 @@ used subject (although it could also be pass as a closure parameter) and more.
 
 <!-- Copy the above paragraph to match-groups.md -->
 
-For example, to read the offset at which the occurrence was matched, use `Match.offset()`:
+For example, to read the offset at which the occurrence was matched, use `Detail.offset()`:
 
 ```php {4}
-pattern('[A-Z][a-z]+')->match('I like Trains')->first(fn(Match $match) => $match->offset());
+pattern('[A-Z][a-z]+')->match('I like Trains')->first(fn(Detail $detail) => $detail->offset());
 ```
 
 ## Overview
 
-Using `Match` details, you gain access to:
+Using `Detail` details, you gain access to:
 
 - [`text()`](#matched-text) - value of a matched occurrence
 - [`toInt()`](#integers)/[`isInt()`](#integers) which allow you to handle integers safely
@@ -44,14 +44,14 @@ Using `Match` details, you gain access to:
 There are 6 similar ways to get the value of the matched occurrence.
 
 ```php {3-4,6-8}
-pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
+pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Detail $detail) {
 
-    return $match->text();             // using text() method
-    return $match->group(0)->text();   // group #0 is the whole match in all regexp engines
+    return $detail->text();             // using text() method
+    return $detail->group(0)->text();   // group #0 is the whole match in all regexp engines
 
-    return (string) $match;            // cast it to string
-    return (string) $match->group(0);  // cast group #0 to string
-    return "$match";                   // enclose it in double quotes
+    return (string) $detail;            // cast it to string
+    return (string) $detail->group(0);  // cast group #0 to string
+    return "$detail";                   // enclose it in double quotes
 });
 ```
 
@@ -64,15 +64,15 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (string $match) {
 ```
 
 All of them are redundant and equal to each other. Their redundancy comes from the fact the there are a few ways of 
-casting an object to string in PHP, casting `Match` to string is the same as getting `text()` in T-Regx, and that the 
+casting an object to string in PHP, casting `Detail` to string is the same as getting `text()` in T-Regx, and that the 
 whole match is also group `0` in regular expressions.
 
 There's also UTF8-safe method `textLength()` which, you guessed it, returns the length of a matched text.
 
 ```php
-pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
-    return $match->text();         // 'Trains'
-    return $match->textLength();   // 6
+pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Detail $detail) {
+    return $detail->text();         // 'Trains'
+    return $detail->textLength();   // 6
 });
 ```
 
@@ -98,13 +98,13 @@ The string is considered a valid integer if:
 
 There are two methods regarding integers: `isInt()` and `toInt()`.
 
-`$match->isInt()` returns `true`/`false` depending on whether the matched occurrence is numeric. `toInt()`
+`$detail->isInt()` returns `true`/`false` depending on whether the matched occurrence is numeric. `toInt()`
 returns said numeric occurrence as an integer, or throws `IntegerFormatException` instead.
 
 ```php {3}
-pattern('\d+')->match('User input was: 4 times')->first(function (Match $match) {
-    if ($match->isInt()) {
-        for ($i = 0; $i < $match->toInt(); $i++) {
+pattern('\d+')->match('User input was: 4 times')->first(function (Detail $detail) {
+    if ($detail->isInt()) {
+        for ($i = 0; $i < $detail->toInt(); $i++) {
             // tasks
         }
     }
@@ -117,12 +117,10 @@ It's implemented with [`filter_var()`], but you can think of it as `/^-?\d+$/` w
 
 ## Subject
 
-To get the subject in your callback, use `Match.subject()`:
+To get the subject in your callback, use `Detail.subject()`:
 
 ```php
-pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Match $match) {
-    return $match->subject();
-});
+pattern('[A-Z][a-z]+')->match('I like Trains')->map(fn(Detail $detail) => $detail->subject());
 ```
 
 ```php
@@ -134,23 +132,21 @@ This is equivalent to storing the subject in a variable and using it in your clo
 ```php
 $subject = 'I like Trains';
 
-pattern('[A-Z][a-z]+')->match($subject)->map(function (Match $match) use ($subject) {
-    return $subject;
-});
+pattern('[A-Z][a-z]+')->match($subject)->map(fn(Detail $detail) => $subject);
 ```
 
 ## Ordinal value (index)
 
-`Match.index()` returns the ordinal number of a matched occurrence.
+`Detail.index()` returns the ordinal number of a matched occurrence.
 
 In this example, we'll modify every second word:
 
 ```php {2}
-pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Match $match) {
-    if ($match->index() % 2 === 0) {
-        return strtolower($match);
+pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Detail $detail) {
+    if ($detail->index() % 2 === 0) {
+        return strtolower($detail);
     }
-    return strtoupper($match);
+    return strtoupper($detail);
 });
 ```
 
@@ -164,32 +160,32 @@ Depending on whether you used [`all()`], [`first()`] or [`only(int)`] - method `
 argument given to `only()`
 
 ```php
-pattern('\w+')->replace($string)->all()->callback(function (Match $match) {
-    $match->limit();   // -1
+pattern('\w+')->replace($string)->all()->callback(function (Detail $detail) {
+    $detail->limit();   // -1
 });
 ```
 
 ```php
-pattern('\w+')->replace($string)->first()->callback(function (Match $match) {
-    $match->limit();   // 1
+pattern('\w+')->replace($string)->first()->callback(function (Detail $detail) {
+    $detail->limit();   // 1
 });
 ```
 
 ```php
-pattern('\w+')->replace($string)->only(5)->callback(function (Match $match) {
-    $match->limit();   // 5
+pattern('\w+')->replace($string)->only(5)->callback(function (Detail $detail) {
+    $detail->limit();   // 5
 });
 ```
 
 ## Offsets
 
-`Match.offset()` can be used to get the offset of the matched occurrence in the subject. `Match.offset()` is multi-byte 
-character safe and returns offset in characters, whereas `Match.byteOffset()` returns the offset in bytes.
+`Detail.offset()` can be used to get the offset of the matched occurrence in the subject. `Detail.offset()` is multi-byte 
+character safe and returns offset in characters, whereas `Detail.byteOffset()` returns the offset in bytes.
 
 ```php
-pattern('here')->match('Apples for 0.30€, here')->first(function (Match $match) {
-    $characters = $match->offset();   // 18
-    $byes = $match->byteOffset();     // 20
+pattern('here')->match('Apples for 0.30€, here')->first(function (Detail $detail) {
+    $characters = $detail->offset();   // 18
+    $byes = $detail->byteOffset();     // 20
 });
 ```
 
@@ -218,31 +214,31 @@ Use:
 
 ## Tail
 
-Method `Match.tail()` simply returns the position of the last character in a matched occurrence.
+Method `Detail.tail()` simply returns the position of the last character in a matched occurrence.
 
 ```php
-pattern('ipsum')->match('Lorem ipsum')->first(function (Match $match) {
-    $start = $match->offset();   // 6
-    $end = $match->tail();       // 11
+pattern('ipsum')->match('Lorem ipsum')->first(function (Detail $detail) {
+    $start = $detail->offset();   // 6
+    $end = $detail->tail();       // 11
 });
 ```
 
-There's also `Match.byteTail()` which returns the tail in bytes, instead of characters.
+There's also `Detail.byteTail()` which returns the tail in bytes, instead of characters.
 
 ## Other occurrences
 
-`Match` has access to other matched occurrences:
+`Detail` has access to other matched occurrences:
 
-- `Match.all()` - for whole matches (like `Match.text()`)
-- `Match.group().all()` - for capturing groups (like `Match.group().text()`)
+- `Detail.all()` - for whole matches (like `Detail.text()`)
+- `Detail.group().all()` - for capturing groups (like `Detail.group().text()`)
 
-Even if you use `first()` or `only(int)` methods, `Match.all()` always returns unlimited occurrences.
+Even if you use `first()` or `only(int)` methods, `Detail.all()` always returns unlimited occurrences.
 
 ```php {4}
-pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
+pattern('\w+')->match('Apples are cool')->map(function (Detail $detail) {
     return [
-        'match' => $match->text(),
-        'all'   => $match->all()
+        'match' => $detail->text(),
+        'all'   => $detail->all()
     ];
 });
 ```
@@ -257,19 +253,19 @@ pattern('\w+')->match('Apples are cool')->map(function (Match $match) {
 
 ## Groups
 
-With `Match.group(string|int)`, you can easily retrieve capturing groups.
+With `Detail.group(string|int)`, you can easily retrieve capturing groups.
 
-Just like with `Match`, retrieving matched occurrence value is done with `text()` method or by casting it to `string`.
+Just like with `Detail`, retrieving matched occurrence value is done with `text()` method or by casting it to `string`.
 
 ```php {5,7-8}
 $pattern = '(?<value>\d+)(?<unit>cm|mm)';
 $subject = '192mm and 168cm or 18mm and 12cm';
 
-pattern($pattern)->match($subject)->first(function (Match $match) {
-    $text = $match->text();                            // '192mm'
+pattern($pattern)->match($subject)->first(function (Detail $detail) {
+    $text = $detail->text();                            // '192mm'
 
-    $value = (string) $match->group('value');          // '192'
-    $unit  =          $match->group('unit')->text();   // 'mm'
+    $value = (string) $detail->group('value');          // '192'
+    $unit  =          $detail->group('unit')->text();   // 'mm'
 });
 ```
 
@@ -283,13 +279,13 @@ value in user data, and then use the value in [`map()`] without reference closur
 
 ```php {4,8}
 pattern('\w{2}')->match('Languages: en, de, xd, sv')
-    ->filter(function (Match $match) {
-        $languageInfo = HeavyService::fetch($match->text());
-        $match->setUserData($languageInfo);
+    ->filter(function (Detail $detail) {
+        $languageInfo = HeavyService::fetch($detail->text());
+        $detail->setUserData($languageInfo);
         return $languageInfo->isValid();
     })
-    ->map(function (Match $match) {
-        $languageInfo = $match->getUserData();
+    ->map(function (Detail $detail) {
+        $languageInfo = $detail->getUserData();
         return $languageInfo->languages():
     });
 ```
@@ -308,6 +304,6 @@ pattern('\w{2}')->match('Languages: en, de, xd, sv')
 [`flatMap()`]: match-flat-map.mdx
 [`callback()`]: replace-callback.mdx
 [Capturing groups]: match-groups.md
-[`Match`]: match-details.md
+[`Detail`]: match-details.md
 [`pattern()->match()`]: match.mdx
 [`pattern()->replace->callback()`]: replace-callback.mdx

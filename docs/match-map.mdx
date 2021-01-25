@@ -6,7 +6,7 @@ title: Map occurrences
 import {CodeTabs, Result} from './code';
 
 Mapping works a bit like a combination of [`all()`] and [`forEach()`]. It returns all matched elements, after
-they have been iterated (and potentially altered) using `map()` callback (which accepts [`Match`] details).
+they have been iterated (and potentially altered) using `map()` callback (which accepts [`Detail`] details).
 
 ## Map matched occurrences
 
@@ -23,8 +23,8 @@ return $matches[0];`}/>
 ...you can map them - to any other value, by callback:
 
 <CodeTabs
-    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->map(function (Match $match) {
-    return strlen($match->text());
+    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->map(function (Detail $detail) {
+    return strlen($detail->text());
 });`}
     php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
 return array_map(function ($text) {
@@ -86,4 +86,4 @@ Read more about [`flatMap()`] on the next page.
 [`all()`]: match.mdx#many
 [`forEach()`]: match-for-each.mdx
 [`flatMap()`]: match-flat-map.mdx
-[`Match`]: match-details.md
+[`Detail`]: match-details.md

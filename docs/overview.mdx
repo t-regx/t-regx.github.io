@@ -15,7 +15,7 @@ Its main features are:
 - API:
   - [Automatic delimiters](delimiters.mdx) for your patterns
   - UTF-8 support out of the box
-  - Unifying differences between matching, replacing, splitting into one interface: [`Match`]
+  - Unifying differences between matching, replacing, splitting into one interface: [`Detail`]
   - [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user input)
 
 - Removing headaches of PHP:
@@ -57,7 +57,7 @@ the API to allow simple migration of `preg_match()` to `preg::match()`.
 
 In CleanRegex this is handled, so you don't have to worry about it - `""` always means an empty string.
 
-[`Match`]: match.mdx
+[`Detail`]: match.mdx
 [`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
 [`preg_replace()`]: https://www.php.net/manual/en/function.preg-replace.php
 [`preg_split()`]: https://www.php.net/manual/en/function.preg-split.php

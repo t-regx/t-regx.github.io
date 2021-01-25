@@ -24,7 +24,7 @@ to verify whether the pattern used is a valid one or not.
 
 `GroupName::isValid()` accepts either a group index or a group name, and checks whether
 it can be used as a group. In other words, it's the method it can be thought of as a
-function validating inputs of [`Match.group()`](match-groups.md).
+function validating inputs of [`Detail.group()`](match-groups.md).
 
 `GroupName::isValid()` called with anything of type other than `int` or `string`, 
 simply returns `false`.

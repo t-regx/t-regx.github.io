@@ -5,7 +5,7 @@ title: Inline groups
 
 import {CodeTabs, Result} from './code';
 
-Method `match()->group()` behaves exactly like [`Match.group(int|string)`]:
+Method `match()->group()` behaves exactly like [`Detail.group(int|string)`]:
 
 - accepts either a group index (where #0 is the whole match) or a group name (when a group is named)
 - throws `NonexistentGroupException` if `group()` is used with a non-existent group
@@ -79,5 +79,5 @@ If, however, an invalid group is used:
 
 [Inline groups]: replace-by-group.mdx
 [replacements]: replace-by-group.mdx
-[`Match.group(int|string)`]: match-details.md
+[`Detail.group(int|string)`]: match-details.md
 [`\InvalidArgumentException`]: https://www.php.net/manual/en/class.invalidargumentexception.php

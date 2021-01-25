@@ -182,10 +182,10 @@ Further, furthermore, if you pass an invalid data type to any of the T-Regx meth
 You will not find arrays, of arrays, of arrays in T-Regx API. Each functionality has a dedicated set of methods.
 
 ```php
-pattern($pattern)->match($subject)->first(function (Match $match) {
-    $match->offset();           // offset of a matched occurrence
-    $match->group(2)->offset(); // offset of a matched capturing group
-    $match->group(-3);          // throws \InvalidArgumentException
+pattern($pattern)->match($subject)->first(function (Detail $detail) {
+    $detail->offset();           // offset of a matched occurrence
+    $detail->group(2)->offset(); // offset of a matched capturing group
+    $detail->group(-3);          // throws \InvalidArgumentException
 });
 ```
 
@@ -194,22 +194,22 @@ pattern($pattern)->match($subject)->first(function (Match $match) {
 Matching
 
 ```php
-pattern($pattern)->match($subject)->first(function (Match $match) {
-    $match->offset();            // exactly the same interface
-    $match->group(2)->offset();
-    $match->group(-3);
+pattern($pattern)->match($subject)->first(function (Detail $detail) {
+    $detail->offset();            // exactly the same interface
+    $detail->group(2)->offset();
+    $detail->group(-3);
 });
 ```
 Replacing:
 ```php
-pattern($pattern)->replace($subject)->first()->callback(function (Match $match) {
-    $match->offset();            // exactly the same interface
-    $match->group(2)->offset(); 
-    $match->group(-3);
+pattern($pattern)->replace($subject)->first()->callback(function (Detail $detail) {
+    $detail->offset();            // exactly the same interface
+    $detail->group(2)->offset(); 
+    $detail->group(-3);
 });
 ```
 
-Read more about [`Match` details](match-details.md).
+Read more about [`Detail`](match-details.md).
 
 ### T-Regx provides rich API for building patterns
 
@@ -230,14 +230,14 @@ Pattern::inject("(My|Our) (dog|cat) names are @ and @!", [$dog, $cat]);
 We really did put a lot of thoughts to make T-Regx secure, so for example these code snippets aren't a big deal:
 
 ```php
-pattern('\w+')->replace($subject)->all()->callback(function (Match $match) {
+pattern('\w+')->replace($subject)->all()->callback(function (Detail $detail) {
     try {
         return pattern('intentionally (( invalid {{ pattern ')->match('Foo')->first();
     }
     catch (MalformedPatternException $ex) {
         // it's all good and dandy
         // this exception $ex here, won't interfere with the pattern "outside"
-        return $match;
+        return $detail;
     }
 });
 ```

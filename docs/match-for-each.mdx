@@ -6,11 +6,11 @@ title: Iterate matches (For each)
 import {CodeTabs, Result} from './code';
 
 Use `forEach()` to easily iterate matched occurrences with your callback. You can call `forEach()` with a callback,
-that's invoked with [`Match`] details just like [`first()`] and [`findFirst()`].
+that's invoked with [`Detail`] details just like [`first()`] and [`findFirst()`].
 
 <CodeTabs
     tregx={`// highlight-next-line
-pattern('\\w+')->match('Apples are cool')->forEach(function (Match $match) {
+pattern('\\w+')->match('Apples are cool')->forEach(function (Detail $match) {
     echo "I matched $match, ";\n});`}
     php={`// highlight-next-line
 preg::match_all('/\\w+/', 'Apples are cool', $matches);
@@ -20,10 +20,10 @@ array_map(function (string $text) {
 }, $matches[0]);`}/>
 <Result text>I matched Apples, I matched are, I matched cool, </Result>
 
-Using [`Match`] you can get detailed information such as [`offset()`], [`index()`] etc.
+Using [`Detail`] you can get detailed information such as [`offset()`], [`index()`] etc.
 
 :::note
-`forEach()` accepts [`Match`] details, but [`Match`] can be cast to `(string)`.
+`forEach()` accepts [`Detail`] details, but [`Detail`] can be cast to `(string)`.
 :::
 
 ## Vanilla PHP `foreach`
@@ -89,7 +89,7 @@ foreach ($matches[0] as $text) {
 Although, instead of `all()` it's possible to chain the entities with one of the more high-level T-Regx methods, such as:
 `forEach()`/[`map()`]/[`flatMap()`] etc.
 
-[`Match`]: match-details.md
+[`Detail`]: match-details.md
 [`offset()`]: match-details.md#offsets
 [`index()`]: match-details.md#ordinal-value-index
 [`first()`]: match-first.mdx

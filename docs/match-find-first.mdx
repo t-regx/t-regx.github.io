@@ -12,15 +12,15 @@ But what if you **expected** the subject not to be matched? And how do you to re
 
 ## Optional matches with `findFirst()`
 
-Method `findFirst()` can be called with a callback (that accepts [`Match`] details) just
-like [`first()`]. The difference is: `findFirst()` never throws `SubjectNotMatchedException`, and allows you to control
-an unmatched subject by appropriate control methods: `orThrow()`, `orReturn()` and `orElse()`.
+Method `findFirst()` can be called with a callback (that accepts [`Detail`]) just like [`first()`].
+The difference is: `findFirst()` never throws `SubjectNotMatchedException`, and allows you to control an unmatched subject by
+appropriate control methods: `orThrow()`, `orReturn()` and `orElse()`.
 
 For example:
 
 <CodeTabs
     tregx={`return pattern('[0-9]+')->match("I'm 19 years old")
-   ->findFirst(function (Match $match) {
+   ->findFirst(function (Detail $match) {
        // highlight-next-line
        return "I was born $match years ago";
    })
@@ -42,7 +42,7 @@ If a match is not found, it returns a default value.
 
 <CodeTabs
     tregx={`return pattern('[0-9]+')->match("I'm a dog")
-    ->findFirst(function (Match $match) {
+    ->findFirst(function (Detail $match) {
        return "I was born $match years ago";
     })
     // highlight-next-line
@@ -61,7 +61,7 @@ If a match is not found, it calls `orElse()` callback and uses *it* to evaluate 
 
 <CodeTabs
     tregx={`return pattern('[0-9]+')->match("I'm a dog")
-    ->findFirst(function (Match $match) {
+    ->findFirst(function (Detail $match) {
        return "I was born $match years ago";
     })
     ->orElse(function (NotMatched $notMatched) { 
@@ -78,7 +78,7 @@ return "I couldn't match subject: $subject";`}/>
 <Result>"I couldn't match subject: I'm a dog"</Result>
 
 Callback of `orElse()` is called with `NotMatched`, which contains only a handful of methods
-present in [`Match`]: `subject()`, `groupNames()`, `groupsCount()` and `hasGroup($nameOrIndex)`.
+present in [`Detail`]: `subject()`, `groupNames()`, `groupsCount()` and `hasGroup($nameOrIndex)`.
 
 ### `orThrow()`
 
@@ -87,7 +87,7 @@ If a match is not found, it throws `SubjectNotMatchedException` by default.
 <CodeTabs
     tregx={`try {
     return pattern('[0-9]+')->match("I'm a dog")
-        ->findFirst(function (Match $match) {
+        ->findFirst(function (Detail $detail) {
             return "Match is found!";
         })
         // highlight-next-line
@@ -121,7 +121,7 @@ You can also supply your own exception class name.
     tregx={`class MyException extends \\Exception {}\n
 try {
     return pattern('[0-9]+')->match("I'm a dog")
-        ->findFirst(function (Match $match) {
+        ->findFirst(function (Detail $detail) {
             return "Match is found!";
         })
         // highlight-next-line
@@ -192,4 +192,4 @@ catch (SubjectNotMatchedException $e) {
 }`}/>
 
 [`first()`]: match-first.mdx
-[`Match`]: match-details.md
+[`Detail`]: match-details.md

@@ -69,7 +69,7 @@ You can also chose to throw an exception, if the unmatched group is not supposed
 - `orElseIgnore()` - leaves the match unchanged - doesn't replace the match, if the group itself is not matched
 - `orElseEmpty()` - matched occurrence is replaced with an empty string (default for PHP regexp)
 - `orElseWith(string)` - match is replaced with the given `string` argument
-- `orElseCalling(callable)` - uses a callback with [`Match`] argument, in order to evaluate a replacement
+- `orElseCalling(callable)` - uses a callback with [`Detail`] argument, in order to evaluate a replacement
 - `orElseThrow()` - throws a default or a custom exception, just like [findFirst()->orThrow()]
 
 
@@ -210,7 +210,7 @@ pattern('(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|io)')->replace($links)
     ->all()
     ->by()
     ->group('domain')
-    ->orElseCalling(fn(Match $match) => "Not found **$match**");`}
+    ->orElseCalling(fn(Detail $match) => "Not found **$match**");`}
     php={`$links = 'My links are: www.google.com, http://.io, facebook.com, https://.com :)';\n
 $producer = function (array $match) {
     return "Not found **{$match[0]}**";
@@ -240,11 +240,11 @@ return preg::replace_callback('#(https?://)?(www\\.)?(?<domain>[\\w-]+)?\\.(com|
 Description:
 
 - Matches `http://.io` and `https://.com` were matched, but the capturing group `'domain'` inside wasn't, so callback
-  function is called with [`Match`] details (first with `http://.io`, and then with `https://.com`), and the link is replaced
+  function is called with [`Detail`] details (first with `http://.io`, and then with `https://.com`), and the link is replaced
   with a result of that function.
 
 :::note "T-Regx" vs "PHP" code tab
-Even this simple T-Regx snippet is represented as a massive PHP code. Using [`Match.index()`] or [`Match.offset()`] when
+Even this simple T-Regx snippet is represented as a massive PHP code. Using [`Detail.index()`] or [`Detail.offset()`] when
 replacing would make PHP code even more complex, introducing counting variables and [`PREG_OFFSET_CAPTURE`].
 :::
 
@@ -303,14 +303,14 @@ is identical to:
 ```php
 pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')->replace($links)
     ->all()
-    ->callback(function (Match $match) {
-        return $match->group('domain')->orXXX();
+    ->callback(function (Detail $detail) {
+        return $detail->group('domain')->orXXX();
     });
 ```
 
-[`Match.index()`]: match-details.md#ordinal-value-index
-[`Match.offset()`]: match-details.md#offsets
-[`Match`]: match-details.md
+[`Detail.index()`]: match-details.md#ordinal-value-index
+[`Detail.offset()`]: match-details.md#offsets
+[`Detail`]: match-details.md
 [`findFirst()`]: match-find-first.mdx
 [findFirst()->orThrow()]: match-find-first.mdx
 [inline groups]: match-group.mdx

@@ -6,7 +6,7 @@ title: Map with keys (Flat map)
 import {CodeTabs, Result} from './code';
 
 There are cases when you would like to create a single list of all your matches. `flatMap()` is great for it.
-It other words it allows you to return one, zero or more elements from your mapping function.
+In other words, it allows you to return one, zero or more elements from your mapping function.
 
 ```
 ->map(function () {
@@ -25,9 +25,9 @@ It other words it allows you to return one, zero or more elements from your mapp
 Method `flatMap()` is basically method [`map()`], from which you can return multiple values.
 
 <CodeTabs
-    tregx={`pattern('\\w+')->match('I have 19 trains')->flatMap(function (Match $match) {
+    tregx={`pattern('\\w+')->match('I have 19 trains')->flatMap(function (Detail $detail) {
     return [
-        $match->text(), strlen($match)
+        $detail->text(), strlen($detail)
     ];\n});`}
     php={`preg::match_all("/\\w+/", 'I have 19 trains', $matches);
 return array_merge(...array_map(function (string $text) {
@@ -45,8 +45,8 @@ return array_merge(...array_map(function (string $text) {
 array under the hood would break our "Explicity rule".
 
 <CodeTabs
-    tregx={`pattern('\\w+')->match("I like trains")->flatMap(function (Match $match) {
-    return $match;  // <- throws InvalidReturnValueException\n});`}
+    tregx={`pattern('\\w+')->match("I like trains")->flatMap(function (Detail $detail) {
+    return $detail;  // <- throws InvalidReturnValueException\n});`}
     php={`preg::match_all("/\\w+/", 'I like trains', $matches);
 return array_merge(...array_map(function (string $text) {
     throw new InvalidReturnValueException(); // <- throws InvalidReturnValueException
@@ -58,8 +58,8 @@ return array_merge(...array_map(function (string $text) {
 So always remember to return an array.
 
 <CodeTabs
-    tregx={`pattern('\\w+')->match("I like trains")->flatMap(function (Match $match) {
-    return [$match->text()];  // ok\n});`}
+    tregx={`pattern('\\w+')->match("I like trains")->flatMap(function (Detail $detail) {
+    return [$detail->text()];  // ok\n});`}
     php={`preg::match_all("/\\w+/", 'I like trains', $matches);
 return array_merge(...array_map(function (string $text) {
     return [$text];   // ok
@@ -88,8 +88,8 @@ Because `flatMap()` receives an array from its callback, it's possible to also r
 specified keys:
 
 <CodeTabs
-    tregx={`pattern("\\w+")->match("Apples are cool")->flatMap(function (Match $match) {
-    return [$match->text() => $match->offset()];   // offset is UTF-8 safe\n});`}
+    tregx={`pattern("\\w+")->match("Apples are cool")->flatMap(function (Detail $detail) {
+    return [$detail->text() => $detail->offset()];   // offset is UTF-8 safe\n});`}
     php={`preg::match_all("/\\w+/", "Apples are cool", $matches, PREG_OFFSET_CAPTURE);
 return array_merge(...array_map(function (array $match) {
     return [$match[0] => $match[1]];    // offset is given in bytes
@@ -112,7 +112,7 @@ a `string` with numeric values (like `'19'`) they will be **reindexed** by [`arr
 :::
 
 :::note
-`Match.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all`
+`Detail.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all`
 counts them as [bytes](match-details.md#offsets). To return bytes number with T-Regx as well,
 use [`byteOffset()`](match-details.md#offsets).
 :::
@@ -122,10 +122,10 @@ use [`byteOffset()`](match-details.md#offsets).
 Duplicate keys are not allowed in PHP arrays, so they'll only appear once in the results.
 
 <CodeTabs
-    tregx={`pattern("\\w+")->match("Apples are cool")->flatMap(function (Match $match) {
+    tregx={`pattern("\\w+")->match("Apples are cool")->flatMap(function (Detail $detail) {
     return [
-        $match->text() => $match->offset(),   // offset is UTF-8 safe
-        'subject'      => $match->subject()
+        $detail->text() => $detail->offset(),   // offset is UTF-8 safe
+        'subject'       => $detail->subject()
     ];
 });`}
     php={`$subject = 'Apples are cool';

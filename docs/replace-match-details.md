@@ -6,10 +6,10 @@ title: Advanced replace details
 ## Introduction
 
 When using `pattern()->match()` all [callbacks](match-for-each.mdx) receive one parameter when 
-called - [`Match`]. You can learn more about it on [`Match` details](match-details.md) page.
+called - [`Detail`]. You can learn more about it on [`Detail`](match-details.md) page.
 
 However, when using `pattern()->replace()` the callback receives `ReplaceMatch` details object.
-It extends [`Match`] object, so they have exactly alike interfaces.
+It extends [`Detail`] object, so they have exactly alike interfaces.
 
 Additionally, `ReplaceMatch` has two separate methods:
 
@@ -32,17 +32,17 @@ Given a pattern, that matches capitalized words:
 ```php
 $subject = 'Me, Rihanna and my Mom really like Sweden';
 
-$result = pattern("[A-Z][a-z]+")->replace($subject)->all()->callback(function ($match) {
+$result = pattern("[A-Z][a-z]+")->replace($subject)->all()->callback(function ($detail) {
     // highlight-next-line
-    $match->subject(); // Me, Rihanna and my Mom really like Sweden
+    $detail->subject(); // Me, Rihanna and my Mom really like Sweden
 
     return '____';
 });
 ```
 
-having iterated the subject looking for `[A-Z][a-z]+` - for each [`Match`] the result of `Match.subject()` 
+having iterated the subject looking for `[A-Z][a-z]+` - for each [`Detail`] the result of `Detail.subject()` 
 method would always be the same. There are 4 occurrences matched by the pattern, so callback is invoked 4 times, 
-and each time `$match->subject()` is equal to:
+and each time `$detail->subject()` is equal to:
 
 ```text
 Me, Rihanna and my Mom really like Sweden
@@ -76,7 +76,7 @@ ____, ____ and my ____ really like ____
 
 ### `modifiedOffset()` example
 
-Have you iterated the subject looking for `[A-Z][a-z]+`, these would be the results of `Match.offset()` method.
+Have you iterated the subject looking for `[A-Z][a-z]+`, these would be the results of `Detail.offset()` method.
 
 ```text
 Me, Rihanna and my Mom really like Sweden
@@ -144,9 +144,9 @@ Method `modifiedOffset()` as well as `modifiedSubject()` are available for group
 ```php
 $subject = 'Me, Rihanna and my Mom really like Sweden';
 
-$result = pattern("[A-Z]([a-z]+)")->replace($subject)->all()->callback(function ($match) {
+$result = pattern("[A-Z]([a-z]+)")->replace($subject)->all()->callback(function ($detail) {
     // highlight-next-line
-    $group = $match->group(1);
+    $group = $detail->group(1);
 
     // highlight-next-line
     $group->modifiedSubject();
@@ -179,11 +179,11 @@ To read **byte** position, use `byteModifiedOffset()`:
 ```php
 $subject = 'Fóó, Lęę, Śćć';
 
-$result = pattern("(\w+)", 'u')->replace($subject)->all()->callback(function ($match) {
+$result = pattern("(\w+)", 'u')->replace($subject)->all()->callback(function (ReplaceDetail $detail) {
     // highlight-next-line
-    $matchOffset = $match->byteModifiedOffset();
+    $matchOffset = $detail->byteModifiedOffset();
     // highlight-next-line
-    $groupOffset = $match->group(1)->byteModifiedOffset();
+    $groupOffset = $detail->group(1)->byteModifiedOffset();
 
     return 'ę';
 });
@@ -193,7 +193,7 @@ Use `modifiedOffset()` with multibyte-safe methods like [`mb_substr()`], and `by
 like [`substr()`].
 :::
 
-[`Match`]: match-details.md
+[`Detail`]: match-details.md
 [`offset()`]: match-offsets.mdx
 [`preg_replace_callback()`]: https://www.php.net/manual/en/function.preg-replace-callback.php
 [`mb_substr()`]: https://www.php.net/manual/en/function.mb-substr.php
