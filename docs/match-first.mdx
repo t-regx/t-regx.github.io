@@ -80,9 +80,8 @@ Retrieving capturing groups from a match is really simple.
 });`}
     php={`if (preg::match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
     // highlight-next-line
-    $capital = $match['capital'][0];\n
-    return $capital;\n}\nelse {
-    throw new SubjectNotMatchedException();\n}`}/>
+    return $match['capital'][0];\n}
+throw new SubjectNotMatchedException();`}/>
 
 <!--T-Regx:{return-at(0)}-->
 <Result>'G'</Result>
@@ -130,8 +129,8 @@ You can call `first()` for any valid PHP [`callable`] which accepts one string p
     tregx={`return pattern('\\w+')->match('Apples are cool')->first('strtoupper');`}
     php={`if (preg::match('/\\w+/', 'Apples are cool', $match)) {
     // highlight-next-line
-    return call_user_func('strtoupper', $match[0]);\n}\nelse {
-    throw new SubjectNotMatchedException();\n}`}/>
+    return call_user_func('strtoupper', $match[0]);\n}
+throw new SubjectNotMatchedException();`}/>
 <Result>'APPLES'</Result>
 
 In this example, [`Detail`] will be cast to string, which is the same as calling `Detail.text()` method.
@@ -147,8 +146,8 @@ From within `first()` callback, you can return any value:
 <CodeTabs
     tregx={`return pattern('\\w+')->match('Apples are cool')->first('str_split');`}
     php={`if (preg::match('/\\w+/', 'Apples are cool', $match)) {
-    return call_user_func('str_split', $match[0]);\n}\nelse {
-    throw new SubjectNotMatchedException();\n}`}/>
+    return call_user_func('str_split', $match[0]);\n}
+throw new SubjectNotMatchedException();`}/>
 <Result>['A', 'p', 'p', 'l', 'e', 's']</Result>
 
 The `first()` callback accepts all return types, including: numbers, objects, arrays, booleans and `null`:
