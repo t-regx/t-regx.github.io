@@ -11,11 +11,11 @@ use TRegx\CleanRegex\Exception\InvalidReturnValueException;
 use TRegx\CleanRegex\Exception\MissingReplacementKeyException;
 use TRegx\CleanRegex\Exception\NonexistentGroupException;
 use TRegx\CleanRegex\Exception\SubjectNotMatchedException;
+use TRegx\CleanRegex\Match\Details\Detail;
 use TRegx\CleanRegex\Match\Details\Match;
 use TRegx\CleanRegex\Match\Details\NotMatched;
 use TRegx\CleanRegex\Pattern;
 use TRegx\SafeRegex\Exception\CompilePregException;
-use TRegx\SafeRegex\Exception\MalformedPatternException;
 use TRegx\SafeRegex\preg;
 
 /**
@@ -49,16 +49,19 @@ class MarkupResultConsistencyTest extends TestCase
      * @test
      * @dataProvider snippets
      * @param array $tregx
-     * @param array $php
-     * @param array $expectedResult
-     * @param array $expectedOutput
+     * @param array|null $php
+     * @param array|null $expectedResult
+     * @param array|null $expectedOutput
      * @param array|null $exceptions
+     * @param string $filename
+     * @throws TestException
+     * @throws Throwable
      */
-    function test(array $tregx, ?array $php, ?array $expectedResult, ?array $expectedOutput, array $exceptions = null): void
+    function test(array $tregx, ?array $php, ?array $expectedResult, ?array $expectedOutput, ?array $exceptions, string $filename): void
     {
         // given
-        $one = $tregx ? $this->arrayToString($tregx) : null;
-        $two = $php ? $this->arrayToString($php) : null;
+        $one = $tregx ? $this->arrayToString($filename, 'T-Regx', $tregx) : null;
+        $two = $php ? $this->arrayToString($filename, 'PHP', $php) : null;
 
         // when
         [$return1, $echo1, $exception1] = $one ? $this->invoke($one, 'T-Regx') : [null, null, null];
@@ -87,24 +90,28 @@ class MarkupResultConsistencyTest extends TestCase
         }
     }
 
-    private function arrayToString(array $lines): string
+    private function arrayToString(string $filename, string $snippetName, array $lines): string
     {
-        return join(PHP_EOL, $this->preprocessCode($lines));
+        return join(PHP_EOL, $this->preprocessCode($filename, $snippetName, $lines));
     }
 
-    private function preprocessCode(array $lines): array
+    private function preprocessCode(string $filename, string $snippet, array $lines): array
     {
+        $class = class_exists('TRegx\Exception\MalformedPatternException')
+            ? 'TRegx\Exception\MalformedPatternException'
+            : 'TRegx\SafeRegex\Exception\MalformedPatternException';
         $namespaces = $this->declareNamespaces([
             MissingReplacementKeyException::class,
             InvalidReturnValueException::class,
             SubjectNotMatchedException::class,
             NonExistentGroupException::class,
-            MalformedPatternException::class,
+            $class,
             CompilePregException::class,
             NotMatched::class,
             Integer::class,
             Pattern::class,
             Match::class,
+            Detail::class,
             preg::class,
         ]);
         $functions = $this->polyfillGlobalFunctions([
@@ -118,10 +125,11 @@ class MarkupResultConsistencyTest extends TestCase
         $lines = $this->addSingleLineReturn($lines);
         $lines = $this->replaceCodeFragments($lines, [
             'new SubjectNotMatchedException()'  => 'new SubjectNotMatchedException("","")',
-            'new InvalidReturnValueException()' => 'new InvalidReturnValueException("","",null)'
+            'new InvalidReturnValueException()' => 'new InvalidReturnValueException("","","")'
         ]);
         $lines = $this->protectAgainstClassRedeclaration($lines);
-        return array_merge($namespaces, $functions, $classes, $lines);
+        $comment = ['', "// Snippet $snippet from $filename", '',];
+        return array_merge($namespaces, [''], $functions, $classes, $comment, $lines);
     }
 
     private function invoke(string $code, string $snippetName): array
@@ -132,7 +140,7 @@ class MarkupResultConsistencyTest extends TestCase
         try {
             ob_start();
             try {
-                $result = eval($code);
+                $result = $this->runPhpCode($code);
             } catch (Throwable $exception) {
                 $caughtException = $exception;
             } finally {
@@ -163,9 +171,7 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function replaceCodeFragments(array $lines, $replacements): array
     {
-        return array_map(function (string $line) use ($replacements) {
-            return str_replace(array_keys($replacements), array_values($replacements), $line);
-        }, $lines);
+        return array_map(fn(string $line) => str_replace(array_keys($replacements), array_values($replacements), $line), $lines);
     }
 
     private function protectAgainstClassRedeclaration(array $lines): array
@@ -184,9 +190,12 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function polyfillGlobalFunctions(array $namesAndResults): array
     {
-        return array_map(function ($key, $value) {
-            return "if (!function_exists('$key')) { function $key() { return " . var_export($value, true) . "; }}";
-        }, array_keys($namesAndResults), $namesAndResults);
+        return array_map(fn($key, $value) => $this->functionPolyfill($key, $value), array_keys($namesAndResults), $namesAndResults);
+    }
+
+    private function functionPolyfill($key, $value): string
+    {
+        return "if (!function_exists('$key')) { function $key() { return " . var_export($value, true) . "; }}";
     }
 
     private function declareNamespaces(array $classes): array
@@ -231,5 +240,15 @@ class MarkupResultConsistencyTest extends TestCase
         if ($exception) {
             throw new TestException($exception, $code);
         }
+    }
+
+    private function runPhpCode(string $code)
+    {
+        $filename = md5($code);
+        $path = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "$filename.php";
+        file_put_contents($path, "<?php\n$code\n\nreturn null;\n");
+        $fileReturn = require $path;
+        unlink($path);
+        return $fileReturn;
     }
 }

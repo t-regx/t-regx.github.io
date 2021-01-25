@@ -15,13 +15,13 @@ class SnippetExceptionTest extends TestCase
     public function shouldReturnEmptySnippet()
     {
         // given
-        $snippet = new Snippet(['Foo', 'Bar']);
+        $snippet = new Snippet('', ['Foo', 'Bar']);
 
         // when
-        $snippet->setException('Foo', Exception::class);
+        $snippet->setExceptions('Foo', Exception::class);
 
         // then
-        $this->assertEquals([null, null, ['Foo' => Exception::class, 'Bar' => null]], $snippet->toDataProviderArray());
+        $this->assertEquals([null, null, ['Foo' => Exception::class, 'Bar' => null], ''], $snippet->toDataProviderArray());
     }
 
     /**
@@ -30,13 +30,13 @@ class SnippetExceptionTest extends TestCase
     public function shouldThrowForNoConsumers()
     {
         // when
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // then
         $this->expectException(LogicException::class);
 
         // when
-        $snippet->setException('Bar', Exception::class);
+        $snippet->setExceptions('Bar', Exception::class);
     }
 
     /**
@@ -45,13 +45,13 @@ class SnippetExceptionTest extends TestCase
     public function shouldThrow_forInvalidArgument()
     {
         // when
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // then
         $this->expectException(LogicException::class);
 
         // when
-        $snippet->setException('Foo', 'asd');
+        $snippet->setExceptions('Foo', 'asd');
     }
 
     /**
@@ -60,12 +60,12 @@ class SnippetExceptionTest extends TestCase
     public function shouldThrow_forNotThrowableClass()
     {
         // when
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // then
         $this->expectException(LogicException::class);
 
         // when
-        $snippet->setException('Foo', ArrayIterator::class);
+        $snippet->setExceptions('Foo', ArrayIterator::class);
     }
 }

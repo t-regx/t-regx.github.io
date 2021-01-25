@@ -12,14 +12,14 @@ class MdxFacade
         $this->parser = $parser;
     }
 
-    public function parse(string $content): array
+    public function parse(string $filename, string $content): array
     {
-        return array_map(fn(Snippet $snippet) => $snippet->toDataProviderArray(), array_map([$this, 'postprocess'], $this->parser->parse($content)));
+        return array_map(fn(array $values) => $this->postprocess($filename, $values)->toDataProviderArray(), $this->parser->parse($content));
     }
 
-    private function postprocess(array $values): Snippet
+    private function postprocess(string $filename, array $values): Snippet
     {
-        $snippet = new Snippet(['T-Regx', 'PHP', 'Result-Value', 'Result-Output']);
+        $snippet = new Snippet($filename, ['T-Regx', 'PHP', 'Result-Value', 'Result-Output']);
         foreach ($values as $element) {
             $element->populate($snippet);
         }

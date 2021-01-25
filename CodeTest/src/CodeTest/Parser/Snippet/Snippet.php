@@ -7,18 +7,20 @@ use Throwable;
 
 class Snippet
 {
+    private string $filename;
     private array $consumers;
     private array $snippet;
-    private array $exception;
+    private array $exceptions;
 
-    public function __construct(array $consumers)
+    public function __construct(string $filename, array $consumers)
     {
         if (empty($consumers)) {
             throw new InvalidArgumentException();
         }
+        $this->filename = $filename;
         $this->consumers = $consumers;
         $this->snippet = $this->emptySnippet();
-        $this->exception = $this->emptySnippet();
+        $this->exceptions = $this->emptySnippet();
     }
 
     private function emptySnippet(): array
@@ -58,19 +60,19 @@ class Snippet
         }
     }
 
-    public function setException(string $consumer, string $className): void
+    public function setExceptions(string $consumer, string $className): void
     {
         $this->validateType($consumer);
         $this->validateExceptionType($className);
-        $this->exception[$consumer] = $className;
+        $this->exceptions[$consumer] = $className;
     }
 
     public function toDataProviderArray(): array
     {
-        if (array_filter($this->exception)) {
-            return array_values($this->snippet + [$this->exception]);
+        if (array_filter($this->exceptions)) {
+            return [...array_values($this->snippet), $this->exceptions, $this->filename];
         }
-        return array_values($this->snippet);
+        return [...array_values($this->snippet), null, $this->filename];
     }
 
     private function validateExceptionType(string $className): void

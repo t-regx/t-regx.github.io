@@ -10,6 +10,6 @@ class ExpectExceptionMod implements Modification
         if ($argument === null) {
             throw new \InvalidArgumentException("ExpectExceptionMod: Exception class name is required");
         }
-        $snippet->setException($type, $argument);
+        $snippet->setExceptions($type, $argument);
     }
 }

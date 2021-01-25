@@ -26,7 +26,7 @@ class CodeTabsDataProvider
     public function getSnippetsIterator(): Iterator
     {
         return new CompositeIterator(new LazyMapperIterator(new FilesIterator($this->basePath), function (string $filename) {
-            $parsed = (new MdxFacade(new MarkdownSnippetParser(new MdxParser(new Mods($this->basePath)))))->parse(file_get_contents($filename));
+            $parsed = (new MdxFacade(new MarkdownSnippetParser(new MdxParser(new Mods($this->basePath)))))->parse($filename, file_get_contents($filename));
             return new KeyMapperIterator(new ArrayIterator($parsed), fn(int $key) => basename($filename) . " #$key");
         }), false);
     }

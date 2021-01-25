@@ -14,13 +14,13 @@ class SnippetTest extends TestCase
     public function shouldReturnEmptySnippet()
     {
         // given
-        $snippet = new Snippet(['Foo', 'Bar', 'Lorem']);
+        $snippet = new Snippet('', ['Foo', 'Bar', 'Lorem']);
 
         // when
         $result = $snippet->toDataProviderArray();
 
         // then
-        $this->assertEquals([null, null, null], $result);
+        $this->assertEquals([null, null, null, null, ''], $result);
     }
 
     /**
@@ -32,7 +32,7 @@ class SnippetTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         // when
-        new Snippet([]);
+        new Snippet('', []);
     }
 
     /**
@@ -41,7 +41,7 @@ class SnippetTest extends TestCase
     public function shouldReset()
     {
         // given
-        $snippet = new Snippet(['Foo', 'Bar']);
+        $snippet = new Snippet('', ['Foo', 'Bar']);
 
         // when
         $snippet->set('Foo', ['first']);
@@ -50,7 +50,7 @@ class SnippetTest extends TestCase
         $snippet->set('Bar', ['fourth']);
 
         // then
-        $this->assertEquals([['third'], ['fourth']], $snippet->toDataProviderArray());
+        $this->assertEquals([['third'], ['fourth'], null, ''], $snippet->toDataProviderArray());
     }
 
     /**
@@ -59,7 +59,7 @@ class SnippetTest extends TestCase
     public function shouldReset_throw_forInvalidConsumer()
     {
         // given
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // then
         $this->expectException(LogicException::class);
@@ -74,7 +74,7 @@ class SnippetTest extends TestCase
     public function shouldGet()
     {
         // given
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
         $snippet->set('Foo', ['one', 'two']);
 
         // when
@@ -90,7 +90,7 @@ class SnippetTest extends TestCase
     public function shouldGet_throw_forInvalidConsumer()
     {
         // given
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // then
         $this->expectException(LogicException::class);
@@ -105,7 +105,7 @@ class SnippetTest extends TestCase
     public function shouldGet_throw_forNotSetConsumer()
     {
         // given
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // then
         $this->expectException(LogicException::class);
@@ -120,7 +120,7 @@ class SnippetTest extends TestCase
     public function shouldHaveConsumer()
     {
         // given
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // when
         $has = $snippet->exists('Foo');
@@ -135,7 +135,7 @@ class SnippetTest extends TestCase
     public function shouldNotHaveConsumer()
     {
         // given
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // when
         $has = $snippet->exists('Bar');
@@ -150,7 +150,7 @@ class SnippetTest extends TestCase
     public function testIsConsumerEmpty()
     {
         // given
-        $snippet = new Snippet(['not set', 'set']);
+        $snippet = new Snippet('', ['not set', 'set']);
         $snippet->set('set', []);
 
         // when
@@ -168,12 +168,27 @@ class SnippetTest extends TestCase
     public function shouldIsConsumerEmpty_throw_forInvalidConsumer()
     {
         // given
-        $snippet = new Snippet(['Foo']);
+        $snippet = new Snippet('', ['Foo']);
 
         // then
         $this->expectException(LogicException::class);
 
         // when
         $snippet->isConsumerSet('Bar');
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnFilename()
+    {
+        // given
+        $snippet = new Snippet('filename.js', ['Foo']);
+
+        // when
+        $dataProvider = $snippet->toDataProviderArray();
+
+        // then
+        $this->assertSame([null, null, 'filename.js'], $dataProvider);
     }
 }
