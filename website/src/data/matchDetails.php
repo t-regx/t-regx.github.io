@@ -1,8 +1,8 @@
 <?php
 
-use TRegx\CleanRegex\Match\Details\Match;
+use TRegx\CleanRegex\Match\Details\Detail;
 
-pattern('https?://(\w+\.\w+)')->match($string)->first(function (Match $match) {
+pattern('https?://(\w+\.\w+)')->match($string)->first(function (Detail $match) {
     // cast to string
     // highlight-next-line
     echo "I matched: $match";
