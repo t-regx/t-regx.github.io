@@ -1,9 +1,11 @@
 <?php
 
+use TRegx\CleanRegex\Pattern;
+
 $message = "Extensions: .mp3, .mp4, .jpg, jpeg, png, gif";
 
 // highlight-next-line
-pattern('\b\.?(?<ext>\w{3,4})\b')->replace($message)
+Pattern::of('\b\.?(?<ext>\w{3,4})\b')->replace($message)
     ->all()
     ->by()
     ->group('ext')

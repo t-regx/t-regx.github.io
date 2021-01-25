@@ -2,6 +2,7 @@ import React from "react";
 import {PhpCode} from "../components/Quiz/components/cosmethics";
 import matchDetails from "./matchDetails.php";
 import functionalProgramming from "./functionalProgramming.php";
+import preparedPatterns from "./preparedPatterns.php";
 import {Markdown} from "../components/Utils/code";
 
 const tryItOnline = "https://repl.it/github/T-Regx/fiddle";
@@ -76,6 +77,11 @@ composer require rawr/t-regx
       body: <>
         <p>
           <Markdown>
+            You can use either `pattern()` or `Pattern::of()`, whatever you prefer.
+          </Markdown>
+        </p>
+        <p>
+          <Markdown>
             T-Regx utilizes chainable, functional programming with methods like `filter()`, [`map()`](docs/match-map),
             [`flatMap()`](docs/match-map#flatmap), [`first()`](docs/match-first)/[`findFirst()`](docs/match-find-first),
             etc.
@@ -90,8 +96,30 @@ composer require rawr/t-regx
       </>
     },
   ],
-  empty: [
-    {},
-    {},
-  ],
+  preparedPatterns: [
+    {
+      title: 'Prepared patterns',
+      body: <>
+        <p>
+          <Markdown>
+            With [PreparedPatterns](docs/handling-user-input) you can safely build your regular expressions,
+            without worrying about it becoming malformed or dangerous.
+          </Markdown>
+        </p>
+        <p>
+          <Markdown>
+            T-Regx provides a wide variety of prepared patterns, for different needs:
+            `Pattern::prepare()`, `Pattern::inject()`, `Pattern::bind()`, `Pattern::compose()`,
+            `Pattern::format()` and `Pattern::template()`.
+          </Markdown>
+        </p>
+        <p>
+          <Markdown>
+            For constant patterns use `Pattern::of()` or simply `pattern()`.
+          </Markdown>
+        </p>
+      </>
+    },
+    {body: <PhpCode>{preparedPatterns}</PhpCode>},
+  ]
 };

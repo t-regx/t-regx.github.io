@@ -31,7 +31,7 @@ export default function Index() {
       <MatchDetails/>
       <Features/>
       <FunctionalProgramming/>
-      <Empty/>
+      <PreparedPatterns/>
       <CommentsSection/>
     </div>
   </Layout>;
@@ -110,10 +110,12 @@ const Installation = () => (
 
 const MatchDetails = () => <GridBlock columns={sections.matchDetails} lightBackground/>;
 const Features = () => <GridBlock columns={sections.features} layout="fourColumn"/>;
-const Empty = () => <GridBlock columns={sections.empty}/>;
 
 const FunctionalProgramming = () =>
   <GridBlock darkBackground scrollableBackground columns={sections.functionalProgramming}/>;
+
+const PreparedPatterns = () =>
+  <GridBlock columns={sections.preparedPatterns}/>;
 
 const CommentsSection = () => <div className="container">
   <DisqusThread
