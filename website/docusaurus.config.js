@@ -4,7 +4,7 @@ const changeLogUrl = `${mainRepoUrl}/blob/develop/ChangeLog.md`;
 
 module.exports = {
   title: 'T-Regx',
-  tagline: 'Programmer-oriented Regular\nExpressions library for PHP',
+  tagline: 'Programmer-oriented Regular\nExpressions wrapper library for PHP',
   url: 'https://t-regx.com',
   baseUrl: '/',
   favicon: 'img/favicon.ico',

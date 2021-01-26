@@ -28,10 +28,11 @@ export default function Index() {
         <QuizOpeningSlide/>
       </GridBlock>
       <Installation/>
-      <MatchDetails/>
-      <Features/>
-      <FunctionalProgramming/>
-      <PreparedPatterns/>
+      <GridBlock columns={sections.matchDetails} lightBackground/>
+      <GridBlock columns={sections.preparedPatterns} />
+      <GridBlock columns={sections.functionalProgramming} darkBackground scrollableBackground/>
+      <GridBlock columns={sections.tryOnline} />
+      <GridBlock columns={sections.features} layout="fourColumn" lightBackground/>
       <CommentsSection/>
     </div>
   </Layout>;
@@ -107,15 +108,6 @@ const Installation = () => (
     <BadgesSection/>
   </GridBlock>
 );
-
-const MatchDetails = () => <GridBlock columns={sections.matchDetails} lightBackground/>;
-const Features = () => <GridBlock columns={sections.features} layout="fourColumn"/>;
-
-const FunctionalProgramming = () =>
-  <GridBlock darkBackground scrollableBackground columns={sections.functionalProgramming}/>;
-
-const PreparedPatterns = () =>
-  <GridBlock columns={sections.preparedPatterns}/>;
 
 const CommentsSection = () => <div className="container">
   <DisqusThread

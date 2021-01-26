@@ -1,7 +1,9 @@
-import classNames from "classnames";
-import styles from "../pages/styles.module.scss";
-import {Markdown} from "./Utils/code";
 import React from "react";
+import classNames from "classnames";
+
+import {Markdown} from "./Utils/code";
+
+import styles from "../pages/styles.module.scss";
 
 export default props => <div className={classNames('padding-vert--xl', {
   [styles.scrollBackground]: props.scrollableBackground,
@@ -13,7 +15,7 @@ export default props => <div className={classNames('padding-vert--xl', {
     {props.children}
     {props.columns && <div className="row">
       {props.columns.map((column, index) => (
-        <div key={index} className="col">
+        <div key={index} className={column.col ? `col col--${column.col}` : "col"}>
           {column.title && <h2>{column.title}</h2>}
 
           {column.body || column.content && <div>

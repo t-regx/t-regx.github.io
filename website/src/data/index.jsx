@@ -4,19 +4,14 @@ import matchDetails from "./matchDetails.php";
 import functionalProgramming from "./functionalProgramming.php";
 import preparedPatterns from "./preparedPatterns.php";
 import {Markdown} from "../components/Utils/code";
+import login from "../../static/img/docs/replit.login.png";
+import example from "../../static/img/docs/replit.example.png";
+import phpstormTooltip from "../../static/img/pages/phpstorm.tooltip.png";
 
 const tryItOnline = "https://repl.it/github/T-Regx/fiddle";
+import weLoveStatic from "../../static/img/t.regx.static.png";
 
 export default {
-  automaticDelimiters: [
-    {
-      title: 'Automatic delimiters',
-      content:
-        "You no longer need to delimiter your patterns. [T-Regx' smart delimiterer](docs/delimiters) will add one of many" +
-        " delimiters for you, if they're not already present.",
-    },
-    {},
-  ],
   installation: [
     {
       title: '',
@@ -32,6 +27,9 @@ composer require rawr/t-regx
     {},
   ],
   matchDetails: [
+    {
+      body: <PhpCode>{matchDetails}</PhpCode>,
+    },
     {
       title: 'Match details',
       body: <>
@@ -51,23 +49,19 @@ composer require rawr/t-regx
         </p>
       </>,
     },
-    {
-      body: <PhpCode>{matchDetails}</PhpCode>,
-    },
   ],
   features: [
     {
       title: 'Written with clean design in mind',
-      content:
-        '`No Reflection used`, `No (...varargs)`, `No (boolean arguments, true)`, `(No flags, 1)`',
+      body: <>
+        <p>T-Regx utilises well designed interfaces, so your IDE will aid you as you type! We follow real SOLID and OOP.</p>
+        <img src={weLoveStatic} style={{width: '75%'}} alt="We love static typing and IDE suggestions"/>
+      </>,
+      col: 5,
     },
     {
-      title: 'Based on exceptions!',
-      body: <Markdown>
-        If any error occurs while using regexp (invalid pattern, malformed UTF8, backtrack limit, nonexistent group,
-        anything!) T-Regx throws an exception, contrary to vanilla-PHP regexp, which use `preg_last_error()` or
-        warnings, which can't be `try`/`catch`ed.
-      </Markdown>,
+      body: <img src={phpstormTooltip} alt="Written with clean design in mind"/>,
+      col: 7
     },
   ],
   functionalProgramming: [
@@ -121,5 +115,27 @@ composer require rawr/t-regx
       </>
     },
     {body: <PhpCode>{preparedPatterns}</PhpCode>},
+  ],
+  tryOnline: [
+    {
+      title: 'Try T-Regx online',
+      body: <>
+        <p>Before you install, you can try T-Regx online, right in your browser.</p>
+        <p>
+          You can use repl.it using your GitHub account, Facebook account or Google account -
+          <a href={tryItOnline}>T-Regx on repl.it</a>
+        </p>
+        <a href={tryItOnline}>
+          <div style={{padding: '10px', borderRadius: '15px', backgroundColor: 'white', display: 'flex', justifyContent: 'center'}}>
+            <img src={login} alt="Repl.it login"/>
+          </div>
+        </a>
+      </>
+    },
+    {
+      body: <a href={tryItOnline}>
+        <img src={example} alt="T-Regx online on Repl.it"/>
+      </a>
+    },
   ]
 };
