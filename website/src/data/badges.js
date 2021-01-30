@@ -59,7 +59,7 @@ export default {
     },
     {
       title: 'PHP Version',
-      src: 'https://img.shields.io/badge/PHP-8.0-yellow.svg',
+      src: 'https://img.shields.io/badge/PHP-8.0-blue.svg',
       href: 'https://travis-ci.org/T-Regx/T-Regx',
     },
     {
