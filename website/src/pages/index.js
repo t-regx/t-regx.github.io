@@ -29,6 +29,7 @@ export default function Index() {
       </GridBlock>
       <Installation/>
       <GridBlock columns={sections.matchDetails} lightBackground/>
+      <GridBlock columns={sections.replaceDetails} lightBackground/>
       <GridBlock columns={sections.preparedPatterns} />
       <GridBlock columns={sections.functionalProgramming} darkBackground scrollableBackground/>
       <GridBlock columns={sections.tryOnline} />

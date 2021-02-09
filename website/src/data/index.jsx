@@ -1,15 +1,19 @@
 import React from "react";
+
+import Link from "../components/Link";
 import {PhpCode} from "../components/Quiz/components/cosmethics";
-import matchDetails from "./matchDetails.php";
-import functionalProgramming from "./functionalProgramming.php";
-import preparedPatterns from "./preparedPatterns.php";
 import {Markdown} from "../components/Utils/code";
+
 import login from "../../static/img/docs/replit.login.png";
 import example from "../../static/img/docs/replit.example.png";
-import phpstormTooltip from "../../static/img/pages/phpstorm.tooltip.png";
-
-const tryItOnline = "https://repl.it/github/T-Regx/fiddle";
 import weLoveStatic from "../../static/img/t.regx.static.png";
+
+import matchDetails from "./matchDetails.php";
+import {tryItOnline} from "./links";
+import replaceDetails from "./replaceDetails.php";
+import phpstormTooltip from "../../static/img/pages/phpstorm.tooltip.png";
+import preparedPatterns from "./preparedPatterns.php";
+import functionalProgramming from "./functionalProgramming.php";
 
 export default {
   installation: [
@@ -34,18 +38,39 @@ composer require rawr/t-regx
       title: 'Match details',
       body: <>
         <p>
-          <Markdown>
-            With [`pattern()->match()`](docs/match) and [`pattern()->replace()`](docs/replace), it's trivial to
-            retrieve, iterate, map and filter matches with callbacks and a detailed
-            [`Match` object](docs/match-details).
-          </Markdown>
+          With <Link>pattern()->match()</Link> and <Link>pattern()->replace()</Link>, it's trivial to
+          retrieve, iterate, map and filter matches with callbacks and a detailed <Link>Detail</Link>.
         </p>
         <p>
-          <Markdown>
-            Checkout the documentation about [`Match` object](docs/match-details) with all
-            [`Match`](docs/match-details) methods. You can also [try it online]({tryItOnline}) in 10 seconds -
-            there are examples as well as [sandbox]({tryItOnline}) for your own tries.
-          </Markdown>
+          It doesn't matter whether the pattern was constructed
+          with <Link>Pattern::of()</Link>, <Link>pattern()</Link>, <Link>Pattern::pcre()</Link>, <Link>Pattern::inject()</Link> or <Link>Pattern::bind()</Link>.
+          The <Link>Detail</Link> is always the same.
+        </p>
+        <p>
+          Checkout the documentation about <Link>Detail</Link>, which describes every <Link>Detail</Link> method.
+        </p>
+      </>,
+    },
+  ],
+  replaceDetails: [
+    {
+      body: <PhpCode>{replaceDetails}</PhpCode>,
+    },
+    {
+      title: 'Uniform API for matching and replacing',
+      body: <>
+        <p>
+          <Link>pattern()->match()</Link> and <Link>pattern()->replace()</Link> callbacks
+          receive the same interface <Link>Detail</Link>.
+        </p>
+        <p>
+          <Link>Detail</Link> used for matching and replacing has exactly the same methods and
+          returns the same values for given <code>$pattern</code> and <code>$subject</code>.
+        </p>
+
+        <p>
+          You can also <Link>try it online</Link> in 10 seconds -
+          there are examples in the as <Link>sandbox</Link> for your own tries.
         </p>
       </>,
     },
@@ -70,9 +95,7 @@ composer require rawr/t-regx
       title: 'Functional programming',
       body: <>
         <p>
-          <Markdown>
-            You can use either `pattern()` or `Pattern::of()`, whatever you prefer.
-          </Markdown>
+          You can use either <Link>pattern()</Link> or <Link>pattern()</Link>, or <Link>Prepared Patterns</Link>.
         </p>
         <p>
           <Markdown>
@@ -95,10 +118,8 @@ composer require rawr/t-regx
       title: 'Prepared patterns',
       body: <>
         <p>
-          <Markdown>
-            With [PreparedPatterns](docs/handling-user-input) you can safely build your regular expressions,
-            without worrying about it becoming malformed or dangerous.
-          </Markdown>
+          With <Link>Prepared Patterns</Link> you can safely build your regular expressions,
+          without worrying about it becoming malformed or dangerous.
         </p>
         <p>
           <Markdown>
@@ -107,11 +128,7 @@ composer require rawr/t-regx
             `Pattern::format()` and `Pattern::template()`.
           </Markdown>
         </p>
-        <p>
-          <Markdown>
-            For constant patterns use `Pattern::of()` or simply `pattern()`.
-          </Markdown>
-        </p>
+        <p>For constant patterns use <Link>Pattern::of()</Link> or simply <Link>pattern()</Link>.</p>
       </>
     },
     {body: <PhpCode>{preparedPatterns}</PhpCode>},
@@ -123,7 +140,7 @@ composer require rawr/t-regx
         <p>Before you install, you can try T-Regx online, right in your browser.</p>
         <p>
           You can use repl.it using your GitHub account, Facebook account or Google account -
-          <a href={tryItOnline}>T-Regx on repl.it</a>
+          <Link>T-Regx on repl.it</Link>
         </p>
         <a href={tryItOnline}>
           <div style={{padding: '10px', borderRadius: '15px', backgroundColor: 'white', display: 'flex', justifyContent: 'center'}}>
