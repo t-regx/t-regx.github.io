@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import React, {FunctionComponent, ReactNode} from "react";
 import CodeBlock from '@theme/CodeBlock';
 import {joinToString} from "../../Utils/code";
 
@@ -9,12 +9,10 @@ export function stripPhp(code: string | string[]): string {
   return code.replace(/^<\?php\s+(use\s+[\w\\]+;\s+)*/, '').trim();
 }
 
-export function letter(index: number): string {
-  return String.fromCharCode(index + 65);
-}
+export const letter = (index: number): string => String.fromCharCode(index + 65);
 
 interface CodeProperties {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export const Code: FunctionComponent<CodeProperties> = ({children}: CodeProperties) =>
