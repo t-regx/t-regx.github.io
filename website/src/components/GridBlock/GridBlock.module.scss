@@ -1,0 +1,38 @@
+.gridBlock {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
+  &.lightBackground {
+    background: #f7f7f7;
+
+    + .lightBackground {
+      padding-top: 0;
+    }
+
+    html[data-theme='dark'] & {
+      background: #24252b;
+    }
+  }
+
+  &.darkBackground {
+    color: white;
+
+    a,
+    code {
+      color: #d6b3b8;
+    }
+  }
+
+  &.scrollBackground {
+    background: #0d467d url('/img/scroll.background.jpg') fixed;
+    background-size: cover;
+
+    code {
+      background-color: rgba(27, 31, 35, 0.55);
+    }
+
+    html[data-theme='dark'] & {
+      box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.45);
+    }
+  }
+}

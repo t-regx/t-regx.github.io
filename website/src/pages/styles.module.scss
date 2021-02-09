@@ -60,33 +60,3 @@
   align-items: center;
   height: 100%;
 }
-
-.scrollBackground {
-  background: #0d467d url('/img/scroll.background.jpg') fixed;
-  background-size: cover;
-}
-
-html[data-theme='dark'] .scrollBackground {
-  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.45);
-}
-
-.scrollBackground code {
-  background-color: rgba(27, 31, 35, 0.55);
-}
-
-.lightBackground {
-  background: #f7f7f7;
-}
-
-html[data-theme='dark'] .lightBackground {
-  background: #24252b;
-}
-
-.darkBackground {
-  color: white;
-
-  a,
-  code {
-    color: #d6b3b8;
-  }
-}

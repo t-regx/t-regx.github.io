@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
 
-import {Markdown} from "./Utils/code";
+import {Markdown} from "../Utils/code";
 
-import styles from "../pages/styles.module.scss";
+import styles from "./GridBlock.module.scss";
 
-export default props => <div className={classNames('padding-vert--xl', {
+export default props => <div className={classNames(styles.gridBlock, {
   [styles.scrollBackground]: props.scrollableBackground,
   [styles.darkBackground]: props.darkBackground,
   [styles.lightBackground]: props.lightBackground,

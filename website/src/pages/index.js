@@ -10,7 +10,7 @@ import phpQuestions from "../components/QuizPhp/questions";
 import {fiddleUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
 import MountingQuiz from "../components/MountingQuiz";
-import GridBlock from "../components/GridBlock";
+import GridBlock from "../components/GridBlock/GridBlock";
 
 import sections from '../data';
 import styles from './styles.module.scss';
