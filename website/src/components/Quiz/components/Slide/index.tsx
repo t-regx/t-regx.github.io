@@ -47,7 +47,7 @@ export default ({index, body, children, selfExplanatory, onClick, onHover}: Slid
           onClick={() => handleAnswer(index, correct)}
           onMouseEnter={() => onHover(hoverCode)}
           onMouseLeave={() => onHover(null)}>
-          <Answer index={index} markdown={markdown} code={code} children={children}/>
+          <Answer key="answer" index={index} markdown={markdown} code={code} children={children}/>
         </AnswerListItem>
       )}
     </ul>
@@ -84,7 +84,7 @@ const AnswerListItem = (props: AnswerListItemInterface) => {
         [styles.hasHelp]: hasHelp,
       })}>
       {children}
-      {help && <Help help={help} markdown={markdownHelp}/>}
+      {help && <Help key="help" help={help} markdown={markdownHelp}/>}
     </div>
   </li>
 };
