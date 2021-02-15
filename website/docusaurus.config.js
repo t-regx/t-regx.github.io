@@ -12,7 +12,7 @@ module.exports = {
   projectName: 't-regx.github.io',
   themeConfig: {
     sidebarCollapsible: false,
-    image: '/img/docusaurus.png',
+    image: '/img/t.regx.png',
     algolia: {
       apiKey: '6d3eef6432e87213c7f031ee898b73a1',
       indexName: 't-regx',
