@@ -1,18 +1,23 @@
 import React from 'react';
 import classNames from 'classnames';
+
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 
-import {AutomaticSplashLogo, BadgesSection, DisqusThread, SponsorButton, StarButton} from '../components';
+import {SponsorButton, StarButton} from "../components/GithubButton";
+import AutomaticSplashLogo from "../components/AutomaticSplashLogo";
+import BadgesSection from "../components/BadgesSection";
+import DisqusThread from "../components/DisqusThread/DisqusThread";
 import phpQuestions from "../components/QuizPhp/questions";
-import {fiddleUrl} from "../../consts";
-import {Markdown} from "../components/Utils/code";
 import MountingQuiz from "../components/MountingQuiz/MountingQuiz";
+import {Markdown} from "../components/Utils/code";
 import GridBlock from "../components/GridBlock/GridBlock";
 
+import {fiddleUrl} from "../../consts";
 import sections from '../data';
+
 import styles from './styles.module.scss';
 
 export default function Index() {

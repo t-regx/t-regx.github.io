@@ -1,6 +1,6 @@
 import React from "react";
 
-import Link from "../components/Link";
+import Link from "../components/Link/Link";
 import {PhpCode} from "../components/Quiz/components/cosmethics";
 import {Markdown} from "../components/Utils/code";
 

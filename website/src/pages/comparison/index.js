@@ -2,7 +2,8 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import Markdown from 'markdown-to-jsx';
 
-import {ComparisonTable, DisqusThread} from '../../components';
+import ComparisonTable from '../../components/ComparisonTable/index';
+import DisqusThread from '../../components/DisqusThread/DisqusThread';
 
 export default function () {
   return <Layout>
