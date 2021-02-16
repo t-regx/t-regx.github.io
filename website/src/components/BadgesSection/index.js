@@ -2,13 +2,7 @@ import React from 'react';
 
 import badges from '../../data/badges';
 import styles from './styles.module.css';
-import {StarButton} from "../index";
-
-const Badge = props => (
-  <a href={props.href} title={props.title}>
-    <img src={props.src} alt={props.title}/>
-  </a>
-);
+import StarButton from "../Github/StarButton";
 
 export default function BadgesSection() {
   const {upper: upperBadges, lower: lowerBadges} = badges;
@@ -29,3 +23,9 @@ export default function BadgesSection() {
     </div>
   );
 };
+
+const Badge = ({title, href, src}) => (
+  <a href={href} title={title}>
+    <img src={src} alt={title}/>
+  </a>
+);

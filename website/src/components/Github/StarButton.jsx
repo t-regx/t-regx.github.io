@@ -1,7 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-export function StarButton() {
+export default function StarButton() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
 
@@ -16,15 +16,4 @@ export function StarButton() {
     aria-label="Star this project on GitHub">
     T-Regx
   </a>;
-}
-
-export function SponsorButton() {
-  return <div style={{height: '32px'}}>
-    <iframe
-      src="https://github.com/sponsors/Danon/button"
-      title="Sponsor Danon"
-      height="35"
-      width="116"
-      style={{"border": 0}}/>
-  </div>;
 }
