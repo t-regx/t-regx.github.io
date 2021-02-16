@@ -9,7 +9,7 @@ import {AutomaticSplashLogo, BadgesSection, DisqusThread, SponsorButton, StarBut
 import phpQuestions from "../components/QuizPhp/questions";
 import {fiddleUrl} from "../../consts";
 import {Markdown} from "../components/Utils/code";
-import MountingQuiz from "../components/MountingQuiz";
+import MountingQuiz from "../components/MountingQuiz/MountingQuiz";
 import GridBlock from "../components/GridBlock/GridBlock";
 
 import sections from '../data';
