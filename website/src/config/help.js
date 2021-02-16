@@ -1,4 +1,4 @@
-const issueLink = 'https://github.com/T-Regx/T-Regx/issues/new/choose';
+import {issueLink} from "./links";
 
 export default [
   {
