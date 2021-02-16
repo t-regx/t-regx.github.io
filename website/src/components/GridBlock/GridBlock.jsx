@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import {Markdown} from "../Utils/code";
+import Markdown from "../Markdown/Markdown";
 
 import styles from "./GridBlock.module.scss";
 

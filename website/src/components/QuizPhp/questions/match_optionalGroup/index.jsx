@@ -11,7 +11,7 @@ import codeHoverNull from "./codeHoverNull.php";
 import codeHoverEmpty from "./codeHoverEmpty.php";
 import codeHoverMissing from "./codeHoverMissing.php";
 import codeHoverNone from "./codeHoverNone.txt";
-import {Markdown} from "../../../Utils/code";
+import Markdown from "../../../Markdown/Markdown";
 import {PhpCode} from "../../../Quiz/components/cosmethics";
 
 const helpMissing = [

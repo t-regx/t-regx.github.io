@@ -1,7 +1,7 @@
 import React from "react";
 
 import {Answer, Question} from "../../../Quiz";
-import {Markdown} from "../../../Utils/code";
+import Markdown from "../../../Markdown/Markdown";
 
 const help = <Markdown>
   There isn't a function to check if `$subject` matches the pattern.

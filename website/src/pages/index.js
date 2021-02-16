@@ -6,14 +6,15 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 
-import {SponsorButton, StarButton} from "../components/GithubButton";
 import AutomaticSplashLogo from "../components/AutomaticSplashLogo";
+import SponsorButton from "../components/Github/SponsorButton";
 import BadgesSection from "../components/BadgesSection";
 import DisqusThread from "../components/DisqusThread/DisqusThread";
 import phpQuestions from "../components/QuizPhp/questions";
 import MountingQuiz from "../components/MountingQuiz/MountingQuiz";
-import {Markdown} from "../components/Utils/code";
+import StarButton from "../components/Github/StarButton";
 import GridBlock from "../components/GridBlock/GridBlock";
+import Markdown from "../components/Markdown/Markdown";
 
 import {fiddleUrl} from "../../consts";
 import sections from '../data';
@@ -35,9 +36,9 @@ export default function Index() {
       <Installation/>
       <GridBlock columns={sections.matchDetails} lightBackground/>
       <GridBlock columns={sections.replaceDetails} lightBackground/>
-      <GridBlock columns={sections.preparedPatterns} />
+      <GridBlock columns={sections.preparedPatterns}/>
       <GridBlock columns={sections.functionalProgramming} darkBackground scrollableBackground/>
-      <GridBlock columns={sections.tryOnline} />
+      <GridBlock columns={sections.tryOnline}/>
       <GridBlock columns={sections.features} layout="fourColumn" lightBackground/>
       <CommentsSection/>
     </div>

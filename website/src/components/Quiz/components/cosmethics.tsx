@@ -1,6 +1,5 @@
 import React, {FunctionComponent, ReactNode} from "react";
 import CodeBlock from '@theme/CodeBlock';
-import {joinToString} from "../../Utils/code";
 
 export function stripPhp(code: string | string[]): string {
   if (Array.isArray(code)) {
@@ -24,3 +23,14 @@ interface PhpProperties {
 
 export const PhpCode: FunctionComponent<PhpProperties> = ({children}: PhpProperties) =>
   <Code>{stripPhp(children)}</Code>;
+
+function joinToString(code) {
+  if (Array.isArray(code)) {
+    return code.join("");
+  }
+  if (typeof code === "string") {
+    return code;
+  }
+  console.error("code is not a string", code);
+  throw "code in not a string";
+}

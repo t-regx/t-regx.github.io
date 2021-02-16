@@ -1,7 +1,7 @@
 import React, {FunctionComponent, ReactNode, useState} from "react";
 import classNames from 'classnames';
 
-import {Markdown} from "../../../Utils/code";
+import Markdown from "../../../Markdown/Markdown";
 import {mapAnswers} from "../mapper";
 import {letter, PhpCode} from "../cosmethics";
 

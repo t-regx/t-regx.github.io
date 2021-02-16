@@ -1,8 +1,8 @@
 import React from "react";
 
 import Link from "../components/Link/Link";
+import Markdown from "../components/Markdown/Markdown";
 import {PhpCode} from "../components/Quiz/components/cosmethics";
-import {Markdown} from "../components/Utils/code";
 
 import login from "../../static/img/docs/replit.login.png";
 import example from "../../static/img/docs/replit.example.png";

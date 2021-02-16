@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {Markdown} from "../../Utils/code";
+import Markdown from "../../Markdown/Markdown";
 
 import Slide from "./Slide";
 import Slider from "./Slider";
