@@ -1,10 +1,11 @@
 import React from 'react';
-import Layout from '@theme/Layout';
-import Markdown from 'markdown-to-jsx';
 import classNames from 'classnames';
+import Markdown from 'markdown-to-jsx';
+
+import Layout from '@theme/Layout';
 
 import DisqusThread from '../../components/DisqusThread/DisqusThread';
-import supportLinks from '../../data/help.js';
+import supportLinks from '../../config/help';
 
 export default function () {
   return <Layout>
