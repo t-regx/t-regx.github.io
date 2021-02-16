@@ -2,7 +2,7 @@ import React from "react";
 
 import Link from "@docusaurus/Link";
 
-import {tryItOnline} from '../../data/links';
+import {tryItOnline} from '../../config/links';
 
 export default ({to, children}: LinkProperties) => {
   if (to) {
