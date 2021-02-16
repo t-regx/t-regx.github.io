@@ -16,8 +16,8 @@ import StarButton from "../components/Github/StarButton";
 import GridBlock from "../components/GridBlock/GridBlock";
 import Markdown from "../components/Markdown/Markdown";
 
+import sections from '../config/sections';
 import {fiddleUrl} from "../../consts";
-import sections from '../data';
 
 import styles from './styles.module.scss';
 

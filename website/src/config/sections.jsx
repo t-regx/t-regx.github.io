@@ -8,13 +8,13 @@ import login from "../../static/img/docs/replit.login.png";
 import example from "../../static/img/docs/replit.example.png";
 import weLoveStatic from "../../static/img/t.regx.static.png";
 
-import {tryItOnline} from "../config/links";
+import {tryItOnline} from "./links";
 
-import matchDetails from "./matchDetails.php";
-import replaceDetails from "./replaceDetails.php";
+import matchDetails from "../data/matchDetails.php";
+import replaceDetails from "../data/replaceDetails.php";
 import phpstormTooltip from "../../static/img/pages/phpstorm.tooltip.png";
-import preparedPatterns from "./preparedPatterns.php";
-import functionalProgramming from "./functionalProgramming.php";
+import preparedPatterns from "../data/preparedPatterns.php";
+import functionalProgramming from "../data/functionalProgramming.php";
 
 export default {
   installation: [
