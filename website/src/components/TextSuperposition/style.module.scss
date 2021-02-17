@@ -1,0 +1,28 @@
+.parent {
+  display: inline-block;
+  overflow: hidden;
+  height: 26px;
+  vertical-align: bottom;
+}
+
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: inherit;
+  transform: translate(0);
+  transition: transform .5s;
+
+  /** For some reason, it prevents the jumpy animations */
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  span {
+    line-height: 26px;
+    height: 26px;
+    align-self: center;
+  }
+}
