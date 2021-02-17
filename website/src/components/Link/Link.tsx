@@ -6,7 +6,7 @@ import {tryItOnline} from '../../config/links';
 
 export default ({to, children}: LinkProperties) => {
   if (to) {
-    return <Link to={to}><code>{children}</code></Link>
+    return <Link to={to}>{children}</Link>
   }
   const {link, content} = linkAndText(children);
   if (link) {
@@ -50,6 +50,7 @@ const textLinks = {
   'T-Regx on repl.it': tryItOnline,
   'prepared patterns': 'docs/handling-user-input',
   'Prepared Patterns': 'docs/handling-user-input',
+  'Blog': 'blog',
 };
 
 interface LinkProperties {
