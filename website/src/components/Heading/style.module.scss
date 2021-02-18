@@ -1,0 +1,10 @@
+.heading, .heading:hover {
+  > :global(a.hash-link) {
+    opacity: 0.3;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
