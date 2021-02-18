@@ -2,7 +2,16 @@ import React from "react";
 
 import Link from "@docusaurus/Link";
 
-import {tryItOnline} from '../../config/links';
+import {
+  displayErrors,
+  errorReporting,
+  pregConstants,
+  pregLastError,
+  tryItOnline,
+  stdClass,
+  phpToString,
+  pregMatchAll
+} from '../../config/links';
 
 export default ({to, children}: LinkProperties) => {
   if (to) {
@@ -35,21 +44,30 @@ const elementLinks: {[key: string]: {content: string, link: string}} = {
 };
 
 const codeLinks = {
-  'pattern()': 'docs/introduction-clean#entry-points',
-  'Pattern::of()': 'docs/introduction-clean#entry-points',
-  'Pattern::pcre()': 'docs/introduction-clean#entry-points',
-  'Pattern::inject()': 'docs/handling-user-input',
-  'Pattern::bind()': 'docs/handling-user-input',
+  'pattern()': '/docs/introduction-clean#entry-points',
+  'Pattern::of()': '/docs/introduction-clean#entry-points',
+  'Pattern::pcre()': '/docs/introduction-clean#entry-points',
+  'Pattern::inject()': '/docs/handling-user-input',
+  'Pattern::bind()': '/docs/handling-user-input',
 
-  'Detail': 'docs/match-details',
+  'Detail': '/docs/match-details',
+
+  'preg_last_error()': pregLastError,
+  'preg_match_all()': pregMatchAll,
+  'error_reporting()': errorReporting,
+  '"display_errors"': displayErrors,
+  'PREG_NO_ERROR': pregConstants,
+  'PREG_OFFSET_CAPTURE': pregConstants,
+  stdClass,
+  '__toString()': phpToString,
 };
 
 const textLinks = {
   'try it online': tryItOnline,
   'sandbox': tryItOnline,
   'T-Regx on repl.it': tryItOnline,
-  'prepared patterns': 'docs/handling-user-input',
-  'Prepared Patterns': 'docs/handling-user-input',
+  'prepared patterns': '/docs/handling-user-input',
+  'Prepared Patterns': '/docs/handling-user-input',
   'Blog': 'blog',
 };
 
