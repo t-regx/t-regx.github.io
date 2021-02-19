@@ -1,4 +1,4 @@
-name: npm
+name: yarn
 
 on:
   push:
@@ -15,10 +15,10 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         working-directory: ./website
-        run: npm ci
+        run: yarn install
       - name: Test Build
         working-directory: ./website
-        run: npm run build
+        run: yarn build
 
   Release:
     if: github.event_name != 'pull_request'
@@ -45,7 +45,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./website
-        run: npm ci
+        run: yarn install
 
       - name: Deploy to GitHub Pages
         working-directory: ./website
@@ -57,4 +57,4 @@ jobs:
         run: |
           git config --global user.email "noreply@gihub.com"
           git config --global user.name "GitHub"
-          npx docusaurus deploy
+          yarn deploy
