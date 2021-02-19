@@ -11,3 +11,4 @@ website/node_modules
 
 vendor/
 composer.phar
+.phpunit.result.cache
