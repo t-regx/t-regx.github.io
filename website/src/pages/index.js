@@ -38,7 +38,7 @@ export default function Index() {
       <GridBlock columns={sections.matchDetails} lightBackground/>
       <GridBlock columns={sections.replaceDetails} lightBackground/>
       <GridBlock columns={sections.preparedPatterns}/>
-      <GridBlock columns={sections.functionalProgramming} darkBackground scrollableBackground/>
+      <GridBlock columns={sections.replaceByGroupMap} darkBackground scrollableBackground/>
       <GridBlock columns={sections.tryOnline}/>
       <GridBlock columns={sections.features} layout="fourColumn" lightBackground/>
       <CommentsSection/>

@@ -15,7 +15,7 @@ import matchDetails from "../data/matchDetails.php";
 import replaceDetails from "../data/replaceDetails.php";
 import phpstormTooltip from "../../static/img/pages/phpstorm.tooltip.png";
 import preparedPatterns from "../data/preparedPatterns.php";
-import functionalProgramming from "../data/functionalProgramming.php";
+import replaceByGroupMap from "../data/replaceByGroupMap.php";
 
 const usernamePattern = `^[a-zA-Z][a-zA-Z0-9]{1,15}$`;
 
