@@ -34,6 +34,7 @@ export default function Index() {
         <QuizOpeningSlide/>
       </GridBlock>
       <Installation/>
+      <GridBlock columns={sections.test} lightBackground/>
       <GridBlock columns={sections.matchDetails} lightBackground/>
       <GridBlock columns={sections.replaceDetails} lightBackground/>
       <GridBlock columns={sections.preparedPatterns}/>

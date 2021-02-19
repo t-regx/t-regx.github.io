@@ -10,11 +10,14 @@ import weLoveStatic from "../../static/img/t.regx.static.png";
 
 import {tryItOnline} from "./links";
 
+import test from "../data/test.php";
 import matchDetails from "../data/matchDetails.php";
 import replaceDetails from "../data/replaceDetails.php";
 import phpstormTooltip from "../../static/img/pages/phpstorm.tooltip.png";
 import preparedPatterns from "../data/preparedPatterns.php";
 import functionalProgramming from "../data/functionalProgramming.php";
+
+const usernamePattern = `^[a-zA-Z][a-zA-Z0-9]{1,15}$`;
 
 export default {
   installation: [
@@ -30,6 +33,16 @@ composer require rawr/t-regx
       `,
     },
     {},
+  ],
+  test: [
+    {body: <PhpCode>{test}</PhpCode>},
+    {
+      title: 'Match your subject against a pattern',
+      body: <>
+        <p>Use <Link>pattern()->test()</Link> to check whether your subject matches a given regular expression.</p>
+        <p> In this case whether <code>{usernamePattern}</code> matches <code>$username</code>.</p>
+      </>
+    },
   ],
   matchDetails: [
     {
@@ -90,8 +103,8 @@ composer require rawr/t-regx
       col: 7
     },
   ],
-  functionalProgramming: [
-    {body: <PhpCode>{functionalProgramming}</PhpCode>},
+  replaceByGroupMap: [
+    {body: <PhpCode>{replaceByGroupMap}</PhpCode>},
     {
       title: 'Functional programming',
       body: <>

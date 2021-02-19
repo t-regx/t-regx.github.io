@@ -49,6 +49,7 @@ const codeLinks = {
   'Pattern::pcre()': '/docs/introduction-clean#entry-points',
   'Pattern::inject()': '/docs/handling-user-input',
   'Pattern::bind()': '/docs/handling-user-input',
+  'pattern()->test()': '/docs/match#test-a-subject',
 
   'Detail': '/docs/match-details',
 
