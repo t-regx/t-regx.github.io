@@ -12,9 +12,9 @@ use TRegx\CleanRegex\Exception\MissingReplacementKeyException;
 use TRegx\CleanRegex\Exception\NonexistentGroupException;
 use TRegx\CleanRegex\Exception\SubjectNotMatchedException;
 use TRegx\CleanRegex\Match\Details\Detail;
-use TRegx\CleanRegex\Match\Details\Match;
 use TRegx\CleanRegex\Match\Details\NotMatched;
 use TRegx\CleanRegex\Pattern;
+use TRegx\Exception\MalformedPatternException;
 use TRegx\SafeRegex\Exception\CompilePregException;
 use TRegx\SafeRegex\preg;
 
@@ -97,20 +97,16 @@ class MarkupResultConsistencyTest extends TestCase
 
     private function preprocessCode(string $filename, string $snippet, array $lines): array
     {
-        $class = class_exists('TRegx\Exception\MalformedPatternException')
-            ? 'TRegx\Exception\MalformedPatternException'
-            : 'TRegx\SafeRegex\Exception\MalformedPatternException';
         $namespaces = $this->declareNamespaces([
             MissingReplacementKeyException::class,
             InvalidReturnValueException::class,
             SubjectNotMatchedException::class,
             NonExistentGroupException::class,
-            $class,
+            MalformedPatternException::class,
             CompilePregException::class,
             NotMatched::class,
             Integer::class,
             Pattern::class,
-            Match::class,
             Detail::class,
             preg::class,
         ]);

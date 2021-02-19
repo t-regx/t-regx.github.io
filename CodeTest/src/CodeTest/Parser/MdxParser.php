@@ -5,7 +5,7 @@ use CodeTest\Parser\Snippet\CodeElement;
 use CodeTest\Parser\Snippet\EmptyElement;
 use CodeTest\Parser\Snippet\ModElement;
 use CodeTest\Parser\Snippet\ResultElement;
-use TRegx\CleanRegex\Match\Details\Match;
+use TRegx\CleanRegex\Match\Details\Detail;
 use TRegx\CleanRegex\Pattern;
 
 class MdxParser
@@ -31,21 +31,21 @@ class MdxParser
 
     public function code(string $content): array
     {
-        return $this->map($this->codePattern(), $content, fn(Match $match) => new CodeElement(
-            $match->group('tregx')->orReturn(null),
-            $match->group('php')->orReturn(null)
+        return $this->map($this->codePattern(), $content, fn(Detail $detail) => new CodeElement(
+            $detail->group('tregx')->orReturn(null),
+            $detail->group('php')->orReturn(null)
         ));
     }
 
     private function mod(string $content): array
     {
-        return $this->map($this->modPattern(), $content, function (Match $match) {
-            if ($match->matched('mod')) {
+        return $this->map($this->modPattern(), $content, function (Detail $detail) {
+            if ($detail->matched('mod')) {
                 return new ModElement(
                     $this->mods,
-                    $match->get('mod'),
-                    $match->get('mod_for'),
-                    $match->group('mod_arg')->orReturn(null)
+                    $detail->get('mod'),
+                    $detail->get('mod_for'),
+                    $detail->group('mod_arg')->orReturn(null)
                 );
             }
             return new EmptyElement();
@@ -54,17 +54,17 @@ class MdxParser
 
     private function result(string $content): array
     {
-        return $this->map($this->resultPattern(), $content, function (Match $match) {
-            if ($match->matched('result_value')) {
+        return $this->map($this->resultPattern(), $content, function (Detail $detail) {
+            if ($detail->matched('result_value')) {
                 return new ResultElement(
-                    $this->unquoteJsx($match, $match->get('result_value')),
-                    $match->group('result_type')->orReturn(null));
+                    $this->unquoteJsx($detail, $detail->get('result_value')),
+                    $detail->group('result_type')->orReturn(null));
             }
             return new EmptyElement();
         });
     }
 
-    private function unquoteJsx(Match $match, string $value): string
+    private function unquoteJsx(Detail $match, string $value): string
     {
         if ($this->isResultJsx($match)) {
             return $this->parseEscapedJsx($value);
@@ -72,7 +72,7 @@ class MdxParser
         return $value;
     }
 
-    private function isResultJsx(Match $match): bool
+    private function isResultJsx(Detail $match): bool
     {
         return trim($match->group('start')->orReturn(null)) == '{`'
             && trim($match->group('end')->orReturn(null)) == '`}';
@@ -111,7 +111,7 @@ PATTERN;
         return Pattern::of($pattern, 'sx')
             ->match($content)
             ->fluent()
-            ->groupByCallback(fn(Match $match) => $match->byteOffset())
+            ->groupByCallback(fn(Detail $detail) => $detail->byteOffset())
             ->map(fn(array $matches) => $mapper($matches[0]))
             ->all();
     }
