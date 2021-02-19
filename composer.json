@@ -20,7 +20,7 @@
     "ext-json": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.5",
+    "phpunit/phpunit": "*",
     "rawr/t-regx": "dev-master"
   }
 }
