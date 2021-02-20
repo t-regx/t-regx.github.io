@@ -13,13 +13,13 @@ import {
   pregMatchAll
 } from '../../config/links';
 
-export default ({to, children}: LinkProperties) => {
+export default ({to, children, title}: LinkProperties) => {
   if (to) {
-    return <Link to={to}>{children}</Link>
+    return <Link to={to} title={title}>{children}</Link>
   }
   const {link, content} = linkAndText(children);
   if (link) {
-    return <Link to={link} children={content}/>
+    return <Link to={link} title={title} children={content}/>
   }
   return content;
 };
@@ -74,5 +74,6 @@ const textLinks = {
 
 interface LinkProperties {
   to?: string,
-  children: string
+  children: string,
+  title?: string,
 }

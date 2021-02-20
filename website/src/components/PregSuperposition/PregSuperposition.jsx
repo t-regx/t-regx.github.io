@@ -16,5 +16,7 @@ export default function () {
     <code>preg_filter()</code>,
   ];
 
-  return <Link to={pregDocs}><TextSuperposition texts={pregMethods}/></Link>;
+  return <Link to={pregDocs} title="Each preg_ method in PHP (so preg_match, preg_replace, etc.)">
+    <TextSuperposition texts={pregMethods}/>
+  </Link>;
 }
