@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -33,7 +32,9 @@ export default function Index() {
       <GridBlock darkBackground scrollableBackground>
         <QuizOpeningSlide/>
       </GridBlock>
-      <Installation/>
+      <GridBlock columns={sections.installation} center layout="threeColumn">
+        <BadgesSection/>
+      </GridBlock>
       <GridBlock columns={sections.test} lightBackground/>
       <GridBlock columns={sections.matchDetails} lightBackground/>
       <GridBlock columns={sections.replaceDetails} lightBackground/>
@@ -41,7 +42,11 @@ export default function Index() {
       <GridBlock columns={sections.replaceByGroupMap} darkBackground scrollableBackground/>
       <GridBlock columns={sections.tryOnline}/>
       <GridBlock columns={sections.features} layout="fourColumn" lightBackground/>
-      <CommentsSection/>
+      <div className="container">
+        <DisqusThread
+          title='Questions about T-Regx'
+          identifier='46dff8e37535ddb3571510672d1af48683bad013'/>
+      </div>
     </div>
   </Layout>;
 }
@@ -111,18 +116,6 @@ const SafeRegexSplash = () =>
     </p>
   </div>;
 
-const Installation = () => (
-  <GridBlock columns={sections.installation} center layout="threeColumn">
-    <BadgesSection/>
-  </GridBlock>
-);
-
-const CommentsSection = () => <div className="container">
-  <DisqusThread
-    title={'Questions about T-Regx'}
-    identifier={'46dff8e37535ddb3571510672d1af48683bad013'}/>
-</div>;
-
 const SplashContainer = props => (
   <div className="hero">
     <div className="container">
@@ -131,10 +124,10 @@ const SplashContainer = props => (
   </div>
 );
 
-const ProjectTitle = props => (
+const ProjectTitle = ({title, tagline}) => (
   <h2 className={styles.projectTitle}>
-    {props.title}
-    <p className={styles.projectSubtitle}>{props.tagline}</p>
+    {title}
+    <p className={styles.projectSubtitle}>{tagline}</p>
     <ul className={styles.iconList}>
       <li>Lightweight</li>
       <li>Reliable</li>
@@ -152,7 +145,7 @@ const PromoSection = props => (
 
 const HeaderButton = ({to, href, children}) => (
   <Link
-    className={classNames('button button--outline button--primary button--md')} to={href || useBaseUrl(to)}
+    className={'button button--outline button--primary button--md'} to={href || useBaseUrl(to)}
     style={{paddingTop: '4px', paddingBottom: '5px'}} /** this is just to match the height of Sponsor button */
   >
     {children}
@@ -160,7 +153,7 @@ const HeaderButton = ({to, href, children}) => (
 );
 
 const Button = ({children, onClick}) => (
-  <Link className={classNames('button button--outline button--primary button--md')} onClick={onClick}>
+  <Link className={'button button--outline button--primary button--md'} onClick={onClick}>
     {children}
   </Link>
 );
