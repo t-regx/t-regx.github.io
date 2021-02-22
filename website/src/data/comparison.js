@@ -77,7 +77,7 @@ export const cleanRegexVsPhp = [
   {
     title: <>Using an invalid capturing group name<sup>(eg. name <code>"!@#$"</code> or index <code>-2</code>)</sup></>,
     php: actuallyTriesToGetTheGroup,
-    tRegx: <>T-Regx throws <code>\InvalidArgumentException</code> <sup>with descriptive message</sup></>,
+    tRegx: <>T-Regx throws <Link>\InvalidArgumentException</Link> <sup>with descriptive message</sup></>,
   },
   {
     title: <>Using a nonexistent group<sup>(group name typo, group deleted)</sup></>,

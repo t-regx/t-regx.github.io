@@ -10,7 +10,8 @@ import {
   tryItOnline,
   stdClass,
   phpToString,
-  pregMatchAll
+  pregMatchAll,
+  invalidArgumentException
 } from '../../config/links';
 
 export default ({to, children, title}: LinkProperties) => {
@@ -61,6 +62,7 @@ const codeLinks = {
   'PREG_OFFSET_CAPTURE': pregConstants,
   stdClass,
   '__toString()': phpToString,
+  '\\InvalidArgumentException': invalidArgumentException,
 };
 
 const textLinks = {

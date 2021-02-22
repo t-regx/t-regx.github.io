@@ -10,3 +10,4 @@ export const displayErrors = 'https://www.php.net/manual/en/errorfunc.configurat
 export const errorReporting = 'https://www.php.net/manual/en/function.error-reporting.php';
 export const stdClass = 'https://www.php.net/manual/en/reserved.classes.php';
 export const phpToString = 'https://www.php.net/manual/en/language.oop5.magic.php#object.tostring';
+export const invalidArgumentException = 'https://www.php.net/manual/en/class.invalidargumentexception.php';
