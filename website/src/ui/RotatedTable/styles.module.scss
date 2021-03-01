@@ -21,7 +21,7 @@
 
     &.heading {
       font-size: 1.1em;
-      background-color: rgb(245, 246, 247);
+      background-color: var(--rotation-table-heading);
     }
 
     &:not(.heading) td:first-child {

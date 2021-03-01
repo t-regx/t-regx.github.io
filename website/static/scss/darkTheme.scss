@@ -1,5 +1,11 @@
+html[data-theme="light"] {
+  --ifm-color-primary-dark: #0858b3;
+  --rotation-table-heading: #f5f6f7;
+}
+
 html[data-theme="dark"] {
   --ifm-color-primary-dark: #5d5df9;
+  --rotation-table-heading: #24282d;
 
   .admonition {
     background-color: #252525;
