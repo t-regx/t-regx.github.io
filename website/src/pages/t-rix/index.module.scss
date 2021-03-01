@@ -5,7 +5,38 @@ div.matrixBackground {
 
   div.post {
     display: flex;
-    padding: 2vh 0 15vh;
+
+    blockquote {
+      display: flex;
+      align-items: flex-start;
+
+      @media (max-width: 600px) {
+        & {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      img {
+
+      }
+
+      div {
+        margin-left: 25px;
+
+        p {
+          font-size: 1.4em;
+        }
+      }
+    }
+  }
+
+  div.youtube {
+    margin-bottom: 30px;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 
   div.commentsBackground {

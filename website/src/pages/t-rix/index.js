@@ -1,31 +1,34 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import Markdown from 'markdown-to-jsx';
 
+import DisqusThread from "../../components/DisqusThread/DisqusThread";
 import tRegxMatrix from "../../../static/img/t.regx.matrix.png";
 
 import styles from "./index.module.scss";
-import DisqusThread from "../../components/DisqusThread/DisqusThread";
 
 export default function MatrixPage() {
   return <div className={styles.matrixBackground}>
     <Layout>
       <div className="container margin-vert--xl">
         <div className={styles.post}>
-          <img src={tRegxMatrix} alt="T-Regx in the dream world"/>
-          <Markdown children={`
-> Have you ever had a dream, that you were so sure was real? What if
-you were unable to wake from that dream? How would you know the
-difference between the dream world and the real world?
-`}/>
+          <blockquote>
+            <img src={tRegxMatrix} alt="T-Regx in the dream world"/>
+            <div>
+              <p>Have you ever had a dream, that you were so sure was real?</p>
+              <p>
+                What if you were unable to wake from that dream? How would you know the
+                difference between the dream world and the real world?
+              </p>
+            </div>
+          </blockquote>
         </div>
-        <div style={{marginBottom: '30px'}}>
+        <div className={styles.youtube}>
           <YouTubeEmbedded/>
         </div>
         <div className={styles.commentsBackground}>
-        <DisqusThread
-          title={'T-Regx Matrix'}
-          identifier={'34641aa1c25319a367666d815a258466'}/>
+          <DisqusThread
+            title='T-Regx Matrix'
+            identifier='34641aa1c25319a367666d815a258466'/>
         </div>
       </div>
     </Layout>
