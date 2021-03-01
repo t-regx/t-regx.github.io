@@ -1,5 +1,8 @@
 export const tryItOnline = "https://repl.it/github/T-Regx/fiddle";
 export const issueLink = 'https://github.com/T-Regx/T-Regx/issues/new/choose';
+export const featureRequest = 'https://github.com/T-Regx/T-Regx/issues/new?template=feature-request.md';
+export const bugReport = 'https://github.com/T-Regx/T-Regx/issues/new?template=i-found-a-bug.md';
+export const questionIssue = 'https://github.com/T-Regx/T-Regx/issues/new?template=i-have-a-question.md';
 export const travisUrl = 'https://travis-ci.org/T-Regx/T-Regx';
 export const mainRepoUrl = 'https://github.com/T-Regx/T-Regx';
 export const pregDocs = "https://www.php.net/manual/en/ref.pcre.php";

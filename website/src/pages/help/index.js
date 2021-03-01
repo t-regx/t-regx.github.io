@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 
 import DisqusThread from '../../components/DisqusThread/DisqusThread';
-import {issueLink} from "../../config/links";
+import {bugReport, featureRequest, questionIssue} from "../../config/links";
 import Link from "../../components/Link/Link";
 
 import discussion from "../../../static/img/t.regx.discussion.png";
@@ -15,7 +15,7 @@ export default function () {
         <h1>Need help?</h1>
         <p>
           This project is maintained by a dedicated group of people. If you have experienced any bugs or problems,
-          you're welcome to submit an <IssueLink>issue on github!</IssueLink> :) It never takes us more than
+          you're welcome to submit an <Link issue>issue on github!</Link> :) It never takes us more than
           48h to respond!
         </p>
 
@@ -55,11 +55,11 @@ const SupportLinks = () => {
 
     <div className="col col--4">
       <h2>Create GitHub issue</h2>
-      <p>Issues on <IssueLink>github</IssueLink> are more than welcome. Feel free to:</p>
+      <p>Issues on <Link issue>github</Link> are more than welcome. Feel free to:</p>
       <ul>
-        <li>create a <Link to="https://github.com/T-Regx/T-Regx/issues/new?template=feature-request.md">feature request</Link></li>
-        <li>report <Link to="https://github.com/T-Regx/T-Regx/issues/new?template=i-found-a-bug.md">a bug</Link></li>
-        <li>or simply ask a <Link to="https://github.com/T-Regx/T-Regx/issues/new?template=i-have-a-question.md">question</Link></li>
+        <li>create a <Link to={featureRequest}>feature request</Link></li>
+        <li>report <Link to={bugReport}>a bug</Link></li>
+        <li>or simply ask a <Link to={questionIssue}>question</Link></li>
       </ul>
       <p>We'll answer as fast as we can :)</p>
     </div>
@@ -75,9 +75,7 @@ const SupportLinks = () => {
     <div className="col col--6">
       <h2>Join the discussion below!</h2>
       <p>Ask as many questions about the documentation and the project as you need We'll try to answer them as fast as we can!</p>
-      <img className="margin-vert--lg" src={discussion} alt="style"/>
+      <img style={{transform: 'scale(0.7)'}} src={discussion} alt="Hey, you! Ask me questions, or join the discussion!"/>
     </div>
   </>;
 };
-
-const IssueLink = ({children}) => <a href={issueLink}>{children}</a>;

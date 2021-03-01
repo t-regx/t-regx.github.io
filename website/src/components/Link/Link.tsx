@@ -11,10 +11,14 @@ import {
   stdClass,
   phpToString,
   pregMatchAll,
-  invalidArgumentException
+  invalidArgumentException,
+  issueLink
 } from '../../config/links';
 
-export default ({to, children, title}: LinkProperties) => {
+export default ({issue, to, children, title}: LinkProperties) => {
+  if (issue) {
+    return <Link href={issueLink}>{children}</Link>
+  }
   if (to) {
     return <Link to={to} title={title}>{children}</Link>
   }
@@ -75,6 +79,7 @@ const textLinks = {
 };
 
 interface LinkProperties {
+  issue: boolean,
   to?: string,
   children: string,
   title?: string,
