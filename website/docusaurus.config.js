@@ -34,7 +34,7 @@ module.exports = {
         {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
-        {position: 'left', label: 'T-Regx on repl.it (Try online)', to: 'replit'},
+        {position: 'left', label: 'Try online', to: 'replit'},
         {position: 'right', label: 'ChangeLog', href: changeLogUrl},
         {position: 'right', label: 'GitHub', href: mainRepoUrl},
       ],
