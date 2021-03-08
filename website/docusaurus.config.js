@@ -17,11 +17,11 @@ module.exports = {
       apiKey: '6d3eef6432e87213c7f031ee898b73a1',
       indexName: 't-regx',
       algoliaOptions: {},
-      //   placeholder: 'Search the website',
     },
     prism: {
       theme: require('./theme'),
       defaultLanguage: 'php',
+      additionalLanguages: ['php']
     },
     navbar: {
       title: 'T-Regx',
