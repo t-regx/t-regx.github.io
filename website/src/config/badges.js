@@ -65,7 +65,7 @@ export default {
       href: travisUrl,
     },
     {
-      title: 'PHP Version',
+      title: 'PRs Welcome',
       src: 'https://img.shields.io/badge/PR-welcome-brightgreen.svg?style=popout',
       href: 'http://makeapullrequest.com',
     },
