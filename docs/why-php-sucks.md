@@ -139,7 +139,7 @@ PHP PCRE API is full of false negatives and false positives. For example, missin
 necessarily mean the group doesn't exist or wasn't matched. It's just a "gotcha" set for you by PHP.
 
 T-Regx performs all the necessary `if`ology and checks to verify that methods that return `true` and `false` are really 
-true or false :)
+true or false. If T-Regx can't eliminate false-negatives or false-negatives, its API simply doesn't include a method to verify that.
 
 If, because of reasons, there isn't a way to determine something with absolute certainty (like the index of a group with `J` modifier), 
 then T-Regx API simply doesn't have `index()` method for `usingDuplicateName().group()`.

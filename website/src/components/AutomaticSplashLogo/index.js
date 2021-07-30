@@ -2,6 +2,7 @@ import React from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import ValentineDino from '../ValentineDino';
+import AutumnDino from '../AutumnDino';
 import styles from './styles.module.css';
 
 const Logo = ({src, title = ''}) => (
@@ -20,7 +21,22 @@ const SplashImage = ({name}) => {
       />
     );
   }
-
+  if (name === 'autumn') {
+    return (
+      <AutumnDino
+        leaves={[
+          useBaseUrl('img/leaves/leaf1.png'),
+          useBaseUrl('img/leaves/leaf2.png'),
+          useBaseUrl('img/leaves/leaf3.png'),
+          useBaseUrl('img/leaves/leaf4.png'),
+          useBaseUrl('img/leaves/leaf5.png'),
+          useBaseUrl('img/leaves/leaf6.png'),
+        ]}
+        dino={useBaseUrl('img/t.regx.png')}
+        title="Autumn's coming T-Regx"
+      />
+    );
+  }
   const images = {
     regular: {src: 't.regx.png', title: 'T-Regx'},
     corona: {src: 't.regx.surgical.png', title: 'Responsible T-Regx'},
@@ -61,6 +77,7 @@ export default function AutomaticSplashLogo() {
   };
 
   const splashName = () => {
+    return 'autumn';
     const now = new Date();
     return splashNameByDate(now.getDate(), now.getMonth() + 1);
   };
