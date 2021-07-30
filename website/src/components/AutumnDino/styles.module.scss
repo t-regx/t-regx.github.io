@@ -1,13 +1,12 @@
 .autumnDino {
   position: relative;
-  float: right;
   width: 200px;
   height: 200px;
 
   .subContainer {
     width: 200px;
     height: 200px;
-    top: -25;
+    top: -25px;
     left: 50px;
     position: absolute;
     transform: rotate(35deg);

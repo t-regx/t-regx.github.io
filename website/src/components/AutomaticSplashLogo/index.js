@@ -15,6 +15,7 @@ const SplashImage = ({name}) => {
   if (name === 'valentine') {
     return (
       <ValentineDino
+        className={styles.projectLogo}
         heart={useBaseUrl('img/heart.png')}
         dino={useBaseUrl('img/t.regx.png')}
         title="Valentine's Day T-Regx"
@@ -24,6 +25,7 @@ const SplashImage = ({name}) => {
   if (name === 'autumn') {
     return (
       <AutumnDino
+        className={styles.projectLogo}
         leaves={[
           useBaseUrl('img/leaves/leaf1.png'),
           useBaseUrl('img/leaves/leaf2.png'),

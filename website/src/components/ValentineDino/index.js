@@ -2,8 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.css';
 
-export default function ValentineDino({heart, dino}) {
-  return <div className={styles.valentinesDino}>
+export default function ValentineDino({className, heart, dino}) {
+  return <div className={classNames(className, styles.valentinesDino)}>
     <div className={styles.subContainer}>
       <img src={heart} alt="" className={classNames(styles.heart, styles.moveVertical)}/>
     </div>

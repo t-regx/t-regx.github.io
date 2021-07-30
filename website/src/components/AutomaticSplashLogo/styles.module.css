@@ -10,3 +10,8 @@
     max-height: 250px;
   }
 }
+@media only screen and (max-width: 1199px) {
+  .projectLogo {
+    margin: 0 auto;
+  }
+}

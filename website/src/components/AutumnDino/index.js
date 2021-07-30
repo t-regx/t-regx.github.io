@@ -2,8 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
 
-export default function AutumnDino({leaves, dino}) {
-  return <div className={styles.autumnDino}>
+export default function AutumnDino({className, leaves, dino}) {
+  return <div className={classNames(className, styles.autumnDino)}>
     <div className={styles.subContainer}>
       <img src={leaves[2]} className={classNames(styles.leaf, styles.animation, styles.slowFall)} alt=""/>
       <img src={leaves[0]} className={classNames(styles.leaf, styles.animation, styles.slowFall)} alt=""/>
