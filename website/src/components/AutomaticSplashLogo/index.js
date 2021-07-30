@@ -79,7 +79,6 @@ export default function AutomaticSplashLogo() {
   };
 
   const splashName = () => {
-    return 'autumn';
     const now = new Date();
     return splashNameByDate(now.getDate(), now.getMonth() + 1);
   };
