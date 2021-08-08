@@ -123,10 +123,10 @@ themselves whether they want to use T-Regx API, or stay with PHP replace style.
 ## Remove occurrence
 
 There are times when you'd like to simply remove the occurrence of a pattern from your subject. To do that,
-use `pattern()->remove()` instead of `pattern()->replace()`:
+use `pattern()->prune()` instead of `pattern()->replace()`:
 
 <CodeTabs
-  tregx={`pattern('[cm]m')->remove('I have 15cm and 192cm')->all();`}
+  tregx={`pattern('[cm]m')->prune('I have 15cm and 192cm');`}
   php={`preg::replace('/[cm]m/', '', 'I have 15cm and 192cm');`}/>
 
 <!--T-Regx:{echo-at(first)}-->
