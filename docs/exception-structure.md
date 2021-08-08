@@ -99,7 +99,7 @@ try {
 
 ## SafeRegex exceptions vs. CleanRegex
 
-By this time, we're sure you must be aware that [CleanRegex] (so [`pattern()`], [`Pattern::of()`], [`Pattern::prepare()`])
+By this time, we're sure you must be aware that [CleanRegex] (so [`pattern()`], [`Pattern::of()`], [`Pattern::inject()`])
 is built on top of [SafeRegex] (providing [`preg::match()`], [`preg::replace()`], etc.).
 
 We tried really hard to design an exception structure in such a way, so it makes sense to the users, and so it resembles the real
@@ -147,7 +147,7 @@ For example, it's possible to induce catastrophic backtracking with [`pattern()`
 It doesn't work the other way, so [SafeRegex] will never throw `PatternException`.
 
 `PatternException` implements `RegexException` (just like `PregException`), so you can use either to catch exceptions thrown from 
-[`pattern()`], [`Pattern::of()`] and [`Pattern::prepare()`].
+[`pattern()`], [`Pattern::of()`] and [`Pattern::inject()`].
 
 ```php
 use TRegx\Exception\RegexException;
@@ -174,8 +174,8 @@ try {
 ```
 
 Similarly to how `PregException` unifies exceptions thrown from [preg functions], `PatternException` unifies exceptions thrown from
-[`pattern()`], [`Pattern::of()`] and [`Pattern::prepare()`]. Because of that, we don't recommending catching `PatternException`, unless you
-actually need to handle every exception expected of those methods.
+[`pattern()`], [`Pattern::of()`] and [`Pattern::inject()`]. Because of that, we don't recommend catching `PatternException`, unless you
+actually need to handle every exception thrown from those methods.
 
 `PatternException` represents:
 
@@ -257,7 +257,7 @@ try {
 
 [`Pattern::of()`]: introduction-clean.mdx#entry-points
 
-[`Pattern::prepare()`]: introduction-clean.mdx#entry-points
+[`Pattern::inject()`]: introduction-clean.mdx#entry-points
 
 [`preg::match()`]: introduction-safe.md#about-saferegex
 

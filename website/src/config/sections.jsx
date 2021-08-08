@@ -57,7 +57,7 @@ composer require rawr/t-regx
         </p>
         <p>
           It doesn't matter whether the pattern was constructed
-          with <Link>Pattern::of()</Link>, <Link>pattern()</Link>, <Link>Pattern::pcre()</Link>, <Link>Pattern::inject()</Link> or <Link>Pattern::bind()</Link>.
+          with <Link>Pattern::of()</Link>, <Link>pattern()</Link>, <Link>Pattern::pcre()</Link>, <Link>Pattern::inject()</Link> or <Link>Pattern::template()</Link>.
           The <Link>Detail</Link> is always the same.
         </p>
         <p>
@@ -138,8 +138,7 @@ composer require rawr/t-regx
         <p>
           <Markdown>
             T-Regx provides a wide variety of prepared patterns, for different needs:
-            `Pattern::prepare()`, `Pattern::inject()`, `Pattern::bind()`, `Pattern::compose()`,
-            `Pattern::format()` and `Pattern::template()`.
+            `Pattern::inject()`, `Pattern::compose()`, `Pattern::mask()` and `Pattern::template()`.
           </Markdown>
         </p>
         <p>For constant patterns use <Link>Pattern::of()</Link> or simply <Link>pattern()</Link>.</p>

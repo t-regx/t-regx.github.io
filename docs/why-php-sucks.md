@@ -213,14 +213,11 @@ Read more about [`Detail`](match-details.md).
 
 ### T-Regx provides rich API for building patterns
 
-Because of `Pattern::prepare()`, `Pattern::inject()`, `Pattern::bind()`, `Pattern::compose()`, `Pattern::format()` and `Pattern::template()`
+Because of `Pattern::inject()`, `Pattern::compose()`, `Pattern::mask()` and `Pattern::template()`
 there is never a need for using [`preg_quote()`] yourself.
 
 For example to build pattern with un-safe data, instead of building pattern with [`preg_quote()`], simply use:
-```php
-Pattern::prepare(["(My|Our) (dog|cat) names are ", [$dog], ' and ', [$cat], '!']);
-```
-or
+
 ```php
 Pattern::inject("(My|Our) (dog|cat) names are @ and @!", [$dog, $cat]);
 ```
