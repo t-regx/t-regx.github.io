@@ -9,8 +9,8 @@ export default {
     },
     {
       title: 'Coverage Status',
-      src: 'https://coveralls.io/repos/github/T-Regx/T-Regx/badge.svg?branch=master',
-      href: 'https://coveralls.io/github/T-Regx/T-Regx?branch=master',
+      src: 'https://img.shields.io/badge/coverage-100%25-green.svg',
+      href: 'https://github.com/T-Regx/T-Regx/blob/master/CONTRIBUTING.md#phpunit-covers-annotation',
     },
     {
       title: 'Dependencies',
