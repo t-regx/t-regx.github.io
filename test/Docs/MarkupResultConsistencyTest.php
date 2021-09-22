@@ -165,7 +165,7 @@ class MarkupResultConsistencyTest extends TestCase
         return $code;
     }
 
-    private function replaceCodeFragments(array $lines, $replacements): array
+    private function replaceCodeFragments(array $lines, array $replacements): array
     {
         return array_map(fn(string $line) => str_replace(array_keys($replacements), array_values($replacements), $line), $lines);
     }
