@@ -19,6 +19,7 @@ import sections from '../config/sections';
 import {fiddleUrl} from "../../consts";
 
 import styles from './styles.module.scss';
+import AutumnDino from "../components/AutumnDino";
 
 export default function Index() {
   const context = useDocusaurusContext();
