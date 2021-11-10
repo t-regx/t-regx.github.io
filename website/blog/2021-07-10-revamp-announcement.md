@@ -6,10 +6,10 @@ author: Daniel Wilkowski
 Rawwrrrr!
 
 Hello, dear regexp writers! For about 5 months now, we've been working really hard or 
-rewriting prepared batters, in order to introduce certain necessary features to them.
+rewriting prepared patterns, in order to introduce certain necessary features to them.
 
-The biggest issue, of prepared patterns in their current forms, is that the only form
-of ignoring a placeholder in a pattern, was escape.
+The biggest issue, of prepared patterns in their current form, is that the only form
+of ignoring a placeholder in a pattern was escape.
 
 ```php
 Pattern::inject('foo:@', ['bar']); // includes value
@@ -25,7 +25,7 @@ wouldn't, and so on.
 The that's fine, but it's not everything. There are other cases whether placeholders needed
 special treatments, most notably `[@]`, `\Q@\E`, `(?#@)` and `#@\n` (with `x` flag).
 We knew about those cases, and we made sure, that while the placeholder would be used in those
-cases, they wouldn't break the pattern and wouldn't introduce and unexpected behaviour.
+cases, they wouldn't break the pattern and wouldn't introduce any unexpected behaviour.
 
 So in other words, as long as the users used the library according to the documentation, every
 thing would be fine and every feature would be usable as usual.
