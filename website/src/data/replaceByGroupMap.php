@@ -13,7 +13,7 @@ $result = Pattern::of('\b\w+(\.(?<ext>\w{3}))?\b')
 // highlight-next-line
     ->map([
         'mp3' => 'Audio',
-        'mp4' => 'Video'
+        'mp4' => 'Video',
     ])
     ->orElseWith('Unknown');
 

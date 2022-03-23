@@ -41,6 +41,7 @@ export default function Index() {
       <GridBlock columns={sections.replaceDetails} lightBackground/>
       <GridBlock columns={sections.preparedPatterns}/>
       <GridBlock columns={sections.replaceByGroupMap} darkBackground scrollableBackground/>
+      <GridBlock columns={sections.facade} lightBackground/>
       <GridBlock columns={sections.tryOnline}/>
       <GridBlock columns={sections.features} layout="fourColumn" lightBackground/>
       <div className="container">

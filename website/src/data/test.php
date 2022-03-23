@@ -2,12 +2,9 @@
 
 use TRegx\CleanRegex\Pattern;
 
-$username = $_GET['username'];
+// instantiate pattern from string
+$pattern = Pattern::of('^[a-zA-Z][a-zA-Z0-9]{1,15}$');
 
-// Use either helper function
+// test subject against a pattern
 // highlight-next-line
-pattern('^[a-zA-Z][a-zA-Z0-9]{1,15}$')->test($username); // true
-
-// or facade
-// highlight-next-line
-Pattern::of('^[a-zA-Z][a-zA-Z0-9]{1,15}$')->test($username); // true
+$pattern->test($_GET['username']);      // (bool) true

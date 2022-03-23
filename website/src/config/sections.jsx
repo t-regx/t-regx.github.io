@@ -11,6 +11,7 @@ import weLoveStatic from "../../static/img/t.regx.static.png";
 import {tryItOnline} from "./links";
 
 import test from "../data/test.php";
+import facade from "../data/facade.php";
 import matchDetails from "../data/matchDetails.php";
 import replaceDetails from "../data/replaceDetails.php";
 import phpstormTooltip from "../../static/img/pages/phpstorm.tooltip.png";
@@ -39,7 +40,7 @@ composer require rawr/t-regx
     {
       title: 'Match your subject against a pattern',
       body: <>
-        <p>Use <Link>pattern()->test()</Link> to check whether your subject matches a given regular expression.</p>
+        <p>Use <Link>pattern()-&gt;test()</Link> to check whether your subject matches a given regular expression.</p>
         <p> In this case whether <code>{usernamePattern}</code> matches <code>$username</code>.</p>
       </>
     },
@@ -52,7 +53,7 @@ composer require rawr/t-regx
       title: 'Match details',
       body: <>
         <p>
-          With <Link>pattern()->match()</Link> and <Link>pattern()->replace()</Link>, it's trivial to
+          With <Link>pattern()-&gt;match()</Link> and <Link>pattern()-&gt;replace()</Link>, it's trivial to
           retrieve, iterate, map and filter matches with callbacks and a detailed <Link>Detail</Link>.
         </p>
         <p>
@@ -74,7 +75,7 @@ composer require rawr/t-regx
       title: 'Uniform API for matching and replacing',
       body: <>
         <p>
-          <Link>pattern()->match()</Link> and <Link>pattern()->replace()</Link> callbacks
+          <Link>pattern()-&gt;match()</Link> and <Link>pattern()-&gt;replace()</Link> callbacks
           receive the same interface <Link>Detail</Link>.
         </p>
         <p>
@@ -145,6 +146,27 @@ composer require rawr/t-regx
       </>
     },
     {body: <PhpCode>{preparedPatterns}</PhpCode>},
+  ],
+  facade: [
+    {body: <PhpCode>{facade}</PhpCode>},
+    {
+      title: 'Different ways of instantiating Patterns',
+      body: <>
+        <p>
+          <Markdown>
+            Regardless of whether you build your pattern using `Pattern::of()`, `pattern()` helper,
+            or maybe using prepared patterns like `Pattern::inject()`/`Pattern::alternate()`, the
+            interface of `Pattern` is the same.
+          </Markdown>
+        </p>
+        <p>
+          <Markdown>
+            Additionally, building patterns using `Pattern::mask()` or `Pattern::template()` also
+            share the same `Pattern` interface.
+          </Markdown>
+        </p>
+      </>
+    },
   ],
   tryOnline: [
     {
