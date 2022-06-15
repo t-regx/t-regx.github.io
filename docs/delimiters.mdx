@@ -41,7 +41,7 @@ echo pattern('https://github.com#heading?key=hello%20there')->delimited() . "\\n
 
 If the was constructed with [`Pattern::pcre()`], method `delimited()` returns the pattern unchanged.
 
-<CodeTabs tregx={`Pattern::pcre('#Welcome/Or not#')->delimited();`}/>
+<CodeTabs tregx={`PcrePattern::of('#Welcome/Or not#')->delimited();`}/>
 
 <!--T-Regx:{echo-at(0)}-->
 <Result text>#Welcome/Or not#</Result>

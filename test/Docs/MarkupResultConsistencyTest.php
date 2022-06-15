@@ -12,8 +12,8 @@ use TRegx\CleanRegex\Exception\MissingReplacementKeyException;
 use TRegx\CleanRegex\Exception\NonexistentGroupException;
 use TRegx\CleanRegex\Exception\SubjectNotMatchedException;
 use TRegx\CleanRegex\Match\Details\Detail;
-use TRegx\CleanRegex\Match\Details\NotMatched;
 use TRegx\CleanRegex\Pattern;
+use TRegx\CleanRegex\PcrePattern;
 use TRegx\Exception\MalformedPatternException;
 use TRegx\SafeRegex\Exception\CompilePregException;
 use TRegx\SafeRegex\preg;
@@ -104,7 +104,7 @@ class MarkupResultConsistencyTest extends TestCase
             NonExistentGroupException::class,
             MalformedPatternException::class,
             CompilePregException::class,
-            NotMatched::class,
+            PcrePattern::class,
             Integer::class,
             Pattern::class,
             Detail::class,

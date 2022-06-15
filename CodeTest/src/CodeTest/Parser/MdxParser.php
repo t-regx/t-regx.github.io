@@ -31,21 +31,26 @@ class MdxParser
 
     public function code(string $content): array
     {
-        return $this->map($this->codePattern(), $content, fn(Detail $detail) => new CodeElement(
-            $detail->group('tregx')->orReturn(null),
-            $detail->group('php')->orReturn(null)
-        ));
+        return $this->map($this->codePattern(), $content, function (Detail $detail) {
+            $tregx = $detail->group('tregx');
+            $php = $detail->group('php');
+            return new CodeElement(
+                $tregx->matched() ? $tregx->text() : null,
+                $php->matched() ? $php->text() : null
+            );
+        });
     }
 
     private function mod(string $content): array
     {
         return $this->map($this->modPattern(), $content, function (Detail $detail) {
             if ($detail->matched('mod')) {
+                $modArg = $detail->group('mod_arg');
                 return new ModElement(
                     $this->mods,
                     $detail->get('mod'),
                     $detail->get('mod_for'),
-                    $detail->group('mod_arg')->orReturn(null)
+                    $modArg->matched() ? $modArg->text() : null
                 );
             }
             return new EmptyElement();
@@ -56,9 +61,10 @@ class MdxParser
     {
         return $this->map($this->resultPattern(), $content, function (Detail $detail) {
             if ($detail->matched('result_value')) {
+                $resultType = $detail->group('result_type');
                 return new ResultElement(
                     $this->unquoteJsx($detail, $detail->get('result_value')),
-                    $detail->group('result_type')->orReturn(null));
+                    $resultType->matched() ? $resultType->text() : null);
             }
             return new EmptyElement();
         });
@@ -74,8 +80,8 @@ class MdxParser
 
     private function isResultJsx(Detail $match): bool
     {
-        return trim($match->group('start')->orReturn(null)) == '{`'
-            && trim($match->group('end')->orReturn(null)) == '`}';
+        return trim($match->group('start')->or('')) == '{`'
+            && trim($match->group('end')->or('')) == '`}';
     }
 
     private function parseEscapedJsx(string $jsx): string
@@ -110,7 +116,7 @@ PATTERN;
     {
         return Pattern::of($pattern, 'sx')
             ->match($content)
-            ->fluent()
+            ->stream()
             ->groupByCallback(fn(Detail $detail) => $detail->byteOffset())
             ->map(fn(array $matches) => $mapper($matches[0]))
             ->all();

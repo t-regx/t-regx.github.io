@@ -957,12 +957,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/T-Regx/T-Regx.git",
-                "reference": "67c0023ac0e5fd3d09421ff4ce53473779f7596c"
+                "reference": "f0b2bcb10e943f72e6a3a4bde04c86380a59674d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/T-Regx/T-Regx/zipball/67c0023ac0e5fd3d09421ff4ce53473779f7596c",
-                "reference": "67c0023ac0e5fd3d09421ff4ce53473779f7596c",
+                "url": "https://api.github.com/repos/T-Regx/T-Regx/zipball/f0b2bcb10e943f72e6a3a4bde04c86380a59674d",
+                "reference": "f0b2bcb10e943f72e6a3a4bde04c86380a59674d",
                 "shasum": ""
             },
             "require": {
@@ -974,8 +974,7 @@
                 "php-coveralls/php-coveralls": "^2.0",
                 "phpunit/phpunit": "^9.5.4 || ^8.0 || ^7.5",
                 "rawr/cross-data-providers": "^2.3.0",
-                "rawr/fqn-check": "^1.2.0",
-                "symfony/console": "<6.0"
+                "rawr/fqn-check": "^1.2.0"
             },
             "default-branch": true,
             "type": "library",
@@ -1015,7 +1014,7 @@
             ],
             "support": {
                 "issues": "https://github.com/T-Regx/T-Regx/issues",
-                "source": "https://github.com/T-Regx/T-Regx/tree/master"
+                "source": "https://github.com/T-Regx/T-Regx/tree/0.33.0"
             },
             "funding": [
                 {
@@ -1023,7 +1022,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-23T12:12:49+00:00"
+            "time": "2022-06-15T16:55:57+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2193,5 +2192,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
