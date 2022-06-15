@@ -22,7 +22,6 @@
       "match-details",
       "match-groups",
       "match-offsets",
-      "match-group",
       "match-as-int"
     ],
     "Replacing": [
@@ -40,9 +39,6 @@
     "Misc": [
       "delimiters",
       "count",
-      "utils",
-      "quote",
-      "valid",
       "split",
       "filter",
       "match-iterator"
@@ -53,8 +49,7 @@
     "Advanced": [
       "match-groups-in-depth",
       "match-groups-j-modifier",
-      "replace-match-details",
-      "prepared-patterns-in-details"
+      "replace-match-details"
     ],
     "PHP Hate": [
       "why-php-sucks"
