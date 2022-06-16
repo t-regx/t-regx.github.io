@@ -13,7 +13,7 @@ they have been iterated (and potentially altered) using `map()` callback (which 
 So instead of returning all elements:
 
 <CodeTabs
-    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->all();`}
+    tregx={`pattern("[\\w']+")->search("I'm 19 years old")->all();`}
     php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
 return $matches[0];`}/>
 
@@ -24,11 +24,11 @@ return $matches[0];`}/>
 
 <CodeTabs
     tregx={`pattern("[\\w']+")->match("I'm 19 years old")->map(function (Detail $detail) {
-    return strlen($detail->text());
+    return strLen($detail->text());
 });`}
     php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
 return array_map(function ($text) {
-    return strlen($text);
+    return strLen($text);
 }, $matches[0]);`}/>
 
 <!--T-Regx:{return-at(0)}-->
@@ -40,9 +40,9 @@ You can invoke `map()` with any valid PHP [`callable`] which accepts one
 string parameter (or no parameters) - just like [`first()`].
 
 <CodeTabs
-    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->map('strtoupper');`}
+    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->map('strToUpper');`}
     php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
-return array_map('strtoupper', $matches[0]);`}/>
+return array_map('strToUpper', $matches[0]);`}/>
 
 <!--T-Regx:{return-at(0)}-->
 <Result>["I'M", "19", "YEARS", "OLD"]</Result>
