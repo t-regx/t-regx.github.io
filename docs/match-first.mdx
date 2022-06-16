@@ -12,51 +12,25 @@ Matching a first occurrence in a string is the most common use-case.
 You can get the first occurrence of a pattern in a subject by calling `first()`.
 
 <CodeTabs
-    tregx={`pattern('[0-9]+')->match("I'm 19 years old")->first();`}
+    tregx={`pattern('[0-9]+')->search("I'm 19 years old")->first();`}
     php={`if (preg::match('/[0-9]+/', "I'm 19 years old", $match)) {
     return $match[0];\n}\nthrow new SubjectNotMatchedException();`}/>
 <Result>'19'</Result>
-
-If a match is **not found** in a subject, `SubjectNotMatchedException` is thrown. This is done to relieve you from the 
-[**brain strain**]. It's much easier to develop an application and *just assume* that this
-method **has** to return a value and go on. No more bothers about empty arrays and empty strings, or a possible
-`null`/`false` hiding somewhere.
 
 :::note
 If you would like to control the subject that **isn't matched** with your pattern though;
 you can do it **explicitly** with [`findFirst()`](#findfirst) (and [`orReturn()`], [`orElse()`], [`orThrow()`]).
 :::
 
-## Use `first()` with callback
-
-You can call an anonymous function for the first matched occurrence. In this example, we'll print the matched text to the 
-standard output.
-
-<CodeTabs
-    tregx={`pattern('\\w+')->match('Apples are cool')->first(function (string $match) {
-    // highlight-next-line
-    echo "I matched $match";\n});`}
-    php={`if (preg::match('/\\w+/', 'Apples are cool', $match)) {
-    // highlight-next-line
-    echo 'I matched ' . $match[0];\n}\nelse {
-    throw new SubjectNotMatchedException();
-}`}/>
-<Result text>I matched Apples</Result>
-
-:::note
-Casting [`Detail`] to `string` is the same as calling `text()` method.
-:::
-
 ### Match details
 
-With [`Detail`], you can gain access to useful information about the matched occurrence.
+With [`Detail`] and `match()`, you can gain access to useful information about the matched occurrence.
 
 <CodeTabs
-    tregx={`pattern('\\w+')->match("Apples are cool")->first(function (Detail $detail) {
-    // highlight-next-line
-    $subject = $detail->subject();
-    echo "Match '$detail' was matched inside '$subject'.";
-});`}
+tregx={`$detail = pattern('\\w+')->match("Apples are cool")->first();
+// highlight-next-line
+$subject = $detail->subject();
+echo "Match '$detail' was matched inside '$subject'.";`}
     php={`$subject = "Apples are cool";
 if (preg::match('/\\w+/', $subject, $match)) {
     $text = $match[0];
@@ -74,10 +48,9 @@ You can read more extensively about it on [`Detail`] page.
 Retrieving capturing groups from a match is really simple.
 
 <CodeTabs
-    tregx={`pattern('(?<capital>[A-Z])')->match('hello there, General Kenobi')->first(function (Detail $detail) {
-    // highlight-next-line
-    return $detail->get('capital');
-});`}
+    tregx={`$detail = pattern('(?<capital>[A-Z])')->match('hello there, General Kenobi')->first();
+// highlight-next-line
+return $detail->get('capital');`}
     php={`if (preg::match('~(?<capital>[A-Z])[a-z]+~', 'hello there, General Kenobi', $match)) {
     // highlight-next-line
     return $match['capital'][0];\n}
@@ -86,105 +59,9 @@ throw new SubjectNotMatchedException();`}/>
 <!--T-Regx:{return-at(0)}-->
 <Result>'G'</Result>
 
-Of course, `first()` callback will only be invoked if your pattern matches the subject.
-
 :::note
 You can learn more about groups on [Capturing Group](match-groups.md) page.
 :::
 
-:::note
-Even more, you can visit [Inline groups](match-group.mdx) and use `all()`, `first()`, `only()` and `offsets()`
-methods on groups.
-:::
 
-### Return value
-
-It's also possible to return your custom value from within `first()` callback. This custom value will be then returned 
-from `first()` function.
-
-<CodeTabs
-    tregx={`$first = pattern('\\w+')->match('Apples are cool')->first(function (Detail $detail) {
-    return [
-        $detail->text(),
-        strtoupper($detail->text()),
-        lcfirst($detail->text())
-    ];\n});\n
-return $first;`}
-    php={`if (preg::match('/\\w+/', 'Apples are cool', $match)) {
-    $first = [
-        $match[0],
-        strtoupper($match[0]),
-        lcfirst($match[0])
-    ];\n}\nelse {
-    throw new SubjectNotMatchedException();
-}\n
-return $first;`}/>
-<Result>['Apples', 'APPLES', 'apples']</Result>
-
-### Variable callbacks
-
-You can call `first()` for any valid PHP [`callable`] which accepts one string parameter (or no parameters).
-
-<CodeTabs
-    tregx={`return pattern('\\w+')->match('Apples are cool')->first('strtoupper');`}
-    php={`if (preg::match('/\\w+/', 'Apples are cool', $match)) {
-    // highlight-next-line
-    return call_user_func('strtoupper', $match[0]);\n}
-throw new SubjectNotMatchedException();`}/>
-<Result>'APPLES'</Result>
-
-In this example, [`Detail`] will be cast to string, which is the same as calling `Detail.text()` method.
-
-:::note
-Of course, `strtoupper` (or any other callback) is only invoked **if** your subject is matched with the pattern.
-:::
-
-### Arbitrary return types
-
-From within `first()` callback, you can return any value:
-
-<CodeTabs
-    tregx={`return pattern('\\w+')->match('Apples are cool')->first('str_split');`}
-    php={`if (preg::match('/\\w+/', 'Apples are cool', $match)) {
-    return call_user_func('str_split', $match[0]);\n}
-throw new SubjectNotMatchedException();`}/>
-<Result>['A', 'p', 'p', 'l', 'e', 's']</Result>
-
-The `first()` callback accepts all return types, including: numbers, objects, arrays, booleans and `null`:
-
-```php
-$pattern = '(?<value>\d+)(?<unit>cm|mm)';
-$subject = '192mm and 168cm or 18mm and 12cm';
-
-pattern($pattern)->match($subject)->first();                 // '192mm'
-pattern($pattern)->match($subject)->first('str_split');      // ['1', '9', '2', 'm', 'm']
-pattern($pattern)->match($subject)->first('strlen')          // 5
-```
-
-## `findFirst()`
-
-This method allows you to explicitly specify how to handle an unmatched subject. Just chain [`findFirst()`] with
-one of the following [`orReturn()`], [`orElse()`] or [`orThrow()`].
-
-<CodeTabs
-    tregx={`echo pattern('\w+')->match('Dog')
-    ->findFirst(function (Detail $match) {
-        // highlight-next-line
-        return "Yay $match";
-    })
-    ->orReturn('Aw, man :/');`}
-    php={`if (preg::match('/\w+/', 'Dog', $match)) {
-    // highlight-next-line
-    echo "Yay {$match[0]}";\n}\nelse {
-    echo 'Aw, man :/';\n}`}/>
-<Result text>Yay Dog</Result>
-
-Read on to learn more about [`findFirst()`].
-
-[`callable`]: https://www.php.net/manual/en/language.types.callable.php
 [`Detail`]: match-details.md
-[**brain strain**]: overview.mdx#brain-strain
-[`findFirst()`]: match-find-first.mdx
-[`orReturn()`]: match-find-first.mdx#orreturn
-[`orElse()`]: match-find-first.mdx#orelse
-[`orThrow()`]: match-find-first.mdx#orthrow
