@@ -40,7 +40,6 @@ const SupportLinks = () => {
         <li><Link to="/docs/replace">Replacing</Link></li>
         <li><Link to="/docs/prepared-patterns">Prepared patterns</Link></li>
         <li><Link to="/docs/delimiters">Automatic delimiters</Link></li>
-        <li><Link to="/docs/valid">Validate pattern</Link></li>
       </ul>
     </div>
 
