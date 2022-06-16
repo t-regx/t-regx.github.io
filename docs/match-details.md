@@ -37,7 +37,6 @@ Using `Detail` details, you gain access to:
   - `byteTail()`
 - [`all()`](#other-occurrences) - other matched occurrences
 - details about capturing groups, in the next chapter: [Capturing groups]
-- [User data](#other-occurrences) - sharing custom data between callbacks
 
 ## Matched text
 
@@ -270,25 +269,6 @@ pattern($pattern)->match($subject)->first(function (Detail $detail) {
 ```
 
 More about capturing groups can be found in the next section: [Capturing groups].
-
-## User data
-
-To most users this functionality will occur as redundant - it's only use case are multiple calls to callbacks, for example
-when using chained `filter()->map()`. With user data, it's possible to perform an operation in `filter()`, store its
-value in user data, and then use the value in [`map()`] without reference closure variables.
-
-```php {4,8}
-pattern('\w{2}')->match('Languages: en, de, xd, sv')
-    ->filter(function (Detail $detail) {
-        $languageInfo = HeavyService::fetch($detail->text());
-        $detail->setUserData($languageInfo);
-        return $languageInfo->isValid();
-    })
-    ->map(function (Detail $detail) {
-        $languageInfo = $detail->getUserData();
-        return $languageInfo->languages():
-    });
-```
 
 [`filter_var()`]: https://www.php.net/manual/en/function.filter-var.php
 [`mb_substr()`]: https://www.php.net/manual/en/function.mb-substr.php
