@@ -51,7 +51,7 @@ const elementLinks: {[key: string]: {content: string, link: string}} = {
 const codeLinks = {
   'pattern()': '/docs/introduction-clean#entry-points',
   'Pattern::of()': '/docs/introduction-clean#entry-points',
-  'Pattern::pcre()': '/docs/introduction-clean#entry-points',
+  'PcrePattern::of()': '/docs/introduction-clean#entry-points',
   'Pattern::inject()': '/docs/handling-user-input',
   'pattern()->test()': '/docs/match#test-a-subject',
 

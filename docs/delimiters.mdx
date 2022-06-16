@@ -39,7 +39,7 @@ echo pattern('https://github.com#heading?key=hello%20there')->delimited() . "\\n
 
 ## PCRE-style patterns
 
-If the was constructed with [`Pattern::pcre()`], method `delimited()` returns the pattern unchanged.
+If the was constructed with [`PcrePattern::of()`], method `delimited()` returns the pattern unchanged.
 
 <CodeTabs tregx={`PcrePattern::of('#Welcome/Or not#')->delimited();`}/>
 
@@ -60,13 +60,13 @@ There are two ways of using patterns with PCRE modifiers:
   Pattern::of('[A-Z][a-z]+', 'i')->match($subject)->first();
 
   // prepared patterns
-  Pattern::inject('[A-Z]@', [$_GET['name']], 'i')->match($subject)->first();
+  Pattern::inject('[A-Z]@', [$_GET['name']], 'i')->search($subject)->first();
   ```
 
 * or use an old-school pattern:
 
   ```php
-  Pattern::pcre('/[A-Z][a-z]+/i')->match($subject)->first();
+  PcrePattern::of('/[A-Z][a-z]+/i')->search($subject)->first();
   ```
 
 ## I want to break it
@@ -75,13 +75,13 @@ T-Regx has a set of predefined, suitable delimiters (like `/`, `#`, `~`, `%`, et
 doesn't occur in your pattern. If you exhaust each of them; if you use every possible, predefined,
 suitable delimiter - it will throw `ExplicitDelimiterRequiredException`.
 
-In that case, you simply have to use an explicit delimiter with [`Pattern::pcre()`].
+In that case, you simply have to use an explicit delimiter with [`PcrePattern::of()`].
 
 If you think another automatic delimiter can be used, please create [a github issue].
 
 [brain strain]: overview.mdx#brain-strain
 [`pattern()`]: introduction-safe.md#entry-points
 [`Pattern::of()`]: introduction-safe.md#entry-points
-[`Pattern::pcre()`]: introduction-safe.md#entry-points
+[`PcrePattern::of()`]: introduction-safe.md#entry-points
 [a github issue]: https://github.com/T-Regx/T-Regx/issues/new/choose
 [PHP PCRE methods]: https://www.php.net/manual/en/ref.pcre.php

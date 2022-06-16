@@ -58,7 +58,7 @@ composer require rawr/t-regx
         </p>
         <p>
           It doesn't matter whether the pattern was constructed
-          with <Link>Pattern::of()</Link>, <Link>pattern()</Link>, <Link>Pattern::pcre()</Link>, <Link>Pattern::inject()</Link> or <Link>Pattern::template()</Link>.
+          with <Link>Pattern::of()</Link>, <Link>pattern()</Link>, <Link>Pattern::inject()</Link> or <Link>Pattern::template()</Link>.
           The <Link>Detail</Link> is always the same.
         </p>
         <p>

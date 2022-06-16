@@ -57,10 +57,10 @@ Pattern::inject("https?://@/index\.php", [$_GET["domain"]], 'mS');
 ## PCRE-styled patterns
 
 Should there be a need for your own delimiters, or you just want to use PCRE style, simply use
-`PatternBuilder::builder()->pcre()->` method, instead of `Pattern::` facade:
+`PcrePattern::`, instead of `Pattern::`:
 
 ```php
-PatternBuilder::builder()->pcre()->inject("/https?://@/index\.php/m", [$_GET["domain"]], 'S');
+PcrePattern::inject("/https?://@/index\.php/m", [$_GET["domain"]], 'S');
 ```
 
 ## Old-school pattern quoting
