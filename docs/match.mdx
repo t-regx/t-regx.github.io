@@ -8,8 +8,8 @@ import {CodeTabs, Result} from './code';
 Using `pattern()->match()` you can:
  - Test a subject against a pattern: [`test()`]/[`fails()`]
  - Retrieve matches from the subject: [`first()`]/[`all()`]/[`only()`]
- - Get capturing groups from matches: [`group()`]/[`Detail.group()`]/[`groups()`]
- - Invoke callbacks for matches: [`first()`]/[`findFirst()`]/[`forEach()`]/[`map()`]/[`flatMap()`]
+ - Get capturing groups from matches: [`Detail.get()`], [`Detail.group()`]
+ - Try functional approach: [`forEach()`]/[`map()`]/[`flatMap()`]
 
 ## Test a subject
 
@@ -32,7 +32,7 @@ Of course `pattern()->match()` throws an exception if the pattern is invalid (or
 To get the first occurrence of a matched pattern, call [`first()`].
 
 <CodeTabs
-    tregx={`pattern('[0-9]+')->match("I'm 19 years old. I was born in 1999")->first();`}
+    tregx={`pattern('[0-9]+')->search("I'm 19 years old. I was born in 1999")->first();`}
     php={`if (preg::match('/[0-9]+/', "I'm 19 years old. I was born in 1999", $match)) {
     return $match[0];
 }
@@ -46,7 +46,7 @@ Read on the [next page](match-first.mdx) to learn more about [`first()`].
 You can easily retrieve matched occurrences of a pattern in your subject.
 
 <CodeTabs
-    tregx={`pattern('[0-9]+')->match("I'm 19. I was born in 1999, on May 12")->all();`}
+    tregx={`pattern('[0-9]+')->search("I'm 19. I was born in 1999, on May 12")->all();`}
     php={`preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
 return $matches[0];`}/>
 <Result>['19', '1999', '12']</Result>
@@ -54,7 +54,7 @@ return $matches[0];`}/>
 You can limit your matches with `only(int)`.
 
 <CodeTabs
-    tregx={`pattern('[0-9]+')->match("I'm 19. I was born in 1999, on May 12")->only(2);`}
+    tregx={`pattern('[0-9]+')->search("I'm 19. I was born in 1999, on May 12")->only(2);`}
     php={`preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
 return array_slice($matches[0], 0, 2);`}/>
 <Result>['19', '1999']</Result>
@@ -66,6 +66,7 @@ return array_slice($matches[0], 0, 2);`}/>
 [`only()`]: #many
 [`group()`]: match-details.md
 [`Detail.group()`]: match-details.md
+[`Detail.get()`]: match-details.md
 [`groups()`]: match-details.md
 [`first()`]: match-first.mdx#use-first-with-callback
 [`findFirst()`]: match-find-first.mdx
