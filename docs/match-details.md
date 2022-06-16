@@ -159,10 +159,12 @@ pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Det
 character safe and returns offset in characters, whereas `Detail.byteOffset()` returns the offset in bytes.
 
 ```php
-pattern('here')->match('Apples for 0.30€, here')->first(function (Detail $detail) {
-    $characters = $detail->offset();   // 18
-    $byes = $detail->byteOffset();     // 20
-});
+$pattern = Pattern::of('here');
+
+$detail = $pattern->match('Apples for 0.30€, here')->first();
+
+$characters = $detail->offset();   // 18
+$byes = $detail->byteOffset();     // 20
 ```
 
 Here's what the numbers mean:
@@ -193,10 +195,10 @@ Use:
 Method `Detail.tail()` simply returns the position of the last character in a matched occurrence.
 
 ```php
-pattern('ipsum')->match('Lorem ipsum')->first(function (Detail $detail) {
-    $start = $detail->offset();   // 6
-    $end = $detail->tail();       // 11
-});
+$detail = pattern('ipsum')->match('Lorem ipsum')->first();
+
+$start = $detail->offset();   // 6
+$end = $detail->tail();       // 11
 ```
 
 There's also `Detail.byteTail()` which returns the tail in bytes, instead of characters.
