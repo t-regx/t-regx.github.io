@@ -20,7 +20,8 @@ For example:
 
 <CodeTabs
     tregx={`return pattern('[0-9]+')->match("I'm 19 years old")
-   ->findFirst(function (Detail $match) {
+   ->findFirst()
+   ->map(function (Detail $match) {
        // highlight-next-line
        return "I was born $match years ago";
    })
@@ -42,7 +43,8 @@ If a match is not found, it returns a default value.
 
 <CodeTabs
     tregx={`return pattern('[0-9]+')->match("I'm a dog")
-    ->findFirst(function (Detail $match) {
+    ->findFirst()
+    ->map(function (Detail $match) {
        return "I was born $match years ago";
     })
     // highlight-next-line
@@ -60,13 +62,14 @@ return "Match is not found";`}/>
 If a match is not found, it calls `orElse()` callback and uses *it* to evaluate a return value.
 
 <CodeTabs
-    tregx={`return pattern('[0-9]+')->match("I'm a dog")
-    ->findFirst(function (Detail $match) {
+    tregx={`return pattern('[0-9]+')->search("I'm a dog")
+    ->findFirst()
+    ->map(function (string $match) {
        return "I was born $match years ago";
     })
-    ->orElse(function (NotMatched $notMatched) { 
+    ->orElse(function () {
         // highlight-next-line
-        return "I couldn't match subject: " . $notMatched->subject();
+        return "I couldn't match subject";
     });`}
     php={`$subject = "I'm a dog";
 if (preg::match('/[0-9]+/', $subject, $match)) {
@@ -74,48 +77,12 @@ if (preg::match('/[0-9]+/', $subject, $match)) {
     return "I was born $text years ago";
 }
 // highlight-next-line
-return "I couldn't match subject: $subject";`}/>
-<Result>"I couldn't match subject: I'm a dog"</Result>
-
-Callback of `orElse()` is called with `NotMatched`, which contains only a handful of methods
-from [`Detail`]: `subject()`, `groupNames()`, `groupsCount()` and `hasGroup($nameOrIndex)`.
+return "I couldn't match subject";`}/>
+<Result>"I couldn't match subject"</Result>
 
 ### `orThrow()`
 
-If a match is not found, it throws `SubjectNotMatchedException` by default.
-
-<CodeTabs
-    tregx={`try {
-    return pattern('[0-9]+')->match("I'm a dog")
-        ->findFirst(function (Detail $detail) {
-            return "Match is found!";
-        })
-        // highlight-next-line
-        ->orThrow();
-}
-catch (SubjectNotMatchedException $e) {
-    // React to an unmatched subject
-    echo "Not matched: " . $e->getMessage();
-}`}
-     php={`try {
-    if (preg::match('/[0-9]+/', "I'm a dog")) {
-        return "Match is found!";
-    }
-    // highlight-next-line
-    throw new SubjectNotMatchedException(
-        // highlight-next-line
-        'Expected to get the first match, but subject was not matched',
-        // highlight-next-line
-        "I'm a dog");
-}
-catch (SubjectNotMatchedException $e) {
-    // React to an unmatched subject
-    echo "Not matched: " . $e->getMessage();
-}`}/>
-
-### Custom exceptions for `orThrow()`
-
-You can also supply your own exception class name.
+Returns the optional value, or throws the specified exception.
 
 <CodeTabs
     tregx={`class MyException extends \\Exception {}\n
@@ -125,11 +92,11 @@ try {
             return "Match is found!";
         })
         // highlight-next-line
-        ->orThrow(MyException::class);
+        ->orThrow(new MyException());
 }
 catch (MyException $e) {
     // React to an unmatched subject
-    echo "Not matched: " . $e->getMessage();
+    echo "Not matched";
 }`}
      php={`class MyException extends \\Exception {}\n
 try {
@@ -137,58 +104,11 @@ try {
         return "Match is found!";
     } 
     // highlight-next-line
-    throw new MyException('Expected to get the first match, but subject was not matched');
+    throw new MyException();
 }
 catch (MyException $e) {
     // React to an unmatched subject
-    echo "Not matched: " . $e->getMessage();
-}`}/>
-
-Of course, your custom exception must meet certain requirements:
-
-- **It has to be a class**
-  
-  Trying to instantiate interfaces or abstract classes would break our "Explicity rule"
-  The class must be concrete and explicit.
-
-- **It has to implement `\Throwable`**
-  
-  Obviously.
-
-- **It must have a suitable constructor**
-
-  The class must be instantiable with one of the following signatures and parameter types.
-
-   - `__construct()`
-   - `__construct($message)`, where `$message` can be a string
-   - `__construct($message, $subject)`, where `$message` and `$subject` can be strings
-
-:::note Notice!
-Using `findFirst()->orThrow()` without your custom exception is **identical** to `first()`.
-:::
-
-## I don't like functional
-
-If you don't like functional programming style, you are free to use [`first()`]
-(which throws an exception) and just catch it.
-
-<CodeTabs
-    tregx={`try {
-    // highlight-next-line
-    return pattern('[0-9]+')->match("I'm a dog")->first();
-}
-catch (SubjectNotMatchedException $e) {
-    return "Some other value";
-}`}
-    php={`try {
-    if (preg::match('/[0-9]+/', "I'm a dog", $match)) {
-        return $match[0];
-    }
-    // highlight-next-line
-    throw new SubjectNotMatchedException();
-}
-catch (SubjectNotMatchedException $e) {
-    return 'Some other value';
+    echo "Not matched";
 }`}/>
 
 [`first()`]: match-first.mdx
