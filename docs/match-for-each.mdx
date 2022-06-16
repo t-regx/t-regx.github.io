@@ -8,6 +8,16 @@ import {CodeTabs, Result} from './code';
 Use `forEach()` to easily iterate matched occurrences with your callback. You can call `forEach()` with a callback,
 that's invoked with [`Detail`] details just like [`first()`] and [`findFirst()`].
 
+`forEach()` is identical to simply iterating the matcher.
+
+```php
+$matcher = Pattern::of('\w+')->match('I like trains');
+
+foreach ($matcher as $detail) {
+    // use detail
+}
+```
+
 <CodeTabs
     tregx={`// highlight-next-line
 pattern('\\w+')->match('Apples are cool')->forEach(function (Detail $match) {
@@ -21,10 +31,6 @@ array_map(function (string $text) {
 <Result text>I matched Apples, I matched are, I matched cool, </Result>
 
 Using [`Detail`] you can get detailed information such as [`offset()`], [`index()`] etc.
-
-:::note
-`forEach()` accepts [`Detail`] details, but [`Detail`] can be cast to `(string)`.
-:::
 
 ## Vanilla PHP `foreach`
 
@@ -41,53 +47,6 @@ foreach ($matches[0] as $text) {
     echo "I matched $text, ";
 }`}/>
 <Result text>I matched Apples, I matched are, I matched cool, </Result>
-
-### Other iterable entities
-
-In the further chapters you will learn about inline [`offsets()`], [`group(string|int)`] and [`asInt()`] methods in detail,
-but for now, you only need to know that all of those entities are iterable with PHP `foreach`.
-
-<CodeTabs
-    tregx={`// highlight-next-line
-foreach (pattern('\\d+')->match('127.0.0.1')->asInt() as $digit) {
-    return $digit; // 127\n}`}
-    php={`// highlight-next-line
-preg_match_all('/\\d+/', '127.0.0.1', $matches);
-// highlight-next-line
-foreach ($matches[0] as $text) {
-    $digit = Integer::parse($text);
-    return $digit; // 127;\n}`}/>
-<Result>127</Result>
-
-or
-
-<CodeTabs
-    tregx={`// highlight-next-line
-foreach (pattern('(\\d+)')->match('127.0.0.1')->group(1) as $group) {
-    return $group->text(); // '127'\n}`}
-    php={`// highlight-next-line
-preg_match_all('/(\\d+)/', '127.0.0.1', $matches);
-// highlight-next-line
-foreach ($matches[1] as $group) {
-    return $group; // '127';\n}`}/>
-<Result>'127'</Result>
-
-Of course, if you call `->all()` on any of the given entities above you will receive an `array`, which is of course
-also iterable by PHP `foreach`.
-
-<CodeTabs
-    tregx={`// highlight-next-line
-foreach (pattern('\\d+')->match('127.0.0.1')->all() as $text) {
-    return $text; // '127'\n}`}
-    php={`// highlight-next-line
-preg_match_all('/\\d+/', '127.0.0.1', $matches);
-// highlight-next-line
-foreach ($matches[0] as $text) {
-    return $text; // '127';\n}`}/>
-<Result>'127'</Result>
-
-Although, instead of `all()` it's possible to chain the entities with one of the more high-level T-Regx methods, such as:
-`forEach()`/[`map()`]/[`flatMap()`] etc.
 
 [`Detail`]: match-details.md
 [`offset()`]: match-details.md#offsets
