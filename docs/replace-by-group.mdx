@@ -11,8 +11,6 @@ optionally handling what should happen when a group is not matched.
 This is, in fact, a shorthand for a rather common usage of `callback()` with a function replacing by a capturing
 group - [scroll down to see an example](replace-by-group.mdx#identity).
 
-Apart from replacing by an inline group, you can also retrieve matched capturing groups with [inline groups].
-
 ## Overview
 
 There are several URL addresses in `$links` variable. Given a regular expression matching a URL, with a group
@@ -313,7 +311,6 @@ pattern('(https?://)?(www\.)?(?<domain>[\w-]+)\.(com|io)')->replace($links)
 [`Detail`]: match-details.md
 [`findFirst()`]: match-find-first.mdx
 [findFirst()->orThrow()]: match-find-first.mdx
-[inline groups]: match-group.mdx
 [`PREG_OFFSET_CAPTURE`]: https://www.php.net/manual/en/pcre.constants.php
 [`\InvalidArgumentException`]: https://www.php.net/manual/en/class.invalidargumentexception.php
 [`preg_replace()`]: https://www.php.net/manual/en/function.preg-replace.php
