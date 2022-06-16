@@ -27,12 +27,12 @@ Method `flatMap()` is basically method [`map()`], from which you can return mult
 <CodeTabs
     tregx={`pattern('\\w+')->match('I have 19 trains')->flatMap(function (Detail $detail) {
     return [
-        $detail->text(), strlen($detail)
+        $detail->text(), strLen($detail)
     ];\n});`}
     php={`preg::match_all("/\\w+/", 'I have 19 trains', $matches);
 return array_merge(...array_map(function (string $text) {
     return [
-        $text, strlen($text)
+        $text, strLen($text)
     ];
 }, $matches[0]));`}/>
 
@@ -84,11 +84,11 @@ The [`callable`] passed to `flatMap()` must return an array. `InvalidReturnValue
 
 ## Mapping with keys
 
-Because `flatMap()` receives an array from its callback, it's possible to also return an associative array with
+Because `flatMapAssoc()` receives an array from its callback, it's possible to also return an associative array with
 specified keys:
 
 <CodeTabs
-    tregx={`pattern("\\w+")->match("Apples are cool")->flatMap(function (Detail $detail) {
+    tregx={`pattern("\\w+")->match("Apples are cool")->flatMapAssoc(function (Detail $detail) {
     return [$detail->text() => $detail->offset()];   // offset is UTF-8 safe\n});`}
     php={`preg::match_all("/\\w+/", "Apples are cool", $matches, PREG_OFFSET_CAPTURE);
 return array_merge(...array_map(function (array $match) {
@@ -107,12 +107,12 @@ return array_merge(...array_map(function (array $match) {
 <!--Result-Value:{return-semi}-->
 
 :::note
-Keep in mind, that `flatMap()` uses [`array_merge()`] to flatten the results! So If you use `int` as a key, or even
-a `string` with numeric values (like `'19'`) they will be **reindexed** by [`array_merge()`].
+Keep in mind, that `flatMap()` uses [`array_merge()`] to flatten the results! So any keys returned will be
+reindexed.
 :::
 
 :::note
-`Detail.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all`
+`Detail.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all()`
 counts them as [bytes](match-details.md#offsets). To return bytes number with T-Regx as well,
 use [`byteOffset()`](match-details.md#offsets).
 :::
@@ -122,7 +122,7 @@ use [`byteOffset()`](match-details.md#offsets).
 Duplicate keys are not allowed in PHP arrays, so they'll only appear once in the results.
 
 <CodeTabs
-    tregx={`pattern("\\w+")->match("Apples are cool")->flatMap(function (Detail $detail) {
+    tregx={`pattern("\\w+")->match("Apples are cool")->flatMapAssoc(function (Detail $detail) {
     return [
         $detail->text() => $detail->offset(),   // offset is UTF-8 safe
         'subject'       => $detail->subject()

@@ -121,7 +121,7 @@ class MarkupResultConsistencyTest extends TestCase
         $lines = $this->addSingleLineReturn($lines);
         $lines = $this->replaceCodeFragments($lines, [
             'new SubjectNotMatchedException()'  => 'new SubjectNotMatchedException("","")',
-            'new InvalidReturnValueException()' => 'new InvalidReturnValueException("","",new \TRegx\CleanRegex\Internal\ValueType(""))'
+            'new InvalidReturnValueException()' => 'new InvalidReturnValueException("","",new \TRegx\CleanRegex\Internal\Type\ValueType(""))'
         ]);
         $lines = $this->protectAgainstClassRedeclaration($lines);
         $comment = ['', "// Snippet $snippet from $filename", '',];
