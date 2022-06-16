@@ -28,7 +28,6 @@
       "replace",
       "replace-with",
       "replace-callback",
-      "replace-by-group",
       "replace-by-map"
     ],
     "Prepared Patterns": [
