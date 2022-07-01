@@ -16,7 +16,6 @@ import matchDetails from "../data/matchDetails.php";
 import replaceDetails from "../data/replaceDetails.php";
 import phpstormTooltip from "../../static/img/pages/phpstorm.tooltip.png";
 import preparedPatterns from "../data/preparedPatterns.php";
-import replaceByGroupMap from "../data/replaceByGroupMap.php";
 
 const usernamePattern = `^[a-zA-Z][a-zA-Z0-9]{1,15}$`;
 
@@ -102,30 +101,6 @@ composer require rawr/t-regx
     {
       body: <img src={phpstormTooltip} alt="Written with clean design in mind"/>,
       col: 7
-    },
-  ],
-  replaceByGroupMap: [
-    {body: <PhpCode>{replaceByGroupMap}</PhpCode>},
-    {
-      title: 'Functional programming',
-      body: <>
-        <p>
-          You can use either <Link>pattern()</Link> or <Link>pattern()</Link>, or <Link>Prepared Patterns</Link>.
-        </p>
-        <p>
-          <Markdown>
-            T-Regx utilizes chainable, functional programming with methods like `filter()`, [`map()`](docs/match-map),
-            [`flatMap()`](docs/match-map#flatmap), [`first()`](docs/match-first)/[`findFirst()`](docs/match-find-first),
-            etc.
-          </Markdown>
-        </p>
-        <p>
-          <Markdown>
-            Apart from standard functional methods, T-Regx provides dedicated methods, suited more for working with
-            `string`s and capturing groups from T-Regx, like `map()`, `mapIfExists()`, `mapAndCallback()`, etc.
-          </Markdown>
-        </p>
-      </>
     },
   ],
   preparedPatterns: [
