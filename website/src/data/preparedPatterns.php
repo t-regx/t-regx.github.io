@@ -13,10 +13,9 @@ $match = $pattern->match($message);
 
 // call Detail for the first match
 // highlight-next-line
-$match->first(function (Detail $detail) {
-  // scheme
-  $scheme = $detail->get('scheme');
+$detail = $match->first();
 
-  // domain
-  $domain = $detail->get('domain');
-});
+// scheme
+$scheme = $detail->get('scheme');
+// domain
+$domain = $detail->get('domain');
