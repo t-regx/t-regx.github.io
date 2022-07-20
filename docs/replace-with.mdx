@@ -107,14 +107,15 @@ against _an unexpected_ `\` or `$` - feel free to use `withReferences()` which *
 <!--PHP:{echo-at(first)}-->
 <Result text>{`I have <15> and <192>`}</Result>
 
-However, this is not recommended. For that, try using [`replace()->by()->group()`] or [`replace()->callback()`].
+However, this is not recommended. For that, try using [`replace()->callback()`].
 
 The only valid use-cases for `withReferences()` is:
  - Performance (since `withReferences()` uses [`preg_replace()`], and not [`preg_replace_callback()`])
  - Migration from `preg_replace()` used in legacy codebase
 
 :::note
-Using `withReferences()` is not recommended. Instead, try using `with()`, `by()->map()` or `callback()`.
+Using `withReferences()` is not recommended, since it exposes part of PHP regexps API, and
+isn't actually part of T-Regx. Instead, try using `with()` or `callback()`.
 
 We don't encourage its usage, but we're keeping it nonetheless, to allow users to decide for
 themselves whether they want to use T-Regx API, or stay with PHP replace style.

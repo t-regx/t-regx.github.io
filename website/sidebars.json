@@ -27,8 +27,7 @@
     "Replacing": [
       "replace",
       "replace-with",
-      "replace-callback",
-      "replace-by-map"
+      "replace-callback"
     ],
     "Prepared Patterns": [
       "handling-user-input",
