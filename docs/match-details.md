@@ -46,10 +46,10 @@ There are 6 similar ways to get the value of the matched occurrence.
 $detaill = pattern('[A-Z][a-z]+')->match('I like Trains')->first();
 
 $detail->text();             // using text() method
+$detail->get(0);             // group #0 is the whole match in all regexp engines
 $detail->group(0)->text();   // group #0 is the whole match in all regexp engines
 
 (string) $detail;            // cast it to string
-(string) $detail->group(0);  // cast group #0 to string
 "$detail";                   // enclose it in double quotes
 ```
 
@@ -57,7 +57,7 @@ or you can just accept `string` in the callback signature.
 
 ```php
 pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (string $match) {
-    return $match;
+    return $match; // string ('Trains')
 });
 ```
 
@@ -69,7 +69,7 @@ There's also Unicode-safe method `length()` which returns the length of a matche
 
 ```php
 pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Detail $detail) {
-    return $detail->text();     // 'Trains'
+    return $detail->text();     // string ('Trains')
     return $detail->length();   // 6
 });
 ```
@@ -111,7 +111,7 @@ if ($detail->isInt()) {
 ```
 
 :::note
-It's implemented with [`filter_var()`], but you can think of it as `/^-?\d+$/` with max/min values check.
+It's implemented with [`filter_var()`], but you can think of it as `/^-?[0-9]+$/` with max/min values check.
 :::
 
 ## Subject
@@ -244,6 +244,9 @@ $text = $detail->text();                            // '192mm'
 
 $value = (string) $detail->group('value');          // '192'
 $unit  =          $detail->group('unit')->text();   // 'mm'
+
+$value = $detail->get('value');                     // '192'
+$unit  = $detail->get('unit');                      // 'mm'
 
 ```
 

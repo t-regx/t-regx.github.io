@@ -32,7 +32,6 @@ Using [`Detail`], you gain access complete information about capturing groups:
 - [`orReturn()`](#optional-groups)/[`orElse()`](#optional-groups)/[`orThrow()`](#optional-groups) - returns a group, or controls the absence of the group
 - [`index()`](#index-name-and-identifier) - ordinal value of the capturing group in a pattern
 - [`name()`](#index-name-and-identifier) - name of the capturing group, or `null` of group is not named
-- [`usedIdentifier()`](#index-name-and-identifier) - either `index()` or `name()`, depending on the argument of `group(int|string)`
 - [`all()`](#other-occurrences) - other matched occurrences of the group
 - [`matched(int|string)`](#optional-groups) - whether the group was matched by the subject
 - [`groupExists(int|string)`](#nonexistent-groups) - whether group was used in a pattern
@@ -87,11 +86,10 @@ pattern($pattern)->match($subject)->forEach(function (Detail $detail) {
 Groups can be referred to either by an index or by name, if the group in a pattern is named. What was the group referred
 with is called an identifier. If group was referred to by an index, then the index is the identifier.
 
-T-Regx has 3 separate methods for each of the group reference method:
+T-Regx has 2 separate methods for each of the group reference method:
 
 - `index()` - returns the ordinal number of a group
 - `name()` - returns the name of a group, or `null` if the group is not named
-- `usedIdentifier()` - returns either `index()` or `name()`, depending on what was the group referred with
 
 ```php
 $pattern = Pattern::of('(?<schema>https?://)?\w+\.\w+');
@@ -103,9 +101,6 @@ $detail->group('schema')->index();           //  1
 
 $detail->group(1)->name();                   // 'schema'
 $detail->group('schema')->name();            // 'schema'
-
-$detail->group(1)->usedIdentifier();         //  1
-$detail->group('schema')->usedIdentifier();  // 'schema'
 ```
 
 ## Optional Groups
