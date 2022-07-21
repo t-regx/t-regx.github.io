@@ -4,7 +4,7 @@ title: Capturing groups
 ---
 
 When using [`pattern()->match()`] and [`pattern()->replace->callback()`], some methods receive a callback that accepts [`Detail`]
-details object. These methods are: [`first()`], [`findFirst()`], [`forEach()`], [`map()`], [`flatMap()`], [`callback()`].
+details object. These methods are: [`forEach()`], [`map()`], [`flatMap()`], `filter()`, [`callback()`].
 
 The details can be used to get concise information about the matched occurrence, such as its value
 (i.e. `"the whole match"`), capturing groups and their UTF-8/raw offsets, limits, indexes, other matches as well as the

@@ -69,8 +69,7 @@ return array_merge(...array_map(function (string $text) {
 
 ## Variable callbacks
 
-You can invoke `flatMap()` with any valid PHP [`callable`], which accepts one or zero string parameters
-(just like [`first()`] and [`map()`]) and returns `array`.
+You can invoke `flatMap()` with any valid PHP [`callable`], which accepts one or zero string parameters and returns `array`.
 
 <CodeTabs
     tregx={`pattern("[\\w']+")->match("I'm 19 years old")->flatMap('str_split');`}

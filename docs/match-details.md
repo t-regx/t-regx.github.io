@@ -15,7 +15,13 @@ used subject (although it could also be pass as a closure parameter) and more.
 For example, to read the offset at which the occurrence was matched, use `Detail.offset()`:
 
 ```php
-$detail = pattern('[A-Z][a-z]+')->match('I like Trains')->first();
+// Instantiate pattern
+$pattern = pattern('[A-Z][a-z]+');
+
+// match the first occurence 
+$detail = $pattern->match('I like Trains')->first();
+
+// read position of the first match
 $detail->offset(); // 2
 ```
 
@@ -56,7 +62,11 @@ $detail->group(0)->text();   // group #0 is the whole match in all regexp engine
 or you can just accept `string` in the callback signature.
 
 ```php
-pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (string $match) {
+// Instantiate pattern
+$pattern = Pattern::of('[A-Z][a-z]+');
+
+// map each occurrence
+$pattern->match('I like Trains')->map(function (string $match) {
     return $match; // string ('Trains')
 });
 ```
@@ -68,7 +78,11 @@ whole match is also group `0` in regular expressions.
 There's also Unicode-safe method `length()` which returns the length of a matched text.
 
 ```php
-pattern('[A-Z][a-z]+')->match('I like Trains')->map(function (Detail $detail) {
+// Instantiate pattern
+$pattern = Pattern::of('[A-Z][a-z]+');
+
+// map each occurrence
+$pattern->match('I like Trains')->map(function (Detail $detail) {
     return $detail->text();     // string ('Trains')
     return $detail->length();   // 6
 });
@@ -129,9 +143,11 @@ pattern('[A-Z][a-z]+')->match('I like Trains')->map(fn(Detail $detail) => $detai
 This is equivalent to storing the subject in a variable and using it in your closure.
 
 ```php
-$subject = 'I like Trains';
+// Instantiate pattern
+$pattern = pattern('[A-Z][a-z]+');
 
-pattern('[A-Z][a-z]+')->match($subject)->map(fn(Detail $detail) => $subject);
+// map each occurrence
+$pattern->match('I like Trains')->map(fn(Detail $detail) => 'I like Trains');
 ```
 
 ## Ordinal value (index)
@@ -155,7 +171,7 @@ pattern('\w+')->match('I like Trains, but I also like bikes')->map(function (Det
 
 ## Offsets
 
-`Detail.offset()` can be used to get the offset of the matched occurrence in the subject. `Detail.offset()` is multi-byte 
+`Detail.offset()` can be used to get the offset of the matched occurrence in the subject. `Detail.offset()` is unicode 
 character safe and returns offset in characters, whereas `Detail.byteOffset()` returns the offset in bytes.
 
 ```php
@@ -182,7 +198,7 @@ A  p   p   l   e   s      f   o   r      0  .  3  0  €           ,     h   e  
                                                                        byteOffset()
 ```
 
-In other words, `offset()` treats bytes `[226, 130, 172]` as one multi-byte character (euro sign `€`) and counts them as
+In other words, `offset()` treats bytes `[226, 130, 172]` as one unicode character (euro sign `€`) and counts them as
 one; whereas `byteOffset()` would count them as three.
 
 Use:

@@ -12,8 +12,7 @@ But what if you **expected** the subject not to be matched? And how do you to re
 
 ## Optional matches with `findFirst()`
 
-Method `findFirst()` can be called with a callback (that accepts [`Detail`]) just like [`first()`].
-The difference is: `findFirst()` never throws `SubjectNotMatchedException`, and allows you to control an unmatched subject by
+`findFirst()` never throws `SubjectNotMatchedException`, and allows you to control an unmatched subject by
 appropriate control methods: `orThrow()`, `orReturn()` and `orElse()`.
 
 For example:
