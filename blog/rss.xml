@@ -15,16 +15,16 @@
             <description><![CDATA[Rawwrrrr!]]></description>
         </item>
         <item>
-            <title><![CDATA[Announcement - Prepared patterns revamp]]></title>
-            <link>https://t-regx.com/blog/2021/07/10/revamp-announcement</link>
-            <guid>Announcement - Prepared patterns revamp</guid>
+            <title><![CDATA[Announcement - Prepared patterns simplification]]></title>
+            <link>https://t-regx.com/blog/2021/07/10/simplification-of-prepared-patterns</link>
+            <guid>Announcement - Prepared patterns simplification</guid>
             <pubDate>Sat, 10 Jul 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Rawwrrrr!]]></description>
         </item>
         <item>
-            <title><![CDATA[Announcement - Prepared patterns simplification]]></title>
-            <link>https://t-regx.com/blog/2021/07/10/simplification-of-prepared-patterns</link>
-            <guid>Announcement - Prepared patterns simplification</guid>
+            <title><![CDATA[Announcement - Prepared patterns revamp]]></title>
+            <link>https://t-regx.com/blog/2021/07/10/revamp-announcement</link>
+            <guid>Announcement - Prepared patterns revamp</guid>
             <pubDate>Sat, 10 Jul 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Rawwrrrr!]]></description>
         </item>
@@ -232,18 +232,18 @@
             <description><![CDATA[Hello there! Another update, this time there's more to it - much has changed.]]></description>
         </item>
         <item>
-            <title><![CDATA[What's new, new, new! Part 2]]></title>
-            <link>https://t-regx.com/blog/2017/12/30/safe-regex</link>
-            <guid>What's new, new, new! Part 2</guid>
-            <pubDate>Sat, 30 Dec 2017 00:00:00 GMT</pubDate>
-            <description><![CDATA[I've separated the library into CleanRegex and SafeRegex. The SafeRegex is an exact copy of all preg_*() methods]]></description>
-        </item>
-        <item>
             <title><![CDATA[What's new, new, new!]]></title>
             <link>https://t-regx.com/blog/2017/12/30/delimiters</link>
             <guid>What's new, new, new!</guid>
             <pubDate>Sat, 30 Dec 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[Another quickly update what's going on with CleanRegex :)]]></description>
+        </item>
+        <item>
+            <title><![CDATA[What's new, new, new! Part 2]]></title>
+            <link>https://t-regx.com/blog/2017/12/30/safe-regex</link>
+            <guid>What's new, new, new! Part 2</guid>
+            <pubDate>Sat, 30 Dec 2017 00:00:00 GMT</pubDate>
+            <description><![CDATA[I've separated the library into CleanRegex and SafeRegex. The SafeRegex is an exact copy of all preg_*() methods]]></description>
         </item>
         <item>
             <title><![CDATA[Back on track!]]></title>
