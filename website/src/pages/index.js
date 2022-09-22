@@ -19,16 +19,13 @@ import sections from '../config/sections';
 import {fiddleUrl} from "../../consts";
 
 import styles from './styles.module.scss';
-import AutumnDino from "../components/AutumnDino";
 
 export default function Index() {
     const context = useDocusaurusContext();
     const {siteConfig = {}} = context;
 
     return <Layout>
-        <HomeSplash
-            title={siteConfig.title}
-            tagline={siteConfig.tagline}/>
+        <HomeSplash title="T-Regx" tagline={siteConfig.tagline}/>
         <div className="mainContainer" style={{overflow: 'hidden'}}>
             <GridBlock darkBackground scrollableBackground>
                 <QuizOpeningSlide/>
