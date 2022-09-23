@@ -1,5 +1,5 @@
 ---
-id: composite-pattern
+id: pattern-list
 title: Multiple patterns
 ---
 
