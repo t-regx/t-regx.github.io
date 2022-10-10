@@ -1,0 +1,125 @@
+---
+id: introduction
+title: Introduction to T-Regx
+---
+
+T-Regx provides clean API for regular expressions, as well as solving more complicated
+issues with PHP regex (like eliminating false positives, validating groups) and including
+features utterly missing in PHP: Prepared patterns, composite patterns, built-alteration
+and more, as well as removing uncertainty with false negatives and false positives.
+
+## Entry points
+
+We have multiple entry methods to create `Pattern`, each with its own use case:
+ - Standard pattern - `Pattern::of('\d+')`
+ - Prepared patterns - to safely use user data in patterns (see [Prepared Patterns](handling-user-input.md))
+ - Pattern lists - `Pattern::list(['\d+', '[a-z]+'])` to use many patterns at once
+ - Literal string value - `Pattern::literal('[]?')` (identical to `Pattern::of('\[\]\?')`)
+
+Additionally, compatibility API remains available, which accepts delimiters
+ - Compatibility legacy - `PcrePattern::of('/\d+/m')` to use vanilla patterns
+
+### Standard pattern
+
+```php
+use TRegx\CleanRegex\Pattern;
+ 
+Pattern::of('[A-Z][a-z]+')->test($subject);
+```
+
+Additionally, as a convenience method, `pattern()` global function is just an alias for `Pattern::of()`.
+
+```php
+pattern('/[A-Z]#[a-z]+')->test($subject);
+```
+
+### T-Regx prepared patterns
+
+With `Pattern::inject()` placeholder `@` is being injected with the literal value of figures pass
+as the second argument of `Pattern::inject()`.
+
+```php
+use TRegx\CleanRegex\Pattern;
+
+/**
+ * Example of prepared patterns
+ */
+$pattern = Pattern::inject('^\d+:@$', [$_GET['user']]);
+
+/**
+ * Test your pattern against subject "14:mark"
+ */
+$pattern->test('14:mark'); // true, if $_GET['user'] == 'mark'
+```
+
+You can learn more about prepared patterns in [Prepared Patterns](prepared-patterns.md).
+
+### Pattern lists in T-Regx
+
+Using `Pattern::list()` results an instance of `PatternList`, which contains the list of the patterns.
+`PatternList` exposes multiple methods which act on the list of patterns. It is preferable to call
+`PatternList.testAny()` instead of calling `Pattern.test()` in a loop, since `PatterList` will use
+performance optimisations.
+
+```php
+<?php
+
+/**
+ * @var PatternList $patternList
+ */
+$patternList = Pattern::list([
+    '\d+',
+    '[a-z]+'
+]);
+
+/**
+ * Check if any of the pattern matches the subject
+ */
+$patternList->testAny($_GET['input']);
+```
+
+`Pattern:list()` also accepts instances of `Pattern`. Any T-Regx method that instantiates `Pattern`
+can be used with `Pattern::list()`.
+
+```php
+<?php
+
+/**
+ * @var PatternList $patternList
+ */
+$patternList = Pattern::list([
+    '\d+',
+    Pattern::of('\d+'),
+    Pattern::inject(':?@', ['value']),
+    PcrePattern::of('/[a-z]+/')
+]);
+```
+
+Passing `string` into `Pattern::list()` ins the same as passing that very same string in `Pattern::of()` before
+adding it to the list.
+
+`PatternList` cannot contain other instances of `PatternList`.
+
+You can learn more about `Pattern::list()` in [Multiple patterns].
+
+## Deliberate delimiters
+
+If `pattern()` or `Pattern::of()` is used with a delimited pattern, then characters `"/"` will simply be treated literally
+
+```php
+<?php
+pattern('/[A-Z]/'); // matches characters "/", a letter and "/"
+```
+
+### Old-school patterns
+
+Delimited patterns are still supported for completeness with flags, with `PcrePattern::of()`. Both versions are equal with each other.
+
+```php
+$pattern = Pattern::of('[A-Z]+', 'im');
+$pattern = PcrePattern::of('/[A-Z]+/im');
+
+$pattern->test($subject)
+```
+
+[Multiple patterns]: /docs/pattern-list

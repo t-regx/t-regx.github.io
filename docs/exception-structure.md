@@ -247,17 +247,17 @@ try {
 
 [SafeRegex]: introduction-safe.md
 
-[CleanRegex]: introduction-clean.mdx
+[CleanRegex]: introduction.mdx
 
 [`\Exception`]: https://www.php.net/manual/en/language.exceptions.php
 
 [`\InvalidArgumentException`]: https://www.php.net/manual/en/class.invalidargumentexception.php
 
-[`pattern()`]: introduction-clean.mdx#entry-points
+[`pattern()`]: introduction.mdx#entry-points
 
-[`Pattern::of()`]: introduction-clean.mdx#entry-points
+[`Pattern::of()`]: introduction.mdx#entry-points
 
-[`Pattern::inject()`]: introduction-clean.mdx#entry-points
+[`Pattern::inject()`]: introduction.mdx#entry-points
 
 [`preg::match()`]: introduction-safe.md#about-saferegex
 

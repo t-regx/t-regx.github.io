@@ -49,9 +49,9 @@ const elementLinks: {[key: string]: {content: string, link: string}} = {
 };
 
 const codeLinks = {
-  'pattern()': '/docs/introduction-clean#entry-points',
-  'Pattern::of()': '/docs/introduction-clean#entry-points',
-  'PcrePattern::of()': '/docs/introduction-clean#entry-points',
+  'pattern()': '/docs/introduction#entry-points',
+  'Pattern::of()': '/docs/introduction#entry-points',
+  'PcrePattern::of()': '/docs/introduction#entry-points',
   'Pattern::inject()': '/docs/handling-user-input',
   'pattern()->test()': '/docs/match#test-a-subject',
 
