@@ -9,12 +9,13 @@
     "@docusaurus/core": "2.0.0-alpha.75",
     "@docusaurus/preset-classic": "2.0.0-alpha.75",
     "classnames": "^2.2.6",
-    "docusaurus-plugin-sass": "^0.1.11",
     "markdown-to-jsx": "^6.11.1",
     "nuka-carousel": "^4.7.2",
     "raw-loader": "^4.0.2",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.0.2"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.0.0-alpha.75",
