@@ -37,7 +37,7 @@ pattern('\w+')->match('I have 19 trains')->flatMap(function (Detail $detail) {
 ## Return types
 
 `flatMap()` only accepts an `array` as its return type. Returning a single element and implicitly creating a one-element
-array under the hood would break our "Explicity rule".
+array under the hood would be counter-intuitive and error-prone.
 
 ```php
 pattern('\w+')->match("I like trains")->flatMap(function (Detail $detail) {
@@ -66,12 +66,11 @@ The [`callable`] passed to `flatMap()` must return an array. `InvalidReturnValue
 
 ## Mapping with keys
 
-Because `flatMapAssoc()` receives an array from its callback, it's possible to also return an associative array with
-specified keys:
+Method `toMap()` can be used to return a dictionary, based on matched occurrences.
 
 ```php
-pattern('\w+')->match("Apples are cool")->flatMapAssoc(function (Detail $detail) {
-    return [$detail->text() => $detail->offset()];   // offset is UTF-8 safe
+pattern('\w+')->match('Apples are cool')->toMap(function (Detail $detail) {
+    return [$detail->text() => $detail->offset()];
 });
 ```
 
@@ -94,7 +93,7 @@ use [`byteOffset()`](match-details.md#offsets).
 Duplicate keys are not allowed in PHP arrays, so they'll only appear once in the results.
 
 ```php
-pattern('\w+')->match("Apples are cool")->flatMapAssoc(function (Detail $detail) {
+pattern('\w+')->match("Apples are cool")->toMap(function (Detail $detail) {
     return [
         $detail->text() => $detail->offset(),   // offset is UTF-8 safe
         'subject'       => $detail->subject()
