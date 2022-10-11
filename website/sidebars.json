@@ -15,7 +15,8 @@
       "match-first",
       "match-for-each",
       "match-map",
-      "match-flat-map"
+      "match-flat-map",
+      "count"
     ],
     "Match Details": [
       "match-details",
@@ -35,7 +36,6 @@
     ],
     "Misc": [
       "delimiters",
-      "count",
       "split",
       "filter",
       "match-iterator"
