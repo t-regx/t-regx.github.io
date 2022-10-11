@@ -30,7 +30,7 @@ module.exports = {
         src: 'img/t.regx.borderless.png',
       },
       items: [
-        {position: 'left', label: 'Tutorial', to: 'docs/installation'},
+        {position: 'left', label: 'Tutorial', to: 'docs/overview'},
         {position: 'left', label: 'Blog', to: 'blog'},
         {position: 'left', label: 'Compare', to: 'comparison'},
         {position: 'left', label: 'Help', to: 'help'},
