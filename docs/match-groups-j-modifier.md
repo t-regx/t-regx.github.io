@@ -67,7 +67,7 @@ Basically:
   And in consequence: `groupNames()`, `namedGroups()`, etc.
 - Text/offset/matched is taken from the **right-most group**.
 
-  And in consequence: `byteOffset()`, `orReturn()`/`orElse()`, `tail()`, etc.
+  And in consequence: `byteOffset()`, `tail()`, etc.
 
 So basically what a group is, what is its name, order and index is determined by the matched subject. Great :|
 

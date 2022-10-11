@@ -29,7 +29,6 @@ Using [`Detail`], you gain access complete information about capturing groups:
     - [offsets of matched values](#offsets) in the subject:
         - character offsets (UTF-8 safe) - `offset()`
         - byte offsets - `byteOffset()`
-- [`orReturn()`](#optional-groups)/[`orElse()`](#optional-groups)/[`orThrow()`](#optional-groups) - returns a group, or controls the absence of the group
 - [`index()`](#index-name-and-identifier) - ordinal value of the capturing group in a pattern
 - [`name()`](#index-name-and-identifier) - name of the capturing group, or `null` of group is not named
 - [`all()`](#other-occurrences) - other matched occurrences of the group
@@ -108,9 +107,10 @@ $detail->group('schema')->name();            // 'schema'
 Method `matched(int|string)` allows you to verify whether a given group was matched by the subject:
 
 ```php
-$subject = 'Links: google.com and http://facebook.com';
+$pattern = pattern('(https?://)?\w+\.\w+');
+$matcher = $pattern->match('Links: google.com and http://facebook.com');
 
-pattern('(https?://)?\w+\.\w+')->match($subject)->forEach(function (Detail $detail) {
+$matcher->forEach(function (Detail $detail) {
     // first iteration
     $detail->text();       // 'google.com'
     $detail->matched(1);   // false, `google.com` doesn't have a schema 
