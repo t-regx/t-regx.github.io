@@ -3,7 +3,8 @@ id: match
 title: Match a subject
 ---
 
-import {CodeTabs, Result} from './code';
+
+import {Result} from './code';
 
 Using `pattern()->match()` you can:
  - Test a subject against a pattern: [`test()`]/[`fails()`]
@@ -14,29 +15,22 @@ Using `pattern()->match()` you can:
 ## Test a subject
 
 If you only need to check whether a pattern matches a subject, use:
-
-<CodeTabs
-    tregx={`pattern('[0-9]+')->test("I'm 19 years old");`}
-    php={`preg::match('/[0-9]+/', "I'm 19 years old") > 0;`}/>
-
+```php
+pattern('[0-9]+')->test("I'm 19 years old");
+```
 ...or to check whether it doesn't:
-
-<CodeTabs
-    tregx={`pattern('[0-9]{3}')->fails("I'm 19 years old");`}
-    php={`preg::match('/[0-9]{3}/', "I'm 19 years old") === 0;`}/>
-
+```php
+pattern('[0-9]{3}')->fails("I'm 19 years old");
+```
 Of course `pattern()->match()` throws an exception if the pattern is invalid (or in case of any other error).
 
 ## Retrieve the first match
 
 To get the first occurrence of a matched pattern, call [`first()`].
 
-<CodeTabs
-    tregx={`pattern('[0-9]+')->search("I'm 19 years old. I was born in 1999")->first();`}
-    php={`if (preg::match('/[0-9]+/', "I'm 19 years old. I was born in 1999", $match)) {
-    return $match[0];
-}
-throw new SubjectNotMatchedException();`}/>
+```php
+pattern('[0-9]+')->search("I'm 19 years old. I was born in 1999")->first();
+```
 <Result>'19'</Result>
 
 Read on the [next page](match-first.mdx) to learn more about [`first()`].
@@ -44,19 +38,15 @@ Read on the [next page](match-first.mdx) to learn more about [`first()`].
 ## Retrieve multiple matches
 
 You can easily retrieve matched occurrences of a pattern in your subject.
-
-<CodeTabs
-    tregx={`pattern('[0-9]+')->search("I'm 19. I was born in 1999, on May 12")->all();`}
-    php={`preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
-return $matches[0];`}/>
+```php
+pattern('[0-9]+')->search("I'm 19. I was born in 1999, on May 12")->all();
+```
 <Result>['19', '1999', '12']</Result>
 
 You can limit your matches with `only(int)`.
-
-<CodeTabs
-    tregx={`pattern('[0-9]+')->search("I'm 19. I was born in 1999, on May 12")->only(2);`}
-    php={`preg::match_all('/[0-9]+/', "I'm 19. I was born in 1999, on May 12", $matches);
-return array_slice($matches[0], 0, 2);`}/>
+```php
+pattern('[0-9]+')->search("I'm 19. I was born in 1999, on May 12")->only(2);
+```
 <Result>['19', '1999']</Result>
 
 [`test()`]: #test-a-subject

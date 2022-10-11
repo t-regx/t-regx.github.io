@@ -3,82 +3,71 @@ id: count
 title: Count occurrences
 ---
 
-import {CodeTabs, Result, Code} from './code';
+
+import {Result} from './code';
 
 Sometimes, you might stumble upon a situation where an amount of occurrences is needed, but not the occurrences
 themselves. In that case, `pattern()->count()` is perfect:
 
-<CodeTabs
-      tregx="return pattern('[aeiouy]')->count('Computer');"
-      php="return preg::match_all('/[aeiouy]/', 'Computer');"/>
+```php
+return pattern('[aeiouy]')->count('Computer');
+```
 <Result>3</Result>
 
 Also, `MatchPattern` is [`\Countable`], so you can use PHP build-in methods, like `count()`:
 
-<CodeTabs
-      tregx={`$match = pattern('[aeiouy]')->match('Computer');\n\ncount($match);`}
-      php={`preg::match_all('/[aeiouy]/', 'Computer', $match);\n\ncount($match[0]);`}/>
 
-<!--T-Regx:{return-at(last)}-->
-<!--PHP:{return-at(last)}-->
+```php
+$match = pattern('[aeiouy]')->match('Computer');
+
+count($match);
+```
+
 <Result>3</Result>
 
 ## Unmatched subjects
 
 If your pattern does not match the subject, `count()` simply returns `0`.
 
-<CodeTabs
-    tregx="return pattern('[0-9]')->count('Computer');"
-    php="return preg::match_all('/[0-9]/', 'Computer');"/>
+```php
+return pattern('[0-9]')->count('Computer');
+```
 <Result>0</Result>
 
 ## Invalid
 
 Every use of `pattern()` with an invalid pattern will cause `MalformedPatternException`.
-<CodeTabs
-    tregx={`try {
+```php
+try {
     pattern('[aeiouy')->count('Computer');  // malformed pattern
 }
 catch (MalformedPatternException $ex) {
     echo $ex->getMessage();
-}`}
-    php={`try {
-    preg::match_all('/[aeiouy/', 'Computer');  // malformed pattern
 }
-catch (MalformedPatternException $ex) {
-    echo $ex->getMessage();
-}`}/>
+```
 <Result text>Missing terminating ] for character class at offset 7</Result>
-
-:::note
-In `PHP` snippet, `MalformedPatternException` is thrown because SafeRegex `preg::match_all()` was used, instead
-of [`preg_match_all()`]. Vanilla [PHP `preg` methods] don't throw exceptions.
-:::
 
 ## Performance
 
 You might be tempted to use `count()` to check whether your subject was matched by the pattern, since `count()` doesn't
 return any matches...
 
-<CodeTabs
-    tregx={`$count = pattern('[aeiouy]')->count('Computer');\nreturn $count > 0;`}
-    php={`$count = preg::match_all('/[aeiouy]/', 'Computer');\nreturn $count > 0;`}/>
+```php
+$count = pattern('[aeiouy]')->count('Computer');
+return $count > 0;
+````
 <Result>true</Result>
 
 ...but that would be wasteful. You're much better off using
 [`test()`](match.mdx#test-a-subject)/[`fails()`](match.mdx#test-a-subject):
 
-<CodeTabs
-    tregx="return pattern('[aeiouy]')->test('Computer');"
-    php="return preg::match('/[aeiouy]/', 'Computer') > 0;"/>
+```php
+return pattern('[aeiouy]')->test('Computer');
+```
 <Result>true</Result>
 
 This is because `count()` will go through each occurrence of a pattern in a subject, counting it; whereas `test()`
 will return right after it finds the first occurrence.
-
-:::note
-Under the hood, `count()` uses [`preg_match_all()`], whereas [`test()`]/[`fails()`] use [`preg_match()`].
-:::
 
 [`\Countable`]: https://www.php.net/manual/en/class.countable.php
 [`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php

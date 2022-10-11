@@ -3,7 +3,8 @@ id: replace-callback
 title: Replace with callback
 ---
 
-import {CodeTabs, Result} from './code';
+
+import {Result} from './code';
 
 After `replace()`, you need to explicitly use one of `first()`/`all()`/`only(int)` methods, to express how many
 replacements should be done.
@@ -16,17 +17,12 @@ Callback passed to `replace()->callback()` will only be invoked:
 
 ## Replace first
 
-<CodeTabs
-    tregx={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
+```php
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
 pattern('[A-Z][a-z]+')->replace($subject)->first()->callback(function (Detail $detail) {
-    return strtoupper($detail->text());\n});`}
-    php={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
-preg::replace_callback('/[A-Z][a-z]+/', function (array $match) {
-    return strtoupper($match[0]);
-}, $subject, 1);`}/>
-
-<!--T-Regx:{return-at(2)}-->
-<!--PHP:{return-at(2)}-->
+    return strtoupper($detail->text());
+});
+```
 <Result>'I like scandinavia: SWEDEN, Norway and Denmark'</Result>
 
 ## Replace multiple
@@ -35,35 +31,24 @@ preg::replace_callback('/[A-Z][a-z]+/', function (array $match) {
 
 Replacing all matched occurrences is the most common use-case:
 
-<CodeTabs
-    tregx={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
+```
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
 pattern('[A-Z][a-z]+')->replace($subject)->all()->callback(function (Detail $m) {
-    return strtoupper($m->text());\n});`}
-    php={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
-preg::replace_callback('/[A-Z][a-z]+/', function (array $m) {
-    return strtoupper($m[0]);\n}, $subject);`}/>
-
-<!--T-Regx:{return-at(2)}-->
-<!--PHP:{return-at(2)}-->
+    return strToUpper($m->text());
+});
+```
 <Result>'I like scandinavia: SWEDEN, NORWAY and DENMARK'</Result>
 
 ### `only()`
 
 You can also limit the amount of replacements done with `only()`.
 
-<CodeTabs
-    tregx={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
+```php
+$subject = 'I like scandinavia: Sweden, Norway and Denmark';
 // In T-Regx, Detail can be cast to string, returning the whole match
-pattern('[A-Z][a-z]+')->replace($subject)->only(2)->callback('strtoupper');`}
-    php={`$subject = 'I like scandinavia: Sweden, Norway and Denmark';\n
-// In Vanilla, $match is an array, and arrays won't cast to string that easily
-preg::replace_callback('/[A-Z][a-z]+/', function (array $match) {
-    // $match[0] can be an empty string, even if a group is not matched
-    return call_user_func('strtoupper', $match[0]);
-}, $subject, 2);`}/>
+pattern('[A-Z][a-z]+')->replace($subject)->only(2)->callback('strToUpper');
+```
 
-<!--T-Regx:{return-at(last)}-->
-<!--PHP:{ignore-snippet}-->
 <Result>'I like scandinavia: SWEDEN, NORWAY and Denmark'</Result>
 
 ## Return types
@@ -116,17 +101,9 @@ pattern('\w+')->replace("Apples are cool")->first()->callback(function (Detail $
 You can call `replace()->callback()` for any valid PHP [`callable`] which accepts one string parameter (or no parameters)
 and returns `string`.
 
-<CodeTabs
-    tregx={`pattern('\\w+')->replace('Apples are cool')->first()->callback('strtoupper');`}
-    php={`// This code is actually impossible in Vanilla-PHP.
-// In T-Regx, Detail can be cast to string - that's the matched text
-// In Vanilla, $match is an array, and arrays won't cast to string that easily\n
-// preg::replace_callback('/\\w+/', 'strtoupper', $subject, 1);\n
-preg::replace_callback('/\\w+/', function (array $match) {
-    return strtoupper($match[0]);
-}, 'Apples are cool', 1);`}/>
-
-<!--PHP:{return-at(-3)}-->
+```php
+pattern('\w+')->replace('Apples are cool')->first()->callback('strToUpper');
+```
 <Result>'APPLES are cool'</Result>
 
 In this example, [`Detail`] will be cast to string, which is the same as calling `Detail.text()` method.

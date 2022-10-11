@@ -3,7 +3,8 @@ id: match-for-each
 title: Iterating matches
 ---
 
-import {CodeTabs, Result} from './code';
+
+import {Result} from './code';
 
 Use `forEach()` to easily iterate matched occurrences with your callback. You can call `forEach()` with a callback,
 that's invoked with [`Detail`].
@@ -18,16 +19,12 @@ foreach ($matcher as $detail) {
 }
 ```
 
-<CodeTabs
-    tregx={`// highlight-next-line
-pattern('\\w+')->match('Apples are cool')->forEach(function (Detail $match) {
-    echo "I matched $match, ";\n});`}
-    php={`// highlight-next-line
-preg::match_all('/\\w+/', 'Apples are cool', $matches);
+```php
 // highlight-next-line
-array_map(function (string $text) {
-    echo "I matched $text, ";
-}, $matches[0]);`}/>
+pattern('\w+')->match('Apples are cool')->forEach(function (Detail $match) {
+    echo "I matched $match, ";
+});
+```
 <Result text>I matched Apples, I matched are, I matched cool, </Result>
 
 Using [`Detail`] you can get detailed information such as [`offset()`], [`index()`] etc.
@@ -36,16 +33,12 @@ Using [`Detail`] you can get detailed information such as [`offset()`], [`index(
 
 You can also use the result of `pattern()->match()` directly in PHP `foreach` loop.
 
-<CodeTabs
-    tregx={`// highlight-next-line
-foreach (pattern('\\w+')->match('Apples are cool') as $match) {
-    echo "I matched " . $match->text() . ", ";\n};`}
-    php={`// highlight-next-line
-preg::match_all('/\\w+/', 'Apples are cool', $matches);
+```php
 // highlight-next-line
-foreach ($matches[0] as $text) {
-    echo "I matched $text, ";
-}`}/>
+foreach (pattern('\w+')->match('Apples are cool') as $match) {
+    echo "I matched " . $match->text() . ", ";
+};
+```
 <Result text>I matched Apples, I matched are, I matched cool, </Result>
 
 [`Detail`]: match-details.md

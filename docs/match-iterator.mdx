@@ -3,7 +3,8 @@ id: match-iterator
 title: Iterator
 ---
 
-import {CodeTabs, Result} from './code';
+
+import {Result} from './code';
 
 T-Regx uses vanilla PHP [`\Iterator`] with standard methods:
 
@@ -18,12 +19,17 @@ T-Regx uses vanilla PHP [`\Iterator`] with standard methods:
 Method `match()->getIterator()` returns an implementation of PHP [`\Iterator`] which you can be used with other [`\Iterator`]
 methods or within your own code, for example PHP methods [`iterator_to_array()`] and [`iterator_count()`].
 
-<CodeTabs
-    tregx={`$iterator = pattern('\\w+')->match('Apples are cool')->getIterator();\n
-return $iterator->current()->text(); // Iterator contains "Detail"`}
-    php={`preg::match_all('/\\w+/', 'Apples are cool', $matches);
-$iterator = new ArrayIterator($matches[0]);\n
-return $iterator->current();  // Iterator contains "string"`}/>
+```php
+$matcher = pattern('\w+')->match('Apples are cool');
+$iterator = $matcher->getIterator();
+
+/**
+ * @var Detail $detail
+ */
+$detail = $iterator->current();
+
+return $detail->text();
+```
 <Result>'Apples'</Result>
 
 It is useful with methods that only accept [`\Iterator`], and when an explicit iterator is needed. Using `match()->getIterator()`
@@ -32,17 +38,16 @@ for methods that accept `array` is redundant :)
 Also, please keep in mind that [`match()`] and other entities (such as [`match()->group(string|int)`] or [`match()->asInt()`])
 are also [iterable with `foreach`], making explicit usage of `getIterator()` even less likely.
 
-<CodeTabs
-    tregx={`foreach (pattern('\\w+')->match('Apples are cool') as $match) {
-    $text = $match->text();\n
-}`}
-    php={`preg::match_all('/\\w+/', 'Apples are cool', $matches);
-foreach ($matches[0] as $text) {
-    $text;\n
-}`}/>
+```php
+$pattern = pattern('\w+');
 
-<!--T-Regx:{return-at(1)}-->
-<!--PHP:{return-at(2)}-->
+/**
+ * @var Detail $match
+ */
+foreach ($pattern->match('Apples are cool') as $match) {
+    $text = $match->text();
+}
+```
 
 [`match()`]: match.mdx
 [`\Iterator`]: https://www.php.net/manual/en/class.iterator.php

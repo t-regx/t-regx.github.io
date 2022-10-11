@@ -3,7 +3,8 @@ id: match-map
 title: Map occurrences
 ---
 
-import {CodeTabs, Result} from './code';
+
+import {Result} from './code';
 
 Mapping works a bit like a combination of [`all()`] and [`forEach()`]. It returns all matched elements, after
 they have been iterated (and potentially altered) using `map()` callback (which accepts [`Detail`] details).
@@ -11,27 +12,17 @@ they have been iterated (and potentially altered) using `map()` callback (which 
 ## Map matched occurrences
 
 So instead of returning all elements:
-
-<CodeTabs
-    tregx={`pattern("[\\w']+")->search("I'm 19 years old")->all();`}
-    php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
-return $matches[0];`}/>
-
-<!--T-Regx:{return-at(0)}-->
+```php
+pattern("[\w']+")->search("I'm 19 years old")->all();
+```
 <Result>["I'm", '19', 'years', 'old']</Result>
 
 ...you can map them - to any other value, by callback:
-
-<CodeTabs
-    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->map(function (Detail $detail) {
+```php
+pattern("[\\w']+")->match("I'm 19 years old")->map(function (Detail $detail) {
     return strLen($detail->text());
-});`}
-    php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
-return array_map(function ($text) {
-    return strLen($text);
-}, $matches[0]);`}/>
-
-<!--T-Regx:{return-at(0)}-->
+});
+```
 <Result>[3, 2, 5, 3]</Result>
 
 ## Variable callbacks
@@ -39,12 +30,9 @@ return array_map(function ($text) {
 You can invoke `map()` with any valid PHP [`callable`] which accepts one
 string parameter (or no parameters) - just like [`first()`].
 
-<CodeTabs
-    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->map('strToUpper');`}
-    php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
-return array_map('strToUpper', $matches[0]);`}/>
-
-<!--T-Regx:{return-at(0)}-->
+```php
+pattern("[\w']+")->match("I'm 19 years old")->map('strToUpper');
+```
 <Result>["I'M", "19", "YEARS", "OLD"]</Result>
 
 ## Arbitrary return types
@@ -52,10 +40,9 @@ return array_map('strToUpper', $matches[0]);`}/>
 Again, just like [`first()`], this method can return values of any type, including: objects, arrays,
 booleans and `null`.
 
-<CodeTabs
-    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->map('str_split');`}
-    php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
-return array_map('str_split', $matches[0]);`}/>
+```php
+pattern("[\w']+")->match("I'm 19 years old")->map('str_split');
+```
 
 <!--T-Regx:{return-at(0)}-->
 <Result>[
@@ -65,18 +52,14 @@ return array_map('str_split', $matches[0]);`}/>
   ['o', 'l', 'd']
 ]</Result>
 
-<!--Result-Value:{return-semi}-->
-
 ## `flatMap()`
 
 You can just as easily create a flattened map.
 
-<CodeTabs
-    tregx={`pattern("[\\w']+")->match("I'm 19 years old")->flatMap('str_split');`}
-    php={`preg::match_all("/[\\w']+/", "I'm 19 years old", $matches);
-return array_merge(...array_map('str_split', $matches[0]));`}/>
+```php
+pattern("[\w']+")->match("I'm 19 years old")->flatMap('str_split');
+```
 
-<!--T-Regx:{return-at(0)}-->
 <Result>['I', '\'', 'm', '1', '9', 'y', 'e', 'a', 'r', 's', 'o', 'l', 'd']</Result>
 
 Read more about [`flatMap()`] on the next page.

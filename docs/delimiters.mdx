@@ -3,7 +3,8 @@ id: delimiters
 title: Automatic delimiters
 ---
 
-import {CodeTabs, Result} from './code';
+
+import {Result} from './code';
 
 :::note
 This chapter doesn't contain `PHP` code snippets, because PHP PCRE require delimiters. There is no way to omit them
@@ -15,21 +16,20 @@ in Vanilla PHP.
 Thanks to automatic delimiters, one can use regular expressions without [brain strain] and without spending time,
 choosing a suitable delimiter.
 
-<CodeTabs
-    tregx="pattern('#[A-Z]/[a-z]+')->match($subject)->all();"
-    php="preg_match_all('%#[A-Z]/[a-z]+%', $subject);"/>
-
-<!--T-Regx:{mock($subject)}-->
-<!--PHP:{mock($subject)}-->
+```php
+pattern('#[A-Z]/[a-z]+')->match($subject)->all();
+```
 
 ## Delimited pattern
 
 Calling method `delimited()` on any instance of T-Regx `PatternInterface` returns
 a pattern, as it will be used with [PHP PCRE methods].
 
-<CodeTabs tregx={`echo pattern('Welcome/Or not')->delimited() . "\\n";
-echo pattern('https://github.com#heading')->delimited() . "\\n";
-echo pattern('https://github.com#heading?key=hello%20there')->delimited() . "\\n";`}/>
+```php
+echo pattern('Welcome/Or not')->delimited() . "\n";
+echo pattern('https://github.com#heading')->delimited() . "\n";
+echo pattern('https://github.com#heading?key=hello%20there')->delimited() . "\n";
+```
 
 <Result text>
 {`#Welcome/Or not#
@@ -41,9 +41,9 @@ echo pattern('https://github.com#heading?key=hello%20there')->delimited() . "\\n
 
 If the was constructed with [`PcrePattern::of()`], method `delimited()` returns the pattern unchanged.
 
-<CodeTabs tregx={`PcrePattern::of('#Welcome/Or not#')->delimited();`}/>
-
-<!--T-Regx:{echo-at(0)}-->
+```php
+PcrePattern::of('#Welcome/Or not#')->delimited();
+```
 <Result text>#Welcome/Or not#</Result>
 
 ## Flags
