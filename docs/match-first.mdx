@@ -17,11 +17,6 @@ You can get the first occurrence of a pattern in a subject by calling `first()`.
     return $match[0];\n}\nthrow new SubjectNotMatchedException();`}/>
 <Result>'19'</Result>
 
-:::note
-If you would like to control the subject that **isn't matched** with your pattern though;
-you can do it **explicitly** with [`findFirst()`](#findfirst) (and [`orReturn()`], [`orElse()`], [`orThrow()`]).
-:::
-
 ### Match details
 
 With [`Detail`] and `match()`, you can gain access to useful information about the matched occurrence.

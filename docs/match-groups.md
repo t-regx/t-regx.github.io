@@ -300,8 +300,6 @@ To learn more, go to [Capturing groups - in depth](match-groups-in-depth.md).
 
 [`Detail`]: match-details.md
 [`first()`]: match-first.mdx
-[`findFirst()`]: match-find-first.mdx
-[`findFirst()->orThrow()`]: match-find-first.mdx
 [`forEach()`]: match-for-each.mdx
 [`map()`]: match-map.mdx
 [`flatMap()`]: match-flat-map.mdx
