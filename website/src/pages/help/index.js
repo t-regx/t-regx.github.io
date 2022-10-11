@@ -33,7 +33,7 @@ const SupportLinks = () => {
   return <>
     <div className="col col--4">
       <h2>Browse Docs</h2>
-      <p>Learn more using the <Link to="/docs/introduction-safe">documentation on this site</Link>. Feel free to visit:</p>
+      <p>Learn more using the <Link to="/docs/introduction-preg">documentation on this site</Link>. Feel free to visit:</p>
       <ul>
         <li><Link to="/docs/match">Matching</Link></li>
         <li><Link to="/docs/match-details">Match details</Link></li>

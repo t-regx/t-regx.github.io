@@ -245,7 +245,7 @@ try {
 }
 ```
 
-[SafeRegex]: introduction-safe.md
+[SafeRegex]: introduction-preg.md
 
 [CleanRegex]: introduction.mdx
 
@@ -259,9 +259,9 @@ try {
 
 [`Pattern::inject()`]: introduction.mdx#entry-points
 
-[`preg::match()`]: introduction-safe.md#about-saferegex
+[`preg::match()`]: introduction-preg.md#about-saferegex
 
-[`preg::replace()`]: introduction-safe.md#about-saferegex
+[`preg::replace()`]: introduction-preg.md#about-saferegex
 
 [`preg_last_error()`]: https://www.php.net/manual/en/function.preg-last-error.php
 

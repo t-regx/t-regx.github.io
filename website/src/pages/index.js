@@ -56,7 +56,7 @@ const HomeSplash = ({title, tagline}) => (
         <StarButton/>
         <PromoSection>
             <HeaderButton to="docs/installation">Installation</HeaderButton>
-            <HeaderButton to="docs/introduction-safe">See Docs</HeaderButton>
+            <HeaderButton to="docs/introduction-preg">See Docs</HeaderButton>
             <HeaderButton href={fiddleUrl}>T-Regx fiddle - Try in your browser!</HeaderButton>
             <div style={{marginTop: '2px'}}>
                 <SponsorButton/>

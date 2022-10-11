@@ -15,7 +15,7 @@ export default function () {
     <code>preg::filter()</code>,
   ];
 
-  return <Link to="/docs/introduction-safe#about-saferegex" title="Each preg::_ method in T-Regx (so preg::match, preg::replace, etc.)">
+  return <Link to="/docs/introduction-preg#about-saferegex" title="Each preg::_ method in T-Regx (so preg::match, preg::replace, etc.)">
     <TextSuperposition texts={methods}/>
   </Link>;
 }

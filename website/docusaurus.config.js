@@ -51,7 +51,7 @@ module.exports = {
           title: 'Docs',
           items: [
             {label: 'Installation', to: 'docs/installation'},
-            {label: 'Getting Started', to: 'docs/introduction-safe'},
+            {label: 'Getting Started', to: 'docs/introduction-preg'},
             {label: 'Documentation', to: 'docs/match'},
             {label: 'API Reference', href: changeLogUrl},
           ],
