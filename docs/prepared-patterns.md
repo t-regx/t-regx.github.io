@@ -5,7 +5,7 @@ sidebar_label: Prepared Patterns - User input
 ---
 
 If you use [`Pattern::inject()`] or `Pattern::template()`, you can explicitly specify which parts of your pattern 
-should be treated as string literals, and not as regular expression special characters.
+should be treated as string literals, not as regular expression special characters.
 
 Prepared Patterns also understand that strings, that are supposed to be treated as string literals, are to be 
 quoted with a delimiter, that was chosen with [Automatic Delimiters](delimiters.mdx).
