@@ -45,8 +45,7 @@
     ],
     "Advanced": [
       "match-groups-in-depth",
-      "match-groups-j-modifier",
-      "replace-match-details"
+      "match-groups-j-modifier"
     ],
     "PHP Hate": [
       "why-php-sucks"
