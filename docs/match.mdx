@@ -1,62 +1,187 @@
 ---
 id: match
-title: Match a subject
+title: Matching overview
 ---
 
+Matching a subject with regular expressions is the most frequent usage of T-Regx.
 
-import {Result} from './code';
+## Predication overview
 
-Using `pattern()->match()` you can:
- - Test a subject against a pattern: [`test()`]/[`fails()`]
- - Retrieve matches from the subject: [`first()`]/[`all()`]/[`only()`]
- - Get capturing groups from matches: [`Detail.get()`], [`Detail.group()`]
- - Try functional approach: [`forEach()`]/[`map()`]/[`flatMap()`]
-
-## Test a subject
-
-If you only need to check whether a pattern matches a subject, use:
-```php
-pattern('[0-9]+')->test("I'm 19 years old");
-```
-...or to check whether it doesn't:
-```php
-pattern('[0-9]{3}')->fails("I'm 19 years old");
-```
-Of course `pattern()->match()` throws an exception if the pattern is invalid (or in case of any other error).
-
-## Retrieve the first match
-
-To get the first occurrence of a matched pattern, call [`first()`].
+Conditions on subject matching certain `Pattern` are the most common. Methods `Pattern.test(string)` and `Pattern.fails(string)`
+can be used to determine whether a pattern matches the subject.
 
 ```php
-pattern('[0-9]+')->search("I'm 19 years old. I was born in 1999")->first();
+$agePattern = Pattern::of('[0-9]{2,}');
+
+$agePattern->test("I'm 19 years old");   // bool (true)
+$agePattern->fails("I'm 9 years old");   // bool (false)
 ```
-<Result>'19'</Result>
 
-Read on the [next page](match-first.mdx) to learn more about [`first()`].
+Methods `Pattern.test(string)` and `Pattern.fails(string)` throw `MalformedPatternExceptions`, should they be called for
+a pattern with a malformed regular expression. Similarly to other T-Regx methods, `test()` and `fails()` throw
+other kinds of appropriate exceptions, for instance `CatastrophicBacktrackingException` should the subject happen to be
+too complex. Detailed reference to T-Regx exception handling is presented in the further chapters of the documentation.
 
-## Retrieve multiple matches
+## Matching overview
 
-You can easily retrieve matched occurrences of a pattern in your subject.
+To match a subject, invoke `match(string)` on an instance of `Pattern` to receive the matcher.
+Invocation of `match(string)` doesn't perform any regular expression search just yet.
+
 ```php
-pattern('[0-9]+')->search("I'm 19. I was born in 1999, on May 12")->all();
-```
-<Result>['19', '1999', '12']</Result>
+/**
+ * Instantiate your pattern
+ */
+$pattern = Pattern::of('\d+');
 
-You can limit your matches with `only(int)`.
-```php
-pattern('[0-9]+')->search("I'm 19. I was born in 1999, on May 12")->only(2);
+/**
+ * Receive the subject matcher
+ */
+$matcher = $pattern->match('I have 140 apples');
 ```
-<Result>['19', '1999']</Result>
+
+The detailed reference of `Matcher` functionalities is presented in the further chapters of the documentation.
+For overview, `Matcher` interface consists of methods:
+
+- Test a subject against a pattern: [`test()`]/[`fails()`]
+- Retrieve matches from the subject: [`first()`]/[`all()`]/[`only(int)`]
+- Get the matched capturing groups: [`Detail.get(int|string)`], [`Detail.group(int|string)`]
+
+The complete `Matcher` reference is present in the further chapters of the documentation.
+
+### Retrieve the first match
+
+Method `Matcher.first()` can be used to perform a single regular expression match against
+the subject.
+
+```php
+/**
+ * Instantiate digit pattern
+ */
+$digitPattern = Pattern::of('[0-9]+');
+
+/**
+ * Receive matcher for the subject
+ */
+$matcher = $digitPattern->match("I'm 19 years old. I was born in 1999");
+
+/**
+ * Perform a single regular expression match
+ */
+$firstMatch = $matcher->first(); // object (Detail)
+```
+
+Instance of `Detail` represents the matched occurrence of the `Pattern` in the subject.
+Methods `Detail.text()` and `Detail.offset()` can be used to read information about the
+matched occurrence.
+
+```php
+/**
+ * Read the whole matched occurrence
+ */
+$firstMatch->text();   // string ("19")
+
+/**
+ * Read the whole match, as integer in base 10
+ */
+$firstMatch->toInt();  // int (19)
+
+/**
+ * Read the occurrence position in subject (in characters)
+ */
+$firstMatch->offset(); // int (4)
+```
+
+More information on [`first()`] is present in the [next chapter](match-first.mdx).
+
+### Iterating multiple matches
+
+Instance of `Matcher` is `\Iterable`, so it can be used directly in a `foreach` loop.
+
+```php
+/**
+ * Instantiate digit pattern
+ */
+$digitPattern = Pattern::of('[0-9]+');
+
+/**
+ * Receive matcher for the subject
+ */
+$matcher = $digitPattern->match("I'm 22 years old. I was born in 1999, so the current year must be 2021 or 2022");
+
+/**
+ * Perform global regular expression search and iterate matches
+ */
+foreach ($matcher as $detail) {
+  /**
+   * Detail used in string interpolation is the same as using Detail.text()
+   */
+  echo "Match found is '$detail' at position " . $detail->offset() . PHP_EOL;
+}
+
+if ($matcher->fails()) {
+  echo "Unfortunately, no occurrences of pattern were present in the subject";
+} else {
+  echo "In total, {$matcher->count()} occurrences found in the subject";
+}
+```
+
+The example above iterates occurrences of `Pattern` in the subject, retrieving
+the whole matches' values and their positions.
+
+```plain
+Match found is '22' at position 4
+Match found is '1999' at position 32
+Match found is '2021' at position 66
+Match found is '2022' at position 74
+In total, 4 occurrences found in the subject
+```
+
+Calling `Matcher.fails()` and `Matcher.count()` will not perform another global regular
+expressions searches, if the search has already been invoked by iterating the `Matcher`.
+In the example above `Matcher` is being iterated for occurrences of `Detail` in the subject,
+thus T-Regx performs the global regular expression search, finding occurrences `['22', '1999', '2021', '2022']`.
+Further call to `Matcher.fails()` uses the results from the iteration and returns `false` without
+any additional search. `Matcher.count()` returns `4` immediately, using the number of occurrences
+found from the previous iteration. Of course, iterating the same instance of `Matcher` again
+will not perform unnecessary global search either. Further details about performance optimisations
+in T-Regx are presented in the next chapters of the documentation.
+
+### Retrieving multiple matches
+
+Method `Matcher.all()` can also be used to perform global regular expression search. `Matcher.all()`
+returns PHP `array`, precisely `Detail[]`.
+
+```php
+/**
+ * Receive matcher for the subject
+ */
+$matcher = $digitPattern->match("I'm 22 years old. I was born in 1999, so the current year must be 2021 or 2022");
+
+/**
+ * Perform global regular expression search and return matches
+ */
+$details = $matcher->all(); // array ([Detail, Detail, Detail, Detail])
+
+/**
+ * Detail used in string interpolation is the same as using Detail.text()
+ */
+echo "Match found is '{$details[0]}' at position " . $detail->offset() . PHP_EOL;
+```
+
+Methods `Matcher.all()`, `Matcher.fails()` and `Matcher.count()` throw `MalformedPatternExceptions`, should
+they be called for a pattern with a malformed regular expression. Similarly to other T-Regx
+methods, `fails()`, `all()` and `count()` throw other kinds of appropriate exceptions, for
+instance `CatastrophicBacktrackingException` should the subject happen to be too complex. Detailed reference
+to T-Regx exception handling is presented in the further chapters of the documentation.
 
 [`test()`]: #test-a-subject
 [`fails()`]: #test-a-subject
 [`first()`]: #one
 [`all()`]: #many
-[`only()`]: #many
+[`only(int)`]: #many
 [`group()`]: match-details.md
-[`Detail.group()`]: match-details.md
-[`Detail.get()`]: match-details.md
+[`Detail.group(int|string)`]: match-details.md
+[`Detail.get(int|string)`]: match-details.md
 [`groups()`]: match-details.md
 [`first()`]: match-first.mdx#use-first-with-callback
 [`forEach()`]: match-for-each.mdx
