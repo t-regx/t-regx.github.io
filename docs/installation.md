@@ -22,7 +22,7 @@ Just visit [T-Regx on repl.it], and when it boots up (after about 4 seconds), ju
 
 [![repl.it example](../website/static/img/docs/replit.example.png)](https://repl.it/github/T-Regx/fiddle)
 
-You can log in to [repl.it] with Github account, Google account, Facebook account or regular credentials.
+You can log in to [repl.it] with GitHub account, Google account, Facebook account or regular credentials.
 
 [![repl.it login](../website/static/img/docs/replit.login.png)](https://repl.it/github/T-Regx/fiddle)
 
@@ -35,8 +35,8 @@ Go to [repl.it] and run the `EXAMPLES.php` or your file in `EDIT_HERE.php`:
 
 ## Install composer
 
-You can either download an executable setup from [https://getcomposer.org/download/], or use a script to download it,
-right from your terminal (Windows and Unix).
+You can either download an executable setup from [https://getcomposer.org/download/], or use a 
+script to download it, right from your terminal (Windows and Unix).
 
 ```bash
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
