@@ -267,4 +267,4 @@ try {
 
 [preg functions]: https://www.php.net/manual/en/ref.pcre.php
 
-[Prepared Patterns]: handling-user-input.md
+[Prepared Patterns]: prepared-patterns.md

@@ -30,8 +30,8 @@
       "replace-callback"
     ],
     "Prepared Patterns": [
-      "handling-user-input",
       "prepared-patterns",
+      "template-syntax",
       "pattern-list"
     ],
     "Misc": [

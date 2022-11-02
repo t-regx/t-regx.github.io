@@ -52,7 +52,7 @@ const codeLinks = {
   'pattern()': '/docs/introduction#entry-points',
   'Pattern::of()': '/docs/introduction#entry-points',
   'PcrePattern::of()': '/docs/introduction#entry-points',
-  'Pattern::inject()': '/docs/handling-user-input',
+  'Pattern::inject()': '/docs/prepared-patterns',
   'pattern()->test()': '/docs/match#test-a-subject',
 
   'Detail': '/docs/match-details',
@@ -72,8 +72,8 @@ const textLinks = {
   'try it online': tryItOnline,
   'sandbox': tryItOnline,
   'T-Regx on repl.it': tryItOnline,
-  'prepared patterns': '/docs/handling-user-input',
-  'Prepared Patterns': '/docs/handling-user-input',
+  'prepared patterns': '/docs/prepared-patterns',
+  'Prepared Patterns': '/docs/prepared-patterns',
   'Blog': 'blog',
 };
 

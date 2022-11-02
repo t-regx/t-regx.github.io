@@ -11,6 +11,6 @@ So over 2 months have passed since the last blog entry - much have changed. It's
 it again.
 
 One big change is [`Prepared Patterns`](/docs/prepared-patterns) - which lets you handle user input or unsafe characters
-in your patterns. It's got a dedicated section in [Docs](/docs/handling-user-input), too.
+in your patterns. It's got a dedicated section in [Docs](/docs/prepared-patterns), too.
 
 Except for that, there's a discussion section in [Help](/help) - feel free to ask questions or propose features!

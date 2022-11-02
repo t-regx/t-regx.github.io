@@ -236,5 +236,5 @@ and render the client application less reliable.
 [`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
 [`preg_replace()`]: https://www.php.net/manual/en/function.preg-replace.php
 [`preg_split()`]: https://www.php.net/manual/en/function.preg-split.php
-[`pattern()`]: /docs/introduction#entry-points
-[Handling user input]: /docs/handling-user-input
+[`pattern()`]: /docs/introduction.mdx#entry-points
+[Handling user input]: /docs/prepared-patterns.md

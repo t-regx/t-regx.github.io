@@ -38,7 +38,7 @@ export default function () {
         <li><Link href="/docs/installation">Installation</Link></li>
         <li><Link href="/docs/match">Matching</Link></li>
         <li><Link href="/docs/replace">Replacing</Link></li>
-        <li><Link href="/docs/handling-user-input">Prepared Patterns</Link></li>
+        <li><Link href="/docs/prepared-patterns">Prepared Patterns</Link></li>
       </ul>
 
       <br/><br/>

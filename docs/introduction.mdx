@@ -12,7 +12,7 @@ and more, as well as removing uncertainty with false negatives and false positiv
 
 We have multiple entry methods to create `Pattern`, each with its own use case:
  - Standard pattern - `Pattern::of('\d+')`
- - Prepared patterns - to safely use user data in patterns (see [Prepared Patterns](handling-user-input.md))
+ - Prepared patterns - to safely use user data in patterns (see [Prepared Patterns](prepared-patterns.md))
  - Pattern lists - `Pattern::list(['\d+', '[a-z]+'])` to use many patterns at once
  - Literal string value - `Pattern::literal('[]?')` (identical to `Pattern::of('\[\]\?')`)
 
@@ -122,4 +122,4 @@ $pattern = PcrePattern::of('/[A-Z]+/im');
 $pattern->test($subject)
 ```
 
-[Multiple patterns]: /docs/pattern-list
+[Multiple patterns]: /docs/pattern-list.md
