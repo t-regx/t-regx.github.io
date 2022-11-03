@@ -203,6 +203,10 @@ $replacer = $pattern->chainedReplace($subject);
 $replacer->with('XXX'); // HTML tags and numbers replaced with "XXX"
 ```
 
+Please, refer to the [StackOverflow][1] [question][1] regarding matching HTML entities with regular expressions.
+
+[1]: https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags
+
 `PatternList.chainedReplace()` also supports Perl-Compatible group references in the replacements, 
 available with method `withReferences()`:
 
