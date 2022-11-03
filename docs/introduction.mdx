@@ -35,8 +35,7 @@ pattern('/[A-Z]#[a-z]+')->test($subject);
 
 ### T-Regx prepared patterns
 
-With `Pattern::inject()` placeholder `@` is being injected with the literal value of figures pass
-as the second argument of `Pattern::inject()`.
+With `Pattern::inject()`, placeholder `@` is being bound the figures passed as the second argument of `Pattern::inject()`.
 
 ```php
 use TRegx\CleanRegex\Pattern;
@@ -122,4 +121,4 @@ $pattern = PcrePattern::of('/[A-Z]+/im');
 $pattern->test($subject)
 ```
 
-[Multiple patterns]: /docs/pattern-list.md
+[Multiple patterns]: pattern-list.md

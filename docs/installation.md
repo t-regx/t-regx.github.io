@@ -12,6 +12,8 @@ The installation of T-Regx is really simple - just add a composer dependency:
 composer require rawr/t-regx
 ```
 
+T-Regx supports PHP versions: `7.1`, `7.2`, `7.3`, `7.4`, `8.0`, `8.1`, `8.2`.
+
 [Scroll to "How to install Composer"](#install-composer)
 
 ## Try T-Regx online (repl.it)
