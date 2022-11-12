@@ -3,7 +3,7 @@ id: pattern-list
 title: Multiple patterns
 ---
 
-Documentation for version: 0.37.0
+Documentation for version: 0.39.0
 
 `PatternList` allows you to perform performance-optimized operations on a collection of
 patterns.
@@ -23,10 +23,9 @@ calls as there are patterns in the array.
   - Predicates
       - [`testAny()`], [`failAny()`]
       - [`testAll()`], [`failAll()`]
-  - Subject modification
+  - Replacements
       - [`prune()`](#prune-a-subject-with-the-list)
-      - [`changedReplace()->with()`](#collective-replace-with)
-      - [`changedReplace()->callback()`](#collective-replace-with-callback)
+      - [`replace()->with()`](#collective-replace-with)
 
 [`testAny()`]: #matching-either-pattern
 
@@ -186,9 +185,9 @@ $list->prune('Hello jello'); // "lo j"
 
 ### Collective replace `with()`
 
-Method `PatternList.chainedReplace()` works very similarly to `Pattern.replace()`. To replace
-a subject with the collective list of patterns, call method `chainedReplace()`, which accepts the
-subject as an argument. On the chained replace, call methods: `with()`, `withReferences()` or `callback()`.
+Method `PatternList.replace()` works very similarly to `Pattern.replace()`. To replace
+a subject with the collective list of patterns, call method `replace()`, which accepts the
+subject as an argument.
 
 In this example, we'll replace every HTML tag and every number with string `"XXX"`:
 
@@ -198,7 +197,7 @@ $pattern = Pattern::list([
   '</(b|div|span)>'
 ]);
 
-$replacer = $pattern->chainedReplace($subject);
+$replacer = $pattern->replace($subject);
 
 $replacer->with('XXX'); // HTML tags and numbers replaced with "XXX"
 ```
@@ -207,7 +206,7 @@ Please, refer to the [StackOverflow][1] [question][1] regarding matching HTML en
 
 [1]: https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags
 
-`PatternList.chainedReplace()` also supports Perl-Compatible group references in the replacements, 
+`PatternList.replace()` also supports Perl-Compatible group references in the replacements, 
 available with method `withReferences()`:
 
 ```php
@@ -216,7 +215,7 @@ $pattern = Pattern::list([
   '</(b|div|span)>'
 ]);
 
-$replacer = $pattern->chainedReplace("Hello <b>there</b>! How are <span>you</span>?");
+$replacer = $pattern->replace("Hello <b>there</b>! How are <span>you</span>?");
 
 $replaced = $replacer->withReferences('[$1]'); // "Hello [b]there[/b]! How are [span]you[/span]?"
 ```

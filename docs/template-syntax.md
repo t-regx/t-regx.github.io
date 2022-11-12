@@ -3,7 +3,7 @@ id: template-syntax
 title: Template Syntax
 ---
 
-Documentation for version: 0.38.0
+Documentation for version: 0.39.0
 
 *"Template"* in prepared patterns terminology is simply a regular expression 
 with placeholders `@`. 

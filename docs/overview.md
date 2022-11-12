@@ -3,7 +3,7 @@ id: overview
 title: What's T-Regx?
 ---
 
-Documentation for version: 0.38.0
+Documentation for version: 0.39.0
 
 T-Regx is a lightweight, high-level library for regular expressions in PHP. It's designed
 to be suitable for simple projects and enterprise solutions.
