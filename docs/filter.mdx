@@ -1,71 +1,105 @@
 ---
 id: filter
-title: Filter an array
+title: Filtering an array
 ---
 
+Documentation for version: 0.39.0
+
+Method `Pattern.filter()` returns a new, sequential array containing only values which match the given pattern.
+
+```php
+/*
+ * Instantiate pattern
+ */
+$pattern = Pattern::of('[A-Z][a-z]+$');
+
+/*
+ * Populate the array
+ */
+$array = [
+  'Mark',
+  'Robert',
+  'lorem impsum',
+  'Jane',
+  'FooBar123'
+];
+
+/*
+ * Filter the array by matching the pattern
+ */
+$pattern->filter($array);
+```
 
 import {Result} from './code';
 
-Filtering an array, returns a new array with only the values that match the pattern.
-
-Available methods for `pattern()->forArray()` are:
-
-- [`filter()`](#filter-a-regular-array) - filters an array by values
-- [`filterAssoc()`](#filter-an-associative-array) - filters an array by values, preserving keys (associative array)
-- [`filterByKeys()`](#filter-by-keys) - filters an array by keys
-
-## Filter a regular array
-
-Method `filter()` filters an array and returns values **re-indexed** to match the removed elements (unlike `array_filter()`).
-
-```php
-pattern('[A-Z][a-z]+$')
-    ->forArray([
-        'Mark',
-        'Robert',
-        'lorem impsum',
-        'Jane',
-        'FooBar123'
-    ])
-    ->filter();
-```
-
 <Result php>['Mark', 'Robert', 'Jane'] </Result>
 
-More precisely it returns `[0 => 'Mark', 1 => 'Robert', 2 => 'Jane']`, even though original key for `'Jane'` was `3`.
+More precisely, `Pattern.filter()` returns `[0 => 'Mark', 1 => 'Robert', 2 => 'Jane']`, even though 
+the original key for `'Jane'` was `3`.
 
-## Filter an associative array
+Only values of type `string` are allowed in the array as the argument for `Pattern.filter()`. Passing 
+an array with a value of any other type than `string` issues `\InvalidArgumentException`.
 
-Method `filterAssoc()` works similarly to `filter()`, but it preserves the array keys:
+The resulting `array` contains subjects for which calling `Pattern.test()` on the same `$pattern` 
+returns `true`. The elements which are no longer present in the resulting array, are subjects for 
+which calling `Pattern.test()` returns `false`.
 
-```php
-pattern('[A-Z][a-z]+$')
-    ->forArray([
-        'm' => 'Mark',
-        'r' => 'Robert',
-        'l' => 'lorem impsum',
-        'j' => 'Jane',
-        's' => 'FooBar123'
-    ])
-    ->filterAssoc();
-```
+## Inversely filtering an array
 
-<Result php>['m' => 'Mark', 'r' => 'Robert', 'j' => 'Jane']</Result>
-
-## Filter by keys
-
-With `filter()` and `filterAssoc()`, only array values are being used to filter the array. With `filterByKeys()`, it's
-the array keys that are used to filter the array. The corresponding values (which can be of type `mixed`) are returned unchanged:
+Method `Pattern.reject()` returns a new, sequential array containing only values which do not match 
+the given pattern.
 
 ```php
-pattern('[A-Z][a-z]+$')
-    ->forArray([
-        'Mark'          => 'm',
-        'Robert'        => 'r',
-        'lorem impsum'  => 'l',
-        'Jane'          => 'j',
-        'FooBar123'     => 'f'
-    ])
-    ->filterByKeys();
+/*
+ * Instantiate pattern
+ */
+$pattern = Pattern::of('[A-Za-z]+$');
+
+/*
+ * Populate the array
+ */
+$array = [
+  'Mark',
+  'Robert',
+  '123',
+  'Jane',
+  '4567'
+];
+
+/*
+ * Inversely filter the array by matching the pattern
+ */
+$pattern->reject($array);
 ```
-<Result php>['Mark' => 'm', 'Robert' => 'r', 'Jane' => 'j']</Result>
+
+Only values of type `string` are allowed in the array as the argument for `Pattern.reject()`. Passing 
+an array with a value of any other type than `string` issues `\InvalidArgumentException`.
+
+## Stable filtering
+
+`Pattern.filter()` and `Pattern.reject()` can be interpreted as what's called a "stable filtering". What
+it means, is that if the input array contains multiple occurrences of the same `string` subject,
+then exactly as many subject `string` is returned.
+
+```php
+/*
+ * Instantiate pattern
+ */
+$pattern = Pattern::of('\w+');
+
+/*
+ * Populate the array
+ */
+$array = ['one', 'one', 'two'];
+
+/*
+ * Filter the array
+ */
+$filtered = $pattern->filter($array);
+```
+
+The array `$filtered` is `[0 => 'one', 1 => 'one']`.
+
+Another characteristic of "stable filtering" is that the order items in the input array doesn't change after
+the filtering. More precisely - for any two items in the array, one item `A` preceding the other item `B`; 
+then item `A` also precedes item `B` in the filtered array.
