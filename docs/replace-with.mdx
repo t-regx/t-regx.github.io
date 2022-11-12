@@ -71,11 +71,8 @@ pattern('(\d+)cm')->replace('I have 15cm and 192cm')->all()->with('<$1>');
 You can be sure, what's put into `with()` will certainly be present unchanged in your final result.
 
 Some replacement strings containing a backslash or a dollar sign (like file system paths, URL addresses or even user input)
-might interfere with logic and cause bugs that are very hard to find.
+might interfere with logic and cause bugs that are very hard to find. Neither of types of references are resolved: `$12`, `\12` nor `${12}`.
 
-:::note
-Neither of types of references are resolved: `$12`, `\12` nor `${12}`.
-:::
 
 ## PHP-style intentional references
 

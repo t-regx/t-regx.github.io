@@ -282,10 +282,8 @@ In other words `Detail.group($x).all()` is a collection of occurrences of group 
 
 ## Complication with `J` modifier
 
-:::note
 Complication with `J` modifier is a rather advanced matter, and not necessary for everyday use.
 If you don't seek "in-depth" understanding of capturing groups, feel free to skip this chapter.
-:::
 
 To learn more, go to [Capturing groups - J modifier](match-groups-j-modifier.md).
 

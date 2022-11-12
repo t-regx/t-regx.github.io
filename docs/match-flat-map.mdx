@@ -82,11 +82,9 @@ pattern('\w+')->match('Apples are cool')->toMap(function (Detail $detail) {
 ]`}
 </Result>
 
-:::note
 `Detail.offset()` returns offset as a [valid UTF-8 sequence](match-details.md#offsets), whereas `preg::match_all()`
 counts them as [bytes](match-details.md#offsets). To return bytes number with T-Regx as well,
 use [`byteOffset()`](match-details.md#offsets).
-:::
 
 ## Duplicate keys
 

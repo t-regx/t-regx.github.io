@@ -19,13 +19,8 @@ return 'Match was found at ' . $detail->offset();
 ```
 <Result>'Match was found at 14'</Result>
 
-:::note
 Method [`offset()`] is UTF-8 safe and returns offsets in characters, not bytes.
-For bytes, consider using [`byteOffset()`] method.
-:::
-:::note
-Use [`offset()`] with multibyte-safe methods like [`mb_substr()`], and [`byteOffset()`] with methods like [`substr()`].
-:::
+For bytes, consider using [`byteOffset()`] method. Use [`offset()`] with multibyte-safe methods like [`mb_substr()`], and [`byteOffset()`] with methods like [`substr()`].
 
 ### Using [`Detail`]
 
