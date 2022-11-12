@@ -31,10 +31,10 @@
     ],
     "Prepared Patterns": [
       "prepared-patterns",
-      "template-syntax",
-      "pattern-list"
+      "template-syntax"
     ],
     "Misc": [
+      "pattern-list",
       "delimiters",
       "split",
       "filter",
