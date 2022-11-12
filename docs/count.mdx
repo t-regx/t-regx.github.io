@@ -1,77 +1,111 @@
 ---
 id: count
-title: Count occurrences
+title: Counting occurrences
 ---
 
+Documentation for version: 0.39.0
 
-import {Result} from './code';
+In certain situations an amount of occurrences is desired, but not the occurrences themselves. 
+In that case, it's recommended to consider `Pattern.count()`, instead of performing full matches
+with `Matcher.all()`/`Search.all()`.
 
-Sometimes, you might stumble upon a situation where an amount of occurrences is needed, but not the occurrences
-themselves. In that case, `pattern()->count()` is perfect:
-
-```php
-return pattern('[aeiouy]')->count('Computer');
-```
-<Result>3</Result>
-
-Also, `MatchPattern` is [`\Countable`], so you can use PHP build-in methods, like `count()`:
-
+Method `Pattern.count()` accepts a `string` subject, and returns the number of occurrences of
+the pattern in the subject.
 
 ```php
-$match = pattern('[aeiouy]')->match('Computer');
+/*
+ * Instantiate pattern
+ */
+$pattern = pattern('[aeiouy]');
 
-count($match);
+/*
+ * Count occurrences 
+ */
+$pattern->count('Computer');  // (int) 3
 ```
-
-<Result>3</Result>
 
 ## Unmatched subjects
 
-If your pattern does not match the subject, `count()` simply returns `0`.
+When `Pattern.count()` is called with a subject that doesn't match the pattern, 
+then `count()` returns `0`.
 
 ```php
-return pattern('[0-9]')->count('Computer');
+$pattern = Pattern::of('[0-9]');
+$pattern->count('Computer');  // (int) 0
 ```
-<Result>0</Result>
 
-## Invalid
+## Malformed patterns
 
-Every use of `pattern()` with an invalid pattern will cause `MalformedPatternException`.
+Every use of `pattern()`/`Pattern::of()` with an invalid pattern causes `MalformedPatternException`.
+
 ```php
 try {
-    pattern('[aeiouy')->count('Computer');  // malformed pattern
+  pattern('[aeiouy')->count('Computer');  // malformed pattern
 }
 catch (MalformedPatternException $ex) {
-    echo $ex->getMessage();
+  echo $ex->getMessage();  // 'Missing terminating ] for character class at offset 7'
 }
 ```
-<Result text>Missing terminating ] for character class at offset 7</Result>
 
-## Performance
+## Number of occurrences in `Matcher`
 
-You might be tempted to use `count()` to check whether your subject was matched by the pattern, since `count()` doesn't
-return any matches...
-
-```php
-$count = pattern('[aeiouy]')->count('Computer');
-return $count > 0;
-````
-<Result>true</Result>
-
-...but that would be wasteful. You're much better off using
-[`test()`](match.mdx#test-a-subject)/[`fails()`](match.mdx#test-a-subject):
+Apart from `Pattern.count()`, methods `Matcher.count()` and `Search.count()` can also be used to 
+retrieve the number of occurrences of the pattern in the subject.
 
 ```php
-return pattern('[aeiouy]')->test('Computer');
+/*
+ * Instantiate pattern
+ */
+$pattern = pattern('[aeiouy]');
+
+/*
+ * Instantiate the subject matcher
+ */
+$matcher = $pattern->match('Computer');
+
+/*
+ * Count occurrences 
+ */
+$matcher->count();  // (int) 3
 ```
-<Result>true</Result>
 
-This is because `count()` will go through each occurrence of a pattern in a subject, counting it; whereas `test()`
-will return right after it finds the first occurrence.
+Additionally, `Matcher` implements PHP interface [`\Countable`], and so can be used with PHP methods, 
+such as `count()`:
+
+```php
+$pattern = pattern('[aeiouy]');
+$matcher = $pattern->match('Computer');
+
+count($matcher);  // (int) 3
+```
+
+## Performance predicating a subject
+
+It might appear suitable to use `count()` to ascertain whether a given subject matches the
+pattern, since `count()` doesn't return any matches.
+
+```php
+$pattern = Pattern::of('[aeiouy]');
+$count = $pattern->count('Computer');
+return $count > 0;  // (bool) true
+```
+
+While that is true, that using `Pattern.count()` is more performant than `Matcher.all()`,
+it still iterates all of the occurrences of the pattern in the subject. 
+
+The recommended approach for such predication is with [`test()`]/[`fails()`]:
+
+```php
+$pattern = Pattern::of('[aeiouy]');
+return $pattern->test('Computer');  // (bool) true
+```
+
+That's because `count()` goes through each occurrence of a pattern in the subject counting it,
+whereas `test()` returns right after matching the first occurrence.
 
 [`\Countable`]: https://www.php.net/manual/en/class.countable.php
 [`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
 [`preg_match_all()`]: https://www.php.net/manual/en/function.preg-match-all.php
-[`test()`]: match.mdx#test-a-subject
-[`fails()`]: match.mdx#test-a-subject
+[`test()`]: match.mdx#predication-overview
+[`fails()`]: match.mdx#predication-overview
 [PHP `preg` methods]: https://www.php.net/manual/en/ref.pcre.php
