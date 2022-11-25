@@ -3,6 +3,8 @@ id: match
 title: Matching overview
 ---
 
+Documentation for version: 0.39.0
+
 Matching a subject with regular expressions is the most frequent usage of T-Regx.
 
 ## Predication overview
@@ -14,7 +16,7 @@ can be used to determine whether a pattern matches the subject.
 $agePattern = Pattern::of('[0-9]{2,}');
 
 $agePattern->test("I'm 19 years old");   // bool (true)
-$agePattern->fails("I'm 9 years old");   // bool (false)
+$agePattern->fails("I'm 19 years old");   // bool (false)
 ```
 
 Methods `Pattern.test(string)` and `Pattern.fails(string)` throw `MalformedPatternExceptions`, should they be called for
@@ -81,7 +83,7 @@ matched occurrence.
 $firstMatch->text();   // string ("19")
 
 /**
- * Read the whole match, as integer in base 10
+ * Read the whole match as integer (in base 10)
  */
 $firstMatch->toInt();  // int (19)
 
@@ -91,7 +93,8 @@ $firstMatch->toInt();  // int (19)
 $firstMatch->offset(); // int (4)
 ```
 
-More information on [`first()`] is present in the [next chapter](match-first.mdx).
+More information on [`first()`] is present in the [next chapter](match-first.mdx). Reference on [`Detail`]
+can be found in ["Match detail"] chapter.
 
 ### Iterating multiple matches
 
@@ -180,6 +183,8 @@ to T-Regx exception handling is presented in the further chapters of the documen
 [`all()`]: #many
 [`only(int)`]: #many
 [`group()`]: match-details.md
+[`Detail`]: match-details.md
+["Match detail"]: match-details.md
 [`Detail.group(int|string)`]: match-details.md
 [`Detail.get(int|string)`]: match-details.md
 [`groups()`]: match-details.md
