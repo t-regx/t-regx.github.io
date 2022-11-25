@@ -114,7 +114,7 @@ composer require rawr/t-regx
         <p>
           <Markdown>
             T-Regx provides a wide variety of prepared patterns, for different needs:
-            `Pattern::inject()`, `Pattern::compose()`, `Pattern::mask()` and `Pattern::template()`.
+            `Pattern::inject()`, `Pattern::list()`, `Pattern::mask()` and `Pattern::template()`.
           </Markdown>
         </p>
         <p>For constant patterns use <Link>Pattern::of()</Link> or simply <Link>pattern()</Link>.</p>

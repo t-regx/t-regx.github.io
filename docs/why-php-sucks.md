@@ -213,7 +213,7 @@ Read more about [`Detail`](match-details.md).
 
 ### T-Regx provides rich API for building patterns
 
-Because of `Pattern::inject()`, `Pattern::compose()`, `Pattern::mask()` and `Pattern::template()`
+Because of `Pattern::inject()`, `Pattern::list()`, `Pattern::mask()` and `Pattern::template()`
 there is never a need for using [`preg_quote()`] yourself.
 
 For example to build pattern with un-safe data, instead of building pattern with [`preg_quote()`], simply use:
