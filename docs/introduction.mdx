@@ -3,21 +3,25 @@ id: introduction
 title: Introduction to T-Regx
 ---
 
+Documentation for version: 0.39.0
+
 T-Regx provides clean API for regular expressions, as well as solving more complicated
 issues with PHP regex (like eliminating false positives, validating groups) and including
-features utterly missing in PHP: Prepared patterns, composite patterns, built-alteration
+features utterly missing in PHP: Prepared patterns, pattern lists, built-in alteration
 and more, as well as removing uncertainty with false negatives and false positives.
 
 ## Entry points
 
 We have multiple entry methods to create `Pattern`, each with its own use case:
  - Standard pattern - `Pattern::of('\d+')`
- - Prepared patterns - to safely use user data in patterns (see [Prepared Patterns](prepared-patterns.md))
+ - Prepared patterns - to safely use user input in patterns (see [Prepared Patterns](prepared-patterns.md))
  - Pattern lists - `Pattern::list(['\d+', '[a-z]+'])` to use many patterns at once
  - Literal string value - `Pattern::literal('[]?')` (identical to `Pattern::of('\[\]\?')`)
 
 Additionally, compatibility API remains available, which accepts delimiters
  - Compatibility legacy - `PcrePattern::of('/\d+/m')` to use vanilla patterns
+
+Additionally, helper `pattern()` is available as a shorthand for `Pattern::of()`.
 
 ### Standard pattern
 
@@ -94,7 +98,7 @@ $patternList = Pattern::list([
 ]);
 ```
 
-Passing `string` into `Pattern::list()` ins the same as passing that very same string in `Pattern::of()` before
+Passing `string` into `Pattern::list()` is the same as passing that very same string in `Pattern::of()` before
 adding it to the list.
 
 `PatternList` cannot contain other instances of `PatternList`.
@@ -110,7 +114,7 @@ If `pattern()` or `Pattern::of()` is used with a delimited pattern, then charact
 pattern('/[A-Z]/'); // matches characters "/", a letter and "/"
 ```
 
-### Old-school patterns
+### Compatibility patterns
 
 Delimited patterns are still supported for completeness with flags, with `PcrePattern::of()`. Both versions are equal with each other.
 
@@ -122,3 +126,9 @@ $pattern->test($subject)
 ```
 
 [Multiple patterns]: pattern-list.md
+
+They are particularly useful when T-Regx is used with other libraries, which return delimited regular expressions.
+If the `Pattern` is instantiated with `PcrePattern`, then it behaves exactly as the input regular expression would.
+There are certain fixed that T-Regx performs on the input, but they are kept to a minimal proportion.
+
+An example of such change could be token `\c\`, which works fine with `PcrePattern`/`Pattern`, but fails with `preg_match()`.
