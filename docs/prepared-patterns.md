@@ -143,7 +143,7 @@ $directoryPattern = Pattern::inject("^/@/@?$", [$directory, $filename]);
 
 Notice, that the second placeholder `@?` matches optionally, due to it being followed by the 
 wildcard `?`, by regular expression. Because of that, `$directoryPattern` will match either 
-`"/home_folder/"` or `"/home_folder/image.jpg"`. For curious minds, it will not match 
+`"/home_folder/"` or `"/home_folder/image.jpg"`. Note for curious readers - it will not match 
 `"/home_folder/image.jp"`.
 
 By regular expression, `@?` matches the figures greedily. Analyzing the *template*, we see:
