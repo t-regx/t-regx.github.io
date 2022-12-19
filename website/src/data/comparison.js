@@ -39,7 +39,7 @@ export const safeRegexVsPhp = [
       {pregLastErrorReturnsError}
       {phpIssuesNothing}
     </ul>,
-    tRegx: <>T-Regx throws <code>RuntimeCleanRegexException</code> <sup>with descriptive message</sup></>,
+    tRegx: <>T-Regx throws <code>SubjectEncodingException</code> <sup>with descriptive message</sup></>,
   },
   {
     title: <>Using an overly complex pattern<sup>(eg. containing <code>?R</code>)</sup></>,
@@ -48,7 +48,7 @@ export const safeRegexVsPhp = [
       {pregLastErrorReturnsError}
       {phpIssuesNothing}
     </ul>,
-    tRegx: <>T-Regx throws <code>RuntimeCleanRegexException</code> <sup>with descriptive message</sup></>,
+    tRegx: <>T-Regx throws <code>RecursionException</code> <sup>with descriptive message</sup></>,
   },
   {
     title: 'Returning an invalid replacement value',
@@ -98,11 +98,6 @@ export const cleanRegexVsPhp = [
     </ul>
   },
   {
-    title: 'Offset while replacing',
-    php: `PHP doesn't keep offsets while replacing`,
-    tRegx: <>With T-Regx, you can use <code>offset()</code> or <code>modifiedOffset()</code></>,
-  },
-  {
     title: `Worst case complexity`,
     php: <>
       <p><code>(string|int|null)[][][]</code></p>
@@ -119,6 +114,7 @@ export const cleanRegexVsPhp = [
       <li><code>1</code>/<code>0</code> - matches or differs</li>
       <li><code>false</code> - for certain errors</li>
       <li>issues a warning - for other errors</li>
+      <li>silenced - for yet other errors</li>
     </ul>,
     tRegx: <ul>
       <li><code>true</code>/<code>false</code> - matches or differs</li>
