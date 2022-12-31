@@ -3,7 +3,7 @@ id: pattern-list
 title: Multiple patterns
 ---
 
-Documentation for version: 0.39.0
+Documentation for version: 0.41.2
 
 `PatternList` allows you to perform performance-optimized operations on a collection of
 patterns.

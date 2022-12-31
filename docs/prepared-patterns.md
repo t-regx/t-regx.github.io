@@ -4,7 +4,7 @@ title: Prepared Patterns - Introduction
 sidebar_label: Introduction
 ---
 
-Documentation for version: 0.39.0
+Documentation for version: 0.41.2
 
 When arbitrary value is needed in the pattern, it might be tempting to use simple string concatenation.
 However, integration of dynamic values such as `$_GET['domain']` can be troublesome or even dangerous.
