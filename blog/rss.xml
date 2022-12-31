@@ -4,9 +4,23 @@
         <title>T-Regx Blog</title>
         <link>https://t-regx.com/blog</link>
         <description>T-Regx Blog</description>
-        <lastBuildDate>Wed, 10 Nov 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 31 Dec 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Performance optimisations]]></title>
+            <link>https://t-regx.com/blog/2022/12/31/performance</link>
+            <guid>Performance optimisations</guid>
+            <pubDate>Sat, 31 Dec 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Release of 0.41.2 comes with a lot of performance optimisations.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Back-porting modifier /n to all versions]]></title>
+            <link>https://t-regx.com/blog/2022/12/04/no-auto-capture</link>
+            <guid>Back-porting modifier /n to all versions</guid>
+            <pubDate>Sun, 04 Dec 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Rawwrrrr!]]></description>
+        </item>
         <item>
             <title><![CDATA[T-Regx on Gitter]]></title>
             <link>https://t-regx.com/blog/2021/11/10/gitter</link>
