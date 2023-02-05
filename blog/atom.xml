@@ -2,11 +2,18 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://t-regx.com/blog</id>
     <title>T-Regx Blog</title>
-    <updated>2022-12-31T00:00:00.000Z</updated>
+    <updated>2023-02-01T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://t-regx.com/blog"/>
     <subtitle>T-Regx Blog</subtitle>
     <icon>https://t-regx.com/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Documentation in source code]]></title>
+        <id>Documentation in source code</id>
+        <link href="https://t-regx.com/blog/2023/02/01/documentation"/>
+        <updated>2023-02-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We're working very hard on trying to bring T-Regx 1.0 to our users,]]></summary>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Performance optimisations]]></title>
         <id>Performance optimisations</id>
@@ -20,6 +27,13 @@
         <link href="https://t-regx.com/blog/2022/12/04/no-auto-capture"/>
         <updated>2022-12-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Rawwrrrr!]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Pattern helper functions]]></title>
+        <id>Pattern helper functions</id>
+        <link href="https://t-regx.com/blog/2022/02/05/pattern-helpers"/>
+        <updated>2022-02-05T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We have just created a new addon to the [core] T-Regx library: [pattern-helpers].]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[T-Regx on Gitter]]></title>
