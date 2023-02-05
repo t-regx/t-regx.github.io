@@ -4,9 +4,16 @@
         <title>T-Regx Blog</title>
         <link>https://t-regx.com/blog</link>
         <description>T-Regx Blog</description>
-        <lastBuildDate>Wed, 01 Feb 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 05 Feb 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Pattern helper functions]]></title>
+            <link>https://t-regx.com/blog/2023/02/05/pattern-helpers</link>
+            <guid>Pattern helper functions</guid>
+            <pubDate>Sun, 05 Feb 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[We have just created a new addon to the [core] T-Regx library: [pattern-helpers].]]></description>
+        </item>
         <item>
             <title><![CDATA[Documentation in source code]]></title>
             <link>https://t-regx.com/blog/2023/02/01/documentation</link>
@@ -27,13 +34,6 @@
             <guid>Back-porting modifier /n to all versions</guid>
             <pubDate>Sun, 04 Dec 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Rawwrrrr!]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Pattern helper functions]]></title>
-            <link>https://t-regx.com/blog/2022/02/05/pattern-helpers</link>
-            <guid>Pattern helper functions</guid>
-            <pubDate>Sat, 05 Feb 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[We have just created a new addon to the [core] T-Regx library: [pattern-helpers].]]></description>
         </item>
         <item>
             <title><![CDATA[T-Regx on Gitter]]></title>
