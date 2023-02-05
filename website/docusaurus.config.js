@@ -92,6 +92,9 @@ module.exports = {
         theme: {
           customCss: require.resolve('./static/scss/style.scss'),
         },
+        blog: {
+          blogSidebarCount: 'ALL'
+        }
       },
     ],
   ],
