@@ -162,21 +162,21 @@ first example, and `".jpg"` and `".jpeg"` in the second example. The last quanti
 which matches any number of times. Regular expression `\(\w*\)` matches any number of `\w` characters 
 between parenthesis, for example: `"()"`, `"(w)"`, `"(wor)"`, `"(words)"`.
 
-Apart from the standard `?`, `+`, and `*` quantifiers, regular expressions also allow custom ranges, 
-expressed in regular expression `{n}`,`{n,}`,`{,n}`,`{n,n}`. 
+Apart from the standard `?`, `+`, and `*` quantifiers, regular expressions allow exact ranges, 
+expressed in regular expression: `{n}`,`{n,}`,`{,n}`,`{n,n}`. 
 
 The corresponding quantifiers determine: 
 - `{n}` - exactly `n` times
 - `{n,}` - `n` or more times
 - `{,n}` - `n` or less times
-- `{n1,n2}` - more than `n1` times, but not more than `n2` times.
+- `{n1,n2}` - more than `n1` times, but no more than `n2` times.
 
 So in truth, quantifier `?` is identical to `{,1}`, quantifier `+` is `{1,}` and quantifier `*` is 
 identical to `{0,}`.
 
 Quantifiers `?`, `*`, `+` and `{1,2}` can follow placeholder `@`. The quantifier that follows the 
-placeholder, applies exclusively to the placeholder, and in the matching process, to the whole figure
-bound.
+placeholder, applies exclusively to the placeholder, and, in the matching process, to the whole figure
+bound and only to the figure (even when the figure turns out to be an empty string).
 
 ### Quantifier `?`
 
