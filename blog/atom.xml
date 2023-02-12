@@ -260,18 +260,18 @@
         <summary type="html"><![CDATA[Hello there! Another update, this time there's more to it - much has changed.]]></summary>
     </entry>
     <entry>
-        <title type="html"><![CDATA[What's new, new, new!]]></title>
-        <id>What's new, new, new!</id>
-        <link href="https://t-regx.com/blog/2017/12/30/delimiters"/>
-        <updated>2017-12-30T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Another quickly update what's going on with CleanRegex :)]]></summary>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[What's new, new, new! Part 2]]></title>
         <id>What's new, new, new! Part 2</id>
         <link href="https://t-regx.com/blog/2017/12/30/safe-regex"/>
         <updated>2017-12-30T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[I've separated the library into CleanRegex and SafeRegex. The SafeRegex is an exact copy of all preg_*() methods]]></summary>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[What's new, new, new!]]></title>
+        <id>What's new, new, new!</id>
+        <link href="https://t-regx.com/blog/2017/12/30/delimiters"/>
+        <updated>2017-12-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Another quickly update what's going on with CleanRegex :)]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[Back on track!]]></title>
