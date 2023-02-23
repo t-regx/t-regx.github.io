@@ -1,15 +1,14 @@
 ---
 id: delimiters
-title: Automatic delimiters
+title: Delimited patterns
 ---
-
 
 import {Result} from './code';
 
 ## Delimited pattern
 
-Calling method `delimited()` on any instance of T-Regx `PatternInterface` returns
-a pattern, as it will be used with [PHP PCRE methods].
+Method `Pattern.delimited()` returns regular expression as `string`,
+representing the pattern in format compatible with with [PHP PCRE methods].
 
 ```php
 echo pattern('https://github.com#heading')->delimited();
@@ -21,12 +20,20 @@ echo pattern('https://github.com#heading')->delimited();
 
 ## PCRE-style patterns
 
-If the was constructed with [`PcrePattern::of()`], method `delimited()` returns the pattern unchanged.
+If the `Pattern` was constructed with [`PcrePattern::of()`], method `delimited()` returns the pattern unchanged.
 
 ```php
 PcrePattern::of('#Welcome/Or not#')->delimited();
 ```
 <Result text>#Welcome/Or not#</Result>
+
+However, certain regular expressions will be modified to allow safe execution. For example, pattern `/\c\/`  
+fails matching in vanilla PHP, so such pattern is delimited in other ways, to ensure proper execution.
+
+```php
+preg_match('/\c\/', $subject); // fails matching
+PcrePattern::of('/\c\/')->test($subject); // works just fine
+```
 
 ## Modifiers
 
@@ -36,13 +43,13 @@ There are two ways of using patterns with PCRE modifiers:
 
   ```php
   // global function
-  pattern('[A-Z][a-z]+', 'i')->match($subject)->first();
+  pattern('[A-Z][a-z]+', 'i')->test($subject);
 
   // static method
-  Pattern::of('[A-Z][a-z]+', 'i')->match($subject)->first();
+  Pattern::of('[A-Z][a-z]+', 'i')->test($subject);
 
   // prepared patterns
-  Pattern::inject('[A-Z]@', [$_GET['name']], 'i')->search($subject)->first();
+  Pattern::inject('[A-Z]@', [$_GET['name']], 'i')->test($subject);
   ```
 
 * or use an old-school pattern:
@@ -50,16 +57,6 @@ There are two ways of using patterns with PCRE modifiers:
   ```php
   PcrePattern::of('/[A-Z][a-z]+/i')->search($subject)->first();
   ```
-
-## I want to break it
-
-T-Regx has a set of predefined, suitable delimiters (like `/`, `#`, `~`, `%`, etc.) and simply uses the first one, that
-doesn't occur in your pattern. If you exhaust each of them; if you use every possible, predefined,
-suitable delimiter - it will throw `ExplicitDelimiterRequiredException`.
-
-In that case, you simply have to use an explicit delimiter with [`PcrePattern::of()`].
-
-If you think another automatic delimiter can be used, please create [a github issue].
 
 [brain strain]: overview.md#brain-strain
 [`pattern()`]: introduction-preg.md#entry-points
