@@ -5,25 +5,27 @@ title: What's T-Regx?
 
 Documentation for version: 0.41.2
 
-T-Regx is a lightweight, high-level library for regular expressions in PHP. It's designed
-to be suitable for simple projects and enterprise solutions.
+T-Regx is a lightweight, high-level library for regular expressions in PHP. It's designed for simple projects 
+and enterprise solutions.
 
 The name "T-Regx" is a combination of words "Regex" and "T-Rex" (Tyrannosaurus Rex).
 
 Main features of T-Regx are:
 
-- Single-point entry `Pattern` class
+- Separates `Pattern` syntax and matching process
+- Unifies differences in PCRE between PHP versions
+- Provides UTF-8 support out of the box
+- Uses exceptions (instead of errors/warnings/fatals and flags)
 - Regular expressions without delimiters (so `Pattern::of("^foo")` instead of `preg_match("/^foo/")`)
-- UTF-8 support out of the box
-- [Prepared Patterns](prepared-patterns.md) handling unsafe characters (e.g. user input, delicate values)
-- Both replacing and matching is with detailed [`Detail`] object
-- Uses PHP regular expressions under the hood, but doesn't leak any of its interface or flaws
+- Provides [prepared patterns] for handling unsafe characters (e.g. user input, delicate values)
+- Has simplified, clean interface:
+    - exposes proper methods (instead of returning `null`, `false`, `""` or `0`/`-1` as magic values)
+    - handles unnecessarily complex `preg_` state and output, and exposes it as:
+        - `Pattern` and `PatternList` for syntax and pattern building
+        - `Matcher`, `Detail`, `Group` for matching (instead of nested `array` of `string|int`)
+        - exceptions `MalformedPatternException`, `SubjectNotMatchedException`, `GroupNotMatchedException`, `NonexistentGroupException`
 
-Surpasses PHP in many ways:
-- Doesn't use PHP warning/error/notice/fatal system, uses only exceptions, for example `MalformedPatternException`
-- Doesn't use any flags, default arguments or varargs, everything is done with methods
-- Doesn't return `false` or `null` on error, but throws a suitable exception instead (for example `NonexistentGroupException`)
-- Doesn't return `null` or `""` to indicate an unmatched group, but uses `Group.matched()` and other methods instead
+T-Regx uses PHP regular expressions under the hood, but its well encapsulated.
 
 ## Example usages of T-Regx
 
@@ -41,16 +43,16 @@ $pattern = Pattern::of("^(f)oo");
 $matcher = $pattern->match($_GET['input'])
 
 if ($matcher->fails()) {
-  die("Nothing matched!");
+    die("Nothing matched!");
 }
 
 /**
  * @var Detail $detail
  */
 foreach ($matcher as $detail) {
-  $detail->text();   // matched text
-  $detail->offset(); // matched offset in characters, for bytes use byteOffset()
-  $detail->get(1);   // get first capturing group
+    $detail->text();   // matched text
+    $detail->offset(); // matched offset in characters, for bytes use byteOffset()
+    $detail->get(1);   // get first capturing group
 }
 
 echo "Found " . $matcher->count() . " occurrences";
@@ -162,6 +164,43 @@ not as regular expression special characters.
 
 You can read more about prepared patterns in [Handling user input].
 
+### Example of exception handling
+
+Example usage of an incorrect pattern:
+
+```php
+<?php
+use TRegx\CleanRegex\Pattern;
+use TRegx\Exception\MalformedPatternException;
+
+try {
+    /**
+     * Try and use an incorrect pattern 
+     */
+    $pattern = Pattern::of('+++++');
+    $pattern->test('value');
+} catch (MalformedPatternException $malformed) {
+    echo "Pattern is incorrect: " . $malformed->getMessage();
+}
+```
+
+Example handling of backtracking limit:
+
+```php
+<?php
+use TRegx\CleanRegex\Pattern;
+use TRegx\SafeRegex\Exception\CatastrophicBacktrackingException;
+
+$pattern = Pattern::of('(?:1+1+)+3');
+
+try {
+    $replace = $pattern->match('11111111111111111111 3')->first();
+    $replace = $pattern->replace('11111111111111111111 3')->withGroup('empty');
+} catch (CatastrophicBacktrackingException $exception) {
+    echo "Failed to match the subject, without exhausting backtracking limit";
+}
+```
+
 ### Code completion with IDE
 
 Because `Pattern` is designed with methods and objects, IDE suggestions can be very helpful when developing applications
@@ -169,6 +208,8 @@ with `Pattern`. Proper suggestions from IDE reduce time spent of reading documen
 syntax or notation.
 
 ![code completion](../website/static/img/docs/codeCompletion.png)
+
+Similar code completion is available for `Matcher`, `Group` and other parts of T-Regx library.
 
 ## Error handling in T-Regx
 
@@ -189,7 +230,8 @@ $pattern = Pattern::of('(Foo)Bar');
 $matcher = $pattern->match('FooBar');
 
 /**
- * Perform one match on the subject
+ * Perform one match on the subject.
+ * This calls preg_match() under the hood.
  */
 $firstDetail = $matcher->first();
 
@@ -197,9 +239,9 @@ $firstDetail = $matcher->first();
  * Try and read a second group 
  */
 try {
-  $firstDetail->get(2);
+    $firstDetail->get(2);
 } catch (NonexistentGroupException $exception) {
-  echo "There is no such group";
+    echo "There is no such group";
 }
 ```
 
@@ -215,24 +257,20 @@ so calling `preg_last_error()` won't return errors.
 use TRegx\CleanRegex\Pattern;
 
 /**
- * Pattern with only one capturing group 
+ * Pattern in unicode mode, because of modifier 'u'
  */
 $pattern = Pattern::of('(Foo)Bar', 'u');
 
 $invalidUnicodeSubject = "\xc3\x28";
 
 try {
-  $matcher = $pattern->match($invalidUnicodeSubject)->first();
+    $matcher = $pattern->match($invalidUnicodeSubject)->first();
 } catch (SubjectEncodingException $exception) {
-  echo "There is a unicode encoding error in the subject";
+    echo "There is a unicode encoding error in the subject";
 }
 
 preg_last_error(); // `PREG_NO_ERROR`
 ```
-
-T-Regx **doesn't** override error handlers or exception handlers, since that could greatly pollute userspace
-and render the client application less reliable.
-
 
 [`Detail`]: match.mdx
 [`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
@@ -240,3 +278,4 @@ and render the client application less reliable.
 [`preg_split()`]: https://www.php.net/manual/en/function.preg-split.php
 [`pattern()`]: introduction.mdx#entry-points
 [Handling user input]: prepared-patterns.md
+[prepared patterns]: prepared-patterns.md
