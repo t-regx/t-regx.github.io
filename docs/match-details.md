@@ -18,7 +18,7 @@ For example, to read the offset at which the occurrence was matched, use `Detail
 // Instantiate pattern
 $pattern = pattern('[A-Z][a-z]+');
 
-// match the first occurence 
+// match the first occurrence 
 $detail = $pattern->match('I like Trains')->first();
 
 // read position of the first match
