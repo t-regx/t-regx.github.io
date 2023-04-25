@@ -279,8 +279,8 @@ More about capturing groups can be found in the next section: [Capturing groups]
 [`forEach()`]: match-for-each.mdx
 [`map()`]: match-map.mdx
 [`flatMap()`]: match-flat-map.mdx
-[`callback()`]: replace-callback.mdx
+[`callback()`]: replace.mdx#replace-with-a-callback
 [Capturing groups]: match-groups.md
 [`Detail`]: match-details.md
 [`pattern()->match()`]: match.mdx
-[`pattern()->replace->callback()`]: replace-callback.mdx
+[`pattern()->replace->callback()`]: replace.mdx#replace-with-a-callback

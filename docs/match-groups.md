@@ -301,10 +301,10 @@ To learn more, go to [Capturing groups - in depth](match-groups-in-depth.md).
 [`forEach()`]: match-for-each.mdx
 [`map()`]: match-map.mdx
 [`flatMap()`]: match-flat-map.mdx
-[`callback()`]: replace-callback.mdx
+[`callback()`]: replace.mdx#replace-with-a-callback
 [`pattern()->match()`]: match.mdx
 [`pattern()->replace()`]: replace.mdx
-[`pattern()->replace->callback()`]: replace-callback.mdx
+[`pattern()->replace->callback()`]: replace.mdx#replace-with-a-callback
 [`array_key_exists()`]: https://www.php.net/manual/en/function.array-key-exists.php
 [`preg_match()`]: https://www.php.net/manual/en/function.preg-match.php
 [`preg_match_all()`]: https://www.php.net/manual/en/function.preg-match-all.php
