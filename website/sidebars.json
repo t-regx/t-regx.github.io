@@ -24,7 +24,9 @@
       "match-as-int"
     ],
     "Replacing": [
-      "replace"
+      "replace",
+      "replace-limit",
+      "replace-count"
     ],
     "Prepared Patterns": [
       "prepared-patterns",
