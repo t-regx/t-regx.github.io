@@ -1,35 +1,334 @@
 ---
 id: replace
-title: Replacing a string
+title: Replacing overview
 ---
 
+Documentation for version: 0.41.2
 
-import {Result} from './code';
+Use `Pattern.replace()` to perform regular expression search and replace.
 
-Using `pattern()->replace()` you can:
+## Replacing with a constant value
 
-- Limit replacements with:
-  - `replace()->first()`
-  - `replace()->all()`
-  - `replace()->only(int)`
-- replace with a constant value - [`with()`](replace-with.mdx)/[`withReferences()`](replace-with.mdx)
-- replace with a computed value - [`callback()`](replace-callback.mdx)
-- handle subjects that don't match the pattern for replacements - `otherwise()`/`throwingOtherwise()`/`returningOtherwise()`
+To replace occurrences of a regular expression pattern in a given subject, use `Pattern.replace()` to
+instantiate a `Replace` operation for the subject and `.with()` to replace the ocurrence with a constant
+`string` value.
 
-## Limiting replacements
-
-After `replace()`, you need to explicitly use one of `first()`/`all()`/`only(int)` methods, to express how many
-replacements should be done.
 ```php
-$subject = "I'm 19, I have 192cm and I was born in 1999";
-pattern('\d+')->replace($subject)->first()->with("___");
-pattern('\d+')->replace($subject)->only(2)->with("___");
-pattern('\d+')->replace($subject)->all()->with("___");
-```
-<Result>
-{`"I'm ___, I have 192cm and I was born in 1999"
-"I'm ___, I have ___cm and I was born in 1999"
-"I'm ___, I have ___cm and I was born in ___"`}
-</Result>
+// Instantiate a pattern
+$pattern = Pattern::of('\w{4,}', 'i');
 
-Read on to learn more about replacing with [a constant value](replace-with.mdx).
+// instantiate a replace operation
+$replace = $pattern->replace('Some of these words are longer');
+
+// perform regular expression search and replace
+$output = $replace->with('XXX');  // (string) "XXX of XXX XXX are XXX"
+```
+
+`Replace.with()` returns a new string with content of the subject, but with occurrences of a
+regular expression replaced by a given `string` argument.
+
+If the pattern doesn't match the subject at all, `.with()` returns the subject unmodified.
+
+### Replacing with an empty string
+
+While it is possible to call `Replace.with()` with an empty string `""` to remove the occurrences,
+it's more semantic to call `Pattern.prune()`.
+
+```php
+// Instantiate a pattern
+$pattern = Pattern::of('\w{4,}', 'i');
+
+// using Replace.with()   🗙 
+$replace = $pattern->replace('Some of these words are longer');
+$output = $replace->with('');  // replace with an empty string
+
+// using Pattern.prune()  ✓ 
+$output = $pattern->prune('Some of these words are longer');
+```
+
+## Replace with a group
+
+Method `Replace.withGroup()` can be used to replace occurrences of a regular expression in the
+subject with a capturing group of the expression. To replace the occurrence of regular expression
+in the subject with a capturing group, pass an ordinal number of the group as the first argument 
+of `Replace.withGroup()`.
+
+```php
+// Instantiate a pattern with a capturing group
+$domainPattern = Pattern::of('www\.([\w.-]+)', 'i');
+
+// instantiate a replace operation
+$replace = $domainPattern->replace('I have a link: www.google.com and www.t-regx.com');
+
+// replace domain with just the top level domain
+$output = $replace->withGroup(1);  // (string) "I have a link: google.com and t-regx.com"
+```
+
+The regular expression `www.([\w.-]+)` matches substring `"www.google.com"`, in which 
+the capturing group `1` captures `"google.com"`. Replacement operation is invoked using `withGroup(1)`, 
+and so the matched occurrence is replaced by the content of the capturing group. The second
+occurrence of the matched pattern is `"www.t-regx.com"`, in which the first capturing group 
+captures `"t-regx.com"`.
+
+Method `Replace.withGroup()` accepts `int|string`. With argument of type `int` passed, the capturing
+group is referred to by an ordinal number, commonly known as *"group index"*. Capturing groups are 
+ordered by their opening parenthesis. For example: in pattern `(Cat)(Foo(Bar))`, group `(Cat)` is 
+assigned an ordinal number `1`, group `(Foo(Bar))` is assigned an ordinal number `2`, and group `(Bar)` 
+is assigned an ordinal number `3`.
+
+Because the matched occurrence is always implicitly captured and is assigned an ordinal number `0`, 
+call `Replace.withGroup(0)` performs a somewhat redundant search and replace, because it returns the 
+subject unmodified, as the matched occurrence is replaced by itself.
+
+### Named groups
+
+Method `Replace.withGroup()` accepts `int|string`. With argument of type `string` passed, the capturing
+group is referred to by its group name. Not all capturing groups are named, for example group `(Foo)` 
+is not a named group.
+
+Explicit syntax is available for named groups: `(?<###>...)`, where `###` is the name of the group, 
+for example: `(?<capital>[A-Z])[a-z]+)`. Alternative syntax for named group is `(?P<###>...)` or `(?'###'...)`.
+
+```php
+// Instantiate a pattern with a named capturing group
+$domainPattern = Pattern::of('(?<capital>[A-Z])[a-z]{2,})');
+
+// instantiate a replace operation
+$replace = $domainPattern->replace('My name is Mark, and his name is John');
+
+// replace names with their capital letters
+$output = $replace->withGroup('capital');  // (string) "My name is M, and his name is J"
+```
+
+Named capturing groups can be referred to either by ordinal numbers or by the name. In pattern 
+`(?<capital>[A-Z])[a-z]{2,})`, the first group can be used to replace the occurrence either 
+using `withGroup(1)` or `withGroup('capital')`. In other words, all capturing groups are assigned 
+an ordinal number, but only named groups can be referred to by their name.
+
+Additionally, modifier `/n` can be used when instantiating `Pattern` by passing `Pattern::NO_AUTOCAPTURE`
+or by simply passing `string` literal `'n'` .
+
+```php
+$pattern = Pattern::of('(https?://)?(?<domain>[\w.]+)', Pattern::NO_AUTOCAPTURE);
+$pattern = Pattern::of('(https?://)?(?<domain>[\w.]+)', 'n');
+```
+
+Because modifier `Pattern::NO_AUTOCAPTURE` is used in `$pattern`, only the named groups are 
+captured, and so group `(https?://)` is not captured. In this case `(?<domain>[\w.]+)` is 
+captured and is assigned an ordinal number `1`. 
+
+In patterns without modifier `'n'` - `Pattern::NO_AUTOCAPTURE`, syntax `(?:...)` can be 
+used to add a non-capturing group.
+
+### Unmatched group
+
+Method `Replace.withGroup()` throws `GroupNotMatchedException` when replacement is attempted with
+an unmatched group.
+
+In example below, group `(http://)` is followed by `?`. Such group may not be matched, while the
+whole pattern matches. Such groups are referred to as *"optional groups"*, because for different 
+subjects they may or may not be matched.
+
+```php
+// Instantiate a pattern
+$domainPattern = Pattern::of('(http://)?www.[\w.-]+');
+
+// instantiate a replace
+$replace = $domainPattern->replace('I have a link: www.google.com and www.t-regx.com');
+
+// try to replace with an unmatched group
+$output = $replace->withGroup(1);  // (GroupNotMatchedException): Expected to replace with group #1, but the group was not matched
+```
+
+### Nonexistent group
+
+Method `Replace.withGroup()` throws `NonexistentGroupException` when replacement is attempted with
+a group that is not present in the pattern.
+
+```php
+// Instantiate a pattern
+$domainPattern = Pattern::of('(http://)?www.[\w.]+');
+
+// instantiate a replace
+$replace = $domainPattern->replace('subject');
+
+// try to replace with a nonexistent group
+$output = $replace->withGroup(3);          // (NonexistentGroupException): Nonexistent group: #3
+$output = $replace->withGroup('missing');  // (NonexistentGroupException): Nonexistent group: 'missing'
+```
+
+In fact, any operation on a missing group apart from `.groupExists()` throws `NonexistentGroupException`.
+
+## Replace with a callback
+
+Method `Replace.callback()` performs a regular expression search, passes the flow control back 
+to the caller via `callable`, which accepts a matched occurrence as `Detail` argument, and then 
+performs replacement with the values returned from the `callable`. Each matched occurrence of the 
+regular expression in the subject is replaced by `string` value returned from the `callable`. In 
+other words, `Replace.callback()` accepts a `callable`, which is supposed to map the received 
+`Detail` argument to a new `string` replacement.
+
+```php
+// Instantiate a pattern
+$pattern = Pattern::of('[A-Z][a-z]+'); 
+
+// instantiate a replace
+$replace = $pattern->replace('I like scandinavia: Sweden, Norway and Denmark');
+
+// replace occurrences with a callback
+$replace->callback(fn (Detail $match) => \strToUpper($match->text())); 
+  // (string) "I like scandinavia: SWEDEN, NORWAY and DENMARK"
+```
+
+### Matched occurrence
+
+The matched occurrence of the regular expression in the subject is passed as an argument 
+to the `callable` argument of `Replace.callback()`.
+
+The matched occurrence is passed as `Detail`, which is the same interface as the one 
+representing the matched occurrence in `Pattern.match()`, for example `Matcher.first()`.
+
+All of the implementation differences between internal structures of matching and replacing
+are unified under the common `Detail` interface.
+
+### Accepted return values
+
+Argument `callable` passed to `Replace.callback()` can only return `string`, which is the
+new replacement.
+
+When value of type other than `string` is returned from the `callable`, then `Replace.callback()`
+throws `InvalidReplacementException`.
+
+```php
+$pattern = Pattern::of('[A-Z][a-z]+');
+$replace = $pattern->replace('I like scandinavia: Sweden, Norway and Denmark');
+
+$replace->callback(function (Detail $match): int {
+    return 2;
+});
+  // (InvalidReplacementException): Invalid callback() callback return type. Expected string, but integer (2) given
+```
+
+### `Stringable` return values
+
+Note, that objects implementing `Stringable` or objects with `__toString()` are also invalid.
+
+Received argument `Detail` can be cast to `string`, which is the same as calling `Detail.text()`;
+but returning object of type `Detail` or any other `Stringable` object throws 
+`InvalidReplacementException`.
+
+```php
+$replace->callback(function (Detail $match): Detail {
+    $match->text();  // (string) "Sweden"
+    (string) $match; // (string) "Sweden"
+
+    return $match;
+});
+    // (InvalidReplacementException): Invalid callback() callback return type. Expected string, but...
+```
+
+To conveniently return object of type `Detail` or other `Stringable` type, specify PHP `string`
+type-hint on the anonymous function or explicitly cast the object to `string`.
+
+```php
+$replace->callback(function (Detail $match) {
+    return (string) $match; // explicit cast to string
+});
+```
+
+```php
+$replace->callback(function (Detail $match): string { // PHP "string" type-hint
+    return $match;
+});
+```
+
+Specify `string` type-hint, so that PHP can implicitly cast the object to `string`, 
+or omit the type-hint and allow `Replace.callback()` to validate the type of the return values,
+in case the returned value is of other type.
+
+### PHP callable notation
+
+In PHP, certain `string` and `array` values are also `callable`. 
+
+- `'strToUpper'`, `'strToLower'` - a `callable` that behaves similarly to global `strToUpper()` and `strToLower()` functions
+- `[$this, 'replace']` - a `callable` tht behaves similarly to a method `.replace()` on `$this`
+
+```php
+// Instantiate a pattern
+$pattern = Pattern::of('[A-Z][a-z]+'); 
+
+// instantiate a replace
+$replace = $pattern->replace('I like scandinavia: Sweden, Norway and Denmark');
+
+// replace occurrences with a callback
+$replace->callback('strToUpper'); // (string) "I like scandinavia: SWEDEN, NORWAY and DENMARK"
+```
+
+Function `strToUpper()` accepts `string` as argument, and so when `callback('strToUpper')` is called,
+the `Detail` is passed as an argument to `strToUpper()`. Because `strToUpper()` accepts `string`, then
+`Detail` is being cast to `string`, which is the same as calling `Detail.text()`.
+
+In PHP, an array `[$this, 'replace']` is also a valid `callable`.
+
+```php
+class HelloWorld {
+    public function run() {
+        // Instantiate a pattern
+        $pattern = Pattern::of('[A-Z][a-z]+'); 
+        
+        // instantiate a replace
+        $replace = $pattern->replace('I like scandinavia: Sweden, Norway and Denmark');
+        
+        // replace occurrences with a callback
+        $replace->callback([$this, 'replace']); // (string) "I like scandinavia: SWEDEN, NORWAY and DENMARK"
+    }
+
+    private function replace(Detail $match): string {
+        return \strToUpper($match->text());
+    }
+}
+```
+
+Notice, that `Replace.callback()` truly accepts `callable` as argument type. However, in PHP certain 
+values are also regarded as callable, for instance the aforementioned `"strToUpper"` or 
+`[$this, 'replace']`.
+
+## Replace with references
+
+Method `Replace.withReferences()` can be used to pass a formatting string to PCRE, which is an internal
+implementation of T-Regx and other regular expression methods in PHP.
+
+`Replace.withReferences()` is listed last, as this is the least recommended mean of replacing elements. 
+Please, try and use `.with()`, `.withGroup()` or `.callback()` first, and only use `.withReferences()` 
+as the last resort.
+
+```php
+// Instantiate a pattern
+$domainPattern = Pattern::of('(?:(https?)://)?www.[\w.-]+');
+
+// instantiate a replace
+$replace = $domainPattern->replace('I have a link: https://www.google.com and www.t-regx.com');
+
+// replace with a formatting string
+$output = $replace->withReferences('<scheme:$1>'); // (string) "I have a link: <scheme:https> and <scheme:>"
+```
+
+Method `Replace.withReferences()` replaces the matched occurrences with the formatting string, 
+with certain tokens populated by captured groups, for example: `$1`.
+
+Special tokens in formatting string:
+
+- `$` and a capturing group ordinal number: `$1`, `$2` and also `$0`
+- `\` and a capturing group ordinal number: `\1`, `\2` and also `\0`
+- `${`, a group ordinal number and a closing `}`: `${1}`, `${2}` and also `${0}`
+
+Please, be advised that `Replace.withReferences()` is discouraged, because of a number of reasons:
+
+- Formatting string tokens use special characters which can be mistaken for PHP language syntax (e.g. for example
+  format token `\1` can be mistaken for PHP notation of `chr(1)`)
+- Unmatched groups are simply ignored, and implicitly replaced by an empty string `""`, which may or may not be desired
+- Nonexistent groups are ignored, which can lead to hard to find bugs
+- Formatting string can't be used to reference capturing groups by names
+- Is a tight dependency on internal PCRE format
+
+For these reasons we recommend using `.with()`, `.withGroup()` and `.callback()`.
