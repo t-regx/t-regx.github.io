@@ -38,9 +38,6 @@
       "split",
       "filter"
     ],
-    "Exceptions": [
-      "exception-structure"
-    ],
     "Advanced": [
       "match-groups-in-depth",
       "match-groups-j-modifier"
