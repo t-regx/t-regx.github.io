@@ -36,8 +36,7 @@
       "pattern-list",
       "delimiters",
       "split",
-      "filter",
-      "match-iterator"
+      "filter"
     ],
     "Exceptions": [
       "exception-structure"
