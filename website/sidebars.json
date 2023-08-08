@@ -12,7 +12,7 @@
     "Matching": [
       "match",
       "match-first",
-      "match-for-each",
+      "match-foreach",
       "count"
     ],
     "Match Details": [
